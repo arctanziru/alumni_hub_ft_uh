@@ -33,10 +33,17 @@ class _ButtonWidgetState extends State<ButtonWidget> {
               : AppColors.secondaryColor,
         ),
         padding: WidgetStateProperty.all<EdgeInsetsGeometry>(
-          const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
         ),
       ),
-      child: Text(widget.label),
+      child: Text(widget.label,
+          style: TextStyle(
+            color: widget.type == ButtonType.primary
+                ? Colors.white
+                : AppColors.primaryColor,
+            fontSize: 16,
+            fontWeight: FontWeight.bold,
+          )),
     );
   }
 }

@@ -1,4 +1,3 @@
-import 'package:alumni_hub_ft_uh/constants/text_styles.dart';
 import 'package:flutter/material.dart';
 
 class ButtonFilterWidget extends StatefulWidget {
@@ -37,9 +36,9 @@ class _ButtonFilterWidgetState extends State<ButtonFilterWidget> {
         children: [
           Text(
             widget.label,
-            style: TextStyles.body.copyWith(
-              color: widget.isActive ? Colors.white : Colors.black,
-            ),
+            style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                  color: widget.isActive ? Colors.white : Colors.black,
+                ),
           ),
           if (widget.icon != null) Icon(widget.icon),
         ],

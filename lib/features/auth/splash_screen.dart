@@ -57,7 +57,7 @@ class SplashScreen extends StatelessWidget {
             ),
             // Row of icons at the bottom
             Padding(
-              padding: const EdgeInsets.only(bottom: 20),
+              padding: const EdgeInsets.all(28),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: iconPaths

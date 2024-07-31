@@ -1,5 +1,7 @@
 import 'package:alumni_hub_ft_uh/constants/colors.dart';
 import 'package:alumni_hub_ft_uh/constants/theme.dart';
+import 'package:alumni_hub_ft_uh/features/auth/sign_up_screen.dart';
+import 'package:alumni_hub_ft_uh/features/auth/sign_in_screen.dart';
 import 'package:alumni_hub_ft_uh/features/auth/splash_screen.dart';
 import 'package:flutter/material.dart';
 

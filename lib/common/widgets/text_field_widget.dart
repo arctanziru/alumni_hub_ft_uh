@@ -1,44 +1,39 @@
 import 'package:flutter/material.dart';
 
-class TextFieldWidget extends StatefulWidget {
+class TextFieldWidget extends StatelessWidget {
   final String label;
-  final String? hint;
-  final TextEditingController? controller;
-  final TextInputType? keyboardType;
+  final String hint;
+  final TextEditingController controller;
   final bool obscureText;
-  final bool readOnly;
+  final FocusNode? focusNode;
 
-  const TextFieldWidget(
-      {super.key,
-      required this.label,
-      this.hint,
-      required this.controller,
-      this.keyboardType,
-      this.obscureText = false,
-      this.readOnly = false});
+  const TextFieldWidget({
+    Key? key,
+    required this.label,
+    required this.hint,
+    required this.controller,
+    this.obscureText = false,
+    this.focusNode,
+  }) : super(key: key);
 
-  @override
-  State<TextFieldWidget> createState() => _TextFieldWidgetState();
-}
-
-class _TextFieldWidgetState extends State<TextFieldWidget> {
   @override
   Widget build(BuildContext context) {
-    return TextField(
-      controller: widget.controller,
-      keyboardType: widget.keyboardType,
-      obscureText: widget.obscureText,
-      readOnly: widget.readOnly,
-      decoration: InputDecoration(
-        labelText: widget.label,
-        hintText: widget.hint,
-        fillColor: Colors.white,
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12.0),
-          borderSide: const BorderSide(
-            color: Colors.grey,
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 8.0),
+      child: TextField(
+        controller: controller,
+        obscureText: obscureText,
+        focusNode: focusNode,
+        decoration: InputDecoration(
+          labelText: label,
+          hintText: hint,
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(8),
           ),
+          contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         ),
+        keyboardType: TextInputType.text,
+        textInputAction: TextInputAction.next,
       ),
     );
   }

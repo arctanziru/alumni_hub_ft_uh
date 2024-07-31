@@ -1,12 +1,13 @@
+import 'package:alumni_hub_ft_uh/constants/colors.dart';
 import 'package:flutter/material.dart';
 
 class SplashScreen extends StatelessWidget {
   final List<String> iconPaths = [
-    'assets/icons/Logo_Resmi_UNHAS.png',
-    'assets/icons/Logo_Resmi_UNHAS.png',
-    'assets/icons/Logo_Resmi_UNHAS.png',
-    'assets/icons/Logo_Resmi_UNHAS.png',
+    'assets/logos/unhas.png',
+    'assets/logos/ikatek_unhas.png',
   ];
+
+  SplashScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -17,58 +18,59 @@ class SplashScreen extends StatelessWidget {
           children: <Widget>[
             // Centered logo and text
             Expanded(
-              child: Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    // Logo with solid red background
-                    Container(
-                      padding: EdgeInsets.all(30.0),
-                      decoration: BoxDecoration(
-                        color: Colors.red, // Solid red background
-                        shape: BoxShape.circle,
-                      ),
-                      child: Container(
-                        child: Image.asset(
-                          'assets/icons/Logo_Resmi_UNHAS.png',
-                          height: 120,
-                          width: 120,
-                        ),
-                      ),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  // Logo with solid red background
+                  Container(
+                    padding: const EdgeInsets.all(30.0),
+                    decoration: const BoxDecoration(
+                      color: AppColors.primaryColor, // Solid red background
+                      shape: BoxShape.circle,
                     ),
-                    SizedBox(height: 30), // Space between logo and text
-                    Text(
-                      'Alumni Hub FT-UH',
-                      style: TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
-                      ),
+                    child: Image.asset(
+                      'assets/logos/ikatek_unhas.png',
+                      height: 160,
+                      width: 160,
                     ),
-                    SizedBox(height: 10),
-                    Text(
-                      'ADAPTIVE COLLABORATIVE',
-                      style: TextStyle(
+                  ),
+                  const SizedBox(height: 30), // Space between logo and text
+                  const Text(
+                    'ALUMNI HUB FT-UH',
+                    style: TextStyle(
+                      fontSize: 28,
+                      fontWeight: FontWeight.w800,
+                      letterSpacing: -0.02,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  const Text(
+                    'ADAPTIVE COLLABORATIVE',
+                    style: TextStyle(
                         fontSize: 14,
                         fontWeight: FontWeight.bold,
-                        color: Colors.red,
-                      ),
-                    ),
-                  ],
-                ),
+                        color: AppColors.primaryColor),
+                  ),
+                ],
               ),
             ),
             // Row of icons at the bottom
             Padding(
-              padding: EdgeInsets.only(bottom: 20),
+              padding: const EdgeInsets.only(bottom: 20),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: iconPaths.map((path) {
-                  return Image.asset(
-                    path,
-                    width: 50,
-                    height: 50,
-                  );
-                }).toList(),
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: iconPaths
+                    .map(
+                      (path) => Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 8),
+                          child: Image.asset(
+                            path,
+                            width: 50,
+                            height: 50,
+                          )),
+                    )
+                    .toList(),
               ),
             ),
           ],

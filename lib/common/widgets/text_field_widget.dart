@@ -1,40 +1,77 @@
 import 'package:flutter/material.dart';
 
-class TextFieldWidget extends StatelessWidget {
+class TextFieldWidget extends StatefulWidget {
   final String label;
   final String hint;
-  final TextEditingController controller;
+  final TextEditingController? controller;
   final bool obscureText;
-  final FocusNode? focusNode;
+  final TextInputType keyboardType;
 
   const TextFieldWidget({
-    Key? key,
+    super.key,
     required this.label,
     required this.hint,
-    required this.controller,
+    this.controller,
     this.obscureText = false,
-    this.focusNode,
-  }) : super(key: key);
+    this.keyboardType = TextInputType.text,
+  });
+
+  @override
+  State createState() => _TextFieldWidgetState();
+}
+
+class _TextFieldWidgetState extends State<TextFieldWidget> {
+  late FocusNode _focusNode;
+
+  @override
+  void initState() {
+    super.initState();
+    _focusNode = FocusNode();
+    _focusNode.addListener(() {
+      if (_focusNode.hasFocus) {
+        Scrollable.ensureVisible(context, alignment: 0.5);
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _focusNode.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8.0),
-      child: TextField(
-        controller: controller,
-        obscureText: obscureText,
-        focusNode: focusNode,
-        decoration: InputDecoration(
-          labelText: label,
-          hintText: hint,
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(8),
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          widget.label,
+          style: const TextStyle(
+            fontSize: 14,
+            fontWeight: FontWeight.w600,
           ),
-          contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         ),
-        keyboardType: TextInputType.text,
-        textInputAction: TextInputAction.next,
-      ),
+        const SizedBox(height: 4),
+        TextField(
+          focusNode: _focusNode,
+          controller: widget.controller,
+          obscureText: widget.obscureText,
+          decoration: InputDecoration(
+            hintText: widget.hint,
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
+            contentPadding: const EdgeInsets.all(16),
+            floatingLabelBehavior: FloatingLabelBehavior.never,
+          ),
+          style: const TextStyle(
+            fontSize: 14,
+          ),
+          keyboardType: widget.keyboardType,
+          textInputAction: TextInputAction.next,
+        ),
+      ],
     );
   }
 }

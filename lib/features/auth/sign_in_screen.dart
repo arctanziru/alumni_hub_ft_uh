@@ -10,6 +10,16 @@ class SignInScreen extends StatefulWidget {
 }
 
 class _SignInScreenState extends State<SignInScreen> {
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -66,14 +76,14 @@ class _SignInScreenState extends State<SignInScreen> {
                     TextFieldWidget(
                       label: 'Email',
                       hint: 'Masukkan email',
-                      controller: TextEditingController(),
+                      controller: _emailController,
                     ),
                     const SizedBox(height: 12),
                     TextFieldWidget(
                       label: 'Kata Sandi',
                       hint: 'Masukkan Kata Sandi',
-                      controller: TextEditingController(),
                       obscureText: true,
+                      controller: _passwordController,
                     ),
                     const SizedBox(height: 36),
                     SizedBox(

@@ -1,5 +1,4 @@
 import 'package:alumni_hub_ft_uh/constants/colors.dart';
-import 'package:alumni_hub_ft_uh/features/auth/sign_in_screen.dart';
 import 'package:flutter/material.dart';
 
 class SplashScreen extends StatelessWidget {
@@ -14,10 +13,7 @@ class SplashScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     // Navigasi ke SignInScreen setelah beberapa detik
     Future.delayed(const Duration(seconds: 3), () {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => const SignInScreen()),
-      );
+      Navigator.pushNamed(context, '/sign_in');
     });
 
     return Scaffold(
@@ -72,13 +68,13 @@ class SplashScreen extends StatelessWidget {
                 children: iconPaths
                     .map(
                       (path) => Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 8),
-                      child: Image.asset(
-                        path,
-                        width: 50,
-                        height: 50,
-                      )),
-                )
+                          padding: const EdgeInsets.symmetric(horizontal: 8),
+                          child: Image.asset(
+                            path,
+                            width: 50,
+                            height: 50,
+                          )),
+                    )
                     .toList(),
               ),
             ),

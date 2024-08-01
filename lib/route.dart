@@ -1,3 +1,4 @@
+import 'package:alumni_hub_ft_uh/features/auth/license_screen.dart';
 import 'package:alumni_hub_ft_uh/features/auth/sign_in_screen.dart';
 import 'package:alumni_hub_ft_uh/features/auth/sign_up_screen.dart';
 import 'package:alumni_hub_ft_uh/features/auth/splash_screen.dart';
@@ -14,6 +15,9 @@ Route<dynamic> routeGenerators(settings) {
 
     case SignUpScreen.route:
       return MaterialPageRoute(builder: (_) => const SignUpScreen());
+
+    case LicenseScreen.route:
+      return MaterialPageRoute(builder: (_) => const LicenseScreen());
 
     case HomeScreen.route:
       return MaterialPageRoute(builder: (_) => const HomeScreen());

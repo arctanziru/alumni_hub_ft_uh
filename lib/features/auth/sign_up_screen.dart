@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:alumni_hub_ft_uh/common/widgets/button/button_widget.dart';
 import 'package:alumni_hub_ft_uh/common/widgets/text_field_widget.dart';
+import 'package:flutter/gestures.dart';
 
 class SignUpScreen extends StatefulWidget {
   static const route = "/sign_up";
@@ -15,6 +16,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   String? selectedJurusan;
   String? selectedAngkatan;
   String? selectedGender;
+  bool agreeToTerms = false;
 
   final List<String> jurusanList = [
     'Teknik Elektro',
@@ -30,8 +32,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final _emailController = TextEditingController();
   final _kataSandiController = TextEditingController();
   final _konfirmasiKataSandiController = TextEditingController();
+  final _noTelpController = TextEditingController();
 
-  // Dispose controllers when not needed
   @override
   void dispose() {
     _namaLengkapController.dispose();
@@ -40,7 +42,20 @@ class _SignUpScreenState extends State<SignUpScreen> {
     _emailController.dispose();
     _kataSandiController.dispose();
     _konfirmasiKataSandiController.dispose();
+    _noTelpController.dispose();
     super.dispose();
+  }
+
+  void _handleSignUp() {
+    if (agreeToTerms) {
+      Navigator.pushNamed(context, '/home');
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Anda harus menyetujui syarat dan ketentuan terlebih dahulu.'),
+        ),
+      );
+    }
   }
 
   @override
@@ -52,12 +67,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
         child: LayoutBuilder(builder: (context, constraints) {
           return ConstrainedBox(
             constraints: BoxConstraints(
-              maxHeight:
-                  constraints.maxHeight - MediaQuery.of(context).padding.top,
+              maxHeight: constraints.maxHeight - MediaQuery.of(context).padding.top,
             ),
             child: Container(
-              margin: EdgeInsets.only(
-                  top: MediaQuery.of(context).size.height * 0.2),
+              margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.2),
               decoration: const BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.only(
@@ -65,16 +78,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   topRight: Radius.circular(30),
                 ),
               ),
-              padding: const EdgeInsets.only(
-                left: 16,
-                right: 16,
-                top: 48,
-                bottom: 16,
-              ),
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
               height: MediaQuery.of(context).size.height * 0.8,
               child: SingleChildScrollView(
-                padding: EdgeInsets.only(
-                    bottom: MediaQuery.of(context).viewInsets.bottom),
+                padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
@@ -114,16 +121,25 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       controller: _stambukController,
                     ),
                     const SizedBox(height: 12),
+                    const Text(
+                      'Jurusan',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    const SizedBox(height: 8),
                     Container(
+                      height: 60,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(8),
                         border: Border.all(color: Colors.grey),
                       ),
                       padding: const EdgeInsets.symmetric(horizontal: 12),
                       child: DropdownButtonFormField<String>(
-                        decoration: const InputDecoration(
-                          labelText: 'Jurusan',
+                        decoration: InputDecoration(
                           border: InputBorder.none,
+                          contentPadding: EdgeInsets.symmetric(horizontal: 12),
                         ),
                         value: selectedJurusan,
                         onChanged: (String? newValue) {
@@ -134,22 +150,38 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         items: jurusanList.map((String jurusan) {
                           return DropdownMenuItem<String>(
                             value: jurusan,
-                            child: Text(jurusan),
+                            child: Text(
+                              jurusan,
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w400,
+                                color: Colors.black,
+                              ),
+                            ),
                           );
                         }).toList(),
                       ),
                     ),
                     const SizedBox(height: 12),
+                    const Text(
+                      'Angkatan',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    const SizedBox(height: 8),
                     Container(
+                      height: 60,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(8),
                         border: Border.all(color: Colors.grey),
                       ),
                       padding: const EdgeInsets.symmetric(horizontal: 12),
                       child: DropdownButtonFormField<String>(
-                        decoration: const InputDecoration(
-                          labelText: 'Angkatan',
+                        decoration: InputDecoration(
                           border: InputBorder.none,
+                          contentPadding: EdgeInsets.symmetric(horizontal: 12),
                         ),
                         value: selectedAngkatan,
                         onChanged: (String? newValue) {
@@ -160,7 +192,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         items: angkatanList.map((String angkatan) {
                           return DropdownMenuItem<String>(
                             value: angkatan,
-                            child: Text(angkatan),
+                            child: Text(
+                              angkatan,
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w400,
+                                color: Colors.black,
+                              ),
+                            ),
                           );
                         }).toList(),
                       ),
@@ -248,6 +287,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       controller: _emailController,
                     ),
                     const SizedBox(height: 12),
+                    const Text(
+                      'No Telepon',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    const SizedBox(height: 8),
                     Row(
                       children: [
                         Container(
@@ -280,11 +327,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 right: Radius.circular(8),
                               ),
                             ),
-                            child: const TextField(
+                            child: TextField(
+                              controller: _noTelpController,
                               keyboardType: TextInputType.phone,
                               decoration: InputDecoration(
                                 contentPadding:
-                                    EdgeInsets.symmetric(horizontal: 16),
+                                EdgeInsets.symmetric(horizontal: 16),
                                 hintText: 'Masukkan nomor telepon',
                                 border: InputBorder.none,
                               ),
@@ -300,15 +348,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       controller: _kataSandiController,
                       obscureText: true,
                     ),
-                    const SizedBox(
-                        height:
-                            4), // Tambahkan sedikit jarak antara TextField dan teks kecil
+                    const SizedBox(height: 4),
                     const Text(
                       'Minimal 8 karakter',
                       style: TextStyle(
                         fontSize: 12,
-                        color:
-                            Colors.grey, // Atur warna sesuai dengan kebutuhan
+                        color: Colors.grey,
                       ),
                     ),
                     const SizedBox(height: 12),
@@ -319,10 +364,54 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       obscureText: true,
                     ),
                     const SizedBox(height: 12),
+                    Row(
+                      children: [
+                        SizedBox(
+                          height: 24,
+                          child: Checkbox(
+                            value: agreeToTerms,
+                            onChanged: (bool? value) {
+                              setState(() {
+                                agreeToTerms = value ?? false;
+                              });
+                            },
+                            materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                          ),
+                        ),
+                        Expanded(
+                          child: RichText(
+                            text: TextSpan(
+                              children: [
+                                TextSpan(
+                                  text: 'Saya menyetujui ',
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    color: Colors.black,
+                                  ),
+                                ),
+                                TextSpan(
+                                  text: 'syarat dan ketentuan',
+                                  style: TextStyle(
+                                    fontSize: 14,
+                                    color: Colors.red,
+                                    decoration: TextDecoration.underline,
+                                  ),
+                                  recognizer: TapGestureRecognizer()
+                                    ..onTap = () {
+                                      Navigator.pushNamed(context, '/license');
+                                    },
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 12),
                     SizedBox(
                       width: double.infinity,
                       child: ButtonWidget(
-                        onPressed: () => Navigator.pushNamed(context, '/home'),
+                        onPressed: agreeToTerms ? _handleSignUp : null,
                         label: 'Daftar',
                       ),
                     ),

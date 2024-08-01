@@ -1,49 +1,47 @@
-import 'package:alumni_hub_ft_uh/constants/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/gestures.dart';
 
 enum ButtonType {
   primary,
   secondary,
 }
 
-class ButtonWidget extends StatefulWidget {
+class ButtonWidget extends StatelessWidget {
   final String label;
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed; // Change to nullable
   final ButtonType? type;
 
-  const ButtonWidget(
-      {super.key,
-      required this.label,
-      required this.onPressed,
-      this.type = ButtonType.primary});
+  const ButtonWidget({
+    super.key,
+    required this.label,
+    this.onPressed,
+    this.type = ButtonType.primary,
+  });
 
-  @override
-  State<ButtonWidget> createState() => _ButtonWidgetState();
-}
-
-class _ButtonWidgetState extends State<ButtonWidget> {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: widget.onPressed,
+      onPressed: onPressed, // No need to check null here, ElevatedButton handles it
       style: ButtonStyle(
-        backgroundColor: WidgetStateProperty.all<Color>(
-          widget.type == ButtonType.primary
-              ? AppColors.primaryColor
-              : AppColors.secondaryColor,
+        backgroundColor: MaterialStateProperty.all<Color>(
+          type == ButtonType.primary
+              ? Colors.red // Use the desired color
+              : Colors.grey, // Use the desired color
         ),
-        padding: WidgetStateProperty.all<EdgeInsetsGeometry>(
+        padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
           const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
         ),
       ),
-      child: Text(widget.label,
-          style: TextStyle(
-            color: widget.type == ButtonType.primary
-                ? Colors.white
-                : AppColors.primaryColor,
-            fontSize: 16,
-            fontWeight: FontWeight.bold,
-          )),
+      child: Text(
+        label,
+        style: TextStyle(
+          color: type == ButtonType.primary
+              ? Colors.white
+              : Colors.blue, // Use the desired color
+          fontSize: 16,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
     );
   }
 }

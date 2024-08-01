@@ -1,13 +1,25 @@
 import 'package:alumni_hub_ft_uh/constants/colors.dart';
 import 'package:flutter/material.dart';
 
-class SplashScreen extends StatelessWidget {
+class SplashScreen extends StatefulWidget {
+  static const route = "/";
+
+  const SplashScreen({super.key});
+
+  @override
+  State<SplashScreen> createState() => _SplashScreenState();
+}
+
+class _SplashScreenState extends State<SplashScreen> {
   final List<String> iconPaths = [
     'assets/logos/unhas.png',
     'assets/logos/ikatek_unhas.png',
   ];
 
-  SplashScreen({super.key});
+  @override
+  void initState() {
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

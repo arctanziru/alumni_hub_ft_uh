@@ -3,6 +3,8 @@ import 'package:alumni_hub_ft_uh/common/widgets/text_field_widget.dart';
 import 'package:flutter/material.dart';
 
 class SignInScreen extends StatefulWidget {
+  static const route = "/sign_in";
+
   const SignInScreen({super.key});
 
   @override
@@ -89,9 +91,7 @@ class _SignInScreenState extends State<SignInScreen> {
                     SizedBox(
                       width: double.infinity,
                       child: ButtonWidget(
-                        onPressed: () {
-                          // Tambahkan logika untuk tombol "Sign In" di sini
-                        },
+                        onPressed: () => Navigator.pushNamed(context, '/home'),
                         label: 'Masuk',
                       ),
                     ),

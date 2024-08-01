@@ -3,6 +3,8 @@ import 'package:alumni_hub_ft_uh/common/widgets/button/button_widget.dart';
 import 'package:alumni_hub_ft_uh/common/widgets/text_field_widget.dart';
 
 class SignUpScreen extends StatefulWidget {
+  static const route = "/sign_up";
+
   const SignUpScreen({super.key});
 
   @override
@@ -320,9 +322,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     SizedBox(
                       width: double.infinity,
                       child: ButtonWidget(
-                        onPressed: () {
-                          // Handle Sign Up button press
-                        },
+                        onPressed: () => Navigator.pushNamed(context, '/home'),
                         label: 'Daftar',
                       ),
                     ),

@@ -1,8 +1,7 @@
 import 'package:alumni_hub_ft_uh/constants/colors.dart';
 import 'package:alumni_hub_ft_uh/constants/theme.dart';
-import 'package:alumni_hub_ft_uh/features/auth/sign_in_screen.dart';
-import 'package:alumni_hub_ft_uh/features/auth/sign_up_screen.dart';
 import 'package:alumni_hub_ft_uh/features/auth/splash_screen.dart';
+import 'package:alumni_hub_ft_uh/route.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -16,16 +15,12 @@ class AlumniHubFtUhApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Alumni Hub FT-UH',
       debugShowCheckedModeBanner: false,
       color: AppColors.primaryColor,
       theme: appTheme,
-      initialRoute: '/',
-      routes: {
-        '/': (context) => SplashScreen(),
-        '/sign_in': (context) => const SignInScreen(),
-        '/sign_up': (context) => const SignUpScreen(),
-      },
+      home: const SplashScreen(),
+      onGenerateRoute: routeGenerators,
     );
   }
 }

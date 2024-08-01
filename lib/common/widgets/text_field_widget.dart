@@ -64,6 +64,12 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
             ),
             contentPadding: const EdgeInsets.all(16),
             floatingLabelBehavior: FloatingLabelBehavior.never,
+            focusedBorder: OutlineInputBorder(
+              borderSide: BorderSide(
+                color: Theme.of(context).primaryColor,
+                width: 1,
+              ),
+            ),
           ),
           style: const TextStyle(
             fontSize: 14,

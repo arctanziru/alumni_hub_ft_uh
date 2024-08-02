@@ -60,6 +60,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final textTheme = Theme.of(context).textTheme;
+
     return Scaffold(
       resizeToAvoidBottomInset: true,
       backgroundColor: Theme.of(context).primaryColor,
@@ -85,20 +87,16 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    const Text(
+                    Text(
                       'Registrasi',
-                      style: TextStyle(
-                        fontSize: 32,
+                      style: textTheme.headlineLarge?.copyWith(
                         fontWeight: FontWeight.w900,
                         letterSpacing: -0.02,
                       ),
                     ),
-                    const Text(
+                    Text(
                       'Data Diri',
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.w400,
-                        letterSpacing: -0.02,
+                      style: textTheme.titleMedium?.copyWith(
                         color: Colors.grey,
                       ),
                     ),
@@ -121,12 +119,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       controller: _stambukController,
                     ),
                     const SizedBox(height: 12),
-                    const Text(
+                    Text(
                       'Jurusan',
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500,
-                      ),
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold),
                     ),
                     const SizedBox(height: 8),
                     Container(
@@ -152,9 +147,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             value: jurusan,
                             child: Text(
                               jurusan,
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w400,
+                              style: textTheme.bodyMedium?.copyWith(
                                 color: Colors.black,
                               ),
                             ),
@@ -163,12 +156,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       ),
                     ),
                     const SizedBox(height: 12),
-                    const Text(
+                    Text(
                       'Angkatan',
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500,
-                      ),
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold),
                     ),
                     const SizedBox(height: 8),
                     Container(
@@ -194,9 +184,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             value: angkatan,
                             child: Text(
                               angkatan,
-                              style: TextStyle(
-                                fontSize: 16,
-                                fontWeight: FontWeight.w400,
+                              style: textTheme.bodyMedium?.copyWith(
                                 color: Colors.black,
                               ),
                             ),
@@ -205,12 +193,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       ),
                     ),
                     const SizedBox(height: 12),
-                    const Text(
+                    Text(
                       'Jenis Kelamin',
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500,
-                      ),
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold),
                     ),
                     const SizedBox(height: 10),
                     Row(
@@ -234,9 +219,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               child: Center(
                                 child: Text(
                                   'Laki-laki',
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w500,
+                                  style: textTheme.bodyMedium?.copyWith(
                                     color: selectedGender == 'Laki-laki'
                                         ? Colors.white
                                         : Colors.black,
@@ -266,9 +249,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               child: Center(
                                 child: Text(
                                   'Perempuan',
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                    fontWeight: FontWeight.w500,
+                                  style: textTheme.bodyMedium?.copyWith(
                                     color: selectedGender == 'Perempuan'
                                         ? Colors.white
                                         : Colors.black,
@@ -287,12 +268,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       controller: _emailController,
                     ),
                     const SizedBox(height: 12),
-                    const Text(
+                    Text(
                       'No Telepon',
-                      style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500,
-                      ),
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold),
                     ),
                     const SizedBox(height: 8),
                     Row(
@@ -331,10 +309,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               controller: _noTelpController,
                               keyboardType: TextInputType.phone,
                               decoration: InputDecoration(
-                                contentPadding:
-                                EdgeInsets.symmetric(horizontal: 16),
+                                contentPadding: EdgeInsets.symmetric(horizontal: 16),
                                 hintText: 'Masukkan nomor telepon',
                                 border: InputBorder.none,
+                                hintStyle: textTheme.bodyMedium?.copyWith(
+                                  color: Colors.grey,
+                                ),
                               ),
                             ),
                           ),
@@ -349,10 +329,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       obscureText: true,
                     ),
                     const SizedBox(height: 4),
-                    const Text(
+                    Text(
                       'Minimal 8 karakter',
-                      style: TextStyle(
-                        fontSize: 12,
+                      style: textTheme.bodySmall?.copyWith(
                         color: Colors.grey,
                       ),
                     ),
@@ -384,15 +363,13 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               children: [
                                 TextSpan(
                                   text: 'Saya menyetujui ',
-                                  style: TextStyle(
-                                    fontSize: 14,
+                                  style: textTheme.bodyMedium?.copyWith(
                                     color: Colors.black,
                                   ),
                                 ),
                                 TextSpan(
                                   text: 'syarat dan ketentuan',
-                                  style: TextStyle(
-                                    fontSize: 14,
+                                  style: textTheme.bodyMedium?.copyWith(
                                     color: Colors.red,
                                     decoration: TextDecoration.underline,
                                   ),

@@ -1,3 +1,4 @@
+import 'package:alumni_hub_ft_uh/constants/colors.dart';
 import 'package:flutter/material.dart';
 
 enum ButtonType {
@@ -24,9 +25,7 @@ class ButtonWidget extends StatelessWidget {
           onPressed, // No need to check null here, ElevatedButton handles it
       style: ButtonStyle(
         backgroundColor: WidgetStateProperty.all<Color>(
-          type == ButtonType.primary
-              ? Colors.red // Use the desired color
-              : Colors.grey, // Use the desired color
+          type == ButtonType.primary ? AppColors.primaryColor : Colors.grey,
         ),
         padding: WidgetStateProperty.all<EdgeInsetsGeometry>(
           const EdgeInsets.symmetric(horizontal: 24, vertical: 16),

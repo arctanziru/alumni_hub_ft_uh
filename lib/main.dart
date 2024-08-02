@@ -21,7 +21,7 @@ class AlumniHubFtUhApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       color: AppColors.primaryColor,
       theme: appTheme,
-      home: const DonationScreen(),
+      home: const SplashScreen(),
       onGenerateRoute: routeGenerators,
     );
   }

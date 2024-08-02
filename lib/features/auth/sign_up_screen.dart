@@ -51,8 +51,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
       Navigator.pushNamed(context, '/home');
     } else {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text('Anda harus menyetujui syarat dan ketentuan terlebih dahulu.'),
+        const SnackBar(
+          content: Text(
+              'Anda harus menyetujui syarat dan ketentuan terlebih dahulu.'),
         ),
       );
     }
@@ -69,10 +70,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
         child: LayoutBuilder(builder: (context, constraints) {
           return ConstrainedBox(
             constraints: BoxConstraints(
-              maxHeight: constraints.maxHeight - MediaQuery.of(context).padding.top,
+              maxHeight:
+                  constraints.maxHeight - MediaQuery.of(context).padding.top,
             ),
             child: Container(
-              margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.2),
+              margin: EdgeInsets.only(
+                  top: MediaQuery.of(context).size.height * 0.2),
               decoration: const BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.only(
@@ -83,7 +86,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
               height: MediaQuery.of(context).size.height * 0.8,
               child: SingleChildScrollView(
-                padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+                padding: EdgeInsets.only(
+                    bottom: MediaQuery.of(context).viewInsets.bottom),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
@@ -121,7 +125,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     const SizedBox(height: 12),
                     Text(
                       'Jurusan',
-                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold),
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyMedium
+                          ?.copyWith(fontWeight: FontWeight.bold),
                     ),
                     const SizedBox(height: 8),
                     Container(
@@ -132,7 +139,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       ),
                       padding: const EdgeInsets.symmetric(horizontal: 12),
                       child: DropdownButtonFormField<String>(
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           border: InputBorder.none,
                           contentPadding: EdgeInsets.symmetric(horizontal: 12),
                         ),
@@ -158,7 +165,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     const SizedBox(height: 12),
                     Text(
                       'Angkatan',
-                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold),
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyMedium
+                          ?.copyWith(fontWeight: FontWeight.bold),
                     ),
                     const SizedBox(height: 8),
                     Container(
@@ -169,7 +179,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       ),
                       padding: const EdgeInsets.symmetric(horizontal: 12),
                       child: DropdownButtonFormField<String>(
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           border: InputBorder.none,
                           contentPadding: EdgeInsets.symmetric(horizontal: 12),
                         ),
@@ -195,7 +205,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     const SizedBox(height: 12),
                     Text(
                       'Jenis Kelamin',
-                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold),
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyMedium
+                          ?.copyWith(fontWeight: FontWeight.bold),
                     ),
                     const SizedBox(height: 10),
                     Row(
@@ -270,7 +283,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     const SizedBox(height: 12),
                     Text(
                       'No Telepon',
-                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold),
+                      style: Theme.of(context)
+                          .textTheme
+                          .bodyMedium
+                          ?.copyWith(fontWeight: FontWeight.bold),
                     ),
                     const SizedBox(height: 8),
                     Row(
@@ -309,7 +325,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               controller: _noTelpController,
                               keyboardType: TextInputType.phone,
                               decoration: InputDecoration(
-                                contentPadding: EdgeInsets.symmetric(horizontal: 16),
+                                contentPadding:
+                                    const EdgeInsets.symmetric(horizontal: 16),
                                 hintText: 'Masukkan nomor telepon',
                                 border: InputBorder.none,
                                 hintStyle: textTheme.bodyMedium?.copyWith(
@@ -354,7 +371,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 agreeToTerms = value ?? false;
                               });
                             },
-                            materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                            materialTapTargetSize:
+                                MaterialTapTargetSize.shrinkWrap,
                           ),
                         ),
                         Expanded(

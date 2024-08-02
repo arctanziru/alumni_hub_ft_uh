@@ -40,6 +40,7 @@ class BottomBarItemWidget extends StatelessWidget {
           const SizedBox(height: 16),
           SvgPicture.asset(
             iconAsset,
+            semanticsLabel: label,
             width: 24,
             height: 24,
             theme: SvgTheme(

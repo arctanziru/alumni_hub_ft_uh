@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/gestures.dart';
 
 enum ButtonType {
   primary,
@@ -21,14 +20,15 @@ class ButtonWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed: onPressed, // No need to check null here, ElevatedButton handles it
+      onPressed:
+          onPressed, // No need to check null here, ElevatedButton handles it
       style: ButtonStyle(
-        backgroundColor: MaterialStateProperty.all<Color>(
+        backgroundColor: WidgetStateProperty.all<Color>(
           type == ButtonType.primary
               ? Colors.red // Use the desired color
               : Colors.grey, // Use the desired color
         ),
-        padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
+        padding: WidgetStateProperty.all<EdgeInsetsGeometry>(
           const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
         ),
       ),

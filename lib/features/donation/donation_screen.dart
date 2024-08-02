@@ -1,7 +1,6 @@
+import 'package:alumni_hub_ft_uh/common/widgets/bottomBar/bottom_bar_widget.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-
-import '../../common/widgets/bottomBar/bottom_bar_widget.dart';
 
 class DonationScreen extends StatefulWidget {
   static const String route = '/donation';
@@ -9,25 +8,21 @@ class DonationScreen extends StatefulWidget {
   const DonationScreen({super.key});
 
   @override
-  _DonationScreenState createState() => _DonationScreenState();
+  State createState() => _DonationScreenState();
 }
 
 class _DonationScreenState extends State<DonationScreen> {
   void _onReadTermsClicked() {
     showModalBottomSheet(
       context: context,
-      shape: RoundedRectangleBorder(
+      shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(16.0)),
       ),
       isScrollControlled: true, // Allow the modal to use the full screen height
       builder: (BuildContext context) {
         return Padding(
           padding: const EdgeInsets.only(
-              top: 60.0,
-              bottom:60.0 ,
-              left: 32.0,
-              right: 32.0
-          ),
+              top: 60.0, bottom: 60.0, left: 32.0, right: 32.0),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -38,47 +33,59 @@ class _DonationScreenState extends State<DonationScreen> {
                 children: [
                   Text(
                     'ENDOWMENT FUND',
-                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: Colors.grey),
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyLarge
+                        ?.copyWith(color: Colors.grey),
                   ),
                   IconButton(
-                    icon: Icon(Icons.close),
+                    icon: const Icon(Icons.close),
                     onPressed: () {
                       Navigator.of(context).pop();
                     },
                   ),
                 ],
               ),
-              SizedBox(height: 4),
+              const SizedBox(height: 4),
               Text(
                 'Dana Abadi',
-                style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold),
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyLarge
+                    ?.copyWith(fontWeight: FontWeight.bold),
               ),
-              Divider(height: 16,),
-              SizedBox(height: 8),
+              const Divider(
+                height: 16,
+              ),
+              const SizedBox(height: 8),
               Text(
                 'Apa itu Dana Abadi?',
-                style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold),
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyMedium
+                    ?.copyWith(fontWeight: FontWeight.bold),
               ),
-              SizedBox(height: 8),
+              const SizedBox(height: 8),
               Column(
                 children: [
-                  SizedBox(height: 8.0), // Set spacing above
+                  const SizedBox(height: 8.0), // Set spacing above
                   Text(
                     'Dana Abadi digunakan untuk mendukung Tri Darma Perguruan Tinggi tanpa mengurangi nilai pokok dana tersebut. Dana Abadi (DA) Universitas Hasanuddin merupakan dana investasi yang diperoleh dari donasi para alumni dan simpatisan dari Fakultas Teknik Universitas Hasanuddin. Dana abadi bersifat simpanan yang akan dikembangkan dan hasilnya akan dimanfaatkan untuk meringankan beban biaya pendidikan yang harus dibayarkan mahasiswa dalam menempuh studinya, mengembangkan riset, serta melakukan pengabdian pada masyarakat.',
                     style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                      height: 1.5, // Adjust line height as needed
-                    ),
-                    textAlign: TextAlign.justify, // Optional: for text justification
+                          height: 1.5, // Adjust line height as needed
+                        ),
+                    textAlign:
+                        TextAlign.justify, // Optional: for text justification
                   ),
-                  SizedBox(height: 8.0), // Set spacing below
+                  const SizedBox(height: 8.0), // Set spacing below
                 ],
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               Text(
                 'Baca lebih lengkap di file PDF kami',
                 style: Theme.of(context).textTheme.bodySmall,
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               Center(
                 child: ElevatedButton(
                   onPressed: () {
@@ -93,12 +100,11 @@ class _DonationScreenState extends State<DonationScreen> {
                   child: Text(
                     'Download PDF',
                     style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold),
+                        color: Colors.white, fontWeight: FontWeight.bold),
                   ),
                 ),
               ),
-              SizedBox(height: 16), // Extra space at the bottom
+              const SizedBox(height: 16), // Extra space at the bottom
             ],
           ),
         );
@@ -130,13 +136,15 @@ class _DonationScreenState extends State<DonationScreen> {
                   padding: const EdgeInsets.all(16.0),
                   decoration: BoxDecoration(
                     color: Colors.white,
-                    borderRadius: BorderRadius.circular(12.0), // Rounded corners
+                    borderRadius:
+                        BorderRadius.circular(12.0), // Rounded corners
                     boxShadow: [
                       BoxShadow(
                         color: Colors.grey.withOpacity(0.3),
                         spreadRadius: 2,
                         blurRadius: 5,
-                        offset: Offset(0, 3), // Changes position of shadow
+                        offset:
+                            const Offset(0, 3), // Changes position of shadow
                       ),
                     ],
                   ),
@@ -147,28 +155,31 @@ class _DonationScreenState extends State<DonationScreen> {
                         'DAUH TEKNIK',
                         style: Theme.of(context).textTheme.bodyLarge,
                       ),
-                      SizedBox(height: 8),
-                      Text('NMID: ID1023255148950', style: Theme.of(context).textTheme.bodySmall),
+                      const SizedBox(height: 8),
+                      Text('NMID: ID1023255148950',
+                          style: Theme.of(context).textTheme.bodySmall),
                       Text('TID', style: Theme.of(context).textTheme.bodySmall),
-                      SizedBox(height: 20),
+                      const SizedBox(height: 20),
                       Image.asset(
                         'assets/qr_code.png', // Replace with your QR code asset path
                         width: 300, // Updated width
                         height: 300, // Updated height
                       ),
-                      Spacer(), // Add Spacer here to push the content below to the bottom
+                      const Spacer(), // Add Spacer here to push the content below to the bottom
                       Text(
                         'SATU QRIS UNTUK SEMUA',
                         style: Theme.of(context).textTheme.bodyMedium,
                       ),
-                      SizedBox(height: 8),
-                      Text('Cek aplikasi penyelenggara', style: Theme.of(context).textTheme.bodySmall),
-                      Text('di: www.aspi-qris.id', style: Theme.of(context).textTheme.bodySmall),
+                      const SizedBox(height: 8),
+                      Text('Cek aplikasi penyelenggara',
+                          style: Theme.of(context).textTheme.bodySmall),
+                      Text('di: www.aspi-qris.id',
+                          style: Theme.of(context).textTheme.bodySmall),
                     ],
                   ),
                 ),
               ),
-              SizedBox(height: 20), // Space between sections
+              const SizedBox(height: 20), // Space between sections
 
               // Second Section
               Container(
@@ -185,7 +196,7 @@ class _DonationScreenState extends State<DonationScreen> {
                       color: Colors.grey.withOpacity(0.3),
                       spreadRadius: 2,
                       blurRadius: 5,
-                      offset: Offset(0, 3), // Changes position of shadow
+                      offset: const Offset(0, 3), // Changes position of shadow
                     ),
                   ],
                 ),
@@ -199,30 +210,39 @@ class _DonationScreenState extends State<DonationScreen> {
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.red, // Background color
                         shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8.0), // Adjust the radius to your liking
+                          borderRadius: BorderRadius.circular(
+                              8.0), // Adjust the radius to your liking
                         ),
                       ),
                       child: Text(
                         'Download Qrcode',
                         style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold),
+                            color: Colors.white, fontWeight: FontWeight.bold),
                       ),
                     ),
-                    SizedBox(height: 16), // Reduced spacing
+                    const SizedBox(height: 16), // Reduced spacing
                     RichText(
                       text: TextSpan(
                         text: 'Ketahui alokasi dana anda disini ',
-                        style: Theme.of(context).textTheme.bodySmall?.copyWith(color: Colors.black),
+                        style: Theme.of(context)
+                            .textTheme
+                            .bodySmall
+                            ?.copyWith(color: Colors.black),
                         children: [
                           TextSpan(
                             text: 'baca ketentuan donasi',
-                            style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                              color: Colors.red,
-                              decoration: TextDecoration.underline, // Add underline
-                              decorationColor: Colors.red, // Set underline color
-                            ),
-                            recognizer: TapGestureRecognizer()..onTap = _onReadTermsClicked,
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodySmall
+                                ?.copyWith(
+                                  color: Colors.red,
+                                  decoration:
+                                      TextDecoration.underline, // Add underline
+                                  decorationColor:
+                                      Colors.red, // Set underline color
+                                ),
+                            recognizer: TapGestureRecognizer()
+                              ..onTap = _onReadTermsClicked,
                           ),
                         ],
                       ),

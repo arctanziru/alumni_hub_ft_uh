@@ -25,7 +25,9 @@ class ButtonWidget extends StatelessWidget {
           onPressed, // No need to check null here, ElevatedButton handles it
       style: ButtonStyle(
         backgroundColor: WidgetStateProperty.all<Color>(
-          type == ButtonType.primary ? AppColors.primaryColor : Colors.grey,
+          type == ButtonType.primary
+              ? AppColors.primaryColor
+              : AppColors.secondaryColor,
         ),
         padding: WidgetStateProperty.all<EdgeInsetsGeometry>(
           const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
@@ -33,10 +35,8 @@ class ButtonWidget extends StatelessWidget {
       ),
       child: Text(
         label,
-        style: TextStyle(
-          color: type == ButtonType.primary
-              ? Colors.white
-              : Colors.blue, // Use the desired color
+        style: const TextStyle(
+          color: Colors.white,
           fontSize: 16,
           fontWeight: FontWeight.bold,
         ),

@@ -32,6 +32,11 @@ class ButtonWidget extends StatelessWidget {
         padding: WidgetStateProperty.all<EdgeInsetsGeometry>(
           const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
         ),
+        shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+          RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(8),
+          ),
+        ),
       ),
       child: Text(
         label,

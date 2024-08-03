@@ -1,4 +1,6 @@
+import 'package:alumni_hub_ft_uh/common/widgets/appBar/app_bar_widget.dart';
 import 'package:alumni_hub_ft_uh/common/widgets/bottomBar/bottom_bar_widget.dart';
+import 'package:alumni_hub_ft_uh/common/widgets/button/button_widget.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
@@ -18,7 +20,8 @@ class _DonationScreenState extends State<DonationScreen> {
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(16.0)),
       ),
-      isScrollControlled: true, // Allow the modal to use the full screen height
+      isScrollControlled: true,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       builder: (BuildContext context) {
         return Padding(
           padding: const EdgeInsets.only(
@@ -87,21 +90,9 @@ class _DonationScreenState extends State<DonationScreen> {
               ),
               const SizedBox(height: 16),
               Center(
-                child: ElevatedButton(
-                  onPressed: () {
-                    // Implement your download PDF logic here
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.red, // Background color
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8.0),
-                    ),
-                  ),
-                  child: Text(
-                    'Download PDF',
-                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                        color: Colors.white, fontWeight: FontWeight.bold),
-                  ),
+                child: ButtonWidget(
+                  onPressed: () {},
+                  label: 'Download PDF',
                 ),
               ),
               const SizedBox(height: 16), // Extra space at the bottom
@@ -116,12 +107,7 @@ class _DonationScreenState extends State<DonationScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: const BottomBarWidget(currentIndex: 2),
-      appBar: AppBar(
-        title: const Text(''), // Empty title
-        backgroundColor: Colors.transparent, // Transparent background
-        elevation: 0, // Remove shadow
-        automaticallyImplyLeading: false, // Remove back button
-      ),
+      appBar: const AppBarWidget(),
       body: SafeArea(
         child: Container(
           color: Colors.grey[200], // Light grey background color
@@ -160,12 +146,14 @@ class _DonationScreenState extends State<DonationScreen> {
                           style: Theme.of(context).textTheme.bodySmall),
                       Text('TID', style: Theme.of(context).textTheme.bodySmall),
                       const SizedBox(height: 20),
-                      Image.asset(
-                        'assets/qr_code.png', // Replace with your QR code asset path
-                        width: 300, // Updated width
-                        height: 300, // Updated height
-                      ),
-                      const Spacer(), // Add Spacer here to push the content below to the bottom
+                      Expanded(
+                          child: Image.network(
+                        'https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=Example',
+                        fit: BoxFit.fill,
+                        // contain
+                        alignment: Alignment.center,
+                      )),
+                      const SizedBox(height: 20),
                       Text(
                         'SATU QRIS UNTUK SEMUA',
                         style: Theme.of(context).textTheme.bodyMedium,
@@ -203,22 +191,9 @@ class _DonationScreenState extends State<DonationScreen> {
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
-                    ElevatedButton(
-                      onPressed: () {
-                        // Add your download QR code logic here
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.red, // Background color
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(
-                              8.0), // Adjust the radius to your liking
-                        ),
-                      ),
-                      child: Text(
-                        'Download Qrcode',
-                        style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                            color: Colors.white, fontWeight: FontWeight.bold),
-                      ),
+                    ButtonWidget(
+                      onPressed: () {},
+                      label: 'Download QR Code',
                     ),
                     const SizedBox(height: 16), // Reduced spacing
                     RichText(

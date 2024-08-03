@@ -43,9 +43,15 @@ class BottomBarItemWidget extends StatelessWidget {
             semanticsLabel: label,
             width: 24,
             height: 24,
-            theme: SvgTheme(
-              currentColor: isSelected ? AppColors.primaryColor : Colors.grey,
-            ),
+            colorFilter: isSelected
+                ? const ColorFilter.mode(
+                    AppColors.primaryColor,
+                    BlendMode.srcIn,
+                  )
+                : const ColorFilter.mode(
+                    Color(0xFF8E8E8E),
+                    BlendMode.srcIn,
+                  ),
           ),
           const SizedBox(
             height: 4,

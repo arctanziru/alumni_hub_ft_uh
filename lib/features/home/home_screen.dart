@@ -6,7 +6,6 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:alumni_hub_ft_uh/common/widgets/bottomBar/bottom_bar_widget.dart';
 import 'package:alumni_hub_ft_uh/common/widgets/card/card_news_widget.dart';
 import 'package:alumni_hub_ft_uh/common/widgets/button/button_filter_widget.dart';
-import 'package:alumni_hub_ft_uh/features/news/news_screen.dart'; // Import your NewsScreen
 
 class NewsItem {
   final String imageUrl;
@@ -73,6 +72,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.grey[200], // Set background color to light grey
       bottomNavigationBar: const BottomBarWidget(currentIndex: 0),
       appBar: const AppBarWidget(),
       body: SafeArea(
@@ -132,95 +132,6 @@ class _HomeScreenState extends State<HomeScreen> {
                           },
                         ),
                       ],
-                    ),
-                    // Filter Section
-                    SizedBox(
-                      height: 50,
-                      child: SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: Row(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(right: 8),
-                              child: ButtonFilterWidget(
-                                label: 'Politik',
-                                onPressed: () {
-                                  setState(() {
-                                    _activeFilterIndex = 0;
-                                  });
-                                },
-                                isActive: _activeFilterIndex == 0,
-                                activeColor: Colors.red,
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(right: 8),
-                              child: ButtonFilterWidget(
-                                label: 'Olahraga',
-                                onPressed: () {
-                                  setState(() {
-                                    _activeFilterIndex = 1;
-                                  });
-                                },
-                                isActive: _activeFilterIndex == 1,
-                                activeColor: Colors.red,
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(right: 8),
-                              child: ButtonFilterWidget(
-                                label: 'Ekonomi',
-                                onPressed: () {
-                                  setState(() {
-                                    _activeFilterIndex = 2;
-                                  });
-                                },
-                                isActive: _activeFilterIndex == 2,
-                                activeColor: Colors.red,
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(right: 8),
-                              child: ButtonFilterWidget(
-                                label: 'Teknologi',
-                                onPressed: () {
-                                  setState(() {
-                                    _activeFilterIndex = 3;
-                                  });
-                                },
-                                isActive: _activeFilterIndex == 3,
-                                activeColor: Colors.red,
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(right: 8),
-                              child: ButtonFilterWidget(
-                                label: 'Seni',
-                                onPressed: () {
-                                  setState(() {
-                                    _activeFilterIndex = 4;
-                                  });
-                                },
-                                isActive: _activeFilterIndex == 4,
-                                activeColor: Colors.red,
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(right: 8),
-                              child: ButtonFilterWidget(
-                                label: 'Sosial',
-                                onPressed: () {
-                                  setState(() {
-                                    _activeFilterIndex = 5;
-                                  });
-                                },
-                                isActive: _activeFilterIndex == 5,
-                                activeColor: Colors.red,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
                     ),
                     const SizedBox(height: 8.0),
                     // Berita Terkini Content

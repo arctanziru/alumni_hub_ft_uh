@@ -15,7 +15,7 @@ class AlumniHubFtUhApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Alumni Hub FT-UH',
+      title: 'IKATEKhub FTUH',
       debugShowCheckedModeBanner: false,
       color: AppColors.primaryColor,
       theme: appTheme,

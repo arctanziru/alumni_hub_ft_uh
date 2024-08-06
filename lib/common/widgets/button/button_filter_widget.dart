@@ -1,3 +1,4 @@
+import 'package:alumni_hub_ft_uh/constants/colors.dart';
 import 'package:flutter/material.dart';
 
 class ButtonFilterWidget extends StatefulWidget {
@@ -12,7 +13,7 @@ class ButtonFilterWidget extends StatefulWidget {
       required this.label,
       required this.onPressed,
       this.icon,
-      this.activeColor,
+      this.activeColor = AppColors.primaryColor,
       this.isActive = false});
 
   @override

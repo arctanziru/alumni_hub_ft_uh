@@ -72,9 +72,7 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
               ),
             ),
           ),
-          style: const TextStyle(
-            fontSize: 14,
-          ),
+          style: Theme.of(context).textTheme.bodyMedium,
           keyboardType: widget.keyboardType,
           textInputAction: TextInputAction.next,
         ),

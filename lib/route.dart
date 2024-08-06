@@ -6,7 +6,6 @@ import 'package:alumni_hub_ft_uh/features/donation/donation_screen.dart';
 import 'package:alumni_hub_ft_uh/features/home/home_screen.dart';
 import 'package:alumni_hub_ft_uh/features/vacancy/vacancy_screen.dart';
 import 'package:alumni_hub_ft_uh/features/news/news_screen.dart';
-import 'package:alumni_hub_ft_uh/features/vacancy/vacancy_screen.dart';
 import 'package:flutter/material.dart';
 
 Route<dynamic> routeGenerators(RouteSettings settings) {

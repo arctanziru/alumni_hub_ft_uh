@@ -6,8 +6,7 @@ final ThemeData appTheme = ThemeData(
   scaffoldBackgroundColor: AppColors.backgroundColor,
   primaryColor: AppColors.primaryColor,
   useMaterial3: true,
-  colorScheme:
-      ColorScheme.fromSeed(seedColor: const Color.fromARGB(255, 56, 45, 45)),
+  colorScheme: ColorScheme.fromSeed(seedColor: AppColors.primaryColor),
   primaryTextTheme: primaryTextTheme,
   textTheme: primaryTextTheme,
 );

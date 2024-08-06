@@ -64,7 +64,7 @@ class CardVacancyWidget extends StatelessWidget {
                 children: [
                   Text(
                     title,
-                    style: Theme.of(context).textTheme.titleLarge,
+                    style: Theme.of(context).textTheme.titleMedium,
                     maxLines: 1,
                     overflow: TextOverflow.ellipsis,
                   ),
@@ -129,13 +129,14 @@ class CardVacancyWidget extends StatelessWidget {
     return Row(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Icon(icon, size: 20, color: Colors.grey),
+        Icon(icon, size: 14, color: Colors.grey),
         const SizedBox(width: 4),
         Flexible(
           child: Text(
             text,
-            style: Theme.of(context).textTheme.labelSmall?.copyWith(
+            style: Theme.of(context).textTheme.bodySmall?.copyWith(
                   color: Colors.grey,
+              fontSize: 10
                 ),
             overflow: TextOverflow.ellipsis,
           ),

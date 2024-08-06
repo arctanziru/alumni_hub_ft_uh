@@ -1,6 +1,5 @@
 import 'package:alumni_hub_ft_uh/common/widgets/appBar/app_bar_search_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:alumni_hub_ft_uh/common/widgets/appBar/app_bar_widget.dart';
 import 'package:alumni_hub_ft_uh/common/widgets/button/button_filter_widget.dart';
 import 'package:alumni_hub_ft_uh/common/widgets/card/card_news_widget.dart';
 import 'package:alumni_hub_ft_uh/common/widgets/bottomBar/bottom_bar_widget.dart'; // Import the BottomBarWidget

@@ -1,8 +1,9 @@
-import 'package:alumni_hub_ft_uh/common/widgets/appBar/app_bar_widget.dart';
 import 'package:alumni_hub_ft_uh/common/widgets/bottomBar/bottom_bar_widget.dart';
 import 'package:alumni_hub_ft_uh/common/widgets/button/button_widget.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+
+import '../../common/widgets/appBar/app_bar_search_widget.dart';
 
 class DonationScreen extends StatefulWidget {
   static const String route = '/donation';
@@ -107,7 +108,7 @@ class _DonationScreenState extends State<DonationScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: const BottomBarWidget(currentIndex: 2),
-      appBar: const AppBarWidget(),
+      appBar: const AppBarSearchWidget(),
       body: SafeArea(
         child: Container(
           color: Colors.grey[200], // Light grey background color

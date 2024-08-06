@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class TextFieldWidget extends StatefulWidget {
-  final String label;
+  final String? label;
   final String hint;
   final TextEditingController? controller;
   final bool obscureText;
@@ -9,7 +9,7 @@ class TextFieldWidget extends StatefulWidget {
 
   const TextFieldWidget({
     super.key,
-    required this.label,
+    this.label,
     required this.hint,
     this.controller,
     this.obscureText = false,
@@ -45,14 +45,15 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          widget.label,
-          style: const TextStyle(
-            fontSize: 14,
-            fontWeight: FontWeight.w600,
+        if (widget.label != null) // Proper null check for label
+          Text(
+            widget.label!,
+            style: const TextStyle(
+              fontSize: 14,
+              fontWeight: FontWeight.w600,
+            ),
           ),
-        ),
-        const SizedBox(height: 4),
+        SizedBox(height: widget.label != null ? 8: 0),
         TextField(
           focusNode: _focusNode,
           controller: widget.controller,

@@ -12,7 +12,6 @@ class AppBarSearchWidget extends StatelessWidget implements PreferredSizeWidget 
       leading: IconButton(
         icon: const Icon(Icons.menu, color: Colors.black),
         onPressed: () {
-          // Navigate to AppBarMenuWidget with slide animation
           Navigator.push(
             context,
             PageRouteBuilder(
@@ -35,7 +34,7 @@ class AppBarSearchWidget extends StatelessWidget implements PreferredSizeWidget 
       ),
       title: Container(
         height: 35,
-        width: 300,
+        width: double.infinity,
         padding: const EdgeInsets.symmetric(horizontal: 16.0),
         decoration: BoxDecoration(
           border: Border.all(color: Colors.black, width: 1.0), // Outline color and width

@@ -1,9 +1,10 @@
-import 'package:alumni_hub_ft_uh/common/widgets/appBar/app_bar_widget.dart';
 import 'package:alumni_hub_ft_uh/common/widgets/bottomBar/bottom_bar_widget.dart';
 import 'package:alumni_hub_ft_uh/common/widgets/card/card_vacancy_widget.dart';
 import 'package:alumni_hub_ft_uh/features/vacancy/domain/vacancy_model.dart';
 import 'package:alumni_hub_ft_uh/features/vacancy/vacancy_detail_screen.dart';
 import 'package:flutter/material.dart';
+
+import '../../common/widgets/appBar/app_bar_search_widget.dart';
 
 class VacancyScreen extends StatefulWidget {
   static const String route =
@@ -20,7 +21,7 @@ class _VacancyScreenState extends State<VacancyScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const AppBarWidget(),
+      appBar: const AppBarSearchWidget(),
       bottomNavigationBar: const BottomBarWidget(currentIndex: 3),
       body: SafeArea(
         child: SingleChildScrollView(

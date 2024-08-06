@@ -8,21 +8,22 @@ enum ButtonType {
 
 class ButtonWidget extends StatelessWidget {
   final String label;
-  final VoidCallback? onPressed; // Change to nullable
-  final ButtonType? type;
+  final VoidCallback? onPressed; // Nullable callback
+  final ButtonType type;
+  final bool rounded;
 
   const ButtonWidget({
     super.key,
     required this.label,
     this.onPressed,
     this.type = ButtonType.primary,
+    this.rounded = false, // Set default value
   });
 
   @override
   Widget build(BuildContext context) {
     return ElevatedButton(
-      onPressed:
-          onPressed, // No need to check null here, ElevatedButton handles it
+      onPressed: onPressed, // ElevatedButton handles null check
       style: ButtonStyle(
         backgroundColor: WidgetStateProperty.all<Color>(
           type == ButtonType.primary
@@ -32,9 +33,9 @@ class ButtonWidget extends StatelessWidget {
         padding: WidgetStateProperty.all<EdgeInsetsGeometry>(
           const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
         ),
-        shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+        shape: WidgetStateProperty.all<OutlinedBorder>(
           RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8),
+            borderRadius: BorderRadius.circular(rounded ? 24 : 8), // Adjust border radius based on rounded
           ),
         ),
       ),

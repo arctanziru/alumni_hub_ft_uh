@@ -105,13 +105,12 @@ class _NewsScreenState extends State<NewsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[200], // Set background color to light grey
       appBar: const AppBarWidget(),
       bottomNavigationBar: const BottomBarWidget(currentIndex: 1),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16),
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -146,7 +145,6 @@ class _NewsScreenState extends State<NewsScreen> {
                               });
                             },
                             isActive: _activeFilterIndex == 0,
-                            activeColor: Colors.red,
                           ),
                         ),
                         Padding(
@@ -159,7 +157,6 @@ class _NewsScreenState extends State<NewsScreen> {
                               });
                             },
                             isActive: _activeFilterIndex == 1,
-                            activeColor: Colors.red,
                           ),
                         ),
                         Padding(
@@ -172,7 +169,6 @@ class _NewsScreenState extends State<NewsScreen> {
                               });
                             },
                             isActive: _activeFilterIndex == 2,
-                            activeColor: Colors.red,
                           ),
                         ),
                         Padding(
@@ -185,7 +181,6 @@ class _NewsScreenState extends State<NewsScreen> {
                               });
                             },
                             isActive: _activeFilterIndex == 3,
-                            activeColor: Colors.red,
                           ),
                         ),
                         Padding(
@@ -198,7 +193,6 @@ class _NewsScreenState extends State<NewsScreen> {
                               });
                             },
                             isActive: _activeFilterIndex == 4,
-                            activeColor: Colors.red,
                           ),
                         ),
                         Padding(
@@ -211,7 +205,6 @@ class _NewsScreenState extends State<NewsScreen> {
                               });
                             },
                             isActive: _activeFilterIndex == 5,
-                            activeColor: Colors.red,
                           ),
                         ),
                       ],

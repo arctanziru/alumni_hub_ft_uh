@@ -6,6 +6,8 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:alumni_hub_ft_uh/common/widgets/bottomBar/bottom_bar_widget.dart';
 import 'package:alumni_hub_ft_uh/common/widgets/card/card_news_widget.dart';
 
+import '../../common/widgets/button/button_filter_widget.dart';
+
 class NewsItem {
   final String imageUrl;
   final String title;
@@ -32,6 +34,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  int _activeFilterIndex = 0;
 
   final List<NewsItem> _newsItems = [
     NewsItem(
@@ -106,7 +109,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -129,6 +132,88 @@ class _HomeScreenState extends State<HomeScreen> {
                           },
                         ),
                       ],
+                    ),
+                    SizedBox(
+                      height: 50,
+                      child: SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(right: 8),
+                              child: ButtonFilterWidget(
+                                label: 'Politik',
+                                onPressed: () {
+                                  setState(() {
+                                    _activeFilterIndex = 0;
+                                  });
+                                },
+                                isActive: _activeFilterIndex == 0,
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(right: 8),
+                              child: ButtonFilterWidget(
+                                label: 'Olahraga',
+                                onPressed: () {
+                                  setState(() {
+                                    _activeFilterIndex = 1;
+                                  });
+                                },
+                                isActive: _activeFilterIndex == 1,
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(right: 8),
+                              child: ButtonFilterWidget(
+                                label: 'Ekonomi',
+                                onPressed: () {
+                                  setState(() {
+                                    _activeFilterIndex = 2;
+                                  });
+                                },
+                                isActive: _activeFilterIndex == 2,
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(right: 8),
+                              child: ButtonFilterWidget(
+                                label: 'Teknologi',
+                                onPressed: () {
+                                  setState(() {
+                                    _activeFilterIndex = 3;
+                                  });
+                                },
+                                isActive: _activeFilterIndex == 3,
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(right: 8),
+                              child: ButtonFilterWidget(
+                                label: 'Seni',
+                                onPressed: () {
+                                  setState(() {
+                                    _activeFilterIndex = 4;
+                                  });
+                                },
+                                isActive: _activeFilterIndex == 4,
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(right: 8),
+                              child: ButtonFilterWidget(
+                                label: 'Sosial',
+                                onPressed: () {
+                                  setState(() {
+                                    _activeFilterIndex = 5;
+                                  });
+                                },
+                                isActive: _activeFilterIndex == 5,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
                     const SizedBox(height: 8.0),
                     // Berita Terkini Content

@@ -127,12 +127,6 @@ class _NewsScreenState extends State<NewsScreen> {
                         fontSize: 24,
                       ),
                     ),
-                    IconButton(
-                      icon: Icon(Icons.arrow_forward_rounded),
-                      onPressed: () {
-                        Navigator.pushNamed(context, NewsScreen.route);
-                      },
-                    ),
                   ],
                 ),
                 // Filter Section

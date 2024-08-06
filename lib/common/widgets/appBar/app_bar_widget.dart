@@ -12,16 +12,16 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
         icon: const Icon(Icons.menu, color: Colors.black),
         onPressed: () {},
       ),
-      title: const Column(
+      title: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
+          const Text(
             'Hey, Arrayyan',
             style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
           ),
           Text(
             'Apa kabar hari ini?',
-            style: TextStyle(color: Colors.black, fontSize: 14),
+            style: Theme.of(context).textTheme.bodyMedium,
           ),
         ],
       ),

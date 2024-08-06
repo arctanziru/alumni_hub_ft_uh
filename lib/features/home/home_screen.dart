@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:alumni_hub_ft_uh/common/widgets/bottomBar/bottom_bar_widget.dart';
 import 'package:alumni_hub_ft_uh/common/widgets/card/card_news_widget.dart';
-import 'package:alumni_hub_ft_uh/common/widgets/button/button_filter_widget.dart';
 
 class NewsItem {
   final String imageUrl;
@@ -33,9 +32,8 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  int _activeFilterIndex = 0;
 
-  List<NewsItem> _newsItems = [
+  final List<NewsItem> _newsItems = [
     NewsItem(
       imageUrl: 'https://images.unsplash.com/photo-1721332149346-00e39ce5c24f?q=80&w=1472&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
       title: 'Reuni Akbar',
@@ -81,7 +79,6 @@ class _HomeScreenState extends State<HomeScreen> {
             children: [
               // Carousel Section
               SizedBox(
-                height: MediaQuery.of(context).size.height * 0.3, // Adjusted height for carousel
                 child: CarouselSlider(
                   options: CarouselOptions(
                     autoPlay: true,
@@ -126,7 +123,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                         ),
                         IconButton(
-                          icon: Icon(Icons.arrow_forward_rounded),
+                          icon: const Icon(Icons.arrow_forward_rounded),
                           onPressed: () {
                             Navigator.pushNamed(context, NewsScreen.route);
                           },
@@ -164,7 +161,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           foregroundColor: Colors.white,
                           backgroundColor: Colors.red, // Background color
                         ),
-                        child: Text('Lainnya'),
+                        child: const Text('Lainnya'),
                       ),
                     ),
                     const SizedBox(height: 20), // Space between button and next section
@@ -181,7 +178,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           ),
                         ),
                         IconButton(
-                          icon: Icon(Icons.arrow_forward_rounded),
+                          icon: const Icon(Icons.arrow_forward_rounded),
                           onPressed: () {
                             Navigator.pushNamed(context, VacancyScreen.route);
                           },
@@ -219,7 +216,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           foregroundColor: Colors.white,
                           backgroundColor: Colors.red, // Background color
                         ),
-                        child: Text('Lainnya'),
+                        child: const Text('Lainnya'),
                       ),
                     ),
                   ],

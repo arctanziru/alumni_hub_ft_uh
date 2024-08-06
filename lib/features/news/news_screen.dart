@@ -1,24 +1,10 @@
 import 'package:alumni_hub_ft_uh/common/widgets/appBar/app_bar_search_widget.dart';
+import 'package:alumni_hub_ft_uh/features/news/domain/news_model.dart';
+import 'package:alumni_hub_ft_uh/features/news/news_detail_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:alumni_hub_ft_uh/common/widgets/button/button_filter_widget.dart';
 import 'package:alumni_hub_ft_uh/common/widgets/card/card_news_widget.dart';
 import 'package:alumni_hub_ft_uh/common/widgets/bottomBar/bottom_bar_widget.dart'; // Import the BottomBarWidget
-
-class NewsItem {
-  final String imageUrl;
-  final String title;
-  final String description;
-  double likes;
-  bool isLiked;
-
-  NewsItem({
-    required this.imageUrl,
-    required this.title,
-    required this.description,
-    required this.likes,
-    this.isLiked = false,
-  });
-}
 
 class NewsScreen extends StatefulWidget {
   static const String route = '/news';
@@ -32,75 +18,88 @@ class NewsScreen extends StatefulWidget {
 class _NewsScreenState extends State<NewsScreen> {
   int _activeFilterIndex = 0;
 
-  final List<NewsItem> _newsItems = [
-    NewsItem(
-      imageUrl: 'https://images.unsplash.com/photo-1721332149346-00e39ce5c24f?q=80&w=1472&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-      title: 'Reuni Akbar',
-      description: 'Diadakan pada 17 Agustus 2024',
-      likes: 10,
-    ),
-    NewsItem(
-      imageUrl: 'https://images.unsplash.com/photo-1721332149346-00e39ce5c24f?q=80&w=1472&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-      title: 'Event Title 2',
-      description: 'Event Description 2',
-      likes: 10,
-    ),
-    NewsItem(
-      imageUrl: 'https://images.unsplash.com/photo-1721332149346-00e39ce5c24f?q=80&w=1472&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-      title: 'Event Title 3',
-      description: 'Event Description 3',
-      likes: 10,
-    ),
-    NewsItem(
-      imageUrl: 'https://images.unsplash.com/photo-1721332149346-00e39ce5c24f?q=80&w=1472&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-      title: 'Event Title 4',
-      description: 'Event Description 4',
-      likes: 10,
-    ),
-    NewsItem(
-      imageUrl: 'https://images.unsplash.com/photo-1721332149346-00e39ce5c24f?q=80&w=1472&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-      title: 'Event Title 5',
-      description: 'Event Description 5',
-      likes: 10,
-    ),
-    NewsItem(
-      imageUrl: 'https://images.unsplash.com/photo-1721332149346-00e39ce5c24f?q=80&w=1472&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-      title: 'Event Title 6',
-      description: 'Event Description 6',
-      likes: 10,
-    ),
-    NewsItem(
-      imageUrl: 'https://images.unsplash.com/photo-1721332149346-00e39ce5c24f?q=80&w=1472&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-      title: 'Event Title 7',
-      description: 'Event Description 7',
-      likes: 10,
-    ),
-    NewsItem(
-      imageUrl: 'https://images.unsplash.com/photo-1721332149346-00e39ce5c24f?q=80&w=1472&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-      title: 'Event Title 8',
-      description: 'Event Description 8',
-      likes: 10,
-    ),
-    NewsItem(
-      imageUrl: 'https://images.unsplash.com/photo-1721332149346-00e39ce5c24f?q=80&w=1472&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-      title: 'Event Title 9',
-      description: 'Event Description 9',
-      likes: 10,
-    ),
-    NewsItem(
-      imageUrl: 'https://images.unsplash.com/photo-1721332149346-00e39ce5c24f?q=80&w=1472&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-      title: 'Event Title 10',
-      description: 'Event Description 10',
-      likes: 10,
-    ),
+  final List<NewsModel> _newsItems = [
+    NewsModel(
+        imageUrl:
+            'https://images.unsplash.com/photo-1721332149346-00e39ce5c24f?q=80&w=1472&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+        title: 'Reuni Akbar',
+        description: 'Diadakan pada 17 Agustus 2024',
+        likes: 10,
+        content: '<b>HTML Content</b>',
+        createdAt: DateTime.now().millisecondsSinceEpoch),
+    NewsModel(
+        imageUrl:
+            'https://images.unsplash.com/photo-1721332149346-00e39ce5c24f?q=80&w=1472&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+        title: 'Event Title 2',
+        description: 'Event Description 2',
+        likes: 10,
+        content: '<b>HTML Content</b>',
+        createdAt: DateTime.now().millisecondsSinceEpoch),
+    NewsModel(
+        imageUrl:
+            'https://images.unsplash.com/photo-1721332149346-00e39ce5c24f?q=80&w=1472&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+        title: 'Event Title 3',
+        description: 'Event Description 3',
+        likes: 10,
+        content: '<b>HTML Content</b>',
+        createdAt: DateTime.now().millisecondsSinceEpoch),
+    NewsModel(
+        imageUrl:
+            'https://images.unsplash.com/photo-1721332149346-00e39ce5c24f?q=80&w=1472&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+        title: 'Event Title 4',
+        description: 'Event Description 4',
+        likes: 10,
+        content: '<b>HTML Content</b>',
+        createdAt: DateTime.now().millisecondsSinceEpoch),
+    NewsModel(
+        imageUrl:
+            'https://images.unsplash.com/photo-1721332149346-00e39ce5c24f?q=80&w=1472&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+        title: 'Event Title 5',
+        description: 'Event Description 5',
+        likes: 10,
+        content: '<b>HTML Content</b>',
+        createdAt: DateTime.now().millisecondsSinceEpoch),
+    NewsModel(
+        imageUrl:
+            'https://images.unsplash.com/photo-1721332149346-00e39ce5c24f?q=80&w=1472&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+        title: 'Event Title 6',
+        description: 'Event Description 6',
+        likes: 10,
+        content: '<b>HTML Content</b>',
+        createdAt: DateTime.now().millisecondsSinceEpoch),
+    NewsModel(
+        imageUrl:
+            'https://images.unsplash.com/photo-1721332149346-00e39ce5c24f?q=80&w=1472&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+        title: 'Event Title 7',
+        description: 'Event Description 7',
+        likes: 10,
+        content: '<b>HTML Content</b>',
+        createdAt: DateTime.now().millisecondsSinceEpoch),
+    NewsModel(
+        imageUrl:
+            'https://images.unsplash.com/photo-1721332149346-00e39ce5c24f?q=80&w=1472&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+        title: 'Event Title 8',
+        description: 'Event Description 8',
+        likes: 10,
+        content: '<b>HTML Content</b>',
+        createdAt: DateTime.now().millisecondsSinceEpoch),
+    NewsModel(
+        imageUrl:
+            'https://images.unsplash.com/photo-1721332149346-00e39ce5c24f?q=80&w=1472&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+        title: 'Event Title 9',
+        description: 'Event Description 9',
+        likes: 10,
+        content: '<b>HTML Content</b>',
+        createdAt: DateTime.now().millisecondsSinceEpoch),
+    NewsModel(
+        imageUrl:
+            'https://images.unsplash.com/photo-1721332149346-00e39ce5c24f?q=80&w=1472&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+        title: 'Event Title 10',
+        description: 'Event Description 10',
+        likes: 10,
+        content: '<b>HTML Content</b>',
+        createdAt: DateTime.now().millisecondsSinceEpoch),
   ];
-
-  void _handleLikePress(int index) {
-    setState(() {
-      _newsItems[index].isLiked = !_newsItems[index].isLiked;
-      _newsItems[index].likes += _newsItems[index].isLiked ? 1 : -1;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -122,9 +121,9 @@ class _NewsScreenState extends State<NewsScreen> {
                       'Daftar Berita',
                       textAlign: TextAlign.left,
                       style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 24,
-                      ),
+                            fontWeight: FontWeight.bold,
+                            fontSize: 24,
+                          ),
                     ),
                   ],
                 ),
@@ -217,15 +216,21 @@ class _NewsScreenState extends State<NewsScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: List.generate(
                     _newsItems.length,
-                        (index) => Column(
+                    (index) => Column(
                       children: [
                         CardNewsWidget(
                           imageUrl: _newsItems[index].imageUrl,
                           title: _newsItems[index].title,
                           description: _newsItems[index].description,
                           likes: _newsItems[index].likes,
-                          isLiked: _newsItems[index].isLiked,
-                          onLikePressed: () => _handleLikePress(index),
+                          isLiked: false,
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => NewsDetailScreen(
+                                        news: _newsItems[index])));
+                          },
                         ),
                         const SizedBox(height: 10),
                       ],

@@ -2,9 +2,9 @@ import 'package:alumni_hub_ft_uh/common/widgets/bottomBar/bottom_bar_item_widget
 import 'package:flutter/material.dart';
 
 class BottomBarWidget extends StatelessWidget {
-  final int currentIndex;
+  final int? currentIndex;
 
-  const BottomBarWidget({super.key, required this.currentIndex});
+  const BottomBarWidget({super.key, this.currentIndex});
 
   @override
   Widget build(BuildContext context) {

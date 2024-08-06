@@ -1,6 +1,8 @@
 import 'package:alumni_hub_ft_uh/common/widgets/appBar/app_bar_widget.dart';
 import 'package:alumni_hub_ft_uh/common/widgets/bottomBar/bottom_bar_widget.dart';
 import 'package:alumni_hub_ft_uh/common/widgets/card/card_vacancy_widget.dart';
+import 'package:alumni_hub_ft_uh/features/vacancy/domain/vacancy_model.dart';
+import 'package:alumni_hub_ft_uh/features/vacancy/vacancy_detail_screen.dart';
 import 'package:flutter/material.dart';
 
 class VacancyScreen extends StatefulWidget {
@@ -45,6 +47,35 @@ class _VacancyScreenState extends State<VacancyScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     CardVacancyWidget(
+                      onTap: () {
+                        Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => VacancyDetailScreen(
+                                      vacancy: VacancyModel(
+                                        id: '1',
+                                        title: 'Frontend Developer',
+                                        company: 'Google',
+                                        type: 'Full Time',
+                                        location: 'Jakarta, Indonesia',
+                                        experience: '2 years',
+                                        createdAt: DateTime.now()
+                                            .microsecondsSinceEpoch,
+                                        description:
+                                            'We are looking for a frontend developer to join our team. You will be responsible for developing and maintaining our web applications.',
+                                        backgroundUrl:
+                                            'https://via.placeholder.com/50',
+                                        companyLogo:
+                                            'https://via.placeholder.com/50',
+                                        requirements: const [
+                                          'Experience with ReactJS',
+                                          'Experience with HTML, CSS, and JavaScript',
+                                          'Experience with Git',
+                                        ],
+                                        salary: 'Rp 10.000.000 - Rp 15.000.000',
+                                        url: 'https://google.com',
+                                      ),
+                                    )) // Updated the route to match the new screen name
+                            );
+                      },
                       title: 'Frontend Developer',
                       company: 'Google',
                       type: 'Full Time',

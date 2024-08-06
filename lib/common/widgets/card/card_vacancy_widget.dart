@@ -9,6 +9,7 @@ class CardVacancyWidget extends StatelessWidget {
   final DateTime postedAt;
   final String description;
   final String companyImgUrl;
+  final VoidCallback onTap;
 
   const CardVacancyWidget(
       {super.key,
@@ -19,104 +20,108 @@ class CardVacancyWidget extends StatelessWidget {
       required this.experience,
       required this.postedAt,
       required this.description,
-      required this.companyImgUrl});
+      required this.companyImgUrl,
+      required this.onTap});
 
   @override
   Widget build(BuildContext context) {
     final daysLeft = DateTime.now().difference(postedAt).inDays;
 
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(8),
-        boxShadow: const [
-          BoxShadow(
-            color: Color.fromRGBO(0, 0, 0, 0.2),
-            blurRadius: 4,
-            offset: Offset(0, 4),
-          ),
-        ],
-      ),
-      padding: const EdgeInsets.symmetric(
-        horizontal: 20,
-        vertical: 16,
-      ),
-      width: double.infinity,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              ClipRRect(
-                borderRadius: BorderRadius.circular(8),
-                child: Image.network(
-                  'https://via.placeholder.com/50',
-                  fit: BoxFit.cover,
-                  width: 21,
-                  height: 21,
-                  errorBuilder: (context, error, stackTrace) =>
-                      const Icon(Icons.error),
+    return InkWell(
+      onTap: onTap,
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(8),
+          boxShadow: const [
+            BoxShadow(
+              color: Color.fromRGBO(0, 0, 0, 0.2),
+              blurRadius: 4,
+              offset: Offset(0, 4),
+            ),
+          ],
+        ),
+        padding: const EdgeInsets.symmetric(
+          horizontal: 20,
+          vertical: 16,
+        ),
+        width: double.infinity,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                ClipRRect(
+                  borderRadius: BorderRadius.circular(8),
+                  child: Image.network(
+                    'https://via.placeholder.com/50',
+                    fit: BoxFit.cover,
+                    width: 21,
+                    height: 21,
+                    errorBuilder: (context, error, stackTrace) =>
+                        const Icon(Icons.error),
+                  ),
                 ),
-              ),
-              const SizedBox(width: 16),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    title,
-                    style: Theme.of(context).textTheme.titleMedium,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  Text(
-                    company,
-                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                          color: Colors.grey,
-                          fontSize: 10,
-                        ),
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                ],
-              ),
-            ],
-          ),
-          const SizedBox(height: 8),
-          const Divider(),
-          Wrap(
-            spacing: 6,
-            runSpacing: 6,
-            children: [
-              _buildInfoRow(
-                icon: Icons.work,
-                text: type,
-                context: context,
-              ),
-              _buildInfoRow(
-                icon: Icons.location_on,
-                text: location,
-                context: context,
-              ),
-              _buildInfoRow(
-                icon: Icons.access_time,
-                text: experience,
-                context: context,
-              ),
-              _buildInfoRow(
-                icon: Icons.calendar_today,
-                text: '$daysLeft days',
-                context: context,
-              ),
-            ],
-          ),
-          const SizedBox(height: 16),
-          Text(
-            description,
-            style: Theme.of(context).textTheme.bodyMedium,
-            maxLines: 3,
-            overflow: TextOverflow.ellipsis,
-          ),
-        ],
+                const SizedBox(width: 16),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      title,
+                      style: Theme.of(context).textTheme.titleMedium,
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    Text(
+                      company,
+                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                            color: Colors.grey,
+                            fontSize: 10,
+                          ),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ],
+                ),
+              ],
+            ),
+            const SizedBox(height: 8),
+            const Divider(),
+            Wrap(
+              spacing: 6,
+              runSpacing: 6,
+              children: [
+                _buildInfoRow(
+                  icon: Icons.work,
+                  text: type,
+                  context: context,
+                ),
+                _buildInfoRow(
+                  icon: Icons.location_on,
+                  text: location,
+                  context: context,
+                ),
+                _buildInfoRow(
+                  icon: Icons.access_time,
+                  text: experience,
+                  context: context,
+                ),
+                _buildInfoRow(
+                  icon: Icons.calendar_today,
+                  text: '$daysLeft days',
+                  context: context,
+                ),
+              ],
+            ),
+            const SizedBox(height: 16),
+            Text(
+              description,
+              style: Theme.of(context).textTheme.bodyMedium,
+              maxLines: 3,
+              overflow: TextOverflow.ellipsis,
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -134,10 +139,10 @@ class CardVacancyWidget extends StatelessWidget {
         Flexible(
           child: Text(
             text,
-            style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                  color: Colors.grey,
-              fontSize: 10
-                ),
+            style: Theme.of(context)
+                .textTheme
+                .bodySmall
+                ?.copyWith(color: Colors.grey, fontSize: 10),
             overflow: TextOverflow.ellipsis,
           ),
         ),

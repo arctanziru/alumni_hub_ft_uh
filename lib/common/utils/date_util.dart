@@ -1,6 +1,6 @@
 class DateUtil {
   static String getFormattedDate(DateTime date) {
-    return "${date.day}/${date.month}/${date.year}";
+    return "${date.day}-${date.month}-${date.year}";
   }
 
   static String getFormattedTime(DateTime date) {

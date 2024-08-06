@@ -55,7 +55,8 @@ class _VacancyDetailScreenState extends State<VacancyDetailScreen> {
             ),
             const SizedBox(height: 6),
             Text(
-              '${DateTime.fromMicrosecondsSinceEpoch(widget.vacancy.createdAt)}',
+              DateUtil.getFormattedDate(DateTime.fromMicrosecondsSinceEpoch(
+                  widget.vacancy.createdAt)),
               style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                     color: const Color(0xFF606060),
                   ),
@@ -71,6 +72,7 @@ class _VacancyDetailScreenState extends State<VacancyDetailScreen> {
               child: Wrap(
                 alignment: WrapAlignment.center,
                 spacing: 14,
+                runSpacing: 8,
                 children: [
                   _buildInfoChip(
                     context: context,
@@ -83,11 +85,11 @@ class _VacancyDetailScreenState extends State<VacancyDetailScreen> {
                     text: widget.vacancy.experience,
                   ),
                   _buildInfoChip(
-                    context: context,
-                    icon: Icons.calendar_today,
-                    text:
-                        '${DateUtil.getDaysAgo(DateTime.fromMillisecondsSinceEpoch(widget.vacancy.createdAt))} days ago',
-                  ),
+                      context: context,
+                      icon: Icons.calendar_today,
+                      text: DateUtil.getDaysAgo(
+                          DateTime.fromMicrosecondsSinceEpoch(
+                              widget.vacancy.createdAt))),
                 ],
               ),
             ),

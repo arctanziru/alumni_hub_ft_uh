@@ -1,5 +1,6 @@
-import 'package:alumni_hub_ft_uh/common/widgets/appBar/app_bar_menu_widget.dart';
+import 'package:alumni_hub_ft_uh/features/search/search_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:alumni_hub_ft_uh/common/widgets/appBar/app_bar_menu_widget.dart';
 
 class AppBarSearchWidget extends StatelessWidget implements PreferredSizeWidget {
   const AppBarSearchWidget({super.key});
@@ -44,15 +45,25 @@ class AppBarSearchWidget extends StatelessWidget implements PreferredSizeWidget 
           children: [
             const Icon(Icons.search, color: Colors.black),
             Expanded(
-              child: TextField(
-                autofocus: true, // Automatically focus when the AppBar is displayed
-                decoration: InputDecoration(
-                  hintText: 'Search',
-                  hintStyle: Theme.of(context).textTheme.bodySmall?.copyWith(color: Colors.black54),
-                  border: InputBorder.none,
-                  contentPadding: const EdgeInsets.symmetric(vertical: 14, horizontal: 8.0), // Adjust height and horizontal padding
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => const SearchScreen()), // Ganti dengan screen yang diinginkan
+                  );
+                },
+                child: AbsorbPointer(
+                  child: TextField(
+                    readOnly: true,
+                    decoration: InputDecoration(
+                      hintText: 'Search',
+                      hintStyle: Theme.of(context).textTheme.bodySmall?.copyWith(color: Colors.black54),
+                      border: InputBorder.none,
+                      contentPadding: const EdgeInsets.symmetric(vertical: 14, horizontal: 8.0), // Adjust height and horizontal padding
+                    ),
+                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Colors.black),
+                  ),
                 ),
-                style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Colors.black),
               ),
             ),
           ],

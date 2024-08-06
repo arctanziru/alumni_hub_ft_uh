@@ -1,4 +1,6 @@
 import 'package:alumni_hub_ft_uh/common/widgets/appBar/app_bar_widget.dart';
+import 'package:alumni_hub_ft_uh/common/widgets/button/button_widget.dart';
+import 'package:alumni_hub_ft_uh/common/widgets/card/card_vacancy_widget.dart';
 import 'package:alumni_hub_ft_uh/features/news/news_screen.dart';
 import 'package:alumni_hub_ft_uh/features/vacancy/vacancy_screen.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +9,8 @@ import 'package:alumni_hub_ft_uh/common/widgets/bottomBar/bottom_bar_widget.dart
 import 'package:alumni_hub_ft_uh/common/widgets/card/card_news_widget.dart';
 
 import '../../common/widgets/button/button_filter_widget.dart';
+import '../vacancy/domain/vacancy_model.dart';
+import '../vacancy/vacancy_detail_screen.dart';
 
 class NewsItem {
   final String imageUrl;
@@ -238,16 +242,11 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     const SizedBox(height: 16), // Space between sections and button
                     Center(
-                      child: ElevatedButton(
-                        onPressed: () {
-                          Navigator.pushNamed(context, NewsScreen.route);
-                        },
-                        style: ElevatedButton.styleFrom(
-                          foregroundColor: Colors.white,
-                          backgroundColor: Colors.red, // Background color
-                        ),
-                        child: const Text('Lainnya'),
-                      ),
+                      child: ButtonWidget(
+                        onPressed: () => Navigator.pushNamed(context, '/news'),
+                        label: 'Lainnya',
+                        rounded: true,
+                      )
                     ),
                     const SizedBox(height: 20), // Space between button and next section
                     // Lowongan Kerja Section
@@ -278,13 +277,46 @@ class _HomeScreenState extends State<HomeScreen> {
                         _newsItems.length,
                             (index) => Column(
                           children: [
-                            CardNewsWidget(
-                              imageUrl: _newsItems[index].imageUrl,
-                              title: _newsItems[index].title,
-                              description: _newsItems[index].description,
-                              likes: _newsItems[index].likes,
-                              isLiked: _newsItems[index].isLiked,
-                              onLikePressed: () => _handleLikePress(index),
+                            CardVacancyWidget(
+                              onTap: () {
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (context) => VacancyDetailScreen(
+                                      vacancy: VacancyModel(
+                                        id: '1',
+                                        title: 'Frontend Developer',
+                                        company: 'Google',
+                                        type: 'Full Time',
+                                        location: 'Jakarta, Indonesia',
+                                        experience: '2 years',
+                                        createdAt: DateTime.now()
+                                            .microsecondsSinceEpoch,
+                                        description:
+                                        'We are looking for a frontend developer to join our team. You will be responsible for developing and maintaining our web applications.',
+                                        backgroundUrl:
+                                        'https://via.placeholder.com/50',
+                                        companyLogo:
+                                        'https://via.placeholder.com/50',
+                                        requirements: const [
+                                          'Experience with ReactJS',
+                                          'Experience with HTML, CSS, and JavaScript',
+                                          'Experience with Git',
+                                        ],
+                                        salary: 'Rp 10.000.000 - Rp 15.000.000',
+                                        url: 'https://google.com',
+                                      ),
+                                    )) // Updated the route to match the new screen name
+                                );
+                              },
+                              title: 'Frontend Developer',
+                              company: 'Google',
+                              type: 'Full Time',
+                              location: 'Jakarta, Indonesia',
+                              experience: '2 years',
+                              postedAt:
+                              DateTime.now().subtract(const Duration(days: 1)),
+                              description:
+                              'We are looking for a frontend developer to join our team. You will be responsible for developing and maintaining our web applications.',
+                              companyImgUrl: 'https://via.placeholder.com/50',
                             ),
                             const SizedBox(height: 10),
                           ],
@@ -293,16 +325,11 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                     const SizedBox(height: 16), // Space between sections and button
                     Center(
-                      child: ElevatedButton(
-                        onPressed: () {
-                          Navigator.pushNamed(context, VacancyScreen.route);
-                        },
-                        style: ElevatedButton.styleFrom(
-                          foregroundColor: Colors.white,
-                          backgroundColor: Colors.red, // Background color
-                        ),
-                        child: const Text('Lainnya'),
-                      ),
+                      child: ButtonWidget(
+                        onPressed: () => Navigator.pushNamed(context, '/vacancy'),
+                        label: 'Lainnya',
+                        rounded: true
+                        ,)
                     ),
                   ],
                 ),

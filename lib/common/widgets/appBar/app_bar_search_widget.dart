@@ -11,6 +11,7 @@ class AppBarSearchWidget extends StatelessWidget implements PreferredSizeWidget 
     return AppBar(
       backgroundColor: Colors.white,
       elevation: 0,
+      scrolledUnderElevation: 0,
       leading: IconButton(
         icon: const Icon(Icons.menu, color: Colors.black),
         onPressed: () {

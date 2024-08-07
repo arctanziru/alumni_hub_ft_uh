@@ -9,6 +9,7 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       backgroundColor: Colors.white,
       elevation: 0,
+      scrolledUnderElevation: 0,
       leading: IconButton(
         icon: const Icon(Icons.menu, color: Colors.black),
         onPressed: () {
@@ -18,12 +19,14 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
               pageBuilder: (context, animation, secondaryAnimation) {
                 return const AppBarMenuWidget();
               },
-              transitionsBuilder: (context, animation, secondaryAnimation, child) {
+              transitionsBuilder:
+                  (context, animation, secondaryAnimation, child) {
                 const begin = Offset(-1.0, 0.0); // Start from the left
                 const end = Offset.zero; // End at the center
                 const curve = Curves.easeInOut;
 
-                var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+                var tween = Tween(begin: begin, end: end)
+                    .chain(CurveTween(curve: curve));
                 var offsetAnimation = animation.drive(tween);
 
                 return SlideTransition(position: offsetAnimation, child: child);
@@ -57,7 +60,8 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
             backgroundImage: NetworkImage('https://via.placeholder.com/150'),
           ),
           onPressed: () {
-            Navigator.pushNamed(context, '/profile'); // Navigate to ProfileScreen
+            Navigator.pushNamed(
+                context, '/profile'); // Navigate to ProfileScreen
           },
         ),
       ],

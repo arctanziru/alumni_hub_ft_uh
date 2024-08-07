@@ -1,9 +1,8 @@
+import 'package:alumni_hub_ft_uh/features/search/search_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:alumni_hub_ft_uh/common/widgets/button/button_widget.dart';
 import 'package:alumni_hub_ft_uh/common/widgets/footer/footer_widget.dart';
 import 'package:alumni_hub_ft_uh/common/widgets/listTile/list_tile_widget.dart';
-
-import '../../../features/search/search_screen.dart';
 
 class AppBarMenuWidget extends StatelessWidget {
   const AppBarMenuWidget({super.key});
@@ -12,9 +11,10 @@ class AppBarMenuWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        elevation: 0, // Removes the shadow beneath the AppBar
-        backgroundColor: Colors.transparent, // Makes the AppBar background transparent
-        automaticallyImplyLeading: false, // Prevents automatic leading widget (back button) from appearing
+        elevation: 0,
+        scrolledUnderElevation: 0,
+        backgroundColor: Colors.transparent,
+        automaticallyImplyLeading: false,
         title: Row(
           children: [
             IconButton(
@@ -30,7 +30,9 @@ class AppBarMenuWidget extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 16.0),
                 decoration: BoxDecoration(
                   color: Colors.white,
-                  border: Border.all(color: Colors.black, width: 1.0), // Outline color and width
+                  border: Border.all(
+                      color: Colors.black,
+                      width: 1.0), // Outline color and width
                   borderRadius: BorderRadius.circular(40.0), // Rounded corners
                 ),
                 child: Row(
@@ -41,18 +43,26 @@ class AppBarMenuWidget extends StatelessWidget {
                         onTap: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => const SearchScreen()),
+                            MaterialPageRoute(
+                                builder: (context) => const SearchScreen()),
                           );
                         },
                         child: AbsorbPointer(
                           child: TextField(
                             decoration: InputDecoration(
                               hintText: 'Search',
-                              hintStyle: Theme.of(context).textTheme.bodySmall?.copyWith(color: Colors.black54),
+                              hintStyle: Theme.of(context)
+                                  .textTheme
+                                  .bodySmall
+                                  ?.copyWith(color: Colors.black54),
                               border: InputBorder.none,
-                              contentPadding: const EdgeInsets.symmetric(vertical: 13.5), // Adjust padding
+                              contentPadding: const EdgeInsets.symmetric(
+                                  vertical: 13.5), // Adjust padding
                             ),
-                            style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Colors.black),
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyMedium
+                                ?.copyWith(color: Colors.black),
                           ),
                         ),
                       ),
@@ -72,7 +82,8 @@ class AppBarMenuWidget extends StatelessWidget {
               children: [
                 const CircleAvatar(
                   radius: 40,
-                  backgroundImage: NetworkImage('https://example.com/path-to-image.jpg'), // Replace with the user's profile image URL
+                  backgroundImage: NetworkImage(
+                      'https://example.com/path-to-image.jpg'), // Replace with the user's profile image URL
                 ),
                 const SizedBox(width: 16),
                 Column(
@@ -88,19 +99,24 @@ class AppBarMenuWidget extends StatelessWidget {
               ],
             ),
           ),
-          const ListTileWidget(icon: Icons.location_on_outlined, title: 'Sekitar Saya'),
+          const ListTileWidget(
+              icon: Icons.location_on_outlined, title: 'Sekitar Saya'),
           const ListTileWidget(icon: Icons.mail_outline, title: 'Kemitraan'),
-          const ListTileWidget(icon: Icons.local_offer_outlined, title: 'E-commerce'),
+          const ListTileWidget(
+              icon: Icons.local_offer_outlined, title: 'E-commerce'),
           const ListTileWidget(icon: Icons.school_outlined, title: 'Mentoring'),
-          const ListTileWidget(icon: Icons.book_outlined, title: 'Tracer Study'),
+          const ListTileWidget(
+              icon: Icons.book_outlined, title: 'Tracer Study'),
           ListTileWidget(
             icon: Icons.settings_outlined,
             title: 'Pengaturan',
-            onTap: () => Navigator.pushNamed(context, '/setting'), // Navigate to the SettingScreen
+            onTap: () => Navigator.pushNamed(
+                context, '/setting'), // Navigate to the SettingScreen
           ),
           const SizedBox(height: 12),
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 16.0),
+            padding:
+                const EdgeInsets.symmetric(vertical: 16.0, horizontal: 16.0),
             child: Center(
               child: ButtonWidget(
                 onPressed: () => Navigator.pushNamed(context, '/sign_in'),

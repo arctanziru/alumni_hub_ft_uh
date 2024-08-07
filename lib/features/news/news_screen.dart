@@ -15,6 +15,7 @@ class NewsScreen extends StatefulWidget {
   State<NewsScreen> createState() => _NewsScreenState();
 }
 
+
 class _NewsScreenState extends State<NewsScreen> {
   int _activeFilterIndex = 0;
 
@@ -100,6 +101,13 @@ class _NewsScreenState extends State<NewsScreen> {
         content: '<b>HTML Content</b>',
         createdAt: DateTime.now().millisecondsSinceEpoch),
   ];
+
+  void _handleLikePress(int index) {
+    setState(() {
+      _newsItems[index].isLiked = !_newsItems[index].isLiked;
+      _newsItems[index].likes += _newsItems[index].isLiked ? 1 : -1;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -216,20 +224,25 @@ class _NewsScreenState extends State<NewsScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: List.generate(
                     _newsItems.length,
-                    (index) => Column(
+                        (index) => Column(
                       children: [
                         CardNewsWidget(
                           imageUrl: _newsItems[index].imageUrl,
                           title: _newsItems[index].title,
                           description: _newsItems[index].description,
                           likes: _newsItems[index].likes,
-                          isLiked: false,
+                          isLiked: _newsItems[index].isLiked, // Use the correct isLiked state
+                          onLikePressed: () {
+                            // Handle like press
+                            _handleLikePress(index);
+                          },
                           onTap: () {
                             Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => NewsDetailScreen(
-                                        news: _newsItems[index])));
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => NewsDetailScreen(news: _newsItems[index]),
+                              ),
+                            );
                           },
                         ),
                         const SizedBox(height: 10),

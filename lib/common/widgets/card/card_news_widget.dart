@@ -10,15 +10,16 @@ class CardNewsWidget extends StatelessWidget {
   final VoidCallback? onLikePressed;
   final VoidCallback? onTap;
 
-  const CardNewsWidget(
-      {super.key,
-      required this.imageUrl,
-      required this.title,
-      required this.description,
-      required this.likes,
-      required this.isLiked,
-      this.onLikePressed,
-      this.onTap});
+  const CardNewsWidget({
+    super.key,
+    required this.imageUrl,
+    required this.title,
+    required this.description,
+    required this.likes,
+    required this.isLiked,
+    this.onLikePressed,
+    this.onTap,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -39,7 +40,7 @@ class CardNewsWidget extends StatelessWidget {
         ),
         clipBehavior: Clip.antiAlias,
         height: 160,
-        width: double.infinity, // Expand to the width of the parent
+        width: double.infinity,
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
@@ -61,10 +62,9 @@ class CardNewsWidget extends StatelessWidget {
                       children: [
                         Text(
                           title,
-                          style:
-                              Theme.of(context).textTheme.titleMedium?.copyWith(
-                                    fontWeight: FontWeight.bold,
-                                  ),
+                          style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                         const SizedBox(height: 8),
                         Text(

@@ -16,18 +16,24 @@ class AppBarSecondaryWidget extends StatelessWidget
         icon: const Icon(Icons.arrow_back, color: Colors.black),
         onPressed: () => Navigator.pop(context),
       ),
-      title: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      title: Row(
         children: [
-          Text(
-            title,
-            style: Theme.of(context).textTheme.titleSmall,
-          ),
-          if (subtitle != null)
-            Text(
-              subtitle!,
-              style: Theme.of(context).textTheme.bodySmall,
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  title,
+                  style: Theme.of(context).textTheme.titleSmall,
+                ),
+                if (subtitle != null)
+                  Text(
+                    subtitle!,
+                    style: Theme.of(context).textTheme.bodySmall,
+                  ),
+              ],
             ),
+          ),
         ],
       ),
       actions: [

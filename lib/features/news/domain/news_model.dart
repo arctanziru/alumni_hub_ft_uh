@@ -3,10 +3,11 @@ class NewsModel {
   final String? category;
   final String description;
   final String content;
-  final double likes;
+  double likes; // Make likes mutable
   final String imageUrl;
   final int createdAt;
   final String author;
+  bool isLiked; // Add isLiked property
 
   NewsModel({
     required this.title,
@@ -17,6 +18,7 @@ class NewsModel {
     this.category,
     required this.imageUrl,
     this.author = 'Admin',
+    this.isLiked = false, // Default to false
   });
 
   factory NewsModel.fromJson(Map<String, dynamic> json) {
@@ -29,6 +31,7 @@ class NewsModel {
       imageUrl: json['imageUrl'],
       author: json['author'],
       category: json['category'],
+      isLiked: json['isLiked'] ?? false, // Handle optional isLiked
     );
   }
 }

@@ -49,7 +49,9 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
       actions: [
         IconButton(
           icon: const Icon(Icons.search, color: Colors.black),
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pushNamed(context, '/search');
+          },
         ),
         const Padding(
           padding: EdgeInsets.symmetric(horizontal: 16.0),

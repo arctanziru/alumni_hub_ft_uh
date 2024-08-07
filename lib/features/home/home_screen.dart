@@ -1,16 +1,17 @@
-import 'package:alumni_hub_ft_uh/common/widgets/appBar/app_bar_widget.dart';
-import 'package:alumni_hub_ft_uh/common/widgets/button/button_widget.dart';
-import 'package:alumni_hub_ft_uh/common/widgets/card/card_vacancy_widget.dart';
-import 'package:alumni_hub_ft_uh/features/news/news_screen.dart';
-import 'package:alumni_hub_ft_uh/features/vacancy/vacancy_screen.dart';
+import 'package:alumni_hub_ft_uh/features/news/domain/news_model.dart';
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:alumni_hub_ft_uh/common/widgets/bottomBar/bottom_bar_widget.dart';
+import 'package:alumni_hub_ft_uh/common/widgets/appBar/app_bar_widget.dart';
+import 'package:alumni_hub_ft_uh/common/widgets/button/button_widget.dart';
+import 'package:alumni_hub_ft_uh/common/widgets/button/button_filter_widget.dart';
 import 'package:alumni_hub_ft_uh/common/widgets/card/card_news_widget.dart';
-
-import '../../common/widgets/button/button_filter_widget.dart';
-import '../vacancy/domain/vacancy_model.dart';
-import '../vacancy/vacancy_detail_screen.dart';
+import 'package:alumni_hub_ft_uh/common/widgets/card/card_vacancy_widget.dart';
+import 'package:alumni_hub_ft_uh/common/widgets/bottomBar/bottom_bar_widget.dart';
+import 'package:alumni_hub_ft_uh/features/news/news_screen.dart';
+import 'package:alumni_hub_ft_uh/features/vacancy/vacancy_screen.dart';
+import 'package:alumni_hub_ft_uh/features/news/news_detail_screen.dart';
+import 'package:alumni_hub_ft_uh/features/vacancy/vacancy_detail_screen.dart';
+import 'package:alumni_hub_ft_uh/features/vacancy/domain/vacancy_model.dart';
 
 class NewsItem {
   final String imageUrl;
@@ -40,31 +41,39 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int _activeFilterIndex = 0;
 
-  final List<NewsItem> _newsItems = [
-    NewsItem(
-      imageUrl: 'https://images.unsplash.com/photo-1721332149346-00e39ce5c24f?q=80&w=1472&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-      title: 'Reuni Akbar',
-      description: 'Diadakan pada 17 Agustus 2024',
-      likes: 10,
-    ),
-    NewsItem(
-      imageUrl: 'https://images.unsplash.com/photo-1721332149346-00e39ce5c24f?q=80&w=1472&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-      title: 'Event Title 2',
-      description: 'Event Description 2',
-      likes: 10,
-    ),
-    NewsItem(
-      imageUrl: 'https://images.unsplash.com/photo-1721332149346-00e39ce5c24f?q=80&w=1472&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-      title: 'Event Title 3',
-      description: 'Event Description 3',
-      likes: 10,
-    ),
-    NewsItem(
-      imageUrl: 'https://images.unsplash.com/photo-1721332149346-00e39ce5c24f?q=80&w=1472&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-      title: 'Event Title 4',
-      description: 'Event Description 4',
-      likes: 10,
-    ),
+  final List<NewsModel> _newsItems = [
+    NewsModel(
+        imageUrl:
+        'https://images.unsplash.com/photo-1721332149346-00e39ce5c24f?q=80&w=1472&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+        title: 'Reuni Akbar',
+        description: 'Diadakan pada 17 Agustus 2024',
+        likes: 10,
+        content: '<b>HTML Content</b>',
+        createdAt: DateTime.now().millisecondsSinceEpoch),
+    NewsModel(
+        imageUrl:
+        'https://images.unsplash.com/photo-1721332149346-00e39ce5c24f?q=80&w=1472&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+        title: 'Event Title 2',
+        description: 'Event Description 2',
+        likes: 10,
+        content: '<b>HTML Content</b>',
+        createdAt: DateTime.now().millisecondsSinceEpoch),
+    NewsModel(
+        imageUrl:
+        'https://images.unsplash.com/photo-1721332149346-00e39ce5c24f?q=80&w=1472&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+        title: 'Event Title 3',
+        description: 'Event Description 3',
+        likes: 10,
+        content: '<b>HTML Content</b>',
+        createdAt: DateTime.now().millisecondsSinceEpoch),
+    NewsModel(
+        imageUrl:
+        'https://images.unsplash.com/photo-1721332149346-00e39ce5c24f?q=80&w=1472&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+        title: 'Event Title 4',
+        description: 'Event Description 4',
+        likes: 10,
+        content: '<b>HTML Content</b>',
+        createdAt: DateTime.now().millisecondsSinceEpoch),
   ];
 
   void _handleLikePress(int index) {
@@ -73,6 +82,7 @@ class _HomeScreenState extends State<HomeScreen> {
       _newsItems[index].likes += _newsItems[index].isLiked ? 1 : -1;
     });
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -232,8 +242,19 @@ class _HomeScreenState extends State<HomeScreen> {
                               title: _newsItems[index].title,
                               description: _newsItems[index].description,
                               likes: _newsItems[index].likes,
-                              isLiked: _newsItems[index].isLiked,
-                              onLikePressed: () => _handleLikePress(index),
+                              isLiked: _newsItems[index].isLiked, // Use the correct isLiked state
+                              onLikePressed: () {
+                                // Handle like press
+                                _handleLikePress(index);
+                              },
+                              onTap: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => NewsDetailScreen(news: _newsItems[index]),
+                                  ),
+                                );
+                              },
                             ),
                             const SizedBox(height: 10),
                           ],
@@ -246,7 +267,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         onPressed: () => Navigator.pushNamed(context, '/news'),
                         label: 'Lainnya',
                         rounded: true,
-                      )
+                      ),
                     ),
                     const SizedBox(height: 20), // Space between button and next section
                     // Lowongan Kerja Section
@@ -280,42 +301,36 @@ class _HomeScreenState extends State<HomeScreen> {
                             CardVacancyWidget(
                               onTap: () {
                                 Navigator.of(context).push(MaterialPageRoute(
-                                    builder: (context) => VacancyDetailScreen(
-                                      vacancy: VacancyModel(
-                                        id: '1',
-                                        title: 'Frontend Developer',
-                                        company: 'Google',
-                                        type: 'Full Time',
-                                        location: 'Jakarta, Indonesia',
-                                        experience: '2 years',
-                                        createdAt: DateTime.now()
-                                            .microsecondsSinceEpoch,
-                                        description:
-                                        'We are looking for a frontend developer to join our team. You will be responsible for developing and maintaining our web applications.',
-                                        backgroundUrl:
-                                        'https://via.placeholder.com/50',
-                                        companyLogo:
-                                        'https://via.placeholder.com/50',
-                                        requirements: const [
-                                          'Experience with ReactJS',
-                                          'Experience with HTML, CSS, and JavaScript',
-                                          'Experience with Git',
-                                        ],
-                                        salary: 'Rp 10.000.000 - Rp 15.000.000',
-                                        url: 'https://google.com',
-                                      ),
-                                    )) // Updated the route to match the new screen name
-                                );
+                                  builder: (context) => VacancyDetailScreen(
+                                    vacancy: VacancyModel(
+                                      id: '1',
+                                      title: 'Frontend Developer',
+                                      company: 'Google',
+                                      type: 'Full Time',
+                                      location: 'Jakarta, Indonesia',
+                                      experience: '2 years',
+                                      createdAt: DateTime.now().microsecondsSinceEpoch,
+                                      description: 'We are looking for a frontend developer to join our team. You will be responsible for developing and maintaining our web applications.',
+                                      backgroundUrl: 'https://via.placeholder.com/50',
+                                      companyLogo: 'https://via.placeholder.com/50',
+                                      requirements: const [
+                                        'Experience with ReactJS',
+                                        'Experience with HTML, CSS, and JavaScript',
+                                        'Experience with Git',
+                                      ],
+                                      salary: 'Rp 10.000.000 - Rp 15.000.000',
+                                      url: 'https://google.com',
+                                    ),
+                                  ),
+                                ));
                               },
                               title: 'Frontend Developer',
                               company: 'Google',
                               type: 'Full Time',
                               location: 'Jakarta, Indonesia',
                               experience: '2 years',
-                              postedAt:
-                              DateTime.now().subtract(const Duration(days: 1)),
-                              description:
-                              'We are looking for a frontend developer to join our team. You will be responsible for developing and maintaining our web applications.',
+                              postedAt: DateTime.now().subtract(const Duration(days: 1)),
+                              description: 'We are looking for a frontend developer to join our team. You will be responsible for developing and maintaining our web applications.',
                               companyImgUrl: 'https://via.placeholder.com/50',
                             ),
                             const SizedBox(height: 10),
@@ -328,8 +343,8 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: ButtonWidget(
                         onPressed: () => Navigator.pushNamed(context, '/vacancy'),
                         label: 'Lainnya',
-                        rounded: true
-                        ,)
+                        rounded: true,
+                      ),
                     ),
                   ],
                 ),

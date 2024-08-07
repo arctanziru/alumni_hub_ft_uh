@@ -4,10 +4,12 @@ import 'package:alumni_hub_ft_uh/features/auth/sign_up_screen.dart';
 import 'package:alumni_hub_ft_uh/features/auth/splash_screen.dart';
 import 'package:alumni_hub_ft_uh/features/donation/donation_screen.dart';
 import 'package:alumni_hub_ft_uh/features/home/home_screen.dart';
+import 'package:alumni_hub_ft_uh/features/news/news_search_screen.dart';
 import 'package:alumni_hub_ft_uh/features/user/screens/setting_screen.dart';
 import 'package:alumni_hub_ft_uh/features/vacancy/vacancy_screen.dart';
 import 'package:alumni_hub_ft_uh/features/news/news_screen.dart';
 import 'package:alumni_hub_ft_uh/features/search/search_screen.dart';
+import 'package:alumni_hub_ft_uh/features/vacancy/vacancy_search_screen.dart';
 import 'package:flutter/material.dart';
 
 Route<dynamic> routeGenerators(RouteSettings settings) {
@@ -32,6 +34,10 @@ Route<dynamic> routeGenerators(RouteSettings settings) {
       return _buildPageRoute(const SearchScreen());
     case SettingScreen.route:
       return _buildPageRoute(const SettingScreen());
+    case NewsSearchScreen.route:
+      return _buildPageRoute(const NewsSearchScreen());
+    case VacancySearchScreen.route:
+      return _buildPageRoute(const VacancySearchScreen());
     default:
       throw ('Route not found');
   }

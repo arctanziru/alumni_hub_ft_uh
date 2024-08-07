@@ -1,8 +1,6 @@
+import 'package:alumni_hub_ft_uh/features/news/news_search_screen.dart';
+import 'package:alumni_hub_ft_uh/features/vacancy/vacancy_search_screen.dart';
 import 'package:flutter/material.dart';
-
-// Assuming you have these screens defined elsewhere in your project
-import 'package:alumni_hub_ft_uh/features/news/news_screen.dart';
-import 'package:alumni_hub_ft_uh/features/vacancy/vacancy_screen.dart';
 
 class SearchScreen extends StatefulWidget {
   static const String route = '/search';
@@ -66,18 +64,18 @@ class _SearchScreenState extends State<SearchScreen> {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const NewsScreen()), // Navigate to NewsScreen
+                  MaterialPageRoute(builder: (context) => const NewsSearchScreen()), // Ganti NewsSearchScreen dengan widget yang sesuai
                 );
               },
             ),
             const SizedBox(height: 16),
             SearchResultSection(
               title: 'LOKER',
-              count: 0,
+              count: 2,
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const VacancyScreen()), // Navigate to VacancyScreen
+                  MaterialPageRoute(builder: (context) => const VacancySearchScreen()), // Navigate to VacancyScreen
                 );
               },
             ),

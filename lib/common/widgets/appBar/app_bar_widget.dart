@@ -1,5 +1,5 @@
-import 'package:alumni_hub_ft_uh/common/widgets/appBar/app_bar_menu_widget.dart';
 import 'package:flutter/material.dart';
+import 'app_bar_menu_widget.dart'; // Import ProfileScreen
 
 class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
   const AppBarWidget({super.key});
@@ -12,7 +12,6 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
       leading: IconButton(
         icon: const Icon(Icons.menu, color: Colors.black),
         onPressed: () {
-          // Navigate to AppBarMenuWidget with slide animation
           Navigator.push(
             context,
             PageRouteBuilder(
@@ -53,11 +52,13 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
             Navigator.pushNamed(context, '/search');
           },
         ),
-        const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16.0),
-          child: CircleAvatar(
+        IconButton(
+          icon: const CircleAvatar(
             backgroundImage: NetworkImage('https://via.placeholder.com/150'),
           ),
+          onPressed: () {
+            Navigator.pushNamed(context, '/profile'); // Navigate to ProfileScreen
+          },
         ),
       ],
     );

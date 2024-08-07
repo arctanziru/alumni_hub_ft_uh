@@ -1,7 +1,7 @@
 import 'package:alumni_hub_ft_uh/constants/colors.dart';
 import 'package:alumni_hub_ft_uh/constants/theme.dart';
 import 'package:alumni_hub_ft_uh/features/auth/splash_screen.dart';
-import 'package:alumni_hub_ft_uh/features/user/screens/profile_screen.dart';
+import 'package:alumni_hub_ft_uh/features/Profile/profile_screen.dart';
 import 'package:alumni_hub_ft_uh/route.dart';
 import 'package:flutter/material.dart';
 
@@ -20,7 +20,7 @@ class AlumniHubFtUhApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       color: AppColors.primaryColor,
       theme: appTheme,
-      home: const ProfileScreen(),
+      home: const SplashScreen(),
       onGenerateRoute: routeGenerators,
     );
   }

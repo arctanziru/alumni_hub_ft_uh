@@ -1,6 +1,7 @@
-import 'package:alumni_hub_ft_uh/features/search/search_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:alumni_hub_ft_uh/features/search/search_screen.dart';
 import 'package:alumni_hub_ft_uh/common/widgets/appBar/app_bar_menu_widget.dart';
+// Import ProfileScreen
 
 class AppBarSearchWidget extends StatelessWidget implements PreferredSizeWidget {
   const AppBarSearchWidget({super.key});
@@ -20,8 +21,8 @@ class AppBarSearchWidget extends StatelessWidget implements PreferredSizeWidget 
                 return const AppBarMenuWidget();
               },
               transitionsBuilder: (context, animation, secondaryAnimation, child) {
-                const begin = Offset(-1.0, 0.0); // Start from the left
-                const end = Offset.zero; // End at the center
+                const begin = Offset(-1.0, 0.0);
+                const end = Offset.zero;
                 const curve = Curves.easeInOut;
 
                 var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
@@ -38,8 +39,8 @@ class AppBarSearchWidget extends StatelessWidget implements PreferredSizeWidget 
         width: double.infinity,
         padding: const EdgeInsets.symmetric(horizontal: 16.0),
         decoration: BoxDecoration(
-          border: Border.all(color: Colors.black, width: 1.0), // Outline color and width
-          borderRadius: BorderRadius.circular(40.0), // Rounded corners
+          border: Border.all(color: Colors.black, width: 1.0),
+          borderRadius: BorderRadius.circular(40.0),
         ),
         child: Row(
           children: [
@@ -49,7 +50,7 @@ class AppBarSearchWidget extends StatelessWidget implements PreferredSizeWidget 
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const SearchScreen()), // Ganti dengan screen yang diinginkan
+                    MaterialPageRoute(builder: (context) => const SearchScreen()),
                   );
                 },
                 child: AbsorbPointer(
@@ -59,7 +60,7 @@ class AppBarSearchWidget extends StatelessWidget implements PreferredSizeWidget 
                       hintText: 'Search',
                       hintStyle: Theme.of(context).textTheme.bodySmall?.copyWith(color: Colors.black54),
                       border: InputBorder.none,
-                      contentPadding: const EdgeInsets.symmetric(vertical: 14, horizontal: 8.0), // Adjust height and horizontal padding
+                      contentPadding: const EdgeInsets.symmetric(vertical: 14, horizontal: 8.0),
                     ),
                     style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Colors.black),
                   ),
@@ -69,12 +70,14 @@ class AppBarSearchWidget extends StatelessWidget implements PreferredSizeWidget 
           ],
         ),
       ),
-      actions: const [
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: 16.0),
-          child: CircleAvatar(
+      actions: [
+        IconButton(
+          icon: const CircleAvatar(
             backgroundImage: NetworkImage('https://via.placeholder.com/150'),
           ),
+          onPressed: () {
+            Navigator.pushNamed(context, '/profile');
+          },
         ),
       ],
     );

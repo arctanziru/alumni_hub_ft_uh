@@ -1,3 +1,4 @@
+import 'package:alumni_hub_ft_uh/features/Profile/profile_screen.dart';
 import 'package:alumni_hub_ft_uh/features/auth/license_screen.dart';
 import 'package:alumni_hub_ft_uh/features/auth/sign_in_screen.dart';
 import 'package:alumni_hub_ft_uh/features/auth/sign_up_screen.dart';
@@ -38,6 +39,8 @@ Route<dynamic> routeGenerators(RouteSettings settings) {
       return _buildPageRoute(const NewsSearchScreen());
     case VacancySearchScreen.route:
       return _buildPageRoute(const VacancySearchScreen());
+    case ProfileScreen.route:
+      return _buildPageRoute(const ProfileScreen());
     default:
       throw ('Route not found');
   }

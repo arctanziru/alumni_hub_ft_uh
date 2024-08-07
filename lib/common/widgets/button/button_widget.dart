@@ -31,7 +31,7 @@ class ButtonWidget extends StatelessWidget {
               : AppColors.secondaryColor,
         ),
         padding: WidgetStateProperty.all<EdgeInsetsGeometry>(
-          const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+          const EdgeInsets.symmetric(horizontal: 16, vertical: 8), // Smaller padding
         ),
         shape: WidgetStateProperty.all<OutlinedBorder>(
           RoundedRectangleBorder(

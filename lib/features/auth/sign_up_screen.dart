@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:alumni_hub_ft_uh/common/widgets/button/button_widget.dart';
-import 'package:alumni_hub_ft_uh/common/widgets/text_field_widget.dart';
+import 'package:alumni_hub_ft_uh/common/widgets/textField/text_field_widget.dart';
 import 'package:flutter/gestures.dart';
 
 class SignUpScreen extends StatefulWidget {

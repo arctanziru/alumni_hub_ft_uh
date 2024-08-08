@@ -1,3 +1,4 @@
+import 'package:alumni_hub_ft_uh/features/alumni/alumni_detail_search_screen.dart';
 import 'package:alumni_hub_ft_uh/features/alumni/alumni_screen.dart';
 import 'package:alumni_hub_ft_uh/features/profile/profile_screen.dart';
 import 'package:alumni_hub_ft_uh/features/auth/license_screen.dart';
@@ -44,6 +45,8 @@ Route<dynamic> routeGenerators(RouteSettings settings) {
       return _buildPageRoute(const ProfileScreen());
     case AlumniScreen.route:
       return _buildPageRoute(const AlumniScreen());
+    case AlumniDetailSearchScreen.route:
+      return _buildPageRoute(const AlumniDetailSearchScreen());
     default:
       throw ('Route not found');
   }

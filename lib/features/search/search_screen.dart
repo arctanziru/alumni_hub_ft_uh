@@ -1,5 +1,7 @@
+import 'package:alumni_hub_ft_uh/common/utils/app_navigation.dart';
 import 'package:alumni_hub_ft_uh/features/news/news_search_screen.dart';
 import 'package:alumni_hub_ft_uh/features/vacancy/vacancy_search_screen.dart';
+import 'package:alumni_hub_ft_uh/locator.dart';
 import 'package:flutter/material.dart';
 
 class SearchScreen extends StatefulWidget {
@@ -24,7 +26,8 @@ class _SearchScreenState extends State<SearchScreen> {
           width: double.infinity,
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
           decoration: BoxDecoration(
-            border: Border.all(color: Colors.black, width: 1.0), // Outline color and width
+            border: Border.all(
+                color: Colors.black, width: 1.0), // Outline color and width
             borderRadius: BorderRadius.circular(40.0), // Rounded corners
           ),
           child: Row(
@@ -32,14 +35,23 @@ class _SearchScreenState extends State<SearchScreen> {
               const Icon(Icons.search, color: Colors.black),
               Expanded(
                 child: TextField(
-                  readOnly: false, // Allow text input if needed
+                  autofocus: true,
                   decoration: InputDecoration(
                     hintText: 'Search',
-                    hintStyle: Theme.of(context).textTheme.bodySmall?.copyWith(color: Colors.black54),
+                    hintStyle: Theme.of(context)
+                        .textTheme
+                        .bodySmall
+                        ?.copyWith(color: Colors.black54),
                     border: InputBorder.none,
-                    contentPadding: const EdgeInsets.symmetric(vertical: 14, horizontal: 8.0), // Adjust height and horizontal padding
+                    contentPadding: const EdgeInsets.symmetric(
+                        vertical: 14,
+                        horizontal:
+                            8.0), // Adjust height and horizontal padding
                   ),
-                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Colors.black),
+                  style: Theme.of(context)
+                      .textTheme
+                      .bodyMedium
+                      ?.copyWith(color: Colors.black),
                 ),
               ),
             ],
@@ -47,9 +59,9 @@ class _SearchScreenState extends State<SearchScreen> {
         ),
         actions: [
           IconButton(
-            icon: const Icon(Icons.close, color: Colors.black), // 'X' icon
+            icon: const Icon(Icons.close, color: Colors.black),
             onPressed: () {
-              Navigator.pop(context); // Navigate back or close the AppBar
+              locator<AppNavigation>().goBack();
             },
           ),
         ],
@@ -64,7 +76,9 @@ class _SearchScreenState extends State<SearchScreen> {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const NewsSearchScreen()), // Ganti NewsSearchScreen dengan widget yang sesuai
+                  MaterialPageRoute(
+                      builder: (context) =>
+                          const NewsSearchScreen()), // Ganti NewsSearchScreen dengan widget yang sesuai
                 );
               },
             ),
@@ -75,7 +89,9 @@ class _SearchScreenState extends State<SearchScreen> {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => const VacancySearchScreen()), // Navigate to VacancyScreen
+                  MaterialPageRoute(
+                      builder: (context) =>
+                          const VacancySearchScreen()), // Navigate to VacancyScreen
                 );
               },
             ),
@@ -91,7 +107,11 @@ class SearchResultSection extends StatelessWidget {
   final int count;
   final VoidCallback onTap;
 
-  const SearchResultSection({super.key, required this.title, required this.count, required this.onTap});
+  const SearchResultSection(
+      {super.key,
+      required this.title,
+      required this.count,
+      required this.onTap});
 
   @override
   Widget build(BuildContext context) {

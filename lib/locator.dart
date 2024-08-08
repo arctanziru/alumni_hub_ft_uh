@@ -10,8 +10,8 @@ import 'locator.config.dart';
 GetIt locator = GetIt.instance;
 
 Future<void> setupLocator() async {
-  configureDependencies();
   locator.registerLazySingleton<AppNavigation>(() => AppNavigation());
+  await configureDependencies();
 }
 
 @InjectableInit(
@@ -19,9 +19,7 @@ Future<void> setupLocator() async {
   preferRelativeImports: true, // default
   asExtension: false, // default
 )
-void configureDependencies() {
-  $initGetIt(locator);
-}
+Future<void> configureDependencies() async => $initGetIt(locator);
 
 @module
 abstract class AppModule {

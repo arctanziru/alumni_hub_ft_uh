@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../../../common/widgets/button/button_widget.dart'; // Import your custom ButtonWidget
+import '../../common/widgets/button/button_widget.dart'; // Import your custom ButtonWidget
 
 class PopupAlumniWidget extends StatefulWidget {
   const PopupAlumniWidget({super.key});
@@ -16,7 +16,7 @@ class PopupAlumniWidgetState extends State<PopupAlumniWidget> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
-    // Generate the list of years from 1990 to 2012
+    // Generate the list of years from 1990 to 2000
     List<String> years = List.generate(2000 - 1990 + 1, (index) => (1990 + index).toString());
 
     return Container(
@@ -69,32 +69,33 @@ class PopupAlumniWidgetState extends State<PopupAlumniWidget> {
           ),
           const SizedBox(height: 30),
           Row(
+            mainAxisAlignment: MainAxisAlignment.center, // Center the buttons horizontally
             children: [
               Expanded(
-                child: Container(
-                  margin: const EdgeInsets.only(right: 5.0),
+                child: Padding(
+                  padding: const EdgeInsets.only(right: 5.0), // Space between buttons
                   child: ButtonWidget(
                     onPressed: () {
                       setState(() {
                         _isAngkatanSayaSelected = true;
                       });
                     },
-                    label: 'ANGKATAN SAYA',
+                    label: 'angkatan saya',
                     rounded: false,
                     color: _isAngkatanSayaSelected ? null : Colors.grey[700], // Change color based on selection
                   ),
                 ),
               ),
               Expanded(
-                child: Container(
-                  margin: const EdgeInsets.only(left: 5.0),
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 5.0), // Space between buttons
                   child: ButtonWidget(
                     onPressed: () {
                       setState(() {
                         _isAngkatanSayaSelected = false;
                       });
                     },
-                    label: 'SEMUA ANGKATAN',
+                    label: 'semua angkatan',
                     rounded: false,
                     color: !_isAngkatanSayaSelected ? null : Colors.grey[700], // Change color based on selection
                   ),

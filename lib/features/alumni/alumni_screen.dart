@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import '../../common/widgets/appBar/app_bar_search_widget.dart';
 import '../../common/widgets/bottomBar/bottom_bar_widget.dart';
 import '../../common/widgets/card/card_alumni_widget.dart';
-import '../../common/widgets/popUp/popup_alumni_widget.dart';
+import 'popup_alumni_widget.dart';
 
 class AlumniScreen extends StatefulWidget {
   static const String route = '/alumni';

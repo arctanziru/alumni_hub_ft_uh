@@ -1,3 +1,4 @@
+import 'package:alumni_hub_ft_uh/constants/colors.dart';
 import 'package:flutter/material.dart';
 
 class CardVacancyWidget extends StatelessWidget {
@@ -67,34 +68,39 @@ class CardVacancyWidget extends StatelessWidget {
                     width: 50,
                     height: 50,
                     errorBuilder: (context, error, stackTrace) =>
-                    const Icon(Icons.error),
+                        const Icon(Icons.error),
                   ),
                 ),
                 const SizedBox(width: 16),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      title,
-                      style: Theme.of(context).textTheme.titleMedium,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    Text(
-                      company,
-                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                        color: Colors.grey,
-                        fontSize: 10,
+                Expanded(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        title,
+                        style: Theme.of(context).textTheme.titleSmall,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        softWrap: true,
+                        textAlign: TextAlign.start,
                       ),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ],
+                      Text(
+                        company,
+                        style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                              color: Colors.grey,
+                              fontSize: 10,
+                            ),
+                        maxLines: 2,
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),
             const SizedBox(height: 8),
-            const Divider(),
+            const Divider(
+              color: AppColors.gray1,
+            ),
             Wrap(
               spacing: 6,
               runSpacing: 6,
@@ -124,7 +130,7 @@ class CardVacancyWidget extends StatelessWidget {
             const SizedBox(height: 16),
             Text(
               description,
-              style: Theme.of(context).textTheme.bodyMedium,
+              style: Theme.of(context).textTheme.bodySmall,
               maxLines: 3,
               overflow: TextOverflow.ellipsis,
             ),

@@ -10,45 +10,27 @@ class AuthRemoteDataSource {
   AuthRemoteDataSource(this._api);
 
   Future<SignInResponse> signIn(SignInBody body) async {
-    try {
-      final response = await _api.createApiCall(
-        endpoint: '/auth/signin',
-        method: NetworkCallMethod.post,
-        body: body.toJson(),
-      );
-      return SignInResponse.fromJson(response.data);
-    } on CustomException {
-      rethrow;
-    } catch (e) {
-      throw CustomException("An unexpected error occurred: $e");
-    }
+    final response = await _api.createApiCall(
+      endpoint: '/auth/signin',
+      method: NetworkCallMethod.post,
+      body: body.toJson(),
+    );
+    return SignInResponse.fromJson(response.data);
   }
 
   Future<SignUpResponse> signUp(SignUpBody body) async {
-    try {
-      final response = await _api.createApiCall(
-        endpoint: '/auth/signup',
-        method: NetworkCallMethod.post,
-        body: body.toJson(),
-      );
-      return SignUpResponse.fromJson(response.data);
-    } on CustomException {
-      rethrow;
-    } catch (e) {
-      throw CustomException("An unexpected error occurred: $e");
-    }
+    final response = await _api.createApiCall(
+      endpoint: '/auth/signup',
+      method: NetworkCallMethod.post,
+      body: body.toJson(),
+    );
+    return SignUpResponse.fromJson(response.data);
   }
 
   Future<void> signOut() async {
-    try {
-      await _api.createApiCall(
-        endpoint: '/auth/signout',
-        method: NetworkCallMethod.post,
-      );
-    } on CustomException {
-      rethrow;
-    } catch (e) {
-      throw CustomException("An unexpected error occurred: $e");
-    }
+    await _api.createApiCall(
+      endpoint: '/auth/signout',
+      method: NetworkCallMethod.post,
+    );
   }
 }

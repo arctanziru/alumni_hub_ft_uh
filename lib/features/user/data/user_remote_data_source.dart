@@ -10,46 +10,28 @@ class UserRemoteDataSource {
   UserRemoteDataSource(this._api);
 
   Future<List<UserModel>> getUsers(UserParams params) async {
-    try {
-      final response = await _api.createApiCall(
-        endpoint: '/users',
-        method: NetworkCallMethod.get,
-        params: params.toJson(),
-      );
-      final users = response.data['data'] as List;
-      return users.map((user) => UserModel.fromJson(user)).toList();
-    } on CustomException {
-      rethrow;
-    } catch (e) {
-      throw CustomException("An unexpected error occurred: $e");
-    }
+    final response = await _api.createApiCall(
+      endpoint: '/users',
+      method: NetworkCallMethod.get,
+      params: params.toJson(),
+    );
+    final users = response.data['data'] as List;
+    return users.map((user) => UserModel.fromJson(user)).toList();
   }
 
   Future<UserModel> getUser(String nim) async {
-    try {
-      final response = await _api.createApiCall(
-        endpoint: '/users/$nim',
-        method: NetworkCallMethod.get,
-      );
-      return UserModel.fromJson(response.data['data']);
-    } on CustomException {
-      rethrow;
-    } catch (e) {
-      throw CustomException("An unexpected error occurred: $e");
-    }
+    final response = await _api.createApiCall(
+      endpoint: '/users/$nim',
+      method: NetworkCallMethod.get,
+    );
+    return UserModel.fromJson(response.data['data']);
   }
 
   Future<UserModel> getProfile() async {
-    try {
-      final response = await _api.createApiCall(
-        endpoint: '/users/profile',
-        method: NetworkCallMethod.get,
-      );
-      return UserModel.fromJson(response.data['data']);
-    } on CustomException {
-      rethrow;
-    } catch (e) {
-      throw CustomException("An unexpected error occurred: $e");
-    }
+    final response = await _api.createApiCall(
+      endpoint: '/users/profile',
+      method: NetworkCallMethod.get,
+    );
+    return UserModel.fromJson(response.data['data']);
   }
 }

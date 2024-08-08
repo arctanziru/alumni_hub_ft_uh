@@ -46,7 +46,8 @@ class Api {
             "Terjadi kesalahan saat memuat data ${response.data?.message ?? ""}");
       }
     } on DioException catch (e) {
-      throw CustomException(e.message ?? 'Terjadi kesalahan saat memuat data');
+      throw CustomException(
+          e.response?.statusMessage ?? 'Terjadi kesalahan saat memuat data');
     } catch (e) {
       throw const CustomException("Terjadi kesalahan saat memuat data");
     }

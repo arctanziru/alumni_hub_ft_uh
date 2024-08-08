@@ -11,17 +11,18 @@ class CardVacancyWidget extends StatelessWidget {
   final String companyImgUrl;
   final VoidCallback onTap;
 
-  const CardVacancyWidget(
-      {super.key,
-      required this.title,
-      required this.company,
-      required this.type,
-      required this.location,
-      required this.experience,
-      required this.postedAt,
-      required this.description,
-      required this.companyImgUrl,
-      required this.onTap});
+  const CardVacancyWidget({
+    super.key,
+    required this.title,
+    required this.company,
+    required this.type,
+    required this.location,
+    required this.experience,
+    required this.postedAt,
+    required this.description,
+    required this.companyImgUrl,
+    required this.onTap,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -33,11 +34,18 @@ class CardVacancyWidget extends StatelessWidget {
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(8),
-          boxShadow: const [
+          boxShadow: [
             BoxShadow(
-              color: Color.fromRGBO(0, 0, 0, 0.2),
-              blurRadius: 4,
-              offset: Offset(0, 4),
+              color: Colors.black.withOpacity(0.2),
+              blurRadius: 8, // Menambahkan efek blur
+              spreadRadius: 0,
+              offset: const Offset(0, 4), // Mengatur jarak shadow
+            ),
+            BoxShadow(
+              color: Colors.black.withOpacity(0.1),
+              blurRadius: 16, // Menambahkan efek blur yang lebih halus
+              spreadRadius: 0,
+              offset: const Offset(0, 8), // Mengatur jarak shadow kedua
             ),
           ],
         ),
@@ -54,12 +62,12 @@ class CardVacancyWidget extends StatelessWidget {
                 ClipRRect(
                   borderRadius: BorderRadius.circular(8),
                   child: Image.network(
-                    'https://via.placeholder.com/50',
+                    companyImgUrl,
                     fit: BoxFit.cover,
-                    width: 21,
-                    height: 21,
+                    width: 50,
+                    height: 50,
                     errorBuilder: (context, error, stackTrace) =>
-                        const Icon(Icons.error),
+                    const Icon(Icons.error),
                   ),
                 ),
                 const SizedBox(width: 16),
@@ -75,9 +83,9 @@ class CardVacancyWidget extends StatelessWidget {
                     Text(
                       company,
                       style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                            color: Colors.grey,
-                            fontSize: 10,
-                          ),
+                        color: Colors.grey,
+                        fontSize: 10,
+                      ),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                     ),

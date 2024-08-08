@@ -8,13 +8,13 @@ class TextFieldProfileWidget extends StatelessWidget {
   final bool readOnly;
 
   const TextFieldProfileWidget({
-    Key? key,
+    super.key,
     required this.label,
     required this.description,
     required this.icon,
     required this.controller,
     this.readOnly = false,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

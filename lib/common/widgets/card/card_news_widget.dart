@@ -29,13 +29,19 @@ class CardNewsWidget extends StatelessWidget {
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(8),
-          boxShadow: const [
+          boxShadow: [
             BoxShadow(
-              color: Color.fromRGBO(0, 0, 0, 0.25),
-              blurRadius: 12.2,
-              spreadRadius: -5,
-              offset: Offset(0, 3),
-            )
+              color: Colors.black.withOpacity(0.2),
+              blurRadius: 15, // Menambahkan efek blur
+              spreadRadius: 0,
+              offset: const Offset(0, 4), // Mengatur jarak shadow
+            ),
+            BoxShadow(
+              color: Colors.black.withOpacity(0.1),
+              blurRadius: 25, // Menambahkan efek blur yang lebih halus
+              spreadRadius: 0,
+              offset: const Offset(0, 8), // Mengatur jarak shadow kedua
+            ),
           ],
         ),
         clipBehavior: Clip.antiAlias,

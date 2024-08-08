@@ -8,11 +8,13 @@ enum ButtonType {
 
 class ButtonWidget extends StatelessWidget {
   final String label;
-  final VoidCallback? onPressed; // Nullable callback
+  final VoidCallback? onPressed;
   final ButtonType type;
   final bool rounded;
+  final IconData? icon;
   final bool isLoading;
   final bool disabled;
+  final Color? color; // Add this parameter
 
   const ButtonWidget({
     super.key,
@@ -20,51 +22,45 @@ class ButtonWidget extends StatelessWidget {
     this.onPressed,
     this.type = ButtonType.primary,
     this.rounded = false,
+    this.icon,
     this.isLoading = false,
     this.disabled = false,
+    this.color,
   });
 
   @override
   Widget build(BuildContext context) {
-    final bool isDisabled = isLoading || disabled;
+    final bool isButtonDisabled = isLoading || disabled;
 
     return ElevatedButton(
-      onPressed:
-          isDisabled ? null : onPressed, // ElevatedButton handles null check
+      onPressed: isButtonDisabled ? null : onPressed,
       style: ButtonStyle(
         backgroundColor: WidgetStateProperty.all<Color>(
-          type == ButtonType.primary
-              ? isDisabled
-                  ? AppColors.primaryColor.withOpacity(0.5)
-                  : AppColors.primaryColor
-              : isDisabled
-                  ? AppColors.secondaryColor.withOpacity(0.5)
-                  : AppColors.secondaryColor,
+          isButtonDisabled
+              ? (color ?? (type == ButtonType.primary
+              ? AppColors.primaryColor
+              : AppColors.secondaryColor)).withOpacity(0.5)
+              : color ?? (type == ButtonType.primary
+              ? AppColors.primaryColor
+              : AppColors.secondaryColor),
         ),
         padding: WidgetStateProperty.all<EdgeInsetsGeometry>(
-          const EdgeInsets.symmetric(
-              horizontal: 16, vertical: 8), // Smaller padding
+          const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
         ),
         shape: WidgetStateProperty.all<OutlinedBorder>(
           RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(
-                rounded ? 24 : 8), // Adjust border radius based on rounded
+            borderRadius: BorderRadius.circular(rounded ? 24 : 8),
           ),
         ),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Text(
-            label,
-            style: const TextStyle(
-              color: Colors.white,
-              fontSize: 16,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          if (isLoading == true) ...[
+          if (icon != null && !isLoading) ...[
+            Icon(icon, color: Colors.white, size: 20),
             const SizedBox(width: 8),
+          ],
+          if (isLoading) ...[
             const SizedBox(
               width: 16,
               height: 16,
@@ -73,7 +69,16 @@ class ButtonWidget extends StatelessWidget {
                 color: Colors.white,
               ),
             ),
+            const SizedBox(width: 8),
           ],
+          Text(
+            label,
+            style: const TextStyle(
+              color: Colors.white,
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
         ],
       ),
     );

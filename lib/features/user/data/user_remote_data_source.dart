@@ -1,6 +1,5 @@
 import 'package:alumni_hub_ft_uh/data/api.dart';
 import 'package:alumni_hub_ft_uh/features/user/domain/user_model.dart';
-import 'package:alumni_hub_ft_uh/middleware/custom_exception.dart';
 import 'package:injectable/injectable.dart';
 
 @singleton

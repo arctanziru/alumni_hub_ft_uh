@@ -1,7 +1,6 @@
 import 'package:alumni_hub_ft_uh/data/api.dart';
 import 'package:alumni_hub_ft_uh/features/auth/domain/auth_model.dart';
 import 'package:injectable/injectable.dart';
-import 'package:alumni_hub_ft_uh/middleware/custom_exception.dart';
 
 @singleton
 class AuthRemoteDataSource {

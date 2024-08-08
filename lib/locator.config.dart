@@ -39,7 +39,7 @@ Future<_i174.GetIt> $initGetIt(
     preResolve: true,
   );
   gh.lazySingleton<_i361.Dio>(() => appModule.dio());
-  gh.singleton<_i420.Api>(() => _i420.Api(gh<_i361.Dio>()));
+  gh.lazySingleton<_i420.Api>(() => _i420.Api(gh<_i361.Dio>()));
   gh.singleton<_i225.UserLocalDataSource>(
       () => _i225.UserLocalDataSource(gh<_i460.SharedPreferences>()));
   gh.singleton<_i516.AuthRemoteDataSource>(

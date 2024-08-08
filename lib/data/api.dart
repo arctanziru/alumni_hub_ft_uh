@@ -3,7 +3,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 
-@singleton
+@LazySingleton()
 class Api {
   final Dio _dio;
 
@@ -45,16 +45,10 @@ class Api {
         throw CustomException(
             "Terjadi kesalahan saat memuat data ${response.data?.message ?? ""}");
       }
-      // } on DioException catch (e) {
-      //   debugPrint('anjing lu error $e');
-      //   final response = e.response?.data;
-      //   String? message = response['message'];
-      //   String? reason = response['reason'];
-      //   final err =
-      //       "$message ${message?.toLowerCase() == reason?.toLowerCase() ? "" : ", $reason"}";
-      //   throw CustomException(err);
+    } on DioException catch (e) {
+      throw CustomException(e.message ?? 'Terjadi kesalahan saat memuat data');
     } catch (e) {
-      throw CustomException("Terjadi kesalahan saat memuat data, $e");
+      throw const CustomException("Terjadi kesalahan saat memuat data");
     }
   }
 }

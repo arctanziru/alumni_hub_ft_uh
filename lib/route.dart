@@ -1,4 +1,4 @@
-import 'package:alumni_hub_ft_uh/features/Profile/profile_screen.dart';
+import 'package:alumni_hub_ft_uh/features/profile/profile_screen.dart';
 import 'package:alumni_hub_ft_uh/features/auth/license_screen.dart';
 import 'package:alumni_hub_ft_uh/features/auth/sign_in_screen.dart';
 import 'package:alumni_hub_ft_uh/features/auth/sign_up_screen.dart';

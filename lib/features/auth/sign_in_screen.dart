@@ -1,6 +1,12 @@
+import 'package:alumni_hub_ft_uh/common/utils/app_navigation.dart';
+import 'package:alumni_hub_ft_uh/common/utils/ui_helper.dart';
 import 'package:alumni_hub_ft_uh/common/widgets/button/button_widget.dart';
 import 'package:alumni_hub_ft_uh/common/widgets/textField/text_field_widget.dart';
+import 'package:alumni_hub_ft_uh/features/auth/domain/auth_model.dart';
+import 'package:alumni_hub_ft_uh/features/user/bloc/user_bloc.dart';
+import 'package:alumni_hub_ft_uh/locator.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SignInScreen extends StatefulWidget {
   static const route = "/sign_in";
@@ -90,9 +96,34 @@ class _SignInScreenState extends State<SignInScreen> {
                     const SizedBox(height: 36),
                     SizedBox(
                       width: double.infinity,
-                      child: ButtonWidget(
-                        onPressed: () => Navigator.pushNamed(context, '/home'),
-                        label: 'Masuk',
+                      child: BlocConsumer<UserBloc, UserState>(
+                        listener: (context, state) {
+                          if (state is UserStateSuccessSignIn) {
+                            showSnackBar(context,
+                                'Selamat datang ${state.signInResponse.user.name}');
+                            locator<AppNavigation>().navigateReplace('/home');
+                          } else if (state is UserStateException) {
+                            debugPrint("Exception: ${state.exception.message}");
+                            showSnackBar(context, state.exception.message);
+                            Future.delayed(const Duration(seconds: 2), () {
+                              locator<AppNavigation>().navigateReplace('/home');
+                            });
+                          }
+                        },
+                        builder: (context, state) {
+                          return ButtonWidget(
+                            onPressed: () => context.read<UserBloc>().add(
+                                UserEventSignIn(
+                                    signInBody: SignInBody(
+                                        email: _emailController.text,
+                                        password: _passwordController.text))),
+                            label: 'Masuk',
+                            isLoading: state is UserStateSignInLoading &&
+                                state is! UserStateException,
+                            disabled: _emailController.text.isEmpty ||
+                                _passwordController.text.isEmpty,
+                          );
+                        },
                       ),
                     ),
                     const SizedBox(height: 20),

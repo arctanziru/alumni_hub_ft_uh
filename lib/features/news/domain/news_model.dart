@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 class NewsModel {
   final String title;
   final String? category;
@@ -20,6 +22,9 @@ class NewsModel {
     this.author = 'Admin',
     this.isLiked = false, // Default to false
   });
+
+  factory NewsModel.fromRawJson(String str) =>
+      NewsModel.fromJson(json.decode(str));
 
   factory NewsModel.fromJson(Map<String, dynamic> json) {
     return NewsModel(

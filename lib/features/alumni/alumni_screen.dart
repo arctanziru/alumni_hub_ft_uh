@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import '../../common/widgets/appBar/app_bar_search_widget.dart';
 import '../../common/widgets/bottomBar/bottom_bar_widget.dart';
 import '../../common/widgets/card/card_alumni_widget.dart';
+import 'search_alumni_screen.dart';
 import 'popup_alumni_widget.dart';
 
 class AlumniScreen extends StatefulWidget {
@@ -59,9 +60,7 @@ class _AlumniScreenState extends State<AlumniScreen> {
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     ButtonWidget(
-                      onPressed: () {
-                        _showFilterDialog(); // Show filter dialog
-                      },
+                      onPressed: _showFilterDialog, // Show filter dialog
                       icon: Icons.filter_list,
                       label: 'Filter',
                       rounded: false,
@@ -69,7 +68,11 @@ class _AlumniScreenState extends State<AlumniScreen> {
                     const SizedBox(width: 8.0), // Space between the buttons
                     ButtonWidget(
                       onPressed: () {
-                        // Add your onPressed logic here
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) => const SearchAlumniScreen(),
+                          ),
+                        );
                       },
                       icon: Icons.search,
                       label: 'Cari Alumni',
@@ -81,22 +84,27 @@ class _AlumniScreenState extends State<AlumniScreen> {
 
                 // List Item using CardAlumniWidget
                 Column(
-                  children: List.generate(10, (index) => // Adjust the number of cards
-                  Column(
-                    children: [
-                      CardAlumniWidget(
-                        label: 'Angkatan ${1990 + index} (${1990 + index})',
-                        subtitle: '${(index + 1) * 200} Alumni',
-                        onTap: () {
-                          Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => const AlumniSearchScreen(),
-                          ));
-                          // Navigate to AlumniSearchScreen
-                        },
-                      ),
-                      const SizedBox(height: 10.0), // Space between cards
-                    ],
-                  ),
+                  children: List.generate(
+                    10,
+                        (index) => // Adjust the number of cards
+                    Column(
+                      children: [
+                        CardAlumniWidget(
+                          label: 'Angkatan ${1990 + index} (${1990 + index})',
+                          subtitle: '${(index + 1) * 200} Alumni',
+                          onTap: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                const AlumniSearchScreen(),
+                              ),
+                            );
+                            // Navigate to AlumniSearchScreen
+                          },
+                        ),
+                        const SizedBox(height: 10.0), // Space between cards
+                      ],
+                    ),
                   ),
                 ),
 

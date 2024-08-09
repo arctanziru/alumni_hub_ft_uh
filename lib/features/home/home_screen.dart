@@ -1,6 +1,5 @@
 import 'package:alumni_hub_ft_uh/features/news/domain/news_model.dart';
 import 'package:flutter/material.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:alumni_hub_ft_uh/common/widgets/appBar/app_bar_widget.dart';
 import 'package:alumni_hub_ft_uh/common/widgets/button/button_widget.dart';
 import 'package:alumni_hub_ft_uh/common/widgets/button/button_filter_widget.dart';
@@ -12,6 +11,8 @@ import 'package:alumni_hub_ft_uh/features/vacancy/vacancy_screen.dart';
 import 'package:alumni_hub_ft_uh/features/news/news_detail_screen.dart';
 import 'package:alumni_hub_ft_uh/features/vacancy/vacancy_detail_screen.dart';
 import 'package:alumni_hub_ft_uh/features/vacancy/domain/vacancy_model.dart';
+
+import '../../common/widgets/carousel/carouse_widget.dart';
 
 class NewsItem {
   final String imageUrl;
@@ -76,6 +77,25 @@ class _HomeScreenState extends State<HomeScreen> {
         createdAt: DateTime.now().millisecondsSinceEpoch),
   ];
 
+  final List<List<String>> carouselImages = [
+    [
+      'https://images.unsplash.com/photo-1721332149346-00e39ce5c24f?q=80&w=1472&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      'https://images.unsplash.com/photo-1721332149346-00e39ce5c24f?q=80&w=1472&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      'https://images.unsplash.com/photo-1721332149346-00e39ce5c24f?q=80&w=1472&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      'https://images.unsplash.com/photo-1721332149346-00e39ce5c24f?q=80&w=1472&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+      'https://images.unsplash.com/photo-1721332149346-00e39ce5c24f?q=80&w=1472&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    ],
+
+  ];
+
+  final List<List<String>> countdownTexts = [
+    ['10 hari lagi', '5 hari lagi', '7 hari lagi', '3 hari lagi', '12 hari lagi'],
+  ];
+
+  final List<List<String>> registrantsInfo = [
+    ['100/200 pendaftar', '50/100 pendaftar','70/150 pendaftar', '30/75 pendaftar', '10/20 pendaftar'],
+  ];
+
   void _handleLikePress(int index) {
     setState(() {
       _newsItems[index].isLiked = !_newsItems[index].isLiked;
@@ -94,36 +114,17 @@ class _HomeScreenState extends State<HomeScreen> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              // Carousel Section
-              SizedBox(
-                child: CarouselSlider(
-                  options: CarouselOptions(
-                    autoPlay: true,
-                    viewportFraction: 1.0,
-                    enlargeCenterPage: false,
-                    aspectRatio: 16 / 9,
+              for (int i = 0; i < carouselImages.length; i++)
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 8.0),
+                  child: HomeCarouselWidget(
+                    carouselItems: carouselImages[i],
+                    countdownTexts: countdownTexts[i],
+                    registrantsInfo: registrantsInfo[i],
                   ),
-                  items: [
-                    'https://images.unsplash.com/photo-1721332149346-00e39ce5c24f?q=80&w=1472&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-                  ].map((imageUrl) {
-                    return Builder(
-                      builder: (BuildContext context) {
-                        return Container(
-                          width: double.infinity,
-                          decoration: BoxDecoration(
-                            image: DecorationImage(
-                              image: NetworkImage(imageUrl),
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                        );
-                      },
-                    );
-                  }).toList(),
                 ),
-              ),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [

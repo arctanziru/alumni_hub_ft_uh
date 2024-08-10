@@ -48,8 +48,8 @@ class HomeCarouselWidget extends StatelessWidget {
               child: Container(
                 padding: const EdgeInsets.all(12.0),
                 decoration: BoxDecoration(
-                  color: Colors.grey.withOpacity(0.9),
-                  borderRadius: BorderRadius.circular(30.0),
+                  color: const Color(0xFFD80100).withOpacity(0.9),
+                  borderRadius: BorderRadius.circular(120.0),
                 ),
                 child: Center(  // Center the entire Column
                   child: Column(
@@ -60,7 +60,7 @@ class HomeCarouselWidget extends StatelessWidget {
                       Text(
                         countdownText.split(' ')[0], // "10"
                         style: bodySmallStyle.copyWith(
-                          fontSize: 24.0,
+                          fontSize: 16.0,
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
                         ),
@@ -68,7 +68,7 @@ class HomeCarouselWidget extends StatelessWidget {
                       Text(
                         countdownText.split(' ').skip(1).join(' '), // "hari lagi"
                         style: bodySmallStyle.copyWith(
-                          fontSize: 16.0,
+                          fontSize: 10.0,
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
                         ),
@@ -84,14 +84,14 @@ class HomeCarouselWidget extends StatelessWidget {
               child: Container(
                 padding: const EdgeInsets.all(12.0),
                 decoration: BoxDecoration(
-                  color: Colors.grey.withOpacity(0.9),
-                  borderRadius: BorderRadius.circular(30.0),
+                  color: const Color(0xFFD80100).withOpacity(0.9),
+                  borderRadius: BorderRadius.circular(100.0),
                 ),
                 child: Center(
                   child: Text(
                     registrantsText,
                     style: bodySmallStyle.copyWith(
-                      fontSize: 16.0,
+                      fontSize: 10.0,
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
                     ),

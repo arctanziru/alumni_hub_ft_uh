@@ -12,7 +12,7 @@ import 'package:alumni_hub_ft_uh/features/news/news_detail_screen.dart';
 import 'package:alumni_hub_ft_uh/features/vacancy/vacancy_detail_screen.dart';
 import 'package:alumni_hub_ft_uh/features/vacancy/domain/vacancy_model.dart';
 
-import '../../common/widgets/carousel/carouse_widget.dart';
+import '../../common/widgets/carousel/carousel_widget.dart';
 
 class NewsItem {
   final String imageUrl;

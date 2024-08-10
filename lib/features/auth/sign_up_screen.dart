@@ -47,17 +47,22 @@ class _SignUpScreenState extends State<SignUpScreen> {
   }
 
   void _handleSignUp() {
-    if (agreeToTerms) {
-      Navigator.pushNamed(context, '/home');
-    } else {
+    if (!agreeToTerms) {
+      // Show SnackBar if terms are not agreed upon
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text(
-              'Anda harus menyetujui syarat dan ketentuan terlebih dahulu.'),
+            'Anda harus menyetujui syarat dan ketentuan terlebih dahulu.',
+          ),
         ),
       );
+    } else {
+      // Proceed with sign up if terms are agreed
+      Navigator.pushNamed(context, '/claim_alumni_data');
     }
   }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -326,7 +331,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                               keyboardType: TextInputType.phone,
                               decoration: InputDecoration(
                                 contentPadding:
-                                    const EdgeInsets.symmetric(horizontal: 16),
+                                    const EdgeInsets.all(16.0),
                                 hintText: 'Masukkan nomor telepon',
                                 border: InputBorder.none,
                                 hintStyle: textTheme.bodyMedium?.copyWith(
@@ -390,6 +395,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   style: textTheme.bodyMedium?.copyWith(
                                     color: Colors.red,
                                     decoration: TextDecoration.underline,
+                                    decorationColor: Colors.red,
                                   ),
                                   recognizer: TapGestureRecognizer()
                                     ..onTap = () {
@@ -406,10 +412,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     SizedBox(
                       width: double.infinity,
                       child: ButtonWidget(
-                        onPressed: agreeToTerms ? _handleSignUp : null,
+                        onPressed: _handleSignUp,
                         label: 'Daftar',
+                        color: agreeToTerms ? Theme.of(context).primaryColor : Colors.grey, // You can change the color when disabled if needed
                       ),
                     ),
+
                   ],
                 ),
               ),

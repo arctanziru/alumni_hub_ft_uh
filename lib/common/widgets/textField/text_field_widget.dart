@@ -6,6 +6,7 @@ class TextFieldWidget extends StatefulWidget {
   final TextEditingController? controller;
   final bool obscureText;
   final TextInputType keyboardType;
+  final Widget? icon; // Add icon parameter
 
   const TextFieldWidget({
     super.key,
@@ -14,6 +15,7 @@ class TextFieldWidget extends StatefulWidget {
     this.controller,
     this.obscureText = false,
     this.keyboardType = TextInputType.text,
+    this.icon, // Initialize icon parameter
   });
 
   @override
@@ -53,7 +55,7 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
               fontWeight: FontWeight.w600,
             ),
           ),
-        SizedBox(height: widget.label != null ? 8: 0),
+        SizedBox(height: widget.label != null ? 8 : 0),
         TextField(
           focusNode: _focusNode,
           controller: widget.controller,
@@ -72,6 +74,7 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
                 width: 1,
               ),
             ),
+            suffixIcon: widget.icon, // Add the icon here
           ),
           style: Theme.of(context).textTheme.bodyMedium,
           keyboardType: widget.keyboardType,

@@ -6,7 +6,7 @@ class TextFieldWidget extends StatefulWidget {
   final TextEditingController? controller;
   final bool obscureText;
   final TextInputType keyboardType;
-  final Widget? icon; // Add icon parameter
+  final Widget? icon; // Icon parameter for suffix icon
 
   const TextFieldWidget({
     super.key,
@@ -74,7 +74,7 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
                 width: 1,
               ),
             ),
-            suffixIcon: widget.icon, // Add the icon here
+            suffixIcon: widget.icon, // Add the icon here as suffixIcon
           ),
           style: Theme.of(context).textTheme.bodyMedium,
           keyboardType: widget.keyboardType,

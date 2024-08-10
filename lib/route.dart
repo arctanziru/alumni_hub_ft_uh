@@ -5,7 +5,7 @@ import 'package:alumni_hub_ft_uh/features/auth/claim_alumni_data_screen.dart';
 import 'package:alumni_hub_ft_uh/features/profile/profile_screen.dart';
 import 'package:alumni_hub_ft_uh/features/auth/license_screen.dart';
 import 'package:alumni_hub_ft_uh/features/auth/sign_in_screen.dart';
-import 'package:alumni_hub_ft_uh/features/auth/sign_up_screen.dart';
+import 'package:alumni_hub_ft_uh/features/auth/insert_alumni_data_screen.dart';
 import 'package:alumni_hub_ft_uh/features/auth/splash_screen.dart';
 import 'package:alumni_hub_ft_uh/features/donation/donation_screen.dart';
 import 'package:alumni_hub_ft_uh/features/home/home_screen.dart';
@@ -16,6 +16,8 @@ import 'package:alumni_hub_ft_uh/features/news/news_screen.dart';
 import 'package:alumni_hub_ft_uh/features/search/search_screen.dart';
 import 'package:alumni_hub_ft_uh/features/vacancy/vacancy_search_screen.dart';
 import 'package:flutter/material.dart';
+
+import 'features/auth/sign_up_screen.dart';
 
 Route<dynamic> routeGenerators(RouteSettings settings) {
   switch (settings.name) {
@@ -53,6 +55,8 @@ Route<dynamic> routeGenerators(RouteSettings settings) {
       return _buildPageRoute(const SearchAlumniScreen());
     case ClaimAlumniDataScreen.route:
       return _buildPageRoute(const ClaimAlumniDataScreen());
+    case InsertAlumniDataScreen.route:
+      return _buildPageRoute(const InsertAlumniDataScreen());
     default:
       throw ('Route not found');
   }

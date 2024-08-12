@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:alumni_hub_ft_uh/common/widgets/appBar/app_bar_secondary_widget.dart';
 import 'package:alumni_hub_ft_uh/common/widgets/card/card_vacancy_widget.dart';
 import 'package:alumni_hub_ft_uh/features/vacancy/vacancy_detail_screen.dart';
-import 'package:alumni_hub_ft_uh/features/vacancy/domain/vacancy_model.dart';
+import 'package:alumni_hub_ft_uh/features/vacancy/domain/models/vacancy_model.dart';
 
 class VacancySearchScreen extends StatefulWidget {
   static const String route = '/vacancy-search';
@@ -18,8 +18,8 @@ class _VacancySearchScreenState extends State<VacancySearchScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const AppBarSecondaryWidget(
-        title: 'FRONTEND DEVELOPER',
-        subtitle: 'LOWONGAN KERJA',
+        title: 'Vacancy Search',
+        subtitle: 'Lowongan Kerja',
       ),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -38,26 +38,23 @@ class _VacancySearchScreenState extends State<VacancySearchScreen> {
                           MaterialPageRoute(
                             builder: (context) => VacancyDetailScreen(
                               vacancy: VacancyModel(
-                                id: '1',
-                                title: 'Frontend Developer',
-                                company: 'Google',
-                                type: 'Full Time',
-                                location: 'Jakarta, Indonesia',
-                                experience: '2 years',
-                                createdAt: DateTime.now().microsecondsSinceEpoch,
-                                description:
+                                idLoker: 1,
+                                judul: 'Frontend Developer',
+                                idPerusahaan: 8,
+                                slug: 'frontend-developer',
+                                konten:
                                 'We are looking for a frontend developer to join our team. You will be responsible for developing and maintaining our web applications.',
-                                backgroundUrl:
-                                'https://via.placeholder.com/50',
-                                companyLogo:
-                                'https://via.placeholder.com/50',
-                                requirements: const [
-                                  'Experience with ReactJS',
-                                  'Experience with HTML, CSS, and JavaScript',
-                                  'Experience with Git',
-                                ],
-                                salary: 'Rp 10.000.000 - Rp 15.000.000',
-                                url: 'https://google.com',
+                                tglSelesai: '2024-12-31',
+                                lokasi: 'Jakarta, Indonesia',
+                                pengalamanKerja: '2 years',
+                                role: 'Frontend Development',
+                                createdAt: DateTime.now(),
+                                updatedAt: DateTime.now(),
+                                perusahaan: const Company(
+                                  idPerusahaan: 8,
+                                  namaPerusahaan: 'Google',
+                                  logo: 'https://via.placeholder.com/50',
+                                ),
                               ),
                             ),
                           ),
@@ -82,32 +79,29 @@ class _VacancySearchScreenState extends State<VacancySearchScreen> {
                           MaterialPageRoute(
                             builder: (context) => VacancyDetailScreen(
                               vacancy: VacancyModel(
-                                id: '2',
-                                title: 'Frontend Developer',
-                                company: 'Microsoft',
-                                type: 'Part Time',
-                                location: 'Bandung, Indonesia',
-                                experience: '3 years',
-                                createdAt: DateTime.now().microsecondsSinceEpoch,
-                                description:
+                                idLoker: 2,
+                                judul: 'Backend Developer',
+                                idPerusahaan: 9,
+                                slug: 'backend-developer',
+                                konten:
                                 'We are looking for a backend developer to join our team. You will be responsible for building and maintaining our server-side applications.',
-                                backgroundUrl:
-                                'https://via.placeholder.com/50',
-                                companyLogo:
-                                'https://via.placeholder.com/50',
-                                requirements: const [
-                                  'Experience with Node.js',
-                                  'Experience with SQL and NoSQL databases',
-                                  'Experience with Docker',
-                                ],
-                                salary: 'Rp 8.000.000 - Rp 12.000.000',
-                                url: 'https://microsoft.com',
+                                tglSelesai: '2024-12-31',
+                                lokasi: 'Bandung, Indonesia',
+                                pengalamanKerja: '3 years',
+                                role: 'Backend Development',
+                                createdAt: DateTime.now(),
+                                updatedAt: DateTime.now(),
+                                perusahaan: const Company(
+                                  idPerusahaan: 9,
+                                  namaPerusahaan: 'Microsoft',
+                                  logo: 'https://via.placeholder.com/50',
+                                ),
                               ),
                             ),
                           ),
                         );
                       },
-                      title: 'Frontend Developer',
+                      title: 'Backend Developer',
                       company: 'Microsoft',
                       type: 'Part Time',
                       location: 'Bandung, Indonesia',

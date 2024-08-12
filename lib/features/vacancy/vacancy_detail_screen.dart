@@ -2,7 +2,7 @@ import 'package:alumni_hub_ft_uh/common/utils/date_util.dart';
 import 'package:alumni_hub_ft_uh/common/widgets/appBar/app_bar_widget.dart';
 import 'package:alumni_hub_ft_uh/common/widgets/bottomBar/bottom_bar_widget.dart';
 import 'package:alumni_hub_ft_uh/constants/colors.dart';
-import 'package:alumni_hub_ft_uh/features/vacancy/domain/vacancy_model.dart';
+import 'package:alumni_hub_ft_uh/features/vacancy/domain/models/vacancy_model.dart';
 import 'package:flutter/material.dart';
 
 class VacancyDetailScreen extends StatefulWidget {
@@ -39,7 +39,7 @@ class _VacancyDetailScreenState extends State<VacancyDetailScreen> {
             ),
             const SizedBox(height: 6),
             Text(
-              widget.vacancy.title,
+              widget.vacancy.judul,
               style: Theme.of(context).textTheme.titleLarge,
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
@@ -47,19 +47,18 @@ class _VacancyDetailScreenState extends State<VacancyDetailScreen> {
             ),
             const SizedBox(height: 6),
             Text(
-              widget.vacancy.company,
+              widget.vacancy.perusahaan.namaPerusahaan,
               style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                    color: const Color(0xFF606060),
-                  ),
+                color: const Color(0xFF606060),
+              ),
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 6),
             Text(
-              DateUtil.getFormattedDate(DateTime.fromMicrosecondsSinceEpoch(
-                  widget.vacancy.createdAt)),
+              DateUtil.getFormattedDate((widget.vacancy.createdAt)),
               style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                    color: const Color(0xFF606060),
-                  ),
+                color: const Color(0xFF606060),
+              ),
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 6),
@@ -77,19 +76,17 @@ class _VacancyDetailScreenState extends State<VacancyDetailScreen> {
                   _buildInfoChip(
                     context: context,
                     icon: Icons.location_on,
-                    text: widget.vacancy.location,
+                    text: widget.vacancy.lokasi,
                   ),
                   _buildInfoChip(
                     context: context,
                     icon: Icons.access_time,
-                    text: widget.vacancy.experience,
+                    text: widget.vacancy.pengalamanKerja,
                   ),
                   _buildInfoChip(
                       context: context,
                       icon: Icons.calendar_today,
-                      text: DateUtil.getDaysAgo(
-                          DateTime.fromMicrosecondsSinceEpoch(
-                              widget.vacancy.createdAt))),
+                      text: DateUtil.getDaysAgo((widget.vacancy.updatedAt))),
                 ],
               ),
             ),
@@ -100,45 +97,24 @@ class _VacancyDetailScreenState extends State<VacancyDetailScreen> {
                   borderRadius: BorderRadius.all(Radius.circular(12)),
                 ),
                 padding:
-                    const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
+                const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const SizedBox(height: 24),
-                    Image.network(
-                      widget.vacancy.backgroundUrl,
-                      errorBuilder: (context, error, stackTrace) => Container(
-                        height: 200,
-                        color: Colors.grey[200],
-                        child: const Center(
-                            child: Icon(Icons.error,
-                                size: 40, color: Colors.grey)),
-                      ),
-                    ),
                     const SizedBox(height: 16),
                     Text(
-                      'Requirements:',
+                      'Role :',
                       style: Theme.of(context).textTheme.titleLarge,
                     ),
                     const SizedBox(height: 8),
-                    ...widget.vacancy.requirements.map((req) => Padding(
-                          padding: const EdgeInsets.only(bottom: 4.0),
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const Text('• ', style: TextStyle(fontSize: 18)),
-                              Expanded(
-                                child: Text(
-                                  req,
-                                  style: Theme.of(context).textTheme.bodyMedium,
-                                ),
-                              ),
-                            ],
-                          ),
-                        )),
+                    Text(
+                      widget.vacancy.role,
+                      style: Theme.of(context).textTheme.bodyMedium,
+                    ),
                     const SizedBox(height: 16),
                     Text(
-                      widget.vacancy.description,
+                      widget.vacancy.konten,
                       style: Theme.of(context).textTheme.bodyMedium,
                     ),
                   ],

@@ -23,6 +23,9 @@ import 'features/user/bloc/user_bloc.dart' as _i898;
 import 'features/user/data/user_local_data_source.dart' as _i225;
 import 'features/user/data/user_remote_data_source.dart' as _i444;
 import 'features/user/domain/user_repository.dart' as _i902;
+import 'features/vacancy/bloc/vacancy_bloc.dart' as _i379;
+import 'features/vacancy/data/vacancy_remote_data_source.dart' as _i785;
+import 'features/vacancy/domain/vacancy_repository.dart' as _i731;
 import 'locator.dart' as _i775;
 
 // initializes the registration of main-scope dependencies inside of GetIt
@@ -47,14 +50,20 @@ Future<_i174.GetIt> $initGetIt(
       () => _i225.UserLocalDataSource(gh<_i460.SharedPreferences>()));
   gh.singleton<_i516.AuthRemoteDataSource>(
       () => _i516.AuthRemoteDataSource(gh<_i420.Api>()));
-  gh.singleton<_i901.NewsRemoteDataSource>(
-      () => _i901.NewsRemoteDataSource(gh<_i420.Api>()));
   gh.singleton<_i444.UserRemoteDataSource>(
       () => _i444.UserRemoteDataSource(gh<_i420.Api>()));
+  gh.singleton<_i901.NewsRemoteDataSource>(
+      () => _i901.NewsRemoteDataSource(gh<_i420.Api>()));
+  gh.singleton<_i785.VacancyRemoteDataSource>(
+      () => _i785.VacancyRemoteDataSource(gh<_i420.Api>()));
+  gh.lazySingleton<_i731.VacancyRepository>(
+      () => _i731.VacancyRepositoryImpl(gh<_i785.VacancyRemoteDataSource>()));
   gh.lazySingleton<_i902.UserRepository>(() => _i902.UserRepositoryImpl(
         userRemoteDataSource: gh<_i444.UserRemoteDataSource>(),
         userLocalDataSource: gh<_i225.UserLocalDataSource>(),
       ));
+  gh.factory<_i379.VacancyBloc>(
+      () => _i379.VacancyBloc(gh<_i731.VacancyRepository>()));
   gh.lazySingleton<_i260.AuthRepository>(() => _i260.AuthRepositoryImpl(
       authRemoteDataSource: gh<_i516.AuthRemoteDataSource>()));
   gh.lazySingleton<_i220.NewsRepository>(

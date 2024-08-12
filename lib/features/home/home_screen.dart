@@ -5,9 +5,12 @@ import 'package:alumni_hub_ft_uh/common/widgets/bottomBar/bottom_bar_widget.dart
 import 'package:alumni_hub_ft_uh/common/widgets/button/button_filter_widget.dart';
 import 'package:alumni_hub_ft_uh/common/widgets/button/button_widget.dart';
 import 'package:alumni_hub_ft_uh/common/widgets/card/card_news_widget.dart';
+import 'package:alumni_hub_ft_uh/common/widgets/card/card_vacancy_widget.dart'; // Ensure this import is correct
 import 'package:alumni_hub_ft_uh/features/news/bloc/news_bloc.dart';
 import 'package:alumni_hub_ft_uh/features/news/news_detail_screen.dart';
 import 'package:alumni_hub_ft_uh/features/news/news_screen.dart';
+import 'package:alumni_hub_ft_uh/features/vacancy/bloc/vacancy_bloc.dart'; // Ensure this import is correct
+import 'package:alumni_hub_ft_uh/features/vacancy/vacancy_detail_screen.dart'; // Ensure this import is correct
 import 'package:alumni_hub_ft_uh/features/vacancy/vacancy_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -15,22 +18,6 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 import '../../common/widgets/carousel/carousel_widget.dart';
-
-class NewsItem {
-  final String imageUrl;
-  final String title;
-  final String description;
-  double likes;
-  bool isLiked;
-
-  NewsItem({
-    required this.imageUrl,
-    required this.title,
-    required this.description,
-    required this.likes,
-    this.isLiked = false,
-  });
-}
 
 class HomeScreen extends StatefulWidget {
   static const String route = '/home';
@@ -76,14 +63,15 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   void initState() {
-    context.read<NewsBloc>().add(NewsFetched());
     super.initState();
+    context.read<NewsBloc>().add(NewsFetched());
+    context.read<VacancyBloc>().add(VacancyFetched());
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey[200], // Set background color to light grey
+      backgroundColor: Colors.grey[200],
       bottomNavigationBar: const BottomBarWidget(currentIndex: 0),
       appBar: const AppBarWidget(),
       body: SafeArea(
@@ -100,8 +88,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
               Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 16, vertical: 8.0),
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -111,11 +98,10 @@ class _HomeScreenState extends State<HomeScreen> {
                         Text(
                           'Berita Terkini',
                           textAlign: TextAlign.left,
-                          style:
-                              Theme.of(context).textTheme.bodyLarge?.copyWith(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 24,
-                                  ),
+                          style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 24,
+                          ),
                         ),
                         IconButton(
                           icon: const Icon(Icons.arrow_forward_rounded),
@@ -130,80 +116,24 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: SingleChildScrollView(
                         scrollDirection: Axis.horizontal,
                         child: Row(
-                          children: [
-                            Padding(
+                          children: List.generate(6, (index) {
+                            final labels = [
+                              'Politik', 'Olahraga', 'Ekonomi',
+                              'Teknologi', 'Seni', 'Sosial'
+                            ];
+                            return Padding(
                               padding: const EdgeInsets.only(right: 8),
                               child: ButtonFilterWidget(
-                                label: 'Politik',
+                                label: labels[index],
                                 onPressed: () {
                                   setState(() {
-                                    _activeFilterIndex = 0;
+                                    _activeFilterIndex = index;
                                   });
                                 },
-                                isActive: _activeFilterIndex == 0,
+                                isActive: _activeFilterIndex == index,
                               ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(right: 8),
-                              child: ButtonFilterWidget(
-                                label: 'Olahraga',
-                                onPressed: () {
-                                  setState(() {
-                                    _activeFilterIndex = 1;
-                                  });
-                                },
-                                isActive: _activeFilterIndex == 1,
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(right: 8),
-                              child: ButtonFilterWidget(
-                                label: 'Ekonomi',
-                                onPressed: () {
-                                  setState(() {
-                                    _activeFilterIndex = 2;
-                                  });
-                                },
-                                isActive: _activeFilterIndex == 2,
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(right: 8),
-                              child: ButtonFilterWidget(
-                                label: 'Teknologi',
-                                onPressed: () {
-                                  setState(() {
-                                    _activeFilterIndex = 3;
-                                  });
-                                },
-                                isActive: _activeFilterIndex == 3,
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(right: 8),
-                              child: ButtonFilterWidget(
-                                label: 'Seni',
-                                onPressed: () {
-                                  setState(() {
-                                    _activeFilterIndex = 4;
-                                  });
-                                },
-                                isActive: _activeFilterIndex == 4,
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(right: 8),
-                              child: ButtonFilterWidget(
-                                label: 'Sosial',
-                                onPressed: () {
-                                  setState(() {
-                                    _activeFilterIndex = 5;
-                                  });
-                                },
-                                isActive: _activeFilterIndex == 5,
-                              ),
-                            ),
-                          ],
+                            );
+                          }),
                         ),
                       ),
                     ),
@@ -215,7 +145,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             child: Column(
                               children: List.generate(
                                 5,
-                                (index) => Column(
+                                    (index) => Column(
                                   children: [
                                     CardNewsWidget(
                                       onTap: () {},
@@ -235,54 +165,48 @@ class _HomeScreenState extends State<HomeScreen> {
 
                         return Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
-                          children: state.status == NewsStatus.loading &&
-                                  state.news.isEmpty
+                          children: state.news.isEmpty
                               ? [
-                                  Text(
-                                    'Tidak ada berita',
-                                    style:
-                                        Theme.of(context).textTheme.bodyLarge,
-                                  ),
-                                ]
+                            Text(
+                              'Tidak ada berita',
+                              style: Theme.of(context).textTheme.bodyLarge,
+                            ),
+                          ]
                               : [
-                                  ...List.generate(
-                                    min(state.news.length, 5),
-                                    (index) => Column(
-                                      children: [
-                                        CardNewsWidget(
-                                          onTap: () {
-                                            Navigator.of(context)
-                                                .push(MaterialPageRoute(
-                                              builder: (context) =>
-                                                  NewsDetailScreen(
-                                                news: state.news[index],
-                                              ),
-                                            ));
-                                          },
-                                          title: state.news[index].judul,
-                                          description: state.news[index].konten,
-                                          imageUrl:
-                                              '${dotenv.env['STORAGE_URL']}${state.news[index].gambar}',
-                                          likes: state.news[index].totalLike,
-                                          isLiked: state.news[index].isLiked,
+                            ...List.generate(
+                              min(state.news.length, 5),
+                                  (index) => Column(
+                                children: [
+                                  CardNewsWidget(
+                                    onTap: () {
+                                      Navigator.of(context).push(MaterialPageRoute(
+                                        builder: (context) => NewsDetailScreen(
+                                          news: state.news[index],
                                         ),
-                                        const SizedBox(height: 10),
-                                      ],
-                                    ),
+                                      ));
+                                    },
+                                    title: state.news[index].judul,
+                                    description: state.news[index].konten,
+                                    imageUrl: '${dotenv.env['STORAGE_URL']}${state.news[index].gambar}',
+                                    likes: state.news[index].totalLike,
+                                    isLiked: state.news[index].isLiked,
                                   ),
-                                  if (state.status == NewsStatus.loaded &&
-                                      state.news.length > 5)
-                                    Center(
-                                      child: ButtonWidget(
-                                        onPressed: () {
-                                          Navigator.pushNamed(
-                                              context, NewsScreen.route);
-                                        },
-                                        label: 'Lainnya',
-                                        rounded: true,
-                                      ),
-                                    ),
+                                  const SizedBox(height: 10),
                                 ],
+                              ),
+                            ),
+                            if (state.status == NewsStatus.loaded &&
+                                state.news.length > 5)
+                              Center(
+                                child: ButtonWidget(
+                                  onPressed: () {
+                                    Navigator.pushNamed(context, NewsScreen.route);
+                                  },
+                                  label: 'Lainnya',
+                                  rounded: true,
+                                ),
+                              ),
+                          ],
                         );
                       },
                     ),
@@ -293,11 +217,10 @@ class _HomeScreenState extends State<HomeScreen> {
                         Text(
                           'Lowongan Kerja',
                           textAlign: TextAlign.left,
-                          style:
-                              Theme.of(context).textTheme.bodyLarge?.copyWith(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 24,
-                                  ),
+                          style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 24,
+                          ),
                         ),
                         IconButton(
                           icon: const Icon(Icons.arrow_forward_rounded),
@@ -308,68 +231,89 @@ class _HomeScreenState extends State<HomeScreen> {
                       ],
                     ),
                     const SizedBox(height: 8.0),
-                    // Lowongan Kerja Content
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      // children: List.generate(
-                      //   _newsItems.length,
-                      //   (index) => Column(
-                      //     children: [
-                      //       CardVacancyWidget(
-                      //         onTap: () {
-                      //           Navigator.of(context).push(MaterialPageRoute(
-                      //             builder: (context) => VacancyDetailScreen(
-                      //               vacancy: VacancyModel(
-                      //                 id: '1',
-                      //                 title: 'Frontend Developer',
-                      //                 company: 'Google',
-                      //                 type: 'Full Time',
-                      //                 location: 'Jakarta, Indonesia',
-                      //                 experience: '2 years',
-                      //                 createdAt:
-                      //                     DateTime.now().microsecondsSinceEpoch,
-                      //                 description:
-                      //                     'We are looking for a frontend developer to join our team. You will be responsible for developing and maintaining our web applications.',
-                      //                 backgroundUrl:
-                      //                     'https://via.placeholder.com/50',
-                      //                 companyLogo:
-                      //                     'https://via.placeholder.com/50',
-                      //                 requirements: const [
-                      //                   'Experience with ReactJS',
-                      //                   'Experience with HTML, CSS, and JavaScript',
-                      //                   'Experience with Git',
-                      //                 ],
-                      //                 salary: 'Rp 10.000.000 - Rp 15.000.000',
-                      //                 url: 'https://google.com',
-                      //               ),
-                      //             ),
-                      //           ));
-                      //         },
-                      //         title: 'Frontend Developer',
-                      //         company: 'Google',
-                      //         type: 'Full Time',
-                      //         location: 'Jakarta, Indonesia',
-                      //         experience: '2 years',
-                      //         postedAt: DateTime.now()
-                      //             .subtract(const Duration(days: 1)),
-                      //         description:
-                      //             'We are looking for a frontend developer to join our team. You will be responsible for developing and maintaining our web applications.',
-                      //         companyImgUrl: 'https://via.placeholder.com/50',
-                      //       ),
-                      //       const SizedBox(height: 10),
-                      //     ],
-                      //   ),
-                      // ),
-                    ),
-                    const SizedBox(
-                        height: 16), // Space between sections and button
-                    Center(
-                      child: ButtonWidget(
-                        onPressed: () =>
-                            Navigator.pushNamed(context, '/vacancy'),
-                        label: 'Lainnya',
-                        rounded: true,
-                      ),
+                    BlocBuilder<VacancyBloc, VacancyState>(
+                      builder: (context, state) {
+                        if (state.status == VacancyStatus.loading) {
+                          return Skeletonizer(
+                            child: Column(
+                              children: List.generate(
+                                5,
+                                    (index) => Column(
+                                  children: [
+                                    CardVacancyWidget(
+                                      onTap: () {},
+                                      title: 'Loading...',
+                                      company: 'Loading...',
+                                      type: 'Loading...',
+                                      location: 'Loading...',
+                                      experience: 'Loading...',
+                                      postedAt: DateTime.now(),
+                                      description: 'Loading...' * 10,
+                                      companyImgUrl: 'Loading...',
+                                    ),
+                                    const SizedBox(height: 10),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          );
+                        }
+
+                        return Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: state.vacancies.isEmpty
+                              ? [
+                            Text(
+                              'Tidak ada lowongan kerja',
+                              style: Theme.of(context).textTheme.bodyLarge,
+                            ),
+                          ]
+                              : [
+                            ...List.generate(
+                              min(state.vacancies.length, 5),
+                                  (index) {
+                                final vacancy = state.vacancies[index];
+                                return Column(
+                                  children: [
+                                    CardVacancyWidget(
+                                      onTap: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) => VacancyDetailScreen(
+                                              vacancy: vacancy,
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                      title: vacancy.judul,
+                                      company: vacancy.perusahaan.namaPerusahaan,
+                                      type: vacancy.role,
+                                      location: vacancy.lokasi,
+                                      experience: vacancy.pengalamanKerja,
+                                      postedAt: vacancy.createdAt,
+                                      description: vacancy.konten,
+                                      companyImgUrl: '${dotenv.get('STORAGE_URL')}${vacancy.perusahaan.logo}',
+                                    ),
+                                    const SizedBox(height: 10),
+                                  ],
+                                );
+                              },
+                            ),
+                            if (state.status == VacancyStatus.loaded &&
+                                state.vacancies.length > 5)
+                              Center(
+                                child: ButtonWidget(
+                                  onPressed: () {
+                                    Navigator.pushNamed(context, VacancyScreen.route);
+                                  },
+                                  label: 'Lainnya',
+                                  rounded: true,
+                                ),
+                              ),
+                          ],
+                        );
+                      },
                     ),
                   ],
                 ),

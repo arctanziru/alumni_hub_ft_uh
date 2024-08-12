@@ -30,6 +30,11 @@ class HomeCarouselWidget extends StatelessWidget {
         String countdownText = countdownTexts[index];
         String registrantsText = registrantsInfo[index];
 
+        // Splitting countdown text into number and text parts
+        final parts = countdownText.split(' ');
+        final numberPart = parts[0];
+        final textPart = parts.skip(1).join(' ');
+
         return Stack(
           fit: StackFit.expand,
           children: [
@@ -45,37 +50,51 @@ class HomeCarouselWidget extends StatelessWidget {
             Positioned(
               top: 16.0,
               left: 16.0,
-              child: Container(
-                padding: const EdgeInsets.all(12.0),
-                decoration: BoxDecoration(
-                  color: const Color(0xFFD80100).withOpacity(0.9),
-                  borderRadius: BorderRadius.circular(120.0),
-                ),
-                child: Center(  // Center the entire Column
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,  // Center text horizontally
-                    children: [
-                      Text(
-                        countdownText.split(' ')[0], // "10"
-                        style: bodySmallStyle.copyWith(
-                          fontSize: 16.0,
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // Container for countdown number and text with fixed size for red background
+                  Container(
+                    padding: const EdgeInsets.all(8.0),
+                    decoration: BoxDecoration(
+                      color: Colors.black.withOpacity(0.5), // Black background with low opacity
+                      borderRadius: BorderRadius.circular(8.0), // Rounded corners
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        // Fixed-size red circular background with the countdown number
+                        Container(
+                          width: 40.0, // Fixed width
+                          height: 40.0, // Fixed height
+                          decoration: BoxDecoration(
+                            color: const Color(0xFFD80100).withOpacity(0.9), // Red background
+                            shape: BoxShape.circle,
+                          ),
+                          child: Center(
+                            child: Text(
+                              numberPart,
+                              style: bodySmallStyle.copyWith(
+                                fontSize: 24.0,
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
                         ),
-                      ),
-                      Text(
-                        countdownText.split(' ').skip(1).join(' '), // "hari lagi"
-                        style: bodySmallStyle.copyWith(
-                          fontSize: 10.0,
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
+                        Text(
+                          textPart,
+                          style: bodySmallStyle.copyWith(
+                            fontSize: 12.0,
+                            color: Colors.white,
+                            fontWeight: FontWeight.bold,
+                          ),
+                          textAlign: TextAlign.center, // Center-align the text
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
+                ],
               ),
             ),
             Positioned(

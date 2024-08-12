@@ -173,8 +173,8 @@ class _SignInScreenState extends State<SignInScreen> {
                       child: BlocConsumer<UserBloc, UserState>(
                         listener: (context, state) {
                           if (state is UserStateSuccessSignIn) {
-                            showSnackBar(context,
-                                'Selamat datang ${state.signInResponse.user.name}');
+                            showSnackBar(context, 'Selamat datang');
+                            debugPrint("Token: ${state.signInResponse.token}");
                             locator<AppNavigation>().navigateReplace('/home');
                           } else if (state is UserStateException) {
                             debugPrint("Exception: ${state.exception.message}");

@@ -1,4 +1,5 @@
 import 'package:alumni_hub_ft_uh/common/utils/app_navigation.dart';
+import 'package:alumni_hub_ft_uh/constants/colors.dart';
 import 'package:alumni_hub_ft_uh/features/news/news_search_screen.dart';
 import 'package:alumni_hub_ft_uh/features/vacancy/vacancy_search_screen.dart';
 import 'package:alumni_hub_ft_uh/locator.dart';
@@ -67,7 +68,7 @@ class _SearchScreenState extends State<SearchScreen> {
         ],
       ),
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(18),
         child: Column(
           children: [
             SearchResultSection(
@@ -85,7 +86,7 @@ class _SearchScreenState extends State<SearchScreen> {
             const SizedBox(height: 16),
             SearchResultSection(
               title: 'LOKER',
-              count: 2,
+              count: 0,
               onTap: () {
                 Navigator.push(
                   context,
@@ -139,16 +140,30 @@ class SearchResultSection extends StatelessWidget {
         ),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text(
-              '$count Ditemukan',
-              style: const TextStyle(fontSize: 16),
+            Text('$count Ditemukan',
+                style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                    color: isHighlighted
+                        ? AppColors.primaryBlack
+                        : Colors.grey[600])),
+            const SizedBox(width: 8),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(title,
+                    style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                        color: isHighlighted
+                            ? AppColors.primaryBlack
+                            : Colors.grey[600])),
+                Icon(
+                  Icons.chevron_right,
+                  size: 18,
+                  color:
+                      isHighlighted ? AppColors.primaryBlack : Colors.grey[600],
+                ),
+              ],
             ),
-            Text(
-              title,
-              style: const TextStyle(fontSize: 16),
-            ),
-            const Icon(Icons.chevron_right),
           ],
         ),
       ),

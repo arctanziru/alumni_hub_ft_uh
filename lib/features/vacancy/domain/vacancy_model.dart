@@ -1,48 +1,26 @@
-class VacancyModel {
-  final String id;
-  final String title;
-  final String description;
-  final String location;
-  final String salary;
-  final String company;
-  final String companyLogo;
-  final String type;
-  final String url;
-  final int createdAt;
-  final String experience;
-  final String backgroundUrl;
-  final List<String> requirements;
+import 'package:freezed_annotation/freezed_annotation.dart';
 
-  VacancyModel(
-      {required this.id,
-      required this.title,
-      required this.description,
-      required this.location,
-      required this.salary,
-      required this.company,
-      required this.companyLogo,
-      required this.type,
-      required this.url,
-      required this.createdAt,
-      required this.backgroundUrl,
-      required this.requirements,
-      required this.experience});
+part 'vacancy_model.freezed.dart';
+part 'vacancy_model.g.dart';
 
-  factory VacancyModel.fromJson(Map<String, dynamic> json) {
-    return VacancyModel(
-      id: json['id'],
-      title: json['title'],
-      description: json['description'],
-      location: json['location'],
-      salary: json['salary'],
-      company: json['company'],
-      companyLogo: json['company_logo'],
-      type: json['type'],
-      url: json['url'],
-      createdAt: json['created_at'],
-      backgroundUrl: json['background_url'],
-      experience: json['experience'],
-      requirements: List<String>.from(json['requirements']),
-    );
-  }
+@freezed
+class VacancyModel with _$VacancyModel {
+  const factory VacancyModel({
+    required String id,
+    required String title,
+    required String description,
+    required String location,
+    required String salary,
+    required String company,
+    required String companyLogo,
+    required String type,
+    required String url,
+    required int createdAt,
+    required String backgroundUrl,
+    required List<String> requirements,
+    required String experience,
+  }) = _VacancyModel;
+
+  factory VacancyModel.fromJson(Map<String, dynamic> json) =>
+      _$VacancyModelFromJson(json);
 }

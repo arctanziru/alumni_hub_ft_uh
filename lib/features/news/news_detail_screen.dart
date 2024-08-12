@@ -2,8 +2,9 @@ import 'package:alumni_hub_ft_uh/common/utils/date_util.dart';
 import 'package:alumni_hub_ft_uh/common/widgets/appBar/app_bar_search_widget.dart';
 import 'package:alumni_hub_ft_uh/common/widgets/bottomBar/bottom_bar_widget.dart';
 import 'package:alumni_hub_ft_uh/constants/colors.dart';
-import 'package:alumni_hub_ft_uh/features/news/domain/news_model.dart';
+import 'package:alumni_hub_ft_uh/features/news/domain/models/news_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 
 class NewsDetailScreen extends StatefulWidget {
@@ -31,7 +32,7 @@ class _NewsDetailScreenState extends State<NewsDetailScreen> {
           children: [
             const SizedBox(height: 24),
             Text(
-              widget.news.category ?? 'Berita',
+              'Berita',
               style: Theme.of(context)
                   .textTheme
                   .labelMedium
@@ -40,7 +41,7 @@ class _NewsDetailScreenState extends State<NewsDetailScreen> {
             ),
             const SizedBox(height: 6),
             Text(
-              widget.news.title,
+              widget.news.judul,
               style: Theme.of(context).textTheme.titleLarge,
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
@@ -48,7 +49,7 @@ class _NewsDetailScreenState extends State<NewsDetailScreen> {
             ),
             const SizedBox(height: 6),
             Text(
-              widget.news.author,
+              widget.news.penulis,
               style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                     color: const Color(0xFF606060),
                   ),
@@ -56,8 +57,7 @@ class _NewsDetailScreenState extends State<NewsDetailScreen> {
             ),
             const SizedBox(height: 6),
             Text(
-              DateUtil.getFormattedDate(
-                  DateTime.fromMicrosecondsSinceEpoch(widget.news.createdAt)),
+              DateUtil.getFormattedDate(widget.news.createdAt),
               style: Theme.of(context).textTheme.bodyLarge?.copyWith(
                     color: const Color(0xFF606060),
                   ),
@@ -76,7 +76,7 @@ class _NewsDetailScreenState extends State<NewsDetailScreen> {
                   children: [
                     const SizedBox(height: 24),
                     Image.network(
-                      widget.news.imageUrl,
+                      '${dotenv.env['STORAGE_URL']}${widget.news.gambar}',
                       errorBuilder: (context, error, stackTrace) => Container(
                         height: 200,
                         color: Colors.grey[200],
@@ -87,7 +87,7 @@ class _NewsDetailScreenState extends State<NewsDetailScreen> {
                     ),
                     const SizedBox(height: 16),
                     HtmlWidget(
-                      widget.news.content,
+                      widget.news.konten,
                       textStyle: Theme.of(context).textTheme.bodyMedium,
                     )
                   ],

@@ -1,10 +1,14 @@
 import 'package:alumni_hub_ft_uh/common/widgets/appBar/app_bar_search_widget.dart';
-import 'package:alumni_hub_ft_uh/features/news/domain/news_model.dart';
-import 'package:alumni_hub_ft_uh/features/news/news_detail_screen.dart';
-import 'package:flutter/material.dart';
+import 'package:alumni_hub_ft_uh/common/widgets/bottomBar/bottom_bar_widget.dart';
 import 'package:alumni_hub_ft_uh/common/widgets/button/button_filter_widget.dart';
 import 'package:alumni_hub_ft_uh/common/widgets/card/card_news_widget.dart';
-import 'package:alumni_hub_ft_uh/common/widgets/bottomBar/bottom_bar_widget.dart'; // Import the BottomBarWidget
+import 'package:alumni_hub_ft_uh/constants/colors.dart';
+import 'package:alumni_hub_ft_uh/features/news/bloc/news_bloc.dart';
+import 'package:alumni_hub_ft_uh/features/news/news_detail_screen.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 class NewsScreen extends StatefulWidget {
   static const String route = '/news';
@@ -15,98 +19,19 @@ class NewsScreen extends StatefulWidget {
   State<NewsScreen> createState() => _NewsScreenState();
 }
 
-
 class _NewsScreenState extends State<NewsScreen> {
-  int _activeFilterIndex = 0;
+  final _scrollController = ScrollController();
 
-  final List<NewsModel> _newsItems = [
-    NewsModel(
-        imageUrl:
-            'https://images.unsplash.com/photo-1721332149346-00e39ce5c24f?q=80&w=1472&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-        title: 'Reuni Akbar',
-        description: 'Diadakan pada 17 Agustus 2024',
-        likes: 10,
-        content: '<b>HTML Content</b>',
-        createdAt: DateTime.now().millisecondsSinceEpoch),
-    NewsModel(
-        imageUrl:
-            'https://images.unsplash.com/photo-1721332149346-00e39ce5c24f?q=80&w=1472&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-        title: 'Event Title 2',
-        description: 'Event Description 2',
-        likes: 10,
-        content: '<b>HTML Content</b>',
-        createdAt: DateTime.now().millisecondsSinceEpoch),
-    NewsModel(
-        imageUrl:
-            'https://images.unsplash.com/photo-1721332149346-00e39ce5c24f?q=80&w=1472&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-        title: 'Event Title 3',
-        description: 'Event Description 3',
-        likes: 10,
-        content: '<b>HTML Content</b>',
-        createdAt: DateTime.now().millisecondsSinceEpoch),
-    NewsModel(
-        imageUrl:
-            'https://images.unsplash.com/photo-1721332149346-00e39ce5c24f?q=80&w=1472&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-        title: 'Event Title 4',
-        description: 'Event Description 4',
-        likes: 10,
-        content: '<b>HTML Content</b>',
-        createdAt: DateTime.now().millisecondsSinceEpoch),
-    NewsModel(
-        imageUrl:
-            'https://images.unsplash.com/photo-1721332149346-00e39ce5c24f?q=80&w=1472&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-        title: 'Event Title 5',
-        description: 'Event Description 5',
-        likes: 10,
-        content: '<b>HTML Content</b>',
-        createdAt: DateTime.now().millisecondsSinceEpoch),
-    NewsModel(
-        imageUrl:
-            'https://images.unsplash.com/photo-1721332149346-00e39ce5c24f?q=80&w=1472&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-        title: 'Event Title 6',
-        description: 'Event Description 6',
-        likes: 10,
-        content: '<b>HTML Content</b>',
-        createdAt: DateTime.now().millisecondsSinceEpoch),
-    NewsModel(
-        imageUrl:
-            'https://images.unsplash.com/photo-1721332149346-00e39ce5c24f?q=80&w=1472&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-        title: 'Event Title 7',
-        description: 'Event Description 7',
-        likes: 10,
-        content: '<b>HTML Content</b>',
-        createdAt: DateTime.now().millisecondsSinceEpoch),
-    NewsModel(
-        imageUrl:
-            'https://images.unsplash.com/photo-1721332149346-00e39ce5c24f?q=80&w=1472&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-        title: 'Event Title 8',
-        description: 'Event Description 8',
-        likes: 10,
-        content: '<b>HTML Content</b>',
-        createdAt: DateTime.now().millisecondsSinceEpoch),
-    NewsModel(
-        imageUrl:
-            'https://images.unsplash.com/photo-1721332149346-00e39ce5c24f?q=80&w=1472&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-        title: 'Event Title 9',
-        description: 'Event Description 9',
-        likes: 10,
-        content: '<b>HTML Content</b>',
-        createdAt: DateTime.now().millisecondsSinceEpoch),
-    NewsModel(
-        imageUrl:
-            'https://images.unsplash.com/photo-1721332149346-00e39ce5c24f?q=80&w=1472&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-        title: 'Event Title 10',
-        description: 'Event Description 10',
-        likes: 10,
-        content: '<b>HTML Content</b>',
-        createdAt: DateTime.now().millisecondsSinceEpoch),
-  ];
-
-  void _handleLikePress(int index) {
-    setState(() {
-      _newsItems[index].isLiked = !_newsItems[index].isLiked;
-      _newsItems[index].likes += _newsItems[index].isLiked ? 1 : -1;
+  @override
+  void initState() {
+    context.read<NewsBloc>().add(NewsFetched());
+    _scrollController.addListener(() {
+      if (_scrollController.position.pixels >=
+          _scrollController.position.maxScrollExtent) {
+        context.read<NewsBloc>().add(NewsNextPage());
+      }
     });
+    super.initState();
   }
 
   @override
@@ -115,143 +40,137 @@ class _NewsScreenState extends State<NewsScreen> {
       appBar: const AppBarSearchWidget(),
       bottomNavigationBar: const BottomBarWidget(currentIndex: 1),
       body: SafeArea(
-        child: SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                // Berita Section
-                Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(
-                      'Daftar Berita',
-                      textAlign: TextAlign.left,
-                      style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 24,
-                          ),
-                    ),
-                  ],
-                ),
-                // Filter Section
-                SizedBox(
-                  height: 50,
-                  child: SingleChildScrollView(
-                    scrollDirection: Axis.horizontal,
-                    child: Row(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    'Daftar Berita',
+                    textAlign: TextAlign.left,
+                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 24,
+                        ),
+                  ),
+                ],
+              ),
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: BlocBuilder<NewsBloc, NewsState>(
+                  builder: (context, state) {
+                    return Row(
                       children: [
                         Padding(
                           padding: const EdgeInsets.only(right: 8),
                           child: ButtonFilterWidget(
                             label: 'Politik',
                             onPressed: () {
-                              setState(() {
-                                _activeFilterIndex = 0;
-                              });
+                              context.read<NewsBloc>().add(
+                                    NewsFilterChanged(
+                                      idKategoriBerita:
+                                          state.idKategoriBerita == 1
+                                              ? null
+                                              : 1,
+                                    ),
+                                  );
                             },
-                            isActive: _activeFilterIndex == 0,
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(right: 8),
-                          child: ButtonFilterWidget(
-                            label: 'Olahraga',
-                            onPressed: () {
-                              setState(() {
-                                _activeFilterIndex = 1;
-                              });
-                            },
-                            isActive: _activeFilterIndex == 1,
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(right: 8),
-                          child: ButtonFilterWidget(
-                            label: 'Ekonomi',
-                            onPressed: () {
-                              setState(() {
-                                _activeFilterIndex = 2;
-                              });
-                            },
-                            isActive: _activeFilterIndex == 2,
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(right: 8),
-                          child: ButtonFilterWidget(
-                            label: 'Teknologi',
-                            onPressed: () {
-                              setState(() {
-                                _activeFilterIndex = 3;
-                              });
-                            },
-                            isActive: _activeFilterIndex == 3,
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(right: 8),
-                          child: ButtonFilterWidget(
-                            label: 'Seni',
-                            onPressed: () {
-                              setState(() {
-                                _activeFilterIndex = 4;
-                              });
-                            },
-                            isActive: _activeFilterIndex == 4,
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(right: 8),
-                          child: ButtonFilterWidget(
-                            label: 'Sosial',
-                            onPressed: () {
-                              setState(() {
-                                _activeFilterIndex = 5;
-                              });
-                            },
-                            isActive: _activeFilterIndex == 5,
+                            isActive: state.idKategoriBerita == 1,
                           ),
                         ),
                       ],
-                    ),
-                  ),
+                    );
+                  },
                 ),
-                const SizedBox(height: 8.0),
-                // Berita Content
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: List.generate(
-                    _newsItems.length,
-                        (index) => Column(
-                      children: [
-                        CardNewsWidget(
-                          imageUrl: _newsItems[index].imageUrl,
-                          title: _newsItems[index].title,
-                          description: _newsItems[index].description,
-                          likes: _newsItems[index].likes,
-                          isLiked: _newsItems[index].isLiked, // Use the correct isLiked state
-                          onLikePressed: () {
-                            // Handle like press
-                            _handleLikePress(index);
-                          },
-                          onTap: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => NewsDetailScreen(news: _newsItems[index]),
-                              ),
+              ),
+              const SizedBox(height: 8.0),
+              Expanded(
+                child: BlocBuilder<NewsBloc, NewsState>(
+                  builder: (context, state) {
+                    if (state.status == NewsStatus.error) {
+                      debugPrint('Error: ${state.toString()}');
+                      return Center(
+                        child: Text(state.error?.message ?? ''),
+                      );
+                    }
+
+                    if (state.status == NewsStatus.loading &&
+                        state.news.isEmpty) {
+                      return Skeletonizer(
+                        child: ListView.builder(
+                          itemCount: 10,
+                          itemBuilder: (context, index) {
+                            return Column(
+                              children: [
+                                CardNewsWidget(
+                                  imageUrl: 'placeholder',
+                                  title: 'placeholder',
+                                  description: 'placeholder',
+                                  likes: 100,
+                                  onTap: () {},
+                                ),
+                                const SizedBox(height: 10),
+                              ],
                             );
                           },
                         ),
-                        const SizedBox(height: 10),
-                      ],
-                    ),
-                  ),
+                      );
+                    }
+
+                    return RefreshIndicator(
+                      color: AppColors.primaryColor,
+                      onRefresh: () {
+                        return Future.delayed(
+                          Duration.zero,
+                          () {
+                            context.read<NewsBloc>().add(NewsRefreshed());
+                          },
+                        );
+                      },
+                      child: state.news.isEmpty
+                          ? Center(
+                              child: Text(
+                                'No data found',
+                                style: Theme.of(context).textTheme.bodyLarge,
+                              ),
+                            )
+                          : ListView.builder(
+                              controller: _scrollController,
+                              itemCount: state.news.length,
+                              itemBuilder: (context, index) {
+                                return Column(
+                                  children: [
+                                    CardNewsWidget(
+                                      imageUrl:
+                                          '${dotenv.get('STORAGE_URL')}${state.news[index].gambar}',
+                                      title: state.news[index].judul,
+                                      description: state.news[index].konten,
+                                      likes: state.news[index].totalLike,
+                                      onTap: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                NewsDetailScreen(
+                                                    news: state.news[index]),
+                                          ),
+                                        );
+                                      },
+                                    ),
+                                    const SizedBox(height: 10),
+                                  ],
+                                );
+                              },
+                            ),
+                    );
+                  },
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
         ),
       ),

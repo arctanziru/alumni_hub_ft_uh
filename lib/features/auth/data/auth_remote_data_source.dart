@@ -10,7 +10,7 @@ class AuthRemoteDataSource {
 
   Future<SignInResponse> signIn(SignInBody body) async {
     final response = await _api.createApiCall(
-      endpoint: '/auth/signin',
+      endpoint: '/auth/login',
       method: NetworkCallMethod.post,
       body: body.toJson(),
     );

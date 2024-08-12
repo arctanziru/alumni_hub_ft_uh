@@ -5,8 +5,8 @@ class CardNewsWidget extends StatelessWidget {
   final String imageUrl;
   final String title;
   final String description;
-  final double likes;
-  final bool isLiked;
+  final int likes;
+  final bool? isLiked;
   final VoidCallback? onLikePressed;
   final VoidCallback? onTap;
 
@@ -16,7 +16,7 @@ class CardNewsWidget extends StatelessWidget {
     required this.title,
     required this.description,
     required this.likes,
-    required this.isLiked,
+    this.isLiked,
     this.onLikePressed,
     this.onTap,
   });
@@ -31,16 +31,10 @@ class CardNewsWidget extends StatelessWidget {
           borderRadius: BorderRadius.circular(8),
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.2),
-              blurRadius: 15, // Menambahkan efek blur
+              color: Colors.black.withOpacity(0.05),
+              blurRadius: 2,
               spreadRadius: 0,
-              offset: const Offset(0, 4), // Mengatur jarak shadow
-            ),
-            BoxShadow(
-              color: Colors.black.withOpacity(0.1),
-              blurRadius: 25, // Menambahkan efek blur yang lebih halus
-              spreadRadius: 0,
-              offset: const Offset(0, 8), // Mengatur jarak shadow kedua
+              offset: const Offset(0, 4),
             ),
           ],
         ),
@@ -55,6 +49,15 @@ class CardNewsWidget extends StatelessWidget {
               width: 96,
               height: 160,
               fit: BoxFit.cover,
+              errorBuilder: (context, error, stackTrace) {
+                return Container(
+                  decoration: BoxDecoration(
+                    color: Colors.blueGrey[200],
+                  ),
+                  width: 96,
+                  height: 160,
+                );
+              },
             ),
             Expanded(
               child: Padding(
@@ -68,9 +71,9 @@ class CardNewsWidget extends StatelessWidget {
                       children: [
                         Text(
                           title,
-                          style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                            fontWeight: FontWeight.bold,
-                          ),
+                          style: Theme.of(context).textTheme.titleSmall,
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
                         ),
                         const SizedBox(height: 8),
                         Text(
@@ -79,7 +82,7 @@ class CardNewsWidget extends StatelessWidget {
                             fontSize: 12,
                             overflow: TextOverflow.ellipsis,
                           ),
-                          maxLines: 3,
+                          maxLines: 2,
                         ),
                       ],
                     ),
@@ -95,7 +98,7 @@ class CardNewsWidget extends StatelessWidget {
                         IconButton(
                           icon: Icon(
                             Icons.favorite,
-                            color: isLiked ? Colors.red : Colors.grey,
+                            color: isLiked == true ? Colors.red : Colors.grey,
                           ),
                           onPressed: onLikePressed,
                         ),

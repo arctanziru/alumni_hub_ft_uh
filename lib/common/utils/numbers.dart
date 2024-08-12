@@ -1,5 +1,5 @@
 class ShortenNumber {
-  static String shorten(double number) {
+  static String shorten(int number) {
     if (number >= 1000000000000) {
       return '${(number / 1000000000000).toStringAsFixed(1)}T';
     } else if (number >= 1000000000) {

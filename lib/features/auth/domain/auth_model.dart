@@ -8,11 +8,23 @@ part 'auth_model.g.dart';
 class SignInResponse with _$SignInResponse {
   const factory SignInResponse({
     required String token,
-    required UserModel user,
+    required SignInResponseData data,
+    required String message,
+    required bool success,
   }) = _SignInResponse;
 
   factory SignInResponse.fromJson(Map<String, dynamic> json) =>
       _$SignInResponseFromJson(json);
+}
+
+@freezed
+class SignInResponseData with _$SignInResponseData {
+  const factory SignInResponseData({
+    required String email,
+  }) = _SignInResponseData;
+
+  factory SignInResponseData.fromJson(Map<String, dynamic> json) =>
+      _$SignInResponseDataFromJson(json);
 }
 
 @freezed

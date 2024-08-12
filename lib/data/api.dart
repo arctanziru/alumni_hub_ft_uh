@@ -1,3 +1,4 @@
+import 'package:alumni_hub_ft_uh/common/domain/common_model.dart';
 import 'package:alumni_hub_ft_uh/middleware/custom_exception.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -46,8 +47,19 @@ class Api {
             "Terjadi kesalahan saat memuat data ${response.data?.message ?? ""}");
       }
     } on DioException catch (e) {
-      throw CustomException(
-          e.response?.statusMessage ?? 'Terjadi kesalahan saat memuat data');
+      if (e.response != null) {
+        debugPrint("Error in response ${e.response?.data}");
+        try {
+          final errorResponse = ErrorResponse.fromJson(e.response?.data);
+          throw CustomException(errorResponse.message);
+        } catch (parseError) {
+          throw CustomException(e.response?.statusMessage ??
+              'Terjadi kesalahan saat memuat data');
+        }
+      } else {
+        throw CustomException(
+            e.response?.statusMessage ?? 'Terjadi kesalahan saat memuat data');
+      }
     } catch (e) {
       throw const CustomException("Terjadi kesalahan saat memuat data");
     }

@@ -21,7 +21,9 @@ SignInResponse _$SignInResponseFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$SignInResponse {
   String get token => throw _privateConstructorUsedError;
-  UserModel get user => throw _privateConstructorUsedError;
+  SignInResponseData get data => throw _privateConstructorUsedError;
+  String get message => throw _privateConstructorUsedError;
+  bool get success => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -35,9 +37,10 @@ abstract class $SignInResponseCopyWith<$Res> {
           SignInResponse value, $Res Function(SignInResponse) then) =
       _$SignInResponseCopyWithImpl<$Res, SignInResponse>;
   @useResult
-  $Res call({String token, UserModel user});
+  $Res call(
+      {String token, SignInResponseData data, String message, bool success});
 
-  $UserModelCopyWith<$Res> get user;
+  $SignInResponseDataCopyWith<$Res> get data;
 }
 
 /// @nodoc
@@ -54,25 +57,35 @@ class _$SignInResponseCopyWithImpl<$Res, $Val extends SignInResponse>
   @override
   $Res call({
     Object? token = null,
-    Object? user = null,
+    Object? data = null,
+    Object? message = null,
+    Object? success = null,
   }) {
     return _then(_value.copyWith(
       token: null == token
           ? _value.token
           : token // ignore: cast_nullable_to_non_nullable
               as String,
-      user: null == user
-          ? _value.user
-          : user // ignore: cast_nullable_to_non_nullable
-              as UserModel,
+      data: null == data
+          ? _value.data
+          : data // ignore: cast_nullable_to_non_nullable
+              as SignInResponseData,
+      message: null == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String,
+      success: null == success
+          ? _value.success
+          : success // ignore: cast_nullable_to_non_nullable
+              as bool,
     ) as $Val);
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $UserModelCopyWith<$Res> get user {
-    return $UserModelCopyWith<$Res>(_value.user, (value) {
-      return _then(_value.copyWith(user: value) as $Val);
+  $SignInResponseDataCopyWith<$Res> get data {
+    return $SignInResponseDataCopyWith<$Res>(_value.data, (value) {
+      return _then(_value.copyWith(data: value) as $Val);
     });
   }
 }
@@ -85,10 +98,11 @@ abstract class _$$SignInResponseImplCopyWith<$Res>
       __$$SignInResponseImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String token, UserModel user});
+  $Res call(
+      {String token, SignInResponseData data, String message, bool success});
 
   @override
-  $UserModelCopyWith<$Res> get user;
+  $SignInResponseDataCopyWith<$Res> get data;
 }
 
 /// @nodoc
@@ -103,17 +117,27 @@ class __$$SignInResponseImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? token = null,
-    Object? user = null,
+    Object? data = null,
+    Object? message = null,
+    Object? success = null,
   }) {
     return _then(_$SignInResponseImpl(
       token: null == token
           ? _value.token
           : token // ignore: cast_nullable_to_non_nullable
               as String,
-      user: null == user
-          ? _value.user
-          : user // ignore: cast_nullable_to_non_nullable
-              as UserModel,
+      data: null == data
+          ? _value.data
+          : data // ignore: cast_nullable_to_non_nullable
+              as SignInResponseData,
+      message: null == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String,
+      success: null == success
+          ? _value.success
+          : success // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -121,7 +145,11 @@ class __$$SignInResponseImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$SignInResponseImpl implements _SignInResponse {
-  const _$SignInResponseImpl({required this.token, required this.user});
+  const _$SignInResponseImpl(
+      {required this.token,
+      required this.data,
+      required this.message,
+      required this.success});
 
   factory _$SignInResponseImpl.fromJson(Map<String, dynamic> json) =>
       _$$SignInResponseImplFromJson(json);
@@ -129,11 +157,15 @@ class _$SignInResponseImpl implements _SignInResponse {
   @override
   final String token;
   @override
-  final UserModel user;
+  final SignInResponseData data;
+  @override
+  final String message;
+  @override
+  final bool success;
 
   @override
   String toString() {
-    return 'SignInResponse(token: $token, user: $user)';
+    return 'SignInResponse(token: $token, data: $data, message: $message, success: $success)';
   }
 
   @override
@@ -142,12 +174,14 @@ class _$SignInResponseImpl implements _SignInResponse {
         (other.runtimeType == runtimeType &&
             other is _$SignInResponseImpl &&
             (identical(other.token, token) || other.token == token) &&
-            (identical(other.user, user) || other.user == user));
+            (identical(other.data, data) || other.data == data) &&
+            (identical(other.message, message) || other.message == message) &&
+            (identical(other.success, success) || other.success == success));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, token, user);
+  int get hashCode => Object.hash(runtimeType, token, data, message, success);
 
   @JsonKey(ignore: true)
   @override
@@ -167,7 +201,9 @@ class _$SignInResponseImpl implements _SignInResponse {
 abstract class _SignInResponse implements SignInResponse {
   const factory _SignInResponse(
       {required final String token,
-      required final UserModel user}) = _$SignInResponseImpl;
+      required final SignInResponseData data,
+      required final String message,
+      required final bool success}) = _$SignInResponseImpl;
 
   factory _SignInResponse.fromJson(Map<String, dynamic> json) =
       _$SignInResponseImpl.fromJson;
@@ -175,10 +211,152 @@ abstract class _SignInResponse implements SignInResponse {
   @override
   String get token;
   @override
-  UserModel get user;
+  SignInResponseData get data;
+  @override
+  String get message;
+  @override
+  bool get success;
   @override
   @JsonKey(ignore: true)
   _$$SignInResponseImplCopyWith<_$SignInResponseImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+SignInResponseData _$SignInResponseDataFromJson(Map<String, dynamic> json) {
+  return _SignInResponseData.fromJson(json);
+}
+
+/// @nodoc
+mixin _$SignInResponseData {
+  String get email => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $SignInResponseDataCopyWith<SignInResponseData> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $SignInResponseDataCopyWith<$Res> {
+  factory $SignInResponseDataCopyWith(
+          SignInResponseData value, $Res Function(SignInResponseData) then) =
+      _$SignInResponseDataCopyWithImpl<$Res, SignInResponseData>;
+  @useResult
+  $Res call({String email});
+}
+
+/// @nodoc
+class _$SignInResponseDataCopyWithImpl<$Res, $Val extends SignInResponseData>
+    implements $SignInResponseDataCopyWith<$Res> {
+  _$SignInResponseDataCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? email = null,
+  }) {
+    return _then(_value.copyWith(
+      email: null == email
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$SignInResponseDataImplCopyWith<$Res>
+    implements $SignInResponseDataCopyWith<$Res> {
+  factory _$$SignInResponseDataImplCopyWith(_$SignInResponseDataImpl value,
+          $Res Function(_$SignInResponseDataImpl) then) =
+      __$$SignInResponseDataImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String email});
+}
+
+/// @nodoc
+class __$$SignInResponseDataImplCopyWithImpl<$Res>
+    extends _$SignInResponseDataCopyWithImpl<$Res, _$SignInResponseDataImpl>
+    implements _$$SignInResponseDataImplCopyWith<$Res> {
+  __$$SignInResponseDataImplCopyWithImpl(_$SignInResponseDataImpl _value,
+      $Res Function(_$SignInResponseDataImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? email = null,
+  }) {
+    return _then(_$SignInResponseDataImpl(
+      email: null == email
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$SignInResponseDataImpl implements _SignInResponseData {
+  const _$SignInResponseDataImpl({required this.email});
+
+  factory _$SignInResponseDataImpl.fromJson(Map<String, dynamic> json) =>
+      _$$SignInResponseDataImplFromJson(json);
+
+  @override
+  final String email;
+
+  @override
+  String toString() {
+    return 'SignInResponseData(email: $email)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$SignInResponseDataImpl &&
+            (identical(other.email, email) || other.email == email));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, email);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$SignInResponseDataImplCopyWith<_$SignInResponseDataImpl> get copyWith =>
+      __$$SignInResponseDataImplCopyWithImpl<_$SignInResponseDataImpl>(
+          this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$SignInResponseDataImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _SignInResponseData implements SignInResponseData {
+  const factory _SignInResponseData({required final String email}) =
+      _$SignInResponseDataImpl;
+
+  factory _SignInResponseData.fromJson(Map<String, dynamic> json) =
+      _$SignInResponseDataImpl.fromJson;
+
+  @override
+  String get email;
+  @override
+  @JsonKey(ignore: true)
+  _$$SignInResponseDataImplCopyWith<_$SignInResponseDataImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 

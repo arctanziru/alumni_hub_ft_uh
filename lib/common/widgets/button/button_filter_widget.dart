@@ -5,7 +5,7 @@ class ButtonFilterWidget extends StatefulWidget {
   final String label;
   final VoidCallback onPressed;
   final IconData? icon;
-  final Color? activeColor;
+  final Color activeColor;
   final bool isActive;
 
   const ButtonFilterWidget(
@@ -27,10 +27,16 @@ class _ButtonFilterWidgetState extends State<ButtonFilterWidget> {
       onPressed: widget.onPressed,
       style: ButtonStyle(
         backgroundColor: widget.isActive
-            ? WidgetStateProperty.all<Color>(widget.activeColor!)
-            : WidgetStateProperty.all<Color>(Colors.grey),
+            ? WidgetStateProperty.all<Color>(widget.activeColor)
+            : WidgetStateProperty.all<Color>(Colors.white),
         padding: WidgetStateProperty.all<EdgeInsetsGeometry>(
           const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+        ),
+        shape: WidgetStateProperty.all<RoundedRectangleBorder>(
+          RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(8),
+            side: BorderSide(color: widget.activeColor),
+          ),
         ),
       ),
       child: Row(

@@ -19,10 +19,10 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     on<UserEventSignIn>((event, emit) async {
       emit(UserStateSignInLoading());
       try {
-        final response = await _authRepository.signIn(event.signInBody);
+        final signInResponse = await _authRepository.signIn(event.signInBody);
         _userRepository.saveUserSession(
-            UserSession(token: response.token, user: response.user));
-        emit(UserStateSuccessSignIn(response));
+            UserSession(token: signInResponse.token, user: null));
+        emit(UserStateSuccessSignIn(signInResponse));
       } on CustomException catch (e) {
         emit(UserStateException(e));
       }
@@ -48,6 +48,18 @@ class UserBloc extends Bloc<UserEvent, UserState> {
         emit(UserStateSuccessGetProfile(user));
       } on CustomException catch (e) {
         emit(UserStateException(e));
+      }
+    });
+
+    on<UserEventSignOut>((event, emit) async {
+      emit(UserStateSignOutLoading());
+      try {
+        await _authRepository.signOut();
+      } on CustomException catch (e) {
+        emit(UserStateException(e));
+      } finally {
+        await _userRepository.deleteUserSession();
+        emit(UserStateSuccessSignOut());
       }
     });
   }

@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:alumni_hub_ft_uh/features/news/domain/models/news_model.dart';
-import 'package:alumni_hub_ft_uh/features/news/news_detail_screen.dart';
 import 'package:alumni_hub_ft_uh/common/widgets/appBar/app_bar_secondary_widget.dart';
-import 'package:alumni_hub_ft_uh/common/widgets/card/card_news_widget.dart';
 
 class NewsSearchScreen extends StatefulWidget {
   static const String route = '/news-search';

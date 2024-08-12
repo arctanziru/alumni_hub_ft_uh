@@ -104,21 +104,35 @@ class AppBarMenuWidget extends StatelessWidget {
                   ],
                 ),
               ),
-              const ListTileWidget(
-                  icon: Icons.location_on_outlined, title: 'Sekitar Saya'),
-              const ListTileWidget(
-                  icon: Icons.mail_outline, title: 'Kemitraan'),
-              const ListTileWidget(
-                  icon: Icons.local_offer_outlined, title: 'E-commerce'),
-              const ListTileWidget(
-                  icon: Icons.school_outlined, title: 'Mentoring'),
-              const ListTileWidget(
-                  icon: Icons.book_outlined, title: 'Tracer Study'),
+              ListTileWidget(
+                icon: Icons.location_on_outlined,
+                title: 'Sekitar Saya',
+                onTap: () => Navigator.pushNamed(context, '/coming-soon'),
+              ),
+              ListTileWidget(
+                icon: Icons.mail_outline,
+                title: 'Kemitraan',
+                onTap: () => Navigator.pushNamed(context, '/coming-soon'),
+              ),
+              ListTileWidget(
+                icon: Icons.local_offer_outlined,
+                title: 'E-commerce',
+                onTap: () => Navigator.pushNamed(context, '/coming-soon'),
+              ),
+              ListTileWidget(
+                icon: Icons.school_outlined,
+                title: 'Mentoring',
+                onTap: () => Navigator.pushNamed(context, '/coming-soon'),
+              ),
+              ListTileWidget(
+                icon: Icons.book_outlined,
+                title: 'Tracer Study',
+                onTap: () => Navigator.pushNamed(context, '/coming-soon'),
+              ),
               ListTileWidget(
                 icon: Icons.settings_outlined,
                 title: 'Pengaturan',
-                onTap: () => Navigator.pushNamed(
-                    context, '/setting'), // Navigate to the SettingScreen
+                onTap: () => Navigator.pushNamed(context, '/setting'),
               ),
               const SizedBox(height: 12),
               Padding(

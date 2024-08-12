@@ -2,6 +2,7 @@ import 'package:alumni_hub_ft_uh/features/alumni/alumni_detail_search_screen.dar
 import 'package:alumni_hub_ft_uh/features/alumni/alumni_screen.dart';
 import 'package:alumni_hub_ft_uh/features/alumni/search_alumni_screen.dart';
 import 'package:alumni_hub_ft_uh/features/auth/claim_alumni_data_screen.dart';
+import 'package:alumni_hub_ft_uh/features/coming_soon/coming_soon_screen.dart';
 import 'package:alumni_hub_ft_uh/features/profile/profile_screen.dart';
 import 'package:alumni_hub_ft_uh/features/auth/license_screen.dart';
 import 'package:alumni_hub_ft_uh/features/auth/sign_in_screen.dart';
@@ -57,6 +58,9 @@ Route<dynamic> routeGenerators(RouteSettings settings) {
       return _buildPageRoute(const ClaimAlumniDataScreen());
     case InsertAlumniDataScreen.route:
       return _buildPageRoute(const InsertAlumniDataScreen());
+    case ComingSoonScreen.route:
+      return _buildPageRoute(const ComingSoonScreen());
+
     default:
       throw ('Route not found');
   }

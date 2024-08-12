@@ -29,6 +29,7 @@ class _SplashScreenState extends State<SplashScreen> {
       () {
         final userSession = context.read<UserBloc>().getUserSession();
         debugPrint("User session: $userSession");
+        debugPrint("User: ${userSession?.user}");
         if (userSession?.token != null) {
           locator<AppNavigation>().navigateReplace(HomeScreen.route);
         } else {

@@ -1,4 +1,4 @@
-import 'package:alumni_hub_ft_uh/features/user/domain/user_model.dart';
+import 'package:alumni_hub_ft_uh/features/user/domain/models/user_model.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'auth_model.freezed.dart';

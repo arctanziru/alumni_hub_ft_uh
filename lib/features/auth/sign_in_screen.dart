@@ -43,10 +43,12 @@ class _SignInScreenState extends State<SignInScreen> {
         child: LayoutBuilder(builder: (context, constraints) {
           return ConstrainedBox(
             constraints: BoxConstraints(
-              maxHeight: constraints.maxHeight - MediaQuery.of(context).padding.top,
+              maxHeight:
+                  constraints.maxHeight - MediaQuery.of(context).padding.top,
             ),
             child: Container(
-              margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.2),
+              margin: EdgeInsets.only(
+                  top: MediaQuery.of(context).size.height * 0.2),
               decoration: const BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.only(
@@ -62,7 +64,8 @@ class _SignInScreenState extends State<SignInScreen> {
                 bottom: 16,
               ),
               child: SingleChildScrollView(
-                padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+                padding: EdgeInsets.only(
+                    bottom: MediaQuery.of(context).viewInsets.bottom),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
@@ -98,7 +101,7 @@ class _SignInScreenState extends State<SignInScreen> {
                           side: const BorderSide(
                             color: AppColors.gray1, // Set outline color
                             width: 1, // Set outline width
-                          ),// Add drop shadow
+                          ), // Add drop shadow
                         ),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -106,14 +109,18 @@ class _SignInScreenState extends State<SignInScreen> {
                             Image.asset(
                               'assets/logos/google_logo.png', // Path to your Google logo asset
                               height: 24, // Adjust the height as needed
-                              width: 24,  // Adjust the width as needed
+                              width: 24, // Adjust the width as needed
                             ),
                             const SizedBox(width: 8),
                             Text(
                               'Registrasi dengan Google',
-                              style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                                color: Colors.black, // Set the text color to black
-                              ),
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyLarge
+                                  ?.copyWith(
+                                    color: Colors
+                                        .black, // Set the text color to black
+                                  ),
                             ),
                           ],
                         ),
@@ -159,7 +166,9 @@ class _SignInScreenState extends State<SignInScreen> {
                       obscureText: _isPasswordObscured,
                       controller: _passwordController,
                       icon: IconButton(
-                        icon: Icon(_isPasswordObscured ? Icons.visibility : Icons.visibility_off),
+                        icon: Icon(_isPasswordObscured
+                            ? Icons.visibility
+                            : Icons.visibility_off),
                         onPressed: () {
                           setState(() {
                             _isPasswordObscured = !_isPasswordObscured;
@@ -178,10 +187,6 @@ class _SignInScreenState extends State<SignInScreen> {
                             locator<AppNavigation>().navigateReplace('/home');
                           } else if (state is UserStateException) {
                             debugPrint("Exception: ${state.exception.message}");
-                            showSnackBar(context, state.exception.message);
-                            Future.delayed(const Duration(seconds: 2), () {
-                              locator<AppNavigation>().navigateReplace('/home');
-                            });
                           }
                         },
                         builder: (context, state) {

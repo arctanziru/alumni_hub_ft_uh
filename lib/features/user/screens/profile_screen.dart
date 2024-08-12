@@ -1,7 +1,9 @@
+import 'package:alumni_hub_ft_uh/features/user/bloc/user_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:alumni_hub_ft_uh/common/widgets/textField/text_field_profile_widget.dart';
 import 'package:alumni_hub_ft_uh/common/widgets/appBar/app_bar_secondary_widget.dart';
 import 'package:alumni_hub_ft_uh/common/widgets/button/button_widget.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class ProfileScreen extends StatefulWidget {
   static const String route = '/profile';
@@ -13,14 +15,33 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
-  bool _isEditing = false; // State to manage edit mode
+  bool _isEditing = false;
 
-  final TextEditingController nameController = TextEditingController(text: 'Syukri Ruly');
-  final TextEditingController phoneController = TextEditingController(text: '+62 813-4073-4686');
-  final TextEditingController locationController = TextEditingController(text: 'Indonesia, Sulawesi Selatan, Makassar');
-  final TextEditingController departmentController = TextEditingController(text: 'Teknik Mesin');
-  final TextEditingController batchController = TextEditingController(text: '1996');
-  final TextEditingController businessFieldController = TextEditingController(text: '71204 - Jasa Inspeksi Teknik Instalasi');
+  late TextEditingController nameController;
+  late TextEditingController phoneController;
+  late TextEditingController locationController;
+  late TextEditingController departmentController;
+  late TextEditingController batchController;
+  late TextEditingController businessFieldController;
+
+  @override
+  void initState() {
+    super.initState();
+
+    final userSession = context.read<UserBloc>().getUserSession();
+    final user = userSession?.user;
+
+    nameController = TextEditingController(text: user?.alumni.nama ?? '');
+    phoneController = TextEditingController(text: user?.alumni.noTelp ?? '');
+    locationController = TextEditingController(text: '');
+    departmentController =
+        TextEditingController(text: user?.alumni.jurusan ?? '');
+    batchController = TextEditingController(text: user?.alumni.angkatan ?? '');
+    businessFieldController =
+        TextEditingController(text: '71204 - Jasa Inspeksi Teknik Instalasi');
+
+    debugPrint("User session: $userSession");
+  }
 
   void _toggleEditMode() {
     setState(() {
@@ -31,6 +52,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
+    final user = context.read<UserBloc>().getUserSession()?.user;
 
     return Scaffold(
       appBar: const AppBarSecondaryWidget(
@@ -42,13 +64,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
             children: [
               Container(
                 color: Colors.grey[200],
-                padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+                padding:
+                    const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const CircleAvatar(
+                    CircleAvatar(
                       radius: 60,
-                      backgroundImage: NetworkImage('https://example.com/profile_pic.jpg'),
+                      backgroundImage: NetworkImage(
+                        user?.avatar ?? 'https://example.com/profile_pic.jpg',
+                      ),
                     ),
                     const SizedBox(width: 40),
                     Expanded(
@@ -56,11 +81,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'M. Syukri T.',
+                            user?.alumni.nama ?? '',
                             style: textTheme.labelLarge!.copyWith(fontSize: 25),
                           ),
                           Text(
-                            'dmcikatekuh@gmail.com',
+                            user?.email ?? '',
                             style: textTheme.bodyMedium,
                           ),
                           const SizedBox(height: 6),
@@ -89,48 +114,49 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     ),
                   ],
                 ),
-                padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
+                padding:
+                    const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
                 margin: const EdgeInsets.symmetric(horizontal: 16),
                 child: Column(
                   children: [
                     TextFieldProfileWidget(
                       label: 'Nama Lengkap',
-                      description: 'Syukri Ruly',
+                      description: nameController.text,
                       icon: Icons.person,
                       controller: nameController,
-                      readOnly: !_isEditing, // Set readOnly based on _isEditing
+                      readOnly: !_isEditing,
                     ),
                     TextFieldProfileWidget(
                       label: 'Phone',
-                      description: '+62 813-4073-4686',
+                      description: phoneController.text,
                       icon: Icons.phone,
                       controller: phoneController,
                       readOnly: !_isEditing,
                     ),
                     TextFieldProfileWidget(
                       label: 'Domisili',
-                      description: 'Indonesia, Sulawesi Selatan, Makassar',
+                      description: locationController.text,
                       icon: Icons.location_on,
                       controller: locationController,
                       readOnly: !_isEditing,
                     ),
                     TextFieldProfileWidget(
                       label: 'Jurusan',
-                      description: 'Teknik Mesin',
+                      description: departmentController.text,
                       icon: Icons.school,
                       controller: departmentController,
                       readOnly: !_isEditing,
                     ),
                     TextFieldProfileWidget(
                       label: 'Angkatan',
-                      description: '1996',
+                      description: batchController.text,
                       icon: Icons.calendar_today,
                       controller: batchController,
                       readOnly: !_isEditing,
                     ),
                     TextFieldProfileWidget(
                       label: 'Bidang Usaha',
-                      description: '71204 - Jasa Inspeksi Teknik Instalasi',
+                      description: businessFieldController.text,
                       icon: Icons.business,
                       controller: businessFieldController,
                       readOnly: !_isEditing,

@@ -1,4 +1,6 @@
+import 'package:alumni_hub_ft_uh/features/user/bloc/user_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'app_bar_menu_widget.dart'; // Import ProfileScreen
 
 class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
@@ -6,6 +8,8 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
+    final userSession = context.read<UserBloc>().getUserSession();
+
     return AppBar(
       backgroundColor: Colors.white,
       elevation: 0,
@@ -39,7 +43,7 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Hey, Arrayyan',
+            'Hey, ${userSession?.user?.alumni.nama ?? 'Guest'}',
             style: Theme.of(context).textTheme.titleSmall,
           ),
           Text(
@@ -56,8 +60,10 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
           },
         ),
         IconButton(
-          icon: const CircleAvatar(
-            backgroundImage: NetworkImage('https://via.placeholder.com/150'),
+          icon: CircleAvatar(
+            backgroundImage: NetworkImage(
+              userSession?.user?.avatar ?? 'https://example.com/profile_pic.jpg',
+            ),
           ),
           onPressed: () {
             Navigator.pushNamed(

@@ -26,7 +26,7 @@ class UserStateSuccessSignUp extends UserState {
 class UserStateSuccessSignOut extends UserState {}
 
 class UserStateSuccessGetProfile extends UserState {
-  final UserModel userModel;
+  final UserGetOneResponse userModel;
   UserStateSuccessGetProfile(this.userModel);
 }
 

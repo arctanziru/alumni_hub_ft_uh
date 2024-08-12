@@ -1,6 +1,7 @@
 import 'package:alumni_hub_ft_uh/features/auth/domain/auth_model.dart';
 import 'package:alumni_hub_ft_uh/features/auth/domain/auth_repository.dart';
-import 'package:alumni_hub_ft_uh/features/user/domain/user_model.dart';
+import 'package:alumni_hub_ft_uh/features/user/domain/models/user_get_one.dart';
+import 'package:alumni_hub_ft_uh/features/user/domain/models/user_model.dart';
 import 'package:alumni_hub_ft_uh/features/user/domain/user_repository.dart';
 import 'package:alumni_hub_ft_uh/middleware/custom_exception.dart';
 import 'package:bloc/bloc.dart';
@@ -22,6 +23,9 @@ class UserBloc extends Bloc<UserEvent, UserState> {
         final signInResponse = await _authRepository.signIn(event.signInBody);
         _userRepository.saveUserSession(
             UserSession(token: signInResponse.token, user: null));
+        final user = await _userRepository.getProfile();
+        _userRepository.saveUserSession(
+            UserSession(token: signInResponse.token, user: user.data));
         emit(UserStateSuccessSignIn(signInResponse));
       } on CustomException catch (e) {
         emit(UserStateException(e));
@@ -32,8 +36,9 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       emit(UserStateSignUpLoading());
       try {
         final response = await _authRepository.signUp(event.signUpBody);
+        final user = await _userRepository.getProfile();
         _userRepository.saveUserSession(
-            UserSession(token: response.token, user: response.user));
+            UserSession(token: response.token, user: user.data));
         emit(UserStateSuccessSignUp(response));
       } on CustomException catch (e) {
         emit(UserStateException(e));
@@ -44,9 +49,9 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       emit(UserStateGetProfileLoading());
       try {
         final user = await _userRepository.getProfile();
-        await Future.delayed(const Duration(seconds: 3));
         emit(UserStateSuccessGetProfile(user));
       } on CustomException catch (e) {
+        await signOut();
         emit(UserStateException(e));
       }
     });
@@ -54,7 +59,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     on<UserEventSignOut>((event, emit) async {
       emit(UserStateSignOutLoading());
       try {
-        await _authRepository.signOut();
+        await signOut();
       } on CustomException catch (e) {
         emit(UserStateException(e));
       } finally {

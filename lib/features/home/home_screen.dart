@@ -270,7 +270,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                       ],
                                     ),
                                   ),
-                                  if (state.status == NewsStatus.loading &&
+                                  if (state.status == NewsStatus.loaded &&
                                       state.news.length > 5)
                                     Center(
                                       child: ButtonWidget(

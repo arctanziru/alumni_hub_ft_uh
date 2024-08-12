@@ -14,6 +14,8 @@ class AppBarMenuWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final userSession = context.read<UserBloc>().getUserSession();
+
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -85,20 +87,22 @@ class AppBarMenuWidget extends StatelessWidget {
                 padding: const EdgeInsets.all(16.0),
                 child: Row(
                   children: [
-                    const CircleAvatar(
+                    CircleAvatar(
                       radius: 40,
-                      backgroundImage: NetworkImage(
-                          'https://example.com/path-to-image.jpg'), // Replace with the user's profile image URL
+                      backgroundImage: NetworkImage(userSession?.user?.avatar ??
+                          'https://example.com/profile_pic.jpg'),
                     ),
                     const SizedBox(width: 16),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          'Arrayyan',
+                          userSession?.user?.alumni.nama ?? '',
                           style: Theme.of(context).textTheme.titleLarge,
                         ),
-                        const Text('arryyxia@gmail.com'),
+                        Text(
+                          userSession?.user?.email ?? '',
+                        ),
                       ],
                     ),
                   ],

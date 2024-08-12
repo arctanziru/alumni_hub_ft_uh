@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:alumni_hub_ft_uh/constants/keys.dart';
-import 'package:alumni_hub_ft_uh/features/user/domain/user_model.dart';
+import 'package:alumni_hub_ft_uh/features/user/domain/models/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 import 'package:shared_preferences/shared_preferences.dart';

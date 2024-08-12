@@ -1,3 +1,4 @@
+import "package:alumni_hub_ft_uh/features/user/domain/models/user_get_one.dart";
 import "package:freezed_annotation/freezed_annotation.dart";
 
 part 'user_model.freezed.dart';
@@ -47,13 +48,14 @@ class UserParams {
 
 class UserSession {
   final String? token;
-  final UserModel? user;
+  final UserGetOneData? user;
 
   UserSession({required this.token, required this.user});
 
   factory UserSession.fromJson(Map<String, dynamic> json) => UserSession(
       token: json['token'],
-      user: json['user'] == null ? null : UserModel.fromJson(json['user']));
+      user:
+          json['user'] == null ? null : UserGetOneData.fromJson(json['user']));
 
   Map<String, dynamic> toJson() {
     return {'token': token, 'user': user?.toJson()};

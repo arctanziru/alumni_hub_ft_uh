@@ -61,6 +61,7 @@ dependencies:
   flutter_dotenv: ^5.1.0
   skeletonizer: ^1.4.2
   cached_query: ^2.0.5
+  stream_transform: ^2.1.0
 
 dev_dependencies:
   flutter_test:

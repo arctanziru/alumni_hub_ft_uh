@@ -9,7 +9,6 @@ part of 'news_get_many_model.dart';
 _$NewsGetManyModelResponseImpl _$$NewsGetManyModelResponseImplFromJson(
         Map<String, dynamic> json) =>
     _$NewsGetManyModelResponseImpl(
-      success: json['success'] as bool,
       message: json['message'] as String,
       data: NewsGetManyModelData.fromJson(json['data'] as Map<String, dynamic>),
     );
@@ -17,7 +16,6 @@ _$NewsGetManyModelResponseImpl _$$NewsGetManyModelResponseImplFromJson(
 Map<String, dynamic> _$$NewsGetManyModelResponseImplToJson(
         _$NewsGetManyModelResponseImpl instance) =>
     <String, dynamic>{
-      'success': instance.success,
       'message': instance.message,
       'data': instance.data,
     };

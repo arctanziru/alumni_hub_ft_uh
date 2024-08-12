@@ -21,7 +21,6 @@ NewsGetManyModelResponse _$NewsGetManyModelResponseFromJson(
 
 /// @nodoc
 mixin _$NewsGetManyModelResponse {
-  bool get success => throw _privateConstructorUsedError;
   String get message => throw _privateConstructorUsedError;
   NewsGetManyModelData get data => throw _privateConstructorUsedError;
 
@@ -37,7 +36,7 @@ abstract class $NewsGetManyModelResponseCopyWith<$Res> {
           $Res Function(NewsGetManyModelResponse) then) =
       _$NewsGetManyModelResponseCopyWithImpl<$Res, NewsGetManyModelResponse>;
   @useResult
-  $Res call({bool success, String message, NewsGetManyModelData data});
+  $Res call({String message, NewsGetManyModelData data});
 
   $NewsGetManyModelDataCopyWith<$Res> get data;
 }
@@ -56,15 +55,10 @@ class _$NewsGetManyModelResponseCopyWithImpl<$Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? success = null,
     Object? message = null,
     Object? data = null,
   }) {
     return _then(_value.copyWith(
-      success: null == success
-          ? _value.success
-          : success // ignore: cast_nullable_to_non_nullable
-              as bool,
       message: null == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
@@ -94,7 +88,7 @@ abstract class _$$NewsGetManyModelResponseImplCopyWith<$Res>
       __$$NewsGetManyModelResponseImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({bool success, String message, NewsGetManyModelData data});
+  $Res call({String message, NewsGetManyModelData data});
 
   @override
   $NewsGetManyModelDataCopyWith<$Res> get data;
@@ -113,15 +107,10 @@ class __$$NewsGetManyModelResponseImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? success = null,
     Object? message = null,
     Object? data = null,
   }) {
     return _then(_$NewsGetManyModelResponseImpl(
-      success: null == success
-          ? _value.success
-          : success // ignore: cast_nullable_to_non_nullable
-              as bool,
       message: null == message
           ? _value.message
           : message // ignore: cast_nullable_to_non_nullable
@@ -138,13 +127,11 @@ class __$$NewsGetManyModelResponseImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$NewsGetManyModelResponseImpl implements _NewsGetManyModelResponse {
   const _$NewsGetManyModelResponseImpl(
-      {required this.success, required this.message, required this.data});
+      {required this.message, required this.data});
 
   factory _$NewsGetManyModelResponseImpl.fromJson(Map<String, dynamic> json) =>
       _$$NewsGetManyModelResponseImplFromJson(json);
 
-  @override
-  final bool success;
   @override
   final String message;
   @override
@@ -152,7 +139,7 @@ class _$NewsGetManyModelResponseImpl implements _NewsGetManyModelResponse {
 
   @override
   String toString() {
-    return 'NewsGetManyModelResponse(success: $success, message: $message, data: $data)';
+    return 'NewsGetManyModelResponse(message: $message, data: $data)';
   }
 
   @override
@@ -160,14 +147,13 @@ class _$NewsGetManyModelResponseImpl implements _NewsGetManyModelResponse {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$NewsGetManyModelResponseImpl &&
-            (identical(other.success, success) || other.success == success) &&
             (identical(other.message, message) || other.message == message) &&
             (identical(other.data, data) || other.data == data));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, success, message, data);
+  int get hashCode => Object.hash(runtimeType, message, data);
 
   @JsonKey(ignore: true)
   @override
@@ -186,16 +172,13 @@ class _$NewsGetManyModelResponseImpl implements _NewsGetManyModelResponse {
 
 abstract class _NewsGetManyModelResponse implements NewsGetManyModelResponse {
   const factory _NewsGetManyModelResponse(
-          {required final bool success,
-          required final String message,
+          {required final String message,
           required final NewsGetManyModelData data}) =
       _$NewsGetManyModelResponseImpl;
 
   factory _NewsGetManyModelResponse.fromJson(Map<String, dynamic> json) =
       _$NewsGetManyModelResponseImpl.fromJson;
 
-  @override
-  bool get success;
   @override
   String get message;
   @override

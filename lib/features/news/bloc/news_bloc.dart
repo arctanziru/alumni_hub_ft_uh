@@ -8,9 +8,16 @@ import 'package:bloc/bloc.dart';
 import 'package:cached_query/cached_query.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:injectable/injectable.dart';
+import 'package:stream_transform/stream_transform.dart';
 
 part 'news_event.dart';
 part 'news_state.dart';
+
+const _debounceDuration = Duration(milliseconds: 300);
+
+EventTransformer<E> debounce<E>(Duration duration) {
+  return (events, mapper) => events.debounce(duration).switchMap(mapper);
+}
 
 @injectable
 class NewsBloc extends Bloc<NewsEvent, NewsState> {
@@ -20,7 +27,8 @@ class NewsBloc extends Bloc<NewsEvent, NewsState> {
     on<NewsFetched>(_onNewsFetched);
     on<NewsRefreshed>(_onNewsRefreshed);
     on<NewsNextPage>(_onNewsNextPage);
-    on<NewsFilterChanged>(_onNewsFilterChanged);
+    on<NewsFilterChanged>(_onNewsFilterChanged,
+        transformer: debounce(_debounceDuration));
   }
 
   FutureOr<void> _onNewsFetched(NewsFetched event, Emitter<NewsState> emit) {
@@ -75,31 +83,18 @@ class NewsBloc extends Bloc<NewsEvent, NewsState> {
 
   FutureOr<void> _onNewsFilterChanged(
       NewsFilterChanged event, Emitter<NewsState> emit) {
+    state.idKategoriBerita = event.idKategoriBerita;
+    state.search = event.search;
+
     final query = _newsRepository.getNews(
       NewsGetManyParams(
-        idKategoriBerita: event.idKategoriBerita,
-        search: event.search,
+        idKategoriBerita: state.idKategoriBerita,
+        search: state.search,
       ),
     );
 
     query.refetch();
 
-    return emit.forEach<InfiniteQueryState<NewsGetManyModelResponse>>(
-      query.stream,
-      onData: (queryState) {
-        return state.copyWith(
-          status: queryState.status == QueryStatus.loading
-              ? NewsStatus.loading
-              : queryState.status == QueryStatus.error
-                  ? NewsStatus.error
-                  : NewsStatus.loaded,
-          news:
-              queryState.data?.expand((page) => page.data.data).toList() ?? [],
-          error: CustomException(queryState.error?.message ?? 'Unknown error'),
-          idKategoriBerita: event.idKategoriBerita,
-          search: event.search,
-        );
-      },
-    );
+    return _onNewsFetched(NewsFetched(), emit);
   }
 }

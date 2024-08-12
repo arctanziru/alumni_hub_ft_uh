@@ -8,7 +8,6 @@ part 'news_get_many_model.g.dart';
 @freezed
 class NewsGetManyModelResponse with _$NewsGetManyModelResponse {
   const factory NewsGetManyModelResponse({
-    required bool success,
     required String message,
     required NewsGetManyModelData data,
   }) = _NewsGetManyModelResponse;

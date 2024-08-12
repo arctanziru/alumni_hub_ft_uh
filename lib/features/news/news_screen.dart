@@ -1,3 +1,6 @@
+import 'dart:ffi';
+
+import 'package:alumni_hub_ft_uh/common/utils/debouncer.dart';
 import 'package:alumni_hub_ft_uh/common/widgets/appBar/app_bar_search_widget.dart';
 import 'package:alumni_hub_ft_uh/common/widgets/bottomBar/bottom_bar_widget.dart';
 import 'package:alumni_hub_ft_uh/common/widgets/button/button_filter_widget.dart';
@@ -21,6 +24,8 @@ class NewsScreen extends StatefulWidget {
 
 class _NewsScreenState extends State<NewsScreen> {
   final _scrollController = ScrollController();
+  final Debouncer _debouncer =
+      Debouncer(delay: const Duration(milliseconds: 500));
 
   @override
   void initState() {
@@ -70,14 +75,16 @@ class _NewsScreenState extends State<NewsScreen> {
                           child: ButtonFilterWidget(
                             label: 'Politik',
                             onPressed: () {
-                              context.read<NewsBloc>().add(
-                                    NewsFilterChanged(
-                                      idKategoriBerita:
-                                          state.idKategoriBerita == 1
-                                              ? null
-                                              : 1,
+                              _debouncer.call(
+                                () => context.read<NewsBloc>().add(
+                                      NewsFilterChanged(
+                                        idKategoriBerita:
+                                            state.idKategoriBerita == 1
+                                                ? null
+                                                : 1,
+                                      ),
                                     ),
-                                  );
+                              );
                             },
                             isActive: state.idKategoriBerita == 1,
                           ),

@@ -31,12 +31,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
     final userSession = context.read<UserBloc>().getUserSession();
     final user = userSession?.user;
 
-    nameController = TextEditingController(text: user?.alumni.nama ?? '');
-    phoneController = TextEditingController(text: user?.alumni.noTelp ?? '');
+    nameController = TextEditingController(text: user?.alumni?.nama ?? '');
+    phoneController = TextEditingController(text: user?.alumni?.noTelp ?? '');
     locationController = TextEditingController(text: '');
     departmentController =
-        TextEditingController(text: user?.alumni.jurusan ?? '');
-    batchController = TextEditingController(text: user?.alumni.angkatan ?? '');
+        TextEditingController(text: user?.alumni?.jurusan ?? '');
+    batchController = TextEditingController(text: user?.alumni?.angkatan ?? '');
     businessFieldController =
         TextEditingController(text: '71204 - Jasa Inspeksi Teknik Instalasi');
 
@@ -81,7 +81,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            user?.alumni.nama ?? '',
+                            user?.alumni?.nama ?? '',
                             style: textTheme.labelLarge!.copyWith(fontSize: 25),
                           ),
                           Text(

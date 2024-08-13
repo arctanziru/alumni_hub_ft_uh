@@ -28,7 +28,9 @@ _$UserGetOneDataImpl _$$UserGetOneDataImplFromJson(Map<String, dynamic> json) =>
       lastActive: json['last_active'] as String?,
       createdAt: json['created_at'] as String,
       updatedAt: json['updated_at'] as String,
-      alumni: AlumniModel.fromJson(json['alumni'] as Map<String, dynamic>),
+      alumni: json['alumni'] == null
+          ? null
+          : AlumniModel.fromJson(json['alumni'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$UserGetOneDataImplToJson(

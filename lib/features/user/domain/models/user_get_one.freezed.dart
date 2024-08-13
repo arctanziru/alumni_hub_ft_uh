@@ -198,7 +198,7 @@ mixin _$UserGetOneData {
   String get createdAt => throw _privateConstructorUsedError;
   @JsonKey(name: 'updated_at')
   String get updatedAt => throw _privateConstructorUsedError;
-  AlumniModel get alumni => throw _privateConstructorUsedError;
+  AlumniModel? get alumni => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -219,9 +219,9 @@ abstract class $UserGetOneDataCopyWith<$Res> {
       @JsonKey(name: 'last_active') String? lastActive,
       @JsonKey(name: 'created_at') String createdAt,
       @JsonKey(name: 'updated_at') String updatedAt,
-      AlumniModel alumni});
+      AlumniModel? alumni});
 
-  $AlumniModelCopyWith<$Res> get alumni;
+  $AlumniModelCopyWith<$Res>? get alumni;
 }
 
 /// @nodoc
@@ -243,7 +243,7 @@ class _$UserGetOneDataCopyWithImpl<$Res, $Val extends UserGetOneData>
     Object? lastActive = freezed,
     Object? createdAt = null,
     Object? updatedAt = null,
-    Object? alumni = null,
+    Object? alumni = freezed,
   }) {
     return _then(_value.copyWith(
       idUser: null == idUser
@@ -270,17 +270,21 @@ class _$UserGetOneDataCopyWithImpl<$Res, $Val extends UserGetOneData>
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as String,
-      alumni: null == alumni
+      alumni: freezed == alumni
           ? _value.alumni
           : alumni // ignore: cast_nullable_to_non_nullable
-              as AlumniModel,
+              as AlumniModel?,
     ) as $Val);
   }
 
   @override
   @pragma('vm:prefer-inline')
-  $AlumniModelCopyWith<$Res> get alumni {
-    return $AlumniModelCopyWith<$Res>(_value.alumni, (value) {
+  $AlumniModelCopyWith<$Res>? get alumni {
+    if (_value.alumni == null) {
+      return null;
+    }
+
+    return $AlumniModelCopyWith<$Res>(_value.alumni!, (value) {
       return _then(_value.copyWith(alumni: value) as $Val);
     });
   }
@@ -301,10 +305,10 @@ abstract class _$$UserGetOneDataImplCopyWith<$Res>
       @JsonKey(name: 'last_active') String? lastActive,
       @JsonKey(name: 'created_at') String createdAt,
       @JsonKey(name: 'updated_at') String updatedAt,
-      AlumniModel alumni});
+      AlumniModel? alumni});
 
   @override
-  $AlumniModelCopyWith<$Res> get alumni;
+  $AlumniModelCopyWith<$Res>? get alumni;
 }
 
 /// @nodoc
@@ -324,7 +328,7 @@ class __$$UserGetOneDataImplCopyWithImpl<$Res>
     Object? lastActive = freezed,
     Object? createdAt = null,
     Object? updatedAt = null,
-    Object? alumni = null,
+    Object? alumni = freezed,
   }) {
     return _then(_$UserGetOneDataImpl(
       idUser: null == idUser
@@ -351,10 +355,10 @@ class __$$UserGetOneDataImplCopyWithImpl<$Res>
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
               as String,
-      alumni: null == alumni
+      alumni: freezed == alumni
           ? _value.alumni
           : alumni // ignore: cast_nullable_to_non_nullable
-              as AlumniModel,
+              as AlumniModel?,
     ));
   }
 }
@@ -391,7 +395,7 @@ class _$UserGetOneDataImpl implements _UserGetOneData {
   @JsonKey(name: 'updated_at')
   final String updatedAt;
   @override
-  final AlumniModel alumni;
+  final AlumniModel? alumni;
 
   @override
   String toString() {
@@ -443,7 +447,7 @@ abstract class _UserGetOneData implements UserGetOneData {
       @JsonKey(name: 'last_active') final String? lastActive,
       @JsonKey(name: 'created_at') required final String createdAt,
       @JsonKey(name: 'updated_at') required final String updatedAt,
-      required final AlumniModel alumni}) = _$UserGetOneDataImpl;
+      required final AlumniModel? alumni}) = _$UserGetOneDataImpl;
 
   factory _UserGetOneData.fromJson(Map<String, dynamic> json) =
       _$UserGetOneDataImpl.fromJson;
@@ -465,7 +469,7 @@ abstract class _UserGetOneData implements UserGetOneData {
   @JsonKey(name: 'updated_at')
   String get updatedAt;
   @override
-  AlumniModel get alumni;
+  AlumniModel? get alumni;
   @override
   @JsonKey(ignore: true)
   _$$UserGetOneDataImplCopyWith<_$UserGetOneDataImpl> get copyWith =>

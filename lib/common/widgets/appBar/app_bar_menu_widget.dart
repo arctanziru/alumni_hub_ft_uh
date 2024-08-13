@@ -97,7 +97,7 @@ class AppBarMenuWidget extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          userSession?.user?.alumni.nama ?? '',
+                          userSession?.user?.alumni?.nama ?? '',
                           style: Theme.of(context).textTheme.titleLarge,
                         ),
                         Text(

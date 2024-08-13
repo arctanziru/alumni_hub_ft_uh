@@ -43,7 +43,7 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            'Hey, ${userSession?.user?.alumni.nama ?? 'Guest'}',
+            'Hey, ${userSession?.user?.alumni?.nama ?? 'Guest'}',
             style: Theme.of(context).textTheme.titleSmall,
           ),
           Text(
@@ -62,7 +62,8 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
         IconButton(
           icon: CircleAvatar(
             backgroundImage: NetworkImage(
-              userSession?.user?.avatar ?? 'https://example.com/profile_pic.jpg',
+              userSession?.user?.avatar ??
+                  'https://example.com/profile_pic.jpg',
             ),
           ),
           onPressed: () {

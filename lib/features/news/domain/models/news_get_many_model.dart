@@ -57,3 +57,31 @@ class NewsGetManyParams extends GetManyParams {
     };
   }
 }
+
+@freezed
+class NewsCategoryGetManyModelResponse with _$NewsCategoryGetManyModelResponse {
+  const factory NewsCategoryGetManyModelResponse({
+    required String message,
+    required List<NewsCategoryModel>? data,
+  }) = _NewsCategoryGetManyModelResponse;
+
+  factory NewsCategoryGetManyModelResponse.fromJson(
+          Map<String, dynamic> json) =>
+      _$NewsCategoryGetManyModelResponseFromJson(json);
+}
+
+class NewsCategoryGetManyParams extends GetManyParams {
+  NewsCategoryGetManyParams({
+    super.page,
+    super.limit,
+    super.search,
+  });
+
+  Map<String, dynamic> toJson() {
+    return {
+      if (page != null) 'page': page,
+      if (limit != null) 'limit': limit,
+      if (search != null) 'search': search,
+    };
+  }
+}

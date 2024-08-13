@@ -28,15 +28,15 @@ mixin _$EventModel {
   String get konten => throw _privateConstructorUsedError;
   String get penyelenggara => throw _privateConstructorUsedError;
   @JsonKey(name: 'tgl_event')
-  String get tglEvent => throw _privateConstructorUsedError;
+  DateTime get tglEvent => throw _privateConstructorUsedError;
   @JsonKey(name: 'lokasi_event')
   String get lokasiEvent => throw _privateConstructorUsedError;
   int get kuota => throw _privateConstructorUsedError;
   int get peserta => throw _privateConstructorUsedError;
   @JsonKey(name: 'created_at')
-  String get createdAt => throw _privateConstructorUsedError;
+  DateTime get createdAt => throw _privateConstructorUsedError;
   @JsonKey(name: 'updated_at')
-  String get updatedAt => throw _privateConstructorUsedError;
+  DateTime get updatedAt => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -57,12 +57,12 @@ abstract class $EventModelCopyWith<$Res> {
       String gambar,
       String konten,
       String penyelenggara,
-      @JsonKey(name: 'tgl_event') String tglEvent,
+      @JsonKey(name: 'tgl_event') DateTime tglEvent,
       @JsonKey(name: 'lokasi_event') String lokasiEvent,
       int kuota,
       int peserta,
-      @JsonKey(name: 'created_at') String createdAt,
-      @JsonKey(name: 'updated_at') String updatedAt});
+      @JsonKey(name: 'created_at') DateTime createdAt,
+      @JsonKey(name: 'updated_at') DateTime updatedAt});
 }
 
 /// @nodoc
@@ -119,7 +119,7 @@ class _$EventModelCopyWithImpl<$Res, $Val extends EventModel>
       tglEvent: null == tglEvent
           ? _value.tglEvent
           : tglEvent // ignore: cast_nullable_to_non_nullable
-              as String,
+              as DateTime,
       lokasiEvent: null == lokasiEvent
           ? _value.lokasiEvent
           : lokasiEvent // ignore: cast_nullable_to_non_nullable
@@ -135,11 +135,11 @@ class _$EventModelCopyWithImpl<$Res, $Val extends EventModel>
       createdAt: null == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
-              as String,
+              as DateTime,
       updatedAt: null == updatedAt
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
-              as String,
+              as DateTime,
     ) as $Val);
   }
 }
@@ -159,12 +159,12 @@ abstract class _$$EventModelImplCopyWith<$Res>
       String gambar,
       String konten,
       String penyelenggara,
-      @JsonKey(name: 'tgl_event') String tglEvent,
+      @JsonKey(name: 'tgl_event') DateTime tglEvent,
       @JsonKey(name: 'lokasi_event') String lokasiEvent,
       int kuota,
       int peserta,
-      @JsonKey(name: 'created_at') String createdAt,
-      @JsonKey(name: 'updated_at') String updatedAt});
+      @JsonKey(name: 'created_at') DateTime createdAt,
+      @JsonKey(name: 'updated_at') DateTime updatedAt});
 }
 
 /// @nodoc
@@ -219,7 +219,7 @@ class __$$EventModelImplCopyWithImpl<$Res>
       tglEvent: null == tglEvent
           ? _value.tglEvent
           : tglEvent // ignore: cast_nullable_to_non_nullable
-              as String,
+              as DateTime,
       lokasiEvent: null == lokasiEvent
           ? _value.lokasiEvent
           : lokasiEvent // ignore: cast_nullable_to_non_nullable
@@ -235,11 +235,11 @@ class __$$EventModelImplCopyWithImpl<$Res>
       createdAt: null == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
-              as String,
+              as DateTime,
       updatedAt: null == updatedAt
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
-              as String,
+              as DateTime,
     ));
   }
 }
@@ -279,7 +279,7 @@ class _$EventModelImpl implements _EventModel {
   final String penyelenggara;
   @override
   @JsonKey(name: 'tgl_event')
-  final String tglEvent;
+  final DateTime tglEvent;
   @override
   @JsonKey(name: 'lokasi_event')
   final String lokasiEvent;
@@ -289,10 +289,10 @@ class _$EventModelImpl implements _EventModel {
   final int peserta;
   @override
   @JsonKey(name: 'created_at')
-  final String createdAt;
+  final DateTime createdAt;
   @override
   @JsonKey(name: 'updated_at')
-  final String updatedAt;
+  final DateTime updatedAt;
 
   @override
   String toString() {
@@ -362,12 +362,12 @@ abstract class _EventModel implements EventModel {
           required final String gambar,
           required final String konten,
           required final String penyelenggara,
-          @JsonKey(name: 'tgl_event') required final String tglEvent,
+          @JsonKey(name: 'tgl_event') required final DateTime tglEvent,
           @JsonKey(name: 'lokasi_event') required final String lokasiEvent,
           required final int kuota,
           required final int peserta,
-          @JsonKey(name: 'created_at') required final String createdAt,
-          @JsonKey(name: 'updated_at') required final String updatedAt}) =
+          @JsonKey(name: 'created_at') required final DateTime createdAt,
+          @JsonKey(name: 'updated_at') required final DateTime updatedAt}) =
       _$EventModelImpl;
 
   factory _EventModel.fromJson(Map<String, dynamic> json) =
@@ -388,7 +388,7 @@ abstract class _EventModel implements EventModel {
   String get penyelenggara;
   @override
   @JsonKey(name: 'tgl_event')
-  String get tglEvent;
+  DateTime get tglEvent;
   @override
   @JsonKey(name: 'lokasi_event')
   String get lokasiEvent;
@@ -398,10 +398,10 @@ abstract class _EventModel implements EventModel {
   int get peserta;
   @override
   @JsonKey(name: 'created_at')
-  String get createdAt;
+  DateTime get createdAt;
   @override
   @JsonKey(name: 'updated_at')
-  String get updatedAt;
+  DateTime get updatedAt;
   @override
   @JsonKey(ignore: true)
   _$$EventModelImplCopyWith<_$EventModelImpl> get copyWith =>

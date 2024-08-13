@@ -1,5 +1,6 @@
 import 'dart:math';
 
+import 'package:alumni_hub_ft_uh/common/utils/debouncer.dart';
 import 'package:alumni_hub_ft_uh/common/widgets/appBar/app_bar_widget.dart';
 import 'package:alumni_hub_ft_uh/common/widgets/bottomBar/bottom_bar_widget.dart';
 import 'package:alumni_hub_ft_uh/common/widgets/button/button_filter_widget.dart';
@@ -30,11 +31,13 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  int _activeFilterIndex = 0;
+  final Debouncer _debouncer =
+      Debouncer(delay: const Duration(milliseconds: 500));
 
   @override
   void initState() {
     super.initState();
+    context.read<NewsBloc>().add(NewsCategoryFetched());
     context.read<NewsBloc>().add(NewsFetched());
     context.read<VacancyBloc>().add(VacancyFetched());
     context.read<EventBloc>().add(EventFetched()); // Fetch events
@@ -52,6 +55,8 @@ class _HomeScreenState extends State<HomeScreen> {
             children: [
               BlocBuilder<EventBloc, EventState>(
                 builder: (context, state) {
+                  debugPrint('Event state: ${state.toString()}');
+
                   if (state.status == EventStatus.loading) {
                     return SizedBox(
                       height: 200,
@@ -62,7 +67,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           itemBuilder: (context, index) => Padding(
                             padding: const EdgeInsets.only(right: 8.0),
                             child: Container(
-                              width: 150,
+                              width: 200,
                               color: Colors.grey[300],
                             ),
                           ),
@@ -71,30 +76,31 @@ class _HomeScreenState extends State<HomeScreen> {
                     );
                   }
 
-                  return const Padding(
-                    padding: EdgeInsets.only(bottom: 8.0),
+                  return Padding(
+                    padding: const EdgeInsets.only(bottom: 8.0),
                     child: HomeCarouselWidget(
-                      carouselItems: [
-                        'https://images.unsplash.com/photo-1506748686214e9df14b3c3b5f6e36b6c1b4c9c8d2c0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwyMTM1NjR8MHwxfGFsbHwxfHx8fHx8fHwxNjg1NTUxNjg&ixlib=rb-1.2.1&q=80&w=400',
-                        'https://images.unsplash.com/photo-1506748686214d31b1a7b7d46b8a67ff56e825f7425e4d91a64d6a497d56?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwyMTM1NjR8MHwxfGFsbHwxfHx8fHx8fHwxNjg1NTUxNjg&ixlib=rb-1.2.1&q=80&w=400',
-                        'https://images.unsplash.com/photo-1506748686214c4450e0d0d1b9b3b8a4a1e2b0f8d2e62?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwyMTM1NjR8MHwxfGFsbHwxfHx8fHx8fHwxNjg1NTUxNjg&ixlib=rb-1.2.1&q=80&w=400',
-                      ],
-                      countdownTexts: [
-                        '10 hari lagi',
-                        '14 hari lagi',
-                        '30 hari lagi',
-                      ],
-                      registrantsInfo: [
-                        '10/100 pendaftar',
-                        '20/100 pendaftar',
-                        '30/100 pendaftar',
-                      ],
+                      carouselItems: List.generate(
+                        min(state.events.length, 3),
+                        (index) =>
+                            '${dotenv.get("STORAGE_URL")}${state.events[index].gambar}',
+                      ),
+                      countdownTexts: List.generate(
+                        min(state.events.length, 3),
+                        (index) =>
+                            '${state.events[index].tglEvent.difference(DateTime.now()).inDays} hari lagi',
+                      ),
+                      registrantsInfo: List.generate(
+                        min(state.events.length, 3),
+                        (index) =>
+                            '${state.events[index].peserta}/${state.events[index].kuota} pendaftar',
+                      ),
                     ),
                   );
                 },
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8.0),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 8.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -104,10 +110,11 @@ class _HomeScreenState extends State<HomeScreen> {
                         Text(
                           'Berita Terkini',
                           textAlign: TextAlign.left,
-                          style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 24,
-                          ),
+                          style:
+                              Theme.of(context).textTheme.bodyLarge?.copyWith(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 24,
+                                  ),
                         ),
                         IconButton(
                           icon: const Icon(Icons.arrow_forward_rounded),
@@ -117,30 +124,40 @@ class _HomeScreenState extends State<HomeScreen> {
                         ),
                       ],
                     ),
-                    SizedBox(
-                      height: 50,
-                      child: SingleChildScrollView(
-                        scrollDirection: Axis.horizontal,
-                        child: Row(
-                          children: List.generate(6, (index) {
-                            final labels = [
-                              'Politik', 'Olahraga', 'Ekonomi',
-                              'Teknologi', 'Seni', 'Sosial'
-                            ];
-                            return Padding(
-                              padding: const EdgeInsets.only(right: 8),
-                              child: ButtonFilterWidget(
-                                label: labels[index],
-                                onPressed: () {
-                                  setState(() {
-                                    _activeFilterIndex = index;
-                                  });
-                                },
-                                isActive: _activeFilterIndex == index,
+                    SingleChildScrollView(
+                      scrollDirection: Axis.horizontal,
+                      child: BlocBuilder<NewsBloc, NewsState>(
+                        builder: (context, state) {
+                          return Row(
+                            children: List.generate(
+                              state.newsCategory.length,
+                              (index) => Padding(
+                                padding: const EdgeInsets.only(right: 8),
+                                child: ButtonFilterWidget(
+                                  label: state.newsCategory[index].kategori,
+                                  onPressed: () {
+                                    _debouncer.call(
+                                      () => context.read<NewsBloc>().add(
+                                            NewsFilterChanged(
+                                              idKategoriBerita: state
+                                                          .idKategoriBerita ==
+                                                      state.newsCategory[index]
+                                                          .idKategoriBerita
+                                                  ? null
+                                                  : state.newsCategory[index]
+                                                      .idKategoriBerita,
+                                            ),
+                                          ),
+                                    );
+                                  },
+                                  isActive: state.idKategoriBerita ==
+                                      state
+                                          .newsCategory[index].idKategoriBerita,
+                                ),
                               ),
-                            );
-                          }),
-                        ),
+                            ),
+                          );
+                        },
                       ),
                     ),
                     const SizedBox(height: 8.0),
@@ -151,7 +168,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             child: Column(
                               children: List.generate(
                                 5,
-                                    (index) => Column(
+                                (index) => Column(
                                   children: [
                                     CardNewsWidget(
                                       onTap: () {},
@@ -173,46 +190,51 @@ class _HomeScreenState extends State<HomeScreen> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: state.news.isEmpty
                               ? [
-                            Text(
-                              'Tidak ada berita',
-                              style: Theme.of(context).textTheme.bodyLarge,
-                            ),
-                          ]
-                              : [
-                            ...List.generate(
-                              min(state.news.length, 5),
-                                  (index) => Column(
-                                children: [
-                                  CardNewsWidget(
-                                    onTap: () {
-                                      Navigator.of(context).push(MaterialPageRoute(
-                                        builder: (context) => NewsDetailScreen(
-                                          news: state.news[index],
-                                        ),
-                                      ));
-                                    },
-                                    title: state.news[index].judul,
-                                    description: state.news[index].konten,
-                                    imageUrl: '${dotenv.env['STORAGE_URL']}${state.news[index].gambar}',
-                                    likes: state.news[index].totalLike,
-                                    isLiked: state.news[index].isLiked,
+                                  Text(
+                                    'Tidak ada berita',
+                                    style:
+                                        Theme.of(context).textTheme.bodyLarge,
                                   ),
-                                  const SizedBox(height: 10),
+                                ]
+                              : [
+                                  ...List.generate(
+                                    min(state.news.length, 5),
+                                    (index) => Column(
+                                      children: [
+                                        CardNewsWidget(
+                                          onTap: () {
+                                            Navigator.of(context)
+                                                .push(MaterialPageRoute(
+                                              builder: (context) =>
+                                                  NewsDetailScreen(
+                                                news: state.news[index],
+                                              ),
+                                            ));
+                                          },
+                                          title: state.news[index].judul,
+                                          description: state.news[index].konten,
+                                          imageUrl:
+                                              '${dotenv.env['STORAGE_URL']}${state.news[index].gambar}',
+                                          likes: state.news[index].totalLike,
+                                          isLiked: state.news[index].isLiked,
+                                        ),
+                                        const SizedBox(height: 10),
+                                      ],
+                                    ),
+                                  ),
+                                  if (state.status == NewsStatus.loaded &&
+                                      state.news.length > 5)
+                                    Center(
+                                      child: ButtonWidget(
+                                        onPressed: () {
+                                          Navigator.pushNamed(
+                                              context, NewsScreen.route);
+                                        },
+                                        label: 'Lainnya',
+                                        rounded: true,
+                                      ),
+                                    ),
                                 ],
-                              ),
-                            ),
-                            if (state.status == NewsStatus.loaded &&
-                                state.news.length > 5)
-                              Center(
-                                child: ButtonWidget(
-                                  onPressed: () {
-                                    Navigator.pushNamed(context, NewsScreen.route);
-                                  },
-                                  label: 'Lainnya',
-                                  rounded: true,
-                                ),
-                              ),
-                          ],
                         );
                       },
                     ),
@@ -223,10 +245,11 @@ class _HomeScreenState extends State<HomeScreen> {
                         Text(
                           'Lowongan Kerja',
                           textAlign: TextAlign.left,
-                          style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 24,
-                          ),
+                          style:
+                              Theme.of(context).textTheme.bodyLarge?.copyWith(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 24,
+                                  ),
                         ),
                         IconButton(
                           icon: const Icon(Icons.arrow_forward_rounded),
@@ -244,7 +267,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             child: Column(
                               children: List.generate(
                                 5,
-                                    (index) => Column(
+                                (index) => Column(
                                   children: [
                                     CardVacancyWidget(
                                       onTap: () {},
@@ -269,55 +292,60 @@ class _HomeScreenState extends State<HomeScreen> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: state.vacancies.isEmpty
                               ? [
-                            Text(
-                              'Tidak ada lowongan kerja',
-                              style: Theme.of(context).textTheme.bodyLarge,
-                            ),
-                          ]
+                                  Text(
+                                    'Tidak ada lowongan kerja',
+                                    style:
+                                        Theme.of(context).textTheme.bodyLarge,
+                                  ),
+                                ]
                               : [
-                            ...List.generate(
-                              min(state.vacancies.length, 5),
-                                  (index) {
-                                final vacancy = state.vacancies[index];
-                                return Column(
-                                  children: [
-                                    CardVacancyWidget(
-                                      onTap: () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) => VacancyDetailScreen(
-                                              vacancy: vacancy,
-                                            ),
+                                  ...List.generate(
+                                    min(state.vacancies.length, 5),
+                                    (index) {
+                                      final vacancy = state.vacancies[index];
+                                      return Column(
+                                        children: [
+                                          CardVacancyWidget(
+                                            onTap: () {
+                                              Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      VacancyDetailScreen(
+                                                    vacancy: vacancy,
+                                                  ),
+                                                ),
+                                              );
+                                            },
+                                            title: vacancy.judul,
+                                            company: vacancy
+                                                .perusahaan.namaPerusahaan,
+                                            type: vacancy.role,
+                                            location: vacancy.lokasi,
+                                            experience: vacancy.pengalamanKerja,
+                                            postedAt: vacancy.createdAt,
+                                            description: vacancy.konten,
+                                            companyImgUrl:
+                                                '${dotenv.get('STORAGE_URL')}${vacancy.perusahaan.logo}',
                                           ),
-                                        );
-                                      },
-                                      title: vacancy.judul,
-                                      company: vacancy.perusahaan.namaPerusahaan,
-                                      type: vacancy.role,
-                                      location: vacancy.lokasi,
-                                      experience: vacancy.pengalamanKerja,
-                                      postedAt: vacancy.createdAt,
-                                      description: vacancy.konten,
-                                      companyImgUrl: '${dotenv.get('STORAGE_URL')}${vacancy.perusahaan.logo}',
+                                          const SizedBox(height: 10),
+                                        ],
+                                      );
+                                    },
+                                  ),
+                                  if (state.status == VacancyStatus.loaded &&
+                                      state.vacancies.length > 5)
+                                    Center(
+                                      child: ButtonWidget(
+                                        onPressed: () {
+                                          Navigator.pushNamed(
+                                              context, VacancyScreen.route);
+                                        },
+                                        label: 'Lainnya',
+                                        rounded: true,
+                                      ),
                                     ),
-                                    const SizedBox(height: 10),
-                                  ],
-                                );
-                              },
-                            ),
-                            if (state.status == VacancyStatus.loaded &&
-                                state.vacancies.length > 5)
-                              Center(
-                                child: ButtonWidget(
-                                  onPressed: () {
-                                    Navigator.pushNamed(context, VacancyScreen.route);
-                                  },
-                                  label: 'Lainnya',
-                                  rounded: true,
-                                ),
-                              ),
-                          ],
+                                ],
                         );
                       },
                     ),

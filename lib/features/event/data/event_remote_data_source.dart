@@ -11,7 +11,7 @@ class EventRemoteDataSource {
   Future<EventGetManyModelResponse> getEvents(
       EventGetManyParams eventGetManyParams) async {
     final response = await _api.createApiCall(
-      endpoint: '/events', // Update this endpoint to match your API for events
+      endpoint: '/event', // Update this endpoint to match your API for events
       method: NetworkCallMethod.get,
       params: eventGetManyParams.toJson(),
     );

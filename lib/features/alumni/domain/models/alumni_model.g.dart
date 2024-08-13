@@ -20,8 +20,8 @@ _$AlumniModelImpl _$$AlumniModelImplFromJson(Map<String, dynamic> json) =>
       agama: json['agama'] as String,
       golonganDarah: json['golongan_darah'] as String,
       validated: json['validated'] as bool,
-      createdAt: json['created_at'] as String,
-      updatedAt: json['updated_at'] as String,
+      createdAt: DateTime.parse(json['created_at'] as String),
+      updatedAt: DateTime.parse(json['updated_at'] as String),
     );
 
 Map<String, dynamic> _$$AlumniModelImplToJson(_$AlumniModelImpl instance) =>
@@ -38,6 +38,6 @@ Map<String, dynamic> _$$AlumniModelImplToJson(_$AlumniModelImpl instance) =>
       'agama': instance.agama,
       'golongan_darah': instance.golonganDarah,
       'validated': instance.validated,
-      'created_at': instance.createdAt,
-      'updated_at': instance.updatedAt,
+      'created_at': instance.createdAt.toIso8601String(),
+      'updated_at': instance.updatedAt.toIso8601String(),
     };

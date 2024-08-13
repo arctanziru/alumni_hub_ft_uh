@@ -626,3 +626,182 @@ abstract class _NewsGetManyModelData implements NewsGetManyModelData {
   _$$NewsGetManyModelDataImplCopyWith<_$NewsGetManyModelDataImpl>
       get copyWith => throw _privateConstructorUsedError;
 }
+
+NewsCategoryGetManyModelResponse _$NewsCategoryGetManyModelResponseFromJson(
+    Map<String, dynamic> json) {
+  return _NewsCategoryGetManyModelResponse.fromJson(json);
+}
+
+/// @nodoc
+mixin _$NewsCategoryGetManyModelResponse {
+  String get message => throw _privateConstructorUsedError;
+  List<NewsCategoryModel>? get data => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $NewsCategoryGetManyModelResponseCopyWith<NewsCategoryGetManyModelResponse>
+      get copyWith => throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $NewsCategoryGetManyModelResponseCopyWith<$Res> {
+  factory $NewsCategoryGetManyModelResponseCopyWith(
+          NewsCategoryGetManyModelResponse value,
+          $Res Function(NewsCategoryGetManyModelResponse) then) =
+      _$NewsCategoryGetManyModelResponseCopyWithImpl<$Res,
+          NewsCategoryGetManyModelResponse>;
+  @useResult
+  $Res call({String message, List<NewsCategoryModel>? data});
+}
+
+/// @nodoc
+class _$NewsCategoryGetManyModelResponseCopyWithImpl<$Res,
+        $Val extends NewsCategoryGetManyModelResponse>
+    implements $NewsCategoryGetManyModelResponseCopyWith<$Res> {
+  _$NewsCategoryGetManyModelResponseCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? message = null,
+    Object? data = freezed,
+  }) {
+    return _then(_value.copyWith(
+      message: null == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String,
+      data: freezed == data
+          ? _value.data
+          : data // ignore: cast_nullable_to_non_nullable
+              as List<NewsCategoryModel>?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$NewsCategoryGetManyModelResponseImplCopyWith<$Res>
+    implements $NewsCategoryGetManyModelResponseCopyWith<$Res> {
+  factory _$$NewsCategoryGetManyModelResponseImplCopyWith(
+          _$NewsCategoryGetManyModelResponseImpl value,
+          $Res Function(_$NewsCategoryGetManyModelResponseImpl) then) =
+      __$$NewsCategoryGetManyModelResponseImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String message, List<NewsCategoryModel>? data});
+}
+
+/// @nodoc
+class __$$NewsCategoryGetManyModelResponseImplCopyWithImpl<$Res>
+    extends _$NewsCategoryGetManyModelResponseCopyWithImpl<$Res,
+        _$NewsCategoryGetManyModelResponseImpl>
+    implements _$$NewsCategoryGetManyModelResponseImplCopyWith<$Res> {
+  __$$NewsCategoryGetManyModelResponseImplCopyWithImpl(
+      _$NewsCategoryGetManyModelResponseImpl _value,
+      $Res Function(_$NewsCategoryGetManyModelResponseImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? message = null,
+    Object? data = freezed,
+  }) {
+    return _then(_$NewsCategoryGetManyModelResponseImpl(
+      message: null == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String,
+      data: freezed == data
+          ? _value._data
+          : data // ignore: cast_nullable_to_non_nullable
+              as List<NewsCategoryModel>?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$NewsCategoryGetManyModelResponseImpl
+    implements _NewsCategoryGetManyModelResponse {
+  const _$NewsCategoryGetManyModelResponseImpl(
+      {required this.message, required final List<NewsCategoryModel>? data})
+      : _data = data;
+
+  factory _$NewsCategoryGetManyModelResponseImpl.fromJson(
+          Map<String, dynamic> json) =>
+      _$$NewsCategoryGetManyModelResponseImplFromJson(json);
+
+  @override
+  final String message;
+  final List<NewsCategoryModel>? _data;
+  @override
+  List<NewsCategoryModel>? get data {
+    final value = _data;
+    if (value == null) return null;
+    if (_data is EqualUnmodifiableListView) return _data;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  @override
+  String toString() {
+    return 'NewsCategoryGetManyModelResponse(message: $message, data: $data)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$NewsCategoryGetManyModelResponseImpl &&
+            (identical(other.message, message) || other.message == message) &&
+            const DeepCollectionEquality().equals(other._data, _data));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType, message, const DeepCollectionEquality().hash(_data));
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$NewsCategoryGetManyModelResponseImplCopyWith<
+          _$NewsCategoryGetManyModelResponseImpl>
+      get copyWith => __$$NewsCategoryGetManyModelResponseImplCopyWithImpl<
+          _$NewsCategoryGetManyModelResponseImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$NewsCategoryGetManyModelResponseImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _NewsCategoryGetManyModelResponse
+    implements NewsCategoryGetManyModelResponse {
+  const factory _NewsCategoryGetManyModelResponse(
+          {required final String message,
+          required final List<NewsCategoryModel>? data}) =
+      _$NewsCategoryGetManyModelResponseImpl;
+
+  factory _NewsCategoryGetManyModelResponse.fromJson(
+          Map<String, dynamic> json) =
+      _$NewsCategoryGetManyModelResponseImpl.fromJson;
+
+  @override
+  String get message;
+  @override
+  List<NewsCategoryModel>? get data;
+  @override
+  @JsonKey(ignore: true)
+  _$$NewsCategoryGetManyModelResponseImplCopyWith<
+          _$NewsCategoryGetManyModelResponseImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}

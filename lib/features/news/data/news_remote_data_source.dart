@@ -17,4 +17,14 @@ class NewsRemoteDataSource {
     );
     return NewsGetManyModelResponse.fromJson(response.data);
   }
+
+  Future<NewsCategoryGetManyModelResponse> getNewsCategory(
+      NewsCategoryGetManyParams? params) async {
+    final response = await _api.createApiCall(
+      endpoint: '/berita/kategori',
+      method: NetworkCallMethod.get,
+      params: params?.toJson(),
+    );
+    return NewsCategoryGetManyModelResponse.fromJson(response.data);
+  }
 }

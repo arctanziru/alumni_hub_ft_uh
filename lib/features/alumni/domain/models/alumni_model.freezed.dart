@@ -38,9 +38,9 @@ mixin _$AlumniModel {
   String get golonganDarah => throw _privateConstructorUsedError;
   bool get validated => throw _privateConstructorUsedError;
   @JsonKey(name: 'created_at')
-  String get createdAt => throw _privateConstructorUsedError;
+  DateTime get createdAt => throw _privateConstructorUsedError;
   @JsonKey(name: 'updated_at')
-  String get updatedAt => throw _privateConstructorUsedError;
+  DateTime get updatedAt => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -67,8 +67,8 @@ abstract class $AlumniModelCopyWith<$Res> {
       String agama,
       @JsonKey(name: 'golongan_darah') String golonganDarah,
       bool validated,
-      @JsonKey(name: 'created_at') String createdAt,
-      @JsonKey(name: 'updated_at') String updatedAt});
+      @JsonKey(name: 'created_at') DateTime createdAt,
+      @JsonKey(name: 'updated_at') DateTime updatedAt});
 }
 
 /// @nodoc
@@ -151,11 +151,11 @@ class _$AlumniModelCopyWithImpl<$Res, $Val extends AlumniModel>
       createdAt: null == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
-              as String,
+              as DateTime,
       updatedAt: null == updatedAt
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
-              as String,
+              as DateTime,
     ) as $Val);
   }
 }
@@ -181,8 +181,8 @@ abstract class _$$AlumniModelImplCopyWith<$Res>
       String agama,
       @JsonKey(name: 'golongan_darah') String golonganDarah,
       bool validated,
-      @JsonKey(name: 'created_at') String createdAt,
-      @JsonKey(name: 'updated_at') String updatedAt});
+      @JsonKey(name: 'created_at') DateTime createdAt,
+      @JsonKey(name: 'updated_at') DateTime updatedAt});
 }
 
 /// @nodoc
@@ -263,11 +263,11 @@ class __$$AlumniModelImplCopyWithImpl<$Res>
       createdAt: null == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
-              as String,
+              as DateTime,
       updatedAt: null == updatedAt
           ? _value.updatedAt
           : updatedAt // ignore: cast_nullable_to_non_nullable
-              as String,
+              as DateTime,
     ));
   }
 }
@@ -325,10 +325,10 @@ class _$AlumniModelImpl implements _AlumniModel {
   final bool validated;
   @override
   @JsonKey(name: 'created_at')
-  final String createdAt;
+  final DateTime createdAt;
   @override
   @JsonKey(name: 'updated_at')
-  final String updatedAt;
+  final DateTime updatedAt;
 
   @override
   String toString() {
@@ -410,8 +410,8 @@ abstract class _AlumniModel implements AlumniModel {
           required final String agama,
           @JsonKey(name: 'golongan_darah') required final String golonganDarah,
           required final bool validated,
-          @JsonKey(name: 'created_at') required final String createdAt,
-          @JsonKey(name: 'updated_at') required final String updatedAt}) =
+          @JsonKey(name: 'created_at') required final DateTime createdAt,
+          @JsonKey(name: 'updated_at') required final DateTime updatedAt}) =
       _$AlumniModelImpl;
 
   factory _AlumniModel.fromJson(Map<String, dynamic> json) =
@@ -448,10 +448,10 @@ abstract class _AlumniModel implements AlumniModel {
   bool get validated;
   @override
   @JsonKey(name: 'created_at')
-  String get createdAt;
+  DateTime get createdAt;
   @override
   @JsonKey(name: 'updated_at')
-  String get updatedAt;
+  DateTime get updatedAt;
   @override
   @JsonKey(ignore: true)
   _$$AlumniModelImplCopyWith<_$AlumniModelImpl> get copyWith =>

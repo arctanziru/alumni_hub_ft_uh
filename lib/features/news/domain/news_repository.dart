@@ -6,6 +6,8 @@ import 'package:injectable/injectable.dart';
 abstract class NewsRepository {
   InfiniteQuery<NewsGetManyModelResponse, int> getNews(
       NewsGetManyParams? params);
+  Query<NewsCategoryGetManyModelResponse> getNewsCategory(
+      NewsCategoryGetManyParams? params);
 }
 
 @LazySingleton(as: NewsRepository)
@@ -37,4 +39,15 @@ class NewsRepositoryImpl implements NewsRepository {
       },
     );
   }
+
+  @override
+  Query<NewsCategoryGetManyModelResponse> getNewsCategory(
+      NewsCategoryGetManyParams? params) {
+    return Query<NewsCategoryGetManyModelResponse>(
+      key: ['news_category'],
+      queryFn: () => _newsRemoteDataSource.getNewsCategory(params),
+    );
+  }
+
+  
 }

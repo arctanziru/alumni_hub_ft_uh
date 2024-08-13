@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:alumni_hub_ft_uh/common/utils/debouncer.dart';
 import 'package:alumni_hub_ft_uh/common/widgets/appBar/app_bar_search_widget.dart';
 import 'package:alumni_hub_ft_uh/common/widgets/bottomBar/bottom_bar_widget.dart';
@@ -30,6 +28,7 @@ class _NewsScreenState extends State<NewsScreen> {
   @override
   void initState() {
     context.read<NewsBloc>().add(NewsFetched());
+    context.read<NewsBloc>().add(NewsCategoryFetched());
     _scrollController.addListener(() {
       if (_scrollController.position.pixels >=
           _scrollController.position.maxScrollExtent) {
@@ -69,27 +68,32 @@ class _NewsScreenState extends State<NewsScreen> {
                 child: BlocBuilder<NewsBloc, NewsState>(
                   builder: (context, state) {
                     return Row(
-                      children: [
-                        Padding(
+                      children: List.generate(
+                        state.newsCategory.length,
+                        (index) => Padding(
                           padding: const EdgeInsets.only(right: 8),
                           child: ButtonFilterWidget(
-                            label: 'Politik',
+                            label: state.newsCategory[index].kategori,
                             onPressed: () {
                               _debouncer.call(
                                 () => context.read<NewsBloc>().add(
                                       NewsFilterChanged(
                                         idKategoriBerita:
-                                            state.idKategoriBerita == 1
+                                            state.idKategoriBerita ==
+                                                    state.newsCategory[index]
+                                                        .idKategoriBerita
                                                 ? null
-                                                : 1,
+                                                : state.newsCategory[index]
+                                                    .idKategoriBerita,
                                       ),
                                     ),
                               );
                             },
-                            isActive: state.idKategoriBerita == 1,
+                            isActive: state.idKategoriBerita ==
+                                state.newsCategory[index].idKategoriBerita,
                           ),
                         ),
-                      ],
+                      ),
                     );
                   },
                 ),

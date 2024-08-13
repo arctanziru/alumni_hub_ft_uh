@@ -59,3 +59,21 @@ Map<String, dynamic> _$$NewsGetManyModelDataImplToJson(
       'to': instance.to,
       'total': instance.total,
     };
+
+_$NewsCategoryGetManyModelResponseImpl
+    _$$NewsCategoryGetManyModelResponseImplFromJson(
+            Map<String, dynamic> json) =>
+        _$NewsCategoryGetManyModelResponseImpl(
+          message: json['message'] as String,
+          data: (json['data'] as List<dynamic>?)
+              ?.map(
+                  (e) => NewsCategoryModel.fromJson(e as Map<String, dynamic>))
+              .toList(),
+        );
+
+Map<String, dynamic> _$$NewsCategoryGetManyModelResponseImplToJson(
+        _$NewsCategoryGetManyModelResponseImpl instance) =>
+    <String, dynamic>{
+      'message': instance.message,
+      'data': instance.data,
+    };

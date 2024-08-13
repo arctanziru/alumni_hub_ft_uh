@@ -5,6 +5,8 @@ abstract class NewsEvent {}
 
 class NewsFetched extends NewsEvent {}
 
+class NewsCategoryFetched extends NewsEvent {}
+
 class NewsRefreshed extends NewsEvent {
   final bool isClear;
 

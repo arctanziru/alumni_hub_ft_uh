@@ -42,7 +42,12 @@ class HomeCarouselWidget extends StatelessWidget {
               width: double.infinity,
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: NetworkImage(imageUrl),
+                  image: Image.network(
+                    imageUrl,
+                    errorBuilder: (context, error, stackTrace) {
+                      return const Icon(Icons.error);
+                    },
+                  ).image,
                   fit: BoxFit.cover,
                 ),
               ),
@@ -57,8 +62,10 @@ class HomeCarouselWidget extends StatelessWidget {
                   Container(
                     padding: const EdgeInsets.all(8.0),
                     decoration: BoxDecoration(
-                      color: Colors.black.withOpacity(0.5), // Black background with low opacity
-                      borderRadius: BorderRadius.circular(8.0), // Rounded corners
+                      color: Colors.black.withOpacity(
+                          0.5), // Black background with low opacity
+                      borderRadius:
+                          BorderRadius.circular(8.0), // Rounded corners
                     ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -68,7 +75,8 @@ class HomeCarouselWidget extends StatelessWidget {
                           width: 40.0, // Fixed width
                           height: 40.0, // Fixed height
                           decoration: BoxDecoration(
-                            color: const Color(0xFFD80100).withOpacity(0.9), // Red background
+                            color: const Color(0xFFD80100)
+                                .withOpacity(0.9), // Red background
                             shape: BoxShape.circle,
                           ),
                           child: Center(

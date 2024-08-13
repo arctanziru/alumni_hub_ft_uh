@@ -12,12 +12,12 @@ class EventModel with _$EventModel {
     required String gambar,
     required String konten,
     required String penyelenggara,
-    @JsonKey(name: 'tgl_event') required String tglEvent,
+    @JsonKey(name: 'tgl_event') required DateTime tglEvent,
     @JsonKey(name: 'lokasi_event') required String lokasiEvent,
     required int kuota,
     required int peserta,
-    @JsonKey(name: 'created_at') required String createdAt,
-    @JsonKey(name: 'updated_at') required String updatedAt,
+    @JsonKey(name: 'created_at') required DateTime createdAt,
+    @JsonKey(name: 'updated_at') required DateTime updatedAt,
   }) = _EventModel;
 
   factory EventModel.fromJson(Map<String, dynamic> json) =>

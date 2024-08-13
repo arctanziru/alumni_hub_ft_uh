@@ -18,8 +18,8 @@ class AlumniModel with _$AlumniModel {
     required String agama,
     @JsonKey(name: 'golongan_darah') required String golonganDarah,
     required bool validated,
-    @JsonKey(name: 'created_at') required String createdAt,
-    @JsonKey(name: 'updated_at') required String updatedAt,
+    @JsonKey(name: 'created_at') required DateTime createdAt,
+    @JsonKey(name: 'updated_at') required DateTime updatedAt,
   }) = _AlumniModel;
 
   factory AlumniModel.fromJson(Map<String, dynamic> json) =>

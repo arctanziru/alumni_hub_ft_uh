@@ -25,6 +25,7 @@ class NewsBloc extends Bloc<NewsEvent, NewsState> {
 
   NewsBloc(this._newsRepository) : super(NewsState()) {
     on<NewsFetched>(_onNewsFetched);
+    on<NewsCategoryFetched>(_onNewsCategoryFetched);
     on<NewsRefreshed>(_onNewsRefreshed);
     on<NewsNextPage>(_onNewsNextPage);
     on<NewsFilterChanged>(_onNewsFilterChanged,
@@ -96,5 +97,22 @@ class NewsBloc extends Bloc<NewsEvent, NewsState> {
     query.refetch();
 
     return _onNewsFetched(NewsFetched(), emit);
+  }
+
+  Future<void> _onNewsCategoryFetched(
+      NewsCategoryFetched event, Emitter<NewsState> emit) async {
+    return emit.forEach<QueryState<NewsCategoryGetManyModelResponse>>(
+        _newsRepository.getNewsCategory(null).stream, onData: (queryState) {
+      return state.copyWith(
+        statusCategory: queryState.status == QueryStatus.loading
+            ? NewsStatus.loading
+            : queryState.status == QueryStatus.error
+                ? NewsStatus.error
+                : NewsStatus.loaded,
+        newsCategory: queryState.data?.data ?? [],
+        errorCategory:
+            CustomException(queryState.error?.message ?? 'Unknown error'),
+      );
+    });
   }
 }

@@ -2,14 +2,11 @@ import 'package:alumni_hub_ft_uh/features/event/data/event_remote_data_source.da
 import 'package:alumni_hub_ft_uh/features/event/domain/models/event_get_many_model.dart';
 import 'package:cached_query/cached_query.dart';
 import 'package:injectable/injectable.dart';
-import 'package:alumni_hub_ft_uh/features/event/domain/models/event_get_many_model.dart';
-import 'package:cached_query/cached_query.dart';
 
 abstract class EventRepository {
   InfiniteQuery<EventGetManyModelResponse, int> getEvents(
       EventGetManyParams? params);
 }
-
 
 @LazySingleton(as: EventRepository)
 class EventRepositoryImpl implements EventRepository {

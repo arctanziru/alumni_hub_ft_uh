@@ -5,13 +5,14 @@ import 'package:alumni_hub_ft_uh/common/widgets/bottomBar/bottom_bar_widget.dart
 import 'package:alumni_hub_ft_uh/common/widgets/button/button_filter_widget.dart';
 import 'package:alumni_hub_ft_uh/common/widgets/button/button_widget.dart';
 import 'package:alumni_hub_ft_uh/common/widgets/card/card_news_widget.dart';
-import 'package:alumni_hub_ft_uh/common/widgets/card/card_vacancy_widget.dart'; // Ensure this import is correct
+import 'package:alumni_hub_ft_uh/common/widgets/card/card_vacancy_widget.dart';
 import 'package:alumni_hub_ft_uh/features/news/bloc/news_bloc.dart';
 import 'package:alumni_hub_ft_uh/features/news/news_detail_screen.dart';
 import 'package:alumni_hub_ft_uh/features/news/news_screen.dart';
-import 'package:alumni_hub_ft_uh/features/vacancy/bloc/vacancy_bloc.dart'; // Ensure this import is correct
-import 'package:alumni_hub_ft_uh/features/vacancy/vacancy_detail_screen.dart'; // Ensure this import is correct
+import 'package:alumni_hub_ft_uh/features/vacancy/bloc/vacancy_bloc.dart';
+import 'package:alumni_hub_ft_uh/features/vacancy/vacancy_detail_screen.dart';
 import 'package:alumni_hub_ft_uh/features/vacancy/vacancy_screen.dart';
+import 'package:alumni_hub_ft_uh/features/event/bloc/event_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -31,41 +32,12 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int _activeFilterIndex = 0;
 
-  final List<List<String>> carouselImages = [
-    [
-      'https://images.unsplash.com/photo-1721332149346-00e39ce5c24f?q=80&w=1472&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-      'https://images.unsplash.com/photo-1721332149346-00e39ce5c24f?q=80&w=1472&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-      'https://images.unsplash.com/photo-1721332149346-00e39ce5c24f?q=80&w=1472&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-      'https://images.unsplash.com/photo-1721332149346-00e39ce5c24f?q=80&w=1472&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-      'https://images.unsplash.com/photo-1721332149346-00e39ce5c24f?q=80&w=1472&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-    ],
-  ];
-
-  final List<List<String>> countdownTexts = [
-    [
-      '10 hari lagi',
-      '5 hari lagi',
-      '7 hari lagi',
-      '3 hari lagi',
-      '12 hari lagi'
-    ],
-  ];
-
-  final List<List<String>> registrantsInfo = [
-    [
-      '100/200 pendaftar',
-      '50/100 pendaftar',
-      '70/150 pendaftar',
-      '30/75 pendaftar',
-      '10/20 pendaftar'
-    ],
-  ];
-
   @override
   void initState() {
     super.initState();
     context.read<NewsBloc>().add(NewsFetched());
     context.read<VacancyBloc>().add(VacancyFetched());
+    context.read<EventBloc>().add(EventFetched()); // Fetch events
   }
 
   @override
@@ -78,15 +50,49 @@ class _HomeScreenState extends State<HomeScreen> {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              for (int i = 0; i < carouselImages.length; i++)
-                Padding(
-                  padding: const EdgeInsets.only(bottom: 8.0),
-                  child: HomeCarouselWidget(
-                    carouselItems: carouselImages[i],
-                    countdownTexts: countdownTexts[i],
-                    registrantsInfo: registrantsInfo[i],
-                  ),
-                ),
+              BlocBuilder<EventBloc, EventState>(
+                builder: (context, state) {
+                  if (state.status == EventStatus.loading) {
+                    return SizedBox(
+                      height: 200,
+                      child: Skeletonizer(
+                        child: ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: 3, // Number of skeleton items
+                          itemBuilder: (context, index) => Padding(
+                            padding: const EdgeInsets.only(right: 8.0),
+                            child: Container(
+                              width: 150,
+                              color: Colors.grey[300],
+                            ),
+                          ),
+                        ),
+                      ),
+                    );
+                  }
+
+                  return const Padding(
+                    padding: EdgeInsets.only(bottom: 8.0),
+                    child: HomeCarouselWidget(
+                      carouselItems: [
+                        'https://images.unsplash.com/photo-1506748686214e9df14b3c3b5f6e36b6c1b4c9c8d2c0?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwyMTM1NjR8MHwxfGFsbHwxfHx8fHx8fHwxNjg1NTUxNjg&ixlib=rb-1.2.1&q=80&w=400',
+                        'https://images.unsplash.com/photo-1506748686214d31b1a7b7d46b8a67ff56e825f7425e4d91a64d6a497d56?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwyMTM1NjR8MHwxfGFsbHwxfHx8fHx8fHwxNjg1NTUxNjg&ixlib=rb-1.2.1&q=80&w=400',
+                        'https://images.unsplash.com/photo-1506748686214c4450e0d0d1b9b3b8a4a1e2b0f8d2e62?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwyMTM1NjR8MHwxfGFsbHwxfHx8fHx8fHwxNjg1NTUxNjg&ixlib=rb-1.2.1&q=80&w=400',
+                      ],
+                      countdownTexts: [
+                        '10 hari lagi',
+                        '14 hari lagi',
+                        '30 hari lagi',
+                      ],
+                      registrantsInfo: [
+                        '10/100 pendaftar',
+                        '20/100 pendaftar',
+                        '30/100 pendaftar',
+                      ],
+                    ),
+                  );
+                },
+              ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8.0),
                 child: Column(

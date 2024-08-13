@@ -16,6 +16,9 @@ import 'package:shared_preferences/shared_preferences.dart' as _i460;
 import 'data/api.dart' as _i420;
 import 'features/auth/data/auth_remote_data_source.dart' as _i516;
 import 'features/auth/domain/auth_repository.dart' as _i260;
+import 'features/event/bloc/event_bloc.dart' as _i859;
+import 'features/event/data/event_remote_data_source.dart' as _i163;
+import 'features/event/domain/event_repository.dart' as _i742;
 import 'features/news/bloc/news_bloc.dart' as _i662;
 import 'features/news/data/news_remote_data_source.dart' as _i901;
 import 'features/news/domain/news_repository.dart' as _i220;
@@ -56,8 +59,14 @@ Future<_i174.GetIt> $initGetIt(
       () => _i444.UserRemoteDataSource(gh<_i420.Api>()));
   gh.singleton<_i785.VacancyRemoteDataSource>(
       () => _i785.VacancyRemoteDataSource(gh<_i420.Api>()));
+  gh.singleton<_i163.EventRemoteDataSource>(
+      () => _i163.EventRemoteDataSource(gh<_i420.Api>()));
   gh.lazySingleton<_i731.VacancyRepository>(
       () => _i731.VacancyRepositoryImpl(gh<_i785.VacancyRemoteDataSource>()));
+  gh.lazySingleton<_i742.EventRepository>(
+      () => _i742.EventRepositoryImpl(gh<_i163.EventRemoteDataSource>()));
+  gh.factory<_i859.EventBloc>(
+      () => _i859.EventBloc(gh<_i742.EventRepository>()));
   gh.lazySingleton<_i902.UserRepository>(() => _i902.UserRepositoryImpl(
         userRemoteDataSource: gh<_i444.UserRemoteDataSource>(),
         userLocalDataSource: gh<_i225.UserLocalDataSource>(),

@@ -82,7 +82,7 @@ class Api {
   Future<void> _handleForbidden() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.remove(kUserSession);
-    locator<AppNavigation>().navigateReplace('login');
+    locator<AppNavigation>().navigateReplace('/sign_in');
   }
 }
 

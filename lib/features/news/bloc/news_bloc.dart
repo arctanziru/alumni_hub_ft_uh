@@ -121,6 +121,6 @@ class NewsBloc extends Bloc<NewsEvent, NewsState> {
       NewsLikeToggled event, Emitter<NewsState> emit) async {
     final mutation = _newsRepository.toggleLikeNews(event.id);
     await mutation.mutate(event.id);
-    return _onNewsFetched(NewsFetched(), emit);
+    return _onNewsRefreshed(NewsRefreshed(), emit);
   }
 }

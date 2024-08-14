@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:alumni_hub_ft_uh/features/auth/domain/auth_model.dart';
 import 'package:alumni_hub_ft_uh/middleware/custom_exception.dart';
 import 'package:flutter/material.dart';
@@ -39,9 +41,17 @@ class AuthRepositoryImpl implements AuthRepository {
   Future<SignInWithGoogleResponse> signInWithGoogle() async {
     try {
       debugPrint('Starting Google Sign-In process');
-      final GoogleSignIn googleSignIn = GoogleSignIn(
-        serverClientId: dotenv.env['GOOGLE_CLIENT_ID'] ?? '',
-      );
+
+      GoogleSignIn googleSignIn = GoogleSignIn(scopes: ['email']);
+
+      if (Platform.isIOS) {
+        googleSignIn = GoogleSignIn(
+          clientId: dotenv.env['GOOGLE_CLIENT_ID'],
+          scopes: [
+            'email',
+          ],
+        );
+      }
 
       await googleSignIn.signOut();
 

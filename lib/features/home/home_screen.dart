@@ -38,7 +38,7 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
     context.read<NewsBloc>().add(NewsCategoryFetched());
-    context.read<NewsBloc>().add(NewsFetched());
+    context.read<NewsBloc>().add(NewsRefreshed(isClear: true));
     context.read<VacancyBloc>().add(VacancyFetched());
     context.read<EventBloc>().add(EventFetched()); // Fetch events
   }
@@ -86,8 +86,17 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                       countdownTexts: List.generate(
                         min(state.events.length, 3),
-                        (index) =>
-                            '${state.events[index].tglEvent.difference(DateTime.now()).inDays} hari lagi',
+                        (index) {
+                          final dif = state.events[index].tglEvent
+                              .difference(DateTime.now())
+                              .inDays;
+
+                          if (dif < 0) {
+                            return 'Exp Event berakhir';
+                          }
+
+                          return ' $dif hari lagi';
+                        },
                       ),
                       registrantsInfo: List.generate(
                         min(state.events.length, 3),
@@ -163,7 +172,8 @@ class _HomeScreenState extends State<HomeScreen> {
                     const SizedBox(height: 8.0),
                     BlocBuilder<NewsBloc, NewsState>(
                       builder: (context, state) {
-                        if (state.status == NewsStatus.loading) {
+                        if (state.status == NewsStatus.loading &&
+                            state.news.isEmpty) {
                           return Skeletonizer(
                             child: Column(
                               children: List.generate(
@@ -217,13 +227,19 @@ class _HomeScreenState extends State<HomeScreen> {
                                               '${dotenv.env['STORAGE_URL']}${state.news[index].gambar}',
                                           likes: state.news[index].totalLike,
                                           isLiked: state.news[index].isLiked,
+                                          onLikePressed: () => {
+                                            context
+                                                .read<NewsBloc>()
+                                                .add(NewsLikeToggled(
+                                                  state.news[index].idBerita,
+                                                ))
+                                          },
                                         ),
                                         const SizedBox(height: 10),
                                       ],
                                     ),
                                   ),
-                                  if (state.status == NewsStatus.loaded &&
-                                      state.news.length > 5)
+                                  if (state.news.length > 5)
                                     Center(
                                       child: ButtonWidget(
                                         onPressed: () {

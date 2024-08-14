@@ -1,5 +1,6 @@
-import 'package:flutter/material.dart';
+import 'package:alumni_hub_ft_uh/constants/colors.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:flutter/material.dart';
 
 class HomeCarouselWidget extends StatelessWidget {
   final List<String> carouselItems;
@@ -30,7 +31,6 @@ class HomeCarouselWidget extends StatelessWidget {
         String countdownText = countdownTexts[index];
         String registrantsText = registrantsInfo[index];
 
-        // Splitting countdown text into number and text parts
         final parts = countdownText.split(' ');
         final numberPart = parts[0];
         final textPart = parts.skip(1).join(' ');
@@ -62,31 +62,21 @@ class HomeCarouselWidget extends StatelessWidget {
                   Container(
                     padding: const EdgeInsets.all(8.0),
                     decoration: BoxDecoration(
-                      color: Colors.black.withOpacity(
-                          0.5), // Black background with low opacity
+                      color: AppColors
+                          .primaryColor, // Black background with low opacity
                       borderRadius:
                           BorderRadius.circular(8.0), // Rounded corners
                     ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
-                        // Fixed-size red circular background with the countdown number
-                        Container(
-                          width: 40.0, // Fixed width
-                          height: 40.0, // Fixed height
-                          decoration: BoxDecoration(
-                            color: const Color(0xFFD80100)
-                                .withOpacity(0.9), // Red background
-                            shape: BoxShape.circle,
-                          ),
-                          child: Center(
-                            child: Text(
-                              numberPart,
-                              style: bodySmallStyle.copyWith(
-                                fontSize: 24.0,
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                              ),
+                        Center(
+                          child: Text(
+                            numberPart,
+                            style: bodySmallStyle.copyWith(
+                              fontSize: 24.0,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
                             ),
                           ),
                         ),

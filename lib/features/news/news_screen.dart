@@ -161,6 +161,14 @@ class _NewsScreenState extends State<NewsScreen> {
                                       title: state.news[index].judul,
                                       description: state.news[index].konten,
                                       likes: state.news[index].totalLike,
+                                      isLiked: state.news[index].isLiked,
+                                      onLikePressed: () => {
+                                        context
+                                            .read<NewsBloc>()
+                                            .add(NewsLikeToggled(
+                                              state.news[index].idBerita,
+                                            ))
+                                      },
                                       onTap: () {
                                         Navigator.push(
                                           context,

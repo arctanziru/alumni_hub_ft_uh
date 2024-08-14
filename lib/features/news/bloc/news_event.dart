@@ -21,3 +21,9 @@ class NewsFilterChanged extends NewsEvent {
 
   NewsFilterChanged({this.idKategoriBerita, this.search});
 }
+
+class NewsLikeToggled extends NewsEvent {
+  final int id;
+
+  NewsLikeToggled(this.id);
+}

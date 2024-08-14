@@ -30,6 +30,7 @@ class NewsBloc extends Bloc<NewsEvent, NewsState> {
     on<NewsNextPage>(_onNewsNextPage);
     on<NewsFilterChanged>(_onNewsFilterChanged,
         transformer: debounce(_debounceDuration));
+    on<NewsLikeToggled>(_onNewsLikeToggled);
   }
 
   FutureOr<void> _onNewsFetched(NewsFetched event, Emitter<NewsState> emit) {
@@ -114,5 +115,12 @@ class NewsBloc extends Bloc<NewsEvent, NewsState> {
             CustomException(queryState.error?.message ?? 'Unknown error'),
       );
     });
+  }
+
+  Future<void> _onNewsLikeToggled(
+      NewsLikeToggled event, Emitter<NewsState> emit) async {
+    final mutation = _newsRepository.toggleLikeNews(event.id);
+    await mutation.mutate(event.id);
+    return _onNewsFetched(NewsFetched(), emit);
   }
 }

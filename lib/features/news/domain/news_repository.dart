@@ -1,5 +1,6 @@
 import 'package:alumni_hub_ft_uh/features/news/data/news_remote_data_source.dart';
 import 'package:alumni_hub_ft_uh/features/news/domain/models/news_get_many_model.dart';
+import 'package:alumni_hub_ft_uh/features/news/domain/models/news_get_one_model.dart';
 import 'package:cached_query/cached_query.dart';
 import 'package:injectable/injectable.dart';
 
@@ -8,6 +9,7 @@ abstract class NewsRepository {
       NewsGetManyParams? params);
   Query<NewsCategoryGetManyModelResponse> getNewsCategory(
       NewsCategoryGetManyParams? params);
+  Mutation<NewsGetOneModelResponse, int> toggleLikeNews(int id);
 }
 
 @LazySingleton(as: NewsRepository)
@@ -49,5 +51,40 @@ class NewsRepositoryImpl implements NewsRepository {
     );
   }
 
-  
+  @override
+  Mutation<NewsGetOneModelResponse, int> toggleLikeNews(int id) {
+    return Mutation<NewsGetOneModelResponse, int>(
+      key: ['news_like', id],
+      invalidateQueries: ['news'],
+      refetchQueries: ['news'],
+      queryFn: (int arg) {
+        return _newsRemoteDataSource.toggleLikeNews(arg);
+      },
+      onStartMutation: (id) {
+        CachedQuery.instance.updateQuery(
+          key: ["news"],
+          updateFn: (dynamic old) {
+            if (old is NewsGetManyModelResponse) {
+              return old.copyWith(
+                data: old.data.copyWith(
+                  data: old.data.data.map((news) {
+                    if (news.idBerita == id) {
+                      return news.copyWith(
+                        isLiked: !news.isLiked,
+                        totalLike: news.isLiked
+                            ? news.totalLike - 1
+                            : news.totalLike + 1,
+                      );
+                    }
+                    return news;
+                  }).toList(),
+                ),
+              );
+            }
+            return old;
+          },
+        );
+      },
+    );
+  }
 }

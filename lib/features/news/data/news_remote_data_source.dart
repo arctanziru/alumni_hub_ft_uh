@@ -1,5 +1,6 @@
 import 'package:alumni_hub_ft_uh/data/api.dart';
 import 'package:alumni_hub_ft_uh/features/news/domain/models/news_get_many_model.dart';
+import 'package:alumni_hub_ft_uh/features/news/domain/models/news_get_one_model.dart';
 import 'package:injectable/injectable.dart';
 
 @singleton
@@ -26,5 +27,14 @@ class NewsRemoteDataSource {
       params: params?.toJson(),
     );
     return NewsCategoryGetManyModelResponse.fromJson(response.data);
+  }
+
+  Future<NewsGetOneModelResponse> toggleLikeNews(int id) async {
+    final response = await _api.createApiCall(
+      endpoint: '/berita/like/',
+      method: NetworkCallMethod.post,
+      body: {'id_berita': id},
+    );
+    return NewsGetOneModelResponse.fromJson(response.data);
   }
 }

@@ -22,6 +22,9 @@ import 'features/event/domain/event_repository.dart' as _i742;
 import 'features/news/bloc/news_bloc.dart' as _i662;
 import 'features/news/data/news_remote_data_source.dart' as _i901;
 import 'features/news/domain/news_repository.dart' as _i220;
+import 'features/search/blocs/search_bloc.dart' as _i926;
+import 'features/search/data/search_remote_data_source.dart' as _i37;
+import 'features/search/domain/search_repository.dart' as _i3;
 import 'features/user/bloc/user_bloc.dart' as _i898;
 import 'features/user/data/user_local_data_source.dart' as _i225;
 import 'features/user/data/user_remote_data_source.dart' as _i444;
@@ -48,19 +51,23 @@ Future<_i174.GetIt> $initGetIt(
     preResolve: true,
   );
   gh.lazySingleton<_i361.Dio>(() => appModule.dio());
+  gh.factory<_i926.SearchBloc>(
+      () => _i926.SearchBloc(gh<_i3.SearchRepository>()));
   gh.lazySingleton<_i420.Api>(() => _i420.Api(gh<_i361.Dio>()));
   gh.singleton<_i225.UserLocalDataSource>(
       () => _i225.UserLocalDataSource(gh<_i460.SharedPreferences>()));
-  gh.singleton<_i785.VacancyRemoteDataSource>(
-      () => _i785.VacancyRemoteDataSource(gh<_i420.Api>()));
   gh.singleton<_i516.AuthRemoteDataSource>(
       () => _i516.AuthRemoteDataSource(gh<_i420.Api>()));
-  gh.singleton<_i444.UserRemoteDataSource>(
-      () => _i444.UserRemoteDataSource(gh<_i420.Api>()));
-  gh.singleton<_i901.NewsRemoteDataSource>(
-      () => _i901.NewsRemoteDataSource(gh<_i420.Api>()));
   gh.singleton<_i163.EventRemoteDataSource>(
       () => _i163.EventRemoteDataSource(gh<_i420.Api>()));
+  gh.singleton<_i901.NewsRemoteDataSource>(
+      () => _i901.NewsRemoteDataSource(gh<_i420.Api>()));
+  gh.singleton<_i37.SearchRemoteDataSource>(
+      () => _i37.SearchRemoteDataSource(gh<_i420.Api>()));
+  gh.singleton<_i444.UserRemoteDataSource>(
+      () => _i444.UserRemoteDataSource(gh<_i420.Api>()));
+  gh.singleton<_i785.VacancyRemoteDataSource>(
+      () => _i785.VacancyRemoteDataSource(gh<_i420.Api>()));
   gh.lazySingleton<_i731.VacancyRepository>(
       () => _i731.VacancyRepositoryImpl(gh<_i785.VacancyRemoteDataSource>()));
   gh.lazySingleton<_i742.EventRepository>(

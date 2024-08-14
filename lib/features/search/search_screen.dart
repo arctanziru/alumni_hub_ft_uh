@@ -21,15 +21,14 @@ class _SearchScreenState extends State<SearchScreen> {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
-        automaticallyImplyLeading: false, // Remove the back button
+        automaticallyImplyLeading: false,
         title: Container(
           height: 35,
           width: double.infinity,
           padding: const EdgeInsets.symmetric(horizontal: 16.0),
           decoration: BoxDecoration(
-            border: Border.all(
-                color: Colors.black, width: 1.0), // Outline color and width
-            borderRadius: BorderRadius.circular(40.0), // Rounded corners
+            border: Border.all(color: Colors.black, width: 1.0),
+            borderRadius: BorderRadius.circular(40.0),
           ),
           child: Row(
             children: [
@@ -45,9 +44,7 @@ class _SearchScreenState extends State<SearchScreen> {
                         ?.copyWith(color: Colors.black54),
                     border: InputBorder.none,
                     contentPadding: const EdgeInsets.symmetric(
-                        vertical: 14,
-                        horizontal:
-                            8.0), // Adjust height and horizontal padding
+                        vertical: 14, horizontal: 8.0),
                   ),
                   style: Theme.of(context)
                       .textTheme
@@ -78,8 +75,7 @@ class _SearchScreenState extends State<SearchScreen> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) =>
-                          const NewsSearchScreen()), // Ganti NewsSearchScreen dengan widget yang sesuai
+                      builder: (context) => const NewsSearchScreen()),
                 );
               },
             ),
@@ -91,8 +87,7 @@ class _SearchScreenState extends State<SearchScreen> {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) =>
-                          const VacancySearchScreen()), // Navigate to VacancyScreen
+                      builder: (context) => const VacancySearchScreen()),
                 );
               },
             ),

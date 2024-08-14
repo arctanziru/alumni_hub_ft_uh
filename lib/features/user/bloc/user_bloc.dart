@@ -7,7 +7,6 @@ import 'package:alumni_hub_ft_uh/middleware/custom_exception.dart';
 import 'package:bloc/bloc.dart';
 import 'package:injectable/injectable.dart';
 
-
 @injectable
 class UserBloc extends Bloc<UserEvent, UserState> {
   final UserRepository _userRepository;
@@ -67,9 +66,11 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     on<UserEventSignInWithGoogle>((event, emit) async {
       emit(UserStateSignInWithGoogleLoading());
       try {
-        final googleResponse = await _authRepository.signInWithGoogle(event.accessToken);
-        _userRepository.saveUserSession(
-            UserSession(token: googleResponse.token, user: googleResponse.user,));
+        final googleResponse = await _authRepository.signInWithGoogle();
+        _userRepository.saveUserSession(UserSession(
+          token: googleResponse.token,
+          user: googleResponse.user,
+        ));
         emit(UserStateSuccessSignInWithGoogle(googleResponse));
       } on CustomException catch (e) {
         emit(UserStateException(e));

@@ -1,11 +1,12 @@
+import 'package:alumni_hub_ft_uh/common/utils/app_navigation.dart';
 import 'package:alumni_hub_ft_uh/common/utils/ui_helper.dart';
+import 'package:alumni_hub_ft_uh/constants/colors.dart';
 import 'package:alumni_hub_ft_uh/features/user/bloc/user_event.dart';
+import 'package:alumni_hub_ft_uh/features/user/bloc/user_state.dart';
+import 'package:alumni_hub_ft_uh/locator.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:alumni_hub_ft_uh/features/user/bloc/user_bloc.dart'; // Import UserBloc
-import 'package:provider/provider.dart'; // Import Provider for context.read()
-
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../common/widgets/button/button_widget.dart';
 import '../../common/widgets/textField/text_field_widget.dart';
@@ -25,7 +26,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final _confirmPasswordController = TextEditingController();
 
   bool _isPasswordObscured1 = false;
-  bool _isPasswordObscured2 = false;// Declare the variable
+  bool _isPasswordObscured2 = false; // Declare the variable
 
   @override
   void dispose() {
@@ -39,29 +40,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
     Navigator.pushNamed(context, '/claim_alumni_data');
   }
 
-  void _handleGoogleSignIn() async {
-    try {
-      final GoogleSignIn googleSignIn = GoogleSignIn(
-        clientId: dotenv.env['GOOGLE_CLIENT_ID'] ?? '',
-      );
-
-      final googleUser = await googleSignIn.signIn();
-
-      if (googleUser != null) {
-        final googleAuth = await googleUser.authentication;
-
-        // Make sure UserBloc is provided in the widget tree
-        context.read<UserBloc>().add(
-          UserEventSignInWithGoogle(accessToken: googleAuth.accessToken ?? ''),
-        );
-      }
-    } catch (error) {
-      debugPrint("Google Sign-In Error: $error");
-      showSnackBar(context, 'Google Sign-In gagal. Silakan coba lagi.');
-    }
-  }
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -71,7 +49,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
           builder: (context, constraints) {
             return ConstrainedBox(
               constraints: BoxConstraints(
-                maxHeight: constraints.maxHeight - MediaQuery.of(context).padding.top,
+                maxHeight:
+                    constraints.maxHeight - MediaQuery.of(context).padding.top,
               ),
               child: Container(
                 margin: EdgeInsets.only(
@@ -85,7 +64,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   ),
                 ),
                 height: MediaQuery.of(context).size.height * 0.8,
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
                 child: SingleChildScrollView(
                   padding: EdgeInsets.only(
                     bottom: MediaQuery.of(context).viewInsets.bottom,
@@ -112,38 +92,60 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       const SizedBox(height: 24),
                       SizedBox(
                         width: double.infinity,
-                        child: ElevatedButton(
-                          onPressed: _handleGoogleSignIn,
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.white,
-                            foregroundColor: Colors.black,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(48),
-                            ),
-                            padding: const EdgeInsets.symmetric(vertical: 16),
-                            elevation: 5,
-                            side: const BorderSide(
-                              color: Colors.grey, // Set outline color
-                              width: 1, // Set outline width
-                            ),
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Image.asset(
-                                'assets/logos/google_logo.png', // Path to your Google logo asset
-                                height: 24, // Adjust the height as needed
-                                width: 24,  // Adjust the width as needed
-                              ),
-                              const SizedBox(width: 8),
-                              Text(
-                                'Registrasi dengan Google',
-                                style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                                  color: Colors.black, // Set the text color to black
+                        child: BlocConsumer<UserBloc, UserState>(
+                          listener: (context, state) {
+                            if (state is UserStateSuccessSignInWithGoogle) {
+                              showSnackBar(context, 'Selamat datang');
+                              locator<AppNavigation>().navigateReplace('/home');
+                            } else if (state is UserStateException) {
+                              debugPrint(
+                                  "Exception: ${state.exception.message}");
+                            }
+                          },
+                          builder: (context, state) {
+                            return ElevatedButton(
+                              onPressed: () {
+                                context
+                                    .read<UserBloc>()
+                                    .add(UserEventSignInWithGoogle());
+                              },
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Colors.white,
+                                foregroundColor: Colors.black,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(48),
+                                ),
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 16),
+                                elevation: 5,
+                                side: const BorderSide(
+                                  color: AppColors.gray1, // Set outline color
+                                  width: 1, // Set outline width
                                 ),
                               ),
-                            ],
-                          ),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Image.asset(
+                                    'assets/logos/google_logo.png', // Path to your Google logo asset
+                                    height: 24, // Adjust the height as needed
+                                    width: 24, // Adjust the width as needed
+                                  ),
+                                  const SizedBox(width: 8),
+                                  Text(
+                                    'Registrasi dengan Google',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodyLarge
+                                        ?.copyWith(
+                                          color: Colors
+                                              .black, // Set the text color to black
+                                        ),
+                                  ),
+                                ],
+                              ),
+                            );
+                          },
                         ),
                       ),
                       const SizedBox(height: 24),
@@ -159,7 +161,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         obscureText: _isPasswordObscured1,
                         controller: _passwordController,
                         icon: IconButton(
-                          icon: Icon(_isPasswordObscured1 ? Icons.visibility : Icons.visibility_off),
+                          icon: Icon(_isPasswordObscured1
+                              ? Icons.visibility
+                              : Icons.visibility_off),
                           onPressed: () {
                             setState(() {
                               _isPasswordObscured1 = !_isPasswordObscured1;
@@ -174,7 +178,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         obscureText: _isPasswordObscured2,
                         controller: _confirmPasswordController,
                         icon: IconButton(
-                          icon: Icon(_isPasswordObscured2 ? Icons.visibility : Icons.visibility_off),
+                          icon: Icon(_isPasswordObscured2
+                              ? Icons.visibility
+                              : Icons.visibility_off),
                           onPressed: () {
                             setState(() {
                               _isPasswordObscured2 = !_isPasswordObscured2;

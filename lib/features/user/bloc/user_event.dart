@@ -22,7 +22,4 @@ class UserEventGetProfile extends UserEvent {}
 
 class UserEventClearUserSession extends UserEvent {}
 
-class UserEventSignInWithGoogle extends UserEvent {
-  final String accessToken;
-  UserEventSignInWithGoogle({required this.accessToken});
-}
+class UserEventSignInWithGoogle extends UserEvent {}

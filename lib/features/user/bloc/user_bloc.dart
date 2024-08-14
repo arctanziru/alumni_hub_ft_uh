@@ -51,7 +51,6 @@ class UserBloc extends Bloc<UserEvent, UserState> {
         final user = await _userRepository.getProfile();
         emit(UserStateSuccessGetProfile(user));
       } on CustomException catch (e) {
-        await signOut();
         emit(UserStateException(e));
       }
     });

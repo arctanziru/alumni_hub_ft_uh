@@ -129,6 +129,11 @@ class AppBarMenuWidget extends StatelessWidget {
                 onTap: () => Navigator.pushNamed(context, '/coming-soon'),
               ),
               ListTileWidget(
+                icon: Icons.calendar_month,
+                title: 'List Event',
+                onTap: () => Navigator.pushNamed(context, '/events'),
+              ),
+              ListTileWidget(
                 icon: Icons.book_outlined,
                 title: 'Tracer Study',
                 onTap: () => Navigator.pushNamed(context, '/coming-soon'),

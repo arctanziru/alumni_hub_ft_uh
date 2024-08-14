@@ -43,10 +43,6 @@ Route<dynamic> routeGenerators(RouteSettings settings) {
       return _buildPageRoute(const SearchScreen());
     case SettingScreen.route:
       return _buildPageRoute(const SettingScreen());
-    case NewsSearchScreen.route:
-      return _buildPageRoute(const NewsSearchScreen());
-    case VacancySearchScreen.route:
-      return _buildPageRoute(const VacancySearchScreen());
     case ProfileScreen.route:
       return _buildPageRoute(const ProfileScreen());
     case AlumniScreen.route:

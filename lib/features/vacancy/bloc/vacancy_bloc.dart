@@ -46,8 +46,9 @@ class VacancyBloc extends Bloc<VacancyEvent, VacancyState> {
 
   FutureOr<void> _onVacancyRefreshed(VacancyRefreshed event, Emitter<VacancyState> emit) {
     if (event.isClear) {
-      state.vacancies.clear();
-      state.search = null;
+      emit(state.copyWith(
+        vacancies: [],
+      ));
     }
     final query = _vacancyRepository.getVacancies(
       VacancyGetManyParams(

@@ -37,10 +37,10 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    context.read<NewsBloc>().add(NewsCategoryFetched());
     context.read<NewsBloc>().add(NewsRefreshed(isClear: true));
+    context.read<NewsBloc>().add(NewsCategoryFetched());
     context.read<VacancyBloc>().add(VacancyFetched());
-    context.read<EventBloc>().add(EventFetched()); // Fetch events
+    context.read<EventBloc>().add(EventFetched());
   }
 
   @override

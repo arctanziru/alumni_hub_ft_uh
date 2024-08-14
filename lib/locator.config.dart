@@ -51,8 +51,6 @@ Future<_i174.GetIt> $initGetIt(
     preResolve: true,
   );
   gh.lazySingleton<_i361.Dio>(() => appModule.dio());
-  gh.factory<_i926.SearchBloc>(
-      () => _i926.SearchBloc(gh<_i3.SearchRepository>()));
   gh.lazySingleton<_i420.Api>(() => _i420.Api(gh<_i361.Dio>()));
   gh.singleton<_i225.UserLocalDataSource>(
       () => _i225.UserLocalDataSource(gh<_i460.SharedPreferences>()));
@@ -72,6 +70,8 @@ Future<_i174.GetIt> $initGetIt(
       () => _i731.VacancyRepositoryImpl(gh<_i785.VacancyRemoteDataSource>()));
   gh.lazySingleton<_i742.EventRepository>(
       () => _i742.EventRepositoryImpl(gh<_i163.EventRemoteDataSource>()));
+  gh.lazySingleton<_i3.SearchRepository>(
+      () => _i3.SearchRepositoryImpl(gh<_i37.SearchRemoteDataSource>()));
   gh.factory<_i859.EventBloc>(
       () => _i859.EventBloc(gh<_i742.EventRepository>()));
   gh.lazySingleton<_i902.UserRepository>(() => _i902.UserRepositoryImpl(
@@ -84,6 +84,8 @@ Future<_i174.GetIt> $initGetIt(
       authRemoteDataSource: gh<_i516.AuthRemoteDataSource>()));
   gh.lazySingleton<_i220.NewsRepository>(
       () => _i220.NewsRepositoryImpl(gh<_i901.NewsRemoteDataSource>()));
+  gh.factory<_i926.SearchBloc>(
+      () => _i926.SearchBloc(gh<_i3.SearchRepository>()));
   gh.factory<_i662.NewsBloc>(() => _i662.NewsBloc(gh<_i220.NewsRepository>()));
   gh.factory<_i898.UserBloc>(() => _i898.UserBloc(
         gh<_i902.UserRepository>(),

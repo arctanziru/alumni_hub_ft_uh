@@ -9,8 +9,9 @@ class NewsCategoryFetched extends NewsEvent {}
 
 class NewsRefreshed extends NewsEvent {
   final bool isClear;
+  final String? search;
 
-  NewsRefreshed({this.isClear = false});
+  NewsRefreshed({this.isClear = false, this.search});
 }
 
 class NewsNextPage extends NewsEvent {}

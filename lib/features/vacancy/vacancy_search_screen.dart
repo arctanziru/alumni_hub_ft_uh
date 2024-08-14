@@ -1,19 +1,30 @@
+import 'package:alumni_hub_ft_uh/features/vacancy/bloc/vacancy_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:alumni_hub_ft_uh/common/widgets/appBar/app_bar_secondary_widget.dart';
 import 'package:alumni_hub_ft_uh/common/widgets/card/card_vacancy_widget.dart';
 import 'package:alumni_hub_ft_uh/features/vacancy/vacancy_detail_screen.dart';
 import 'package:alumni_hub_ft_uh/features/vacancy/domain/models/vacancy_model.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class VacancySearchScreen extends StatefulWidget {
   static const String route = '/vacancy-search';
+  final String searchQuery;
 
-  const VacancySearchScreen({super.key});
+  const VacancySearchScreen({super.key, required this.searchQuery});
 
   @override
   State<VacancySearchScreen> createState() => _VacancySearchScreenState();
 }
 
 class _VacancySearchScreenState extends State<VacancySearchScreen> {
+  @override
+  void initState() {
+    super.initState();
+    context
+        .read<VacancyBloc>()
+        .add(VacancyRefreshed(isClear: true, search: widget.searchQuery));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,7 +54,7 @@ class _VacancySearchScreenState extends State<VacancySearchScreen> {
                                 idPerusahaan: 8,
                                 slug: 'frontend-developer',
                                 konten:
-                                'We are looking for a frontend developer to join our team. You will be responsible for developing and maintaining our web applications.',
+                                    'We are looking for a frontend developer to join our team. You will be responsible for developing and maintaining our web applications.',
                                 tglSelesai: '2024-12-31',
                                 lokasi: 'Jakarta, Indonesia',
                                 pengalamanKerja: '2 years',
@@ -66,9 +77,9 @@ class _VacancySearchScreenState extends State<VacancySearchScreen> {
                       location: 'Jakarta, Indonesia',
                       experience: '2 years',
                       postedAt:
-                      DateTime.now().subtract(const Duration(days: 1)),
+                          DateTime.now().subtract(const Duration(days: 1)),
                       description:
-                      'We are looking for a frontend developer to join our team. You will be responsible for developing and maintaining our web applications.',
+                          'We are looking for a frontend developer to join our team. You will be responsible for developing and maintaining our web applications.',
                       companyImgUrl: 'https://via.placeholder.com/50',
                     ),
                     const SizedBox(height: 16),
@@ -84,7 +95,7 @@ class _VacancySearchScreenState extends State<VacancySearchScreen> {
                                 idPerusahaan: 9,
                                 slug: 'backend-developer',
                                 konten:
-                                'We are looking for a backend developer to join our team. You will be responsible for building and maintaining our server-side applications.',
+                                    'We are looking for a backend developer to join our team. You will be responsible for building and maintaining our server-side applications.',
                                 tglSelesai: '2024-12-31',
                                 lokasi: 'Bandung, Indonesia',
                                 pengalamanKerja: '3 years',
@@ -107,9 +118,9 @@ class _VacancySearchScreenState extends State<VacancySearchScreen> {
                       location: 'Bandung, Indonesia',
                       experience: '3 years',
                       postedAt:
-                      DateTime.now().subtract(const Duration(days: 2)),
+                          DateTime.now().subtract(const Duration(days: 2)),
                       description:
-                      'We are looking for a backend developer to join our team. You will be responsible for building and maintaining our server-side applications.',
+                          'We are looking for a backend developer to join our team. You will be responsible for building and maintaining our server-side applications.',
                       companyImgUrl: 'https://via.placeholder.com/50',
                     ),
                   ],

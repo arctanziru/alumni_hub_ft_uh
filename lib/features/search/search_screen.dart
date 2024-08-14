@@ -1,9 +1,11 @@
 import 'package:alumni_hub_ft_uh/common/utils/app_navigation.dart';
 import 'package:alumni_hub_ft_uh/constants/colors.dart';
 import 'package:alumni_hub_ft_uh/features/news/news_search_screen.dart';
+import 'package:alumni_hub_ft_uh/features/search/blocs/search_bloc.dart';
 import 'package:alumni_hub_ft_uh/features/vacancy/vacancy_search_screen.dart';
 import 'package:alumni_hub_ft_uh/locator.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SearchScreen extends StatefulWidget {
   static const String route = '/search';
@@ -15,6 +17,12 @@ class SearchScreen extends StatefulWidget {
 }
 
 class _SearchScreenState extends State<SearchScreen> {
+  @override
+  void initState() {
+    context.read<SearchBloc>().add(SearchFetched());
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,6 +58,11 @@ class _SearchScreenState extends State<SearchScreen> {
                       .textTheme
                       .bodyMedium
                       ?.copyWith(color: Colors.black),
+                  onSubmitted: (value) {
+                    context.read<SearchBloc>().add(SearchQueryChanged(value));
+                  },
+                  controller: TextEditingController(
+                      text: context.read<SearchBloc>().state.searchQuery),
                 ),
               ),
             ],
@@ -64,35 +77,45 @@ class _SearchScreenState extends State<SearchScreen> {
           ),
         ],
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(18),
-        child: Column(
-          children: [
-            SearchResultSection(
-              title: 'BERITA',
-              count: 4,
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const NewsSearchScreen()),
-                );
-              },
+      body: BlocBuilder<SearchBloc, SearchState>(
+        builder: (context, state) {
+          return Padding(
+            padding: const EdgeInsets.all(18),
+            child: Column(
+              children: [
+                SearchResultSection(
+                  title: 'BERITA',
+                  count: state.search?.data.berita ?? 0,
+                  isLoading: state.status == SearchStatus.loading,
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => NewsSearchScreen(
+                                searchQuery: state.searchQuery!,
+                              )),
+                    );
+                  },
+                ),
+                const SizedBox(height: 16),
+                SearchResultSection(
+                  title: 'LOKER',
+                  count: state.search?.data.loker ?? 0,
+                  isLoading: state.status == SearchStatus.loading,
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => VacancySearchScreen(
+                                searchQuery: state.searchQuery!,
+                              )),
+                    );
+                  },
+                ),
+              ],
             ),
-            const SizedBox(height: 16),
-            SearchResultSection(
-              title: 'LOKER',
-              count: 0,
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const VacancySearchScreen()),
-                );
-              },
-            ),
-          ],
-        ),
+          );
+        },
       ),
     );
   }
@@ -102,12 +125,14 @@ class SearchResultSection extends StatelessWidget {
   final String title;
   final int count;
   final VoidCallback onTap;
+  final bool isLoading;
 
   const SearchResultSection(
       {super.key,
       required this.title,
       required this.count,
-      required this.onTap});
+      required this.onTap,
+      this.isLoading = false});
 
   @override
   Widget build(BuildContext context) {
@@ -137,11 +162,20 @@ class SearchResultSection extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text('$count Ditemukan',
-                style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                    color: isHighlighted
-                        ? AppColors.primaryBlack
-                        : Colors.grey[600])),
+            isLoading
+                ? const SizedBox(
+                    height: 16,
+                    width: 16,
+                    child: CircularProgressIndicator(
+                      color: AppColors.primaryColor,
+                      strokeWidth: 1,
+                    ),
+                  )
+                : Text('$count Ditemukan',
+                    style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                        color: isHighlighted
+                            ? AppColors.primaryBlack
+                            : Colors.grey[600])),
             const SizedBox(width: 8),
             Row(
               crossAxisAlignment: CrossAxisAlignment.center,

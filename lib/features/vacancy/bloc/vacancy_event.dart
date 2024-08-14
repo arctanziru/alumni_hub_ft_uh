@@ -7,8 +7,9 @@ class VacancyFetched extends VacancyEvent {}
 
 class VacancyRefreshed extends VacancyEvent {
   final bool isClear;
+  final String? search;
 
-  VacancyRefreshed({this.isClear = false});
+  VacancyRefreshed({this.isClear = false, this.search});
 }
 
 class VacancyNextPage extends VacancyEvent {}

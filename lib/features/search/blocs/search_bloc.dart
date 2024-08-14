@@ -51,5 +51,7 @@ class SearchBloc extends Bloc<SearchEvent, SearchState> {
     emit(state.copyWith(
       searchQuery: event.searchQuery,
     ));
+
+    add(SearchFetched());
   }
 }

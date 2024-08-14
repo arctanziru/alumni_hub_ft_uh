@@ -1,12 +1,8 @@
 import 'package:alumni_hub_ft_uh/common/domain/common_model.dart';
-import 'package:alumni_hub_ft_uh/common/utils/app_navigation.dart';
-import 'package:alumni_hub_ft_uh/constants/keys.dart';
-import 'package:alumni_hub_ft_uh/locator.dart';
 import 'package:alumni_hub_ft_uh/middleware/custom_exception.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 @LazySingleton()
 class Api {
@@ -54,35 +50,22 @@ class Api {
       }
     } on DioException catch (e) {
       if (e.response != null) {
-        if ((e.response?.statusCode == 403 || e.response?.statusCode == 401) &&
-            !e.requestOptions.uri.path.contains('auth')) {
-          await _handleForbidden();
-          throw const CustomException("Forbidden");
-        } else {
-          debugPrint("Error in response ${e.response?.data}");
-          try {
-            final errorResponse = ErrorResponse.fromJson(e.response?.data);
-            throw CustomException(errorResponse.message);
-          } catch (parseError) {
-            throw CustomException(e.response?.statusMessage ??
-                'Terjadi kesalahan saat memuat data');
-          }
+        debugPrint("Error in response ${e.response?.data}");
+        try {
+          final errorResponse = ErrorResponse.fromJson(e.response?.data);
+          throw CustomException(errorResponse.message);
+        } catch (parseError) {
+          throw CustomException(e.response?.statusMessage ??
+              'Terjadi kesalahan saat memuat data');
         }
       } else {
-        throw CustomException(
-            e.response?.statusMessage ?? 'Terjadi kesalahan saat memuat data');
+        throw const CustomException('Terjadi kesalahan saat memuat data');
       }
     } on CustomException {
       rethrow;
     } catch (e) {
       throw const CustomException("Terjadi kesalahan saat memuat data");
     }
-  }
-
-  Future<void> _handleForbidden() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.remove(kUserSession);
-    locator<AppNavigation>().navigateReplace('/sign_in');
   }
 }
 

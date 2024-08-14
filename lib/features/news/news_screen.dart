@@ -27,7 +27,7 @@ class _NewsScreenState extends State<NewsScreen> {
 
   @override
   void initState() {
-    context.read<NewsBloc>().add(NewsFetched());
+    context.read<NewsBloc>().add(NewsRefreshed(isClear: true));
     context.read<NewsBloc>().add(NewsCategoryFetched());
     _scrollController.addListener(() {
       if (_scrollController.position.pixels >=

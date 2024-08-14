@@ -58,9 +58,20 @@ class NewsBloc extends Bloc<NewsEvent, NewsState> {
   FutureOr<void> _onNewsRefreshed(
       NewsRefreshed event, Emitter<NewsState> emit) {
     if (event.isClear) {
-      state.news.clear();
-      state.idKategoriBerita = null;
-      state.search = null;
+      emit(NewsState(
+        news: [],
+        idKategoriBerita: null,
+        search: event.search,
+      ));
+    } else {
+      emit(NewsState(
+        news: state.news,
+        idKategoriBerita: state.idKategoriBerita,
+        search: state.search ?? event.search,
+        newsCategory: state.newsCategory,
+        status: state.status,
+        statusCategory: state.statusCategory,
+      ));
     }
     final query = _newsRepository.getNews(
       NewsGetManyParams(
@@ -69,7 +80,7 @@ class NewsBloc extends Bloc<NewsEvent, NewsState> {
       ),
     );
     query.refetch();
-    return _onNewsFetched(NewsFetched(), emit);
+    add(NewsFetched());
   }
 
   FutureOr<void> _onNewsNextPage(NewsNextPage event, Emitter<NewsState> emit) {
@@ -85,19 +96,25 @@ class NewsBloc extends Bloc<NewsEvent, NewsState> {
 
   FutureOr<void> _onNewsFilterChanged(
       NewsFilterChanged event, Emitter<NewsState> emit) {
-    state.idKategoriBerita = event.idKategoriBerita;
-    state.search = event.search;
+    emit(NewsState(
+      news: state.news,
+      idKategoriBerita: event.idKategoriBerita,
+      search: event.search,
+      newsCategory: state.newsCategory,
+      status: state.status,
+      statusCategory: state.statusCategory,
+    ));
 
     final query = _newsRepository.getNews(
       NewsGetManyParams(
-        idKategoriBerita: state.idKategoriBerita,
-        search: state.search,
+        idKategoriBerita: event.idKategoriBerita,
+        search: event.search,
       ),
     );
 
     query.refetch();
 
-    return _onNewsFetched(NewsFetched(), emit);
+    add(NewsFetched());
   }
 
   Future<void> _onNewsCategoryFetched(
@@ -121,6 +138,7 @@ class NewsBloc extends Bloc<NewsEvent, NewsState> {
       NewsLikeToggled event, Emitter<NewsState> emit) async {
     final mutation = _newsRepository.toggleLikeNews(event.id);
     await mutation.mutate(event.id);
-    return _onNewsRefreshed(NewsRefreshed(), emit);
+
+    add(NewsRefreshed());
   }
 }

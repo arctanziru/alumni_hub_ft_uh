@@ -51,14 +51,14 @@ Future<_i174.GetIt> $initGetIt(
   gh.lazySingleton<_i420.Api>(() => _i420.Api(gh<_i361.Dio>()));
   gh.singleton<_i225.UserLocalDataSource>(
       () => _i225.UserLocalDataSource(gh<_i460.SharedPreferences>()));
-  gh.singleton<_i516.AuthRemoteDataSource>(
-      () => _i516.AuthRemoteDataSource(gh<_i420.Api>()));
-  gh.singleton<_i901.NewsRemoteDataSource>(
-      () => _i901.NewsRemoteDataSource(gh<_i420.Api>()));
-  gh.singleton<_i444.UserRemoteDataSource>(
-      () => _i444.UserRemoteDataSource(gh<_i420.Api>()));
   gh.singleton<_i785.VacancyRemoteDataSource>(
       () => _i785.VacancyRemoteDataSource(gh<_i420.Api>()));
+  gh.singleton<_i516.AuthRemoteDataSource>(
+      () => _i516.AuthRemoteDataSource(gh<_i420.Api>()));
+  gh.singleton<_i444.UserRemoteDataSource>(
+      () => _i444.UserRemoteDataSource(gh<_i420.Api>()));
+  gh.singleton<_i901.NewsRemoteDataSource>(
+      () => _i901.NewsRemoteDataSource(gh<_i420.Api>()));
   gh.singleton<_i163.EventRemoteDataSource>(
       () => _i163.EventRemoteDataSource(gh<_i420.Api>()));
   gh.lazySingleton<_i731.VacancyRepository>(

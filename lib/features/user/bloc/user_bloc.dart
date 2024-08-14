@@ -1,15 +1,12 @@
-import 'package:alumni_hub_ft_uh/features/auth/domain/auth_model.dart';
 import 'package:alumni_hub_ft_uh/features/auth/domain/auth_repository.dart';
-import 'package:alumni_hub_ft_uh/features/user/domain/models/user_get_one.dart';
+import 'package:alumni_hub_ft_uh/features/user/bloc/user_event.dart';
+import 'package:alumni_hub_ft_uh/features/user/bloc/user_state.dart';
 import 'package:alumni_hub_ft_uh/features/user/domain/models/user_model.dart';
 import 'package:alumni_hub_ft_uh/features/user/domain/user_repository.dart';
 import 'package:alumni_hub_ft_uh/middleware/custom_exception.dart';
 import 'package:bloc/bloc.dart';
-import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 
-part 'user_event.dart';
-part 'user_state.dart';
 
 @injectable
 class UserBloc extends Bloc<UserEvent, UserState> {
@@ -64,6 +61,18 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       } finally {
         await _userRepository.deleteUserSession();
         emit(UserStateSuccessSignOut());
+      }
+    });
+
+    on<UserEventSignInWithGoogle>((event, emit) async {
+      emit(UserStateSignInWithGoogleLoading());
+      try {
+        final googleResponse = await _authRepository.signInWithGoogle(event.accessToken);
+        _userRepository.saveUserSession(
+            UserSession(token: googleResponse.token, user: googleResponse.user,));
+        emit(UserStateSuccessSignInWithGoogle(googleResponse));
+      } on CustomException catch (e) {
+        emit(UserStateException(e));
       }
     });
   }

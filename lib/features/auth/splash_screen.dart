@@ -3,6 +3,8 @@ import 'package:alumni_hub_ft_uh/constants/colors.dart';
 import 'package:alumni_hub_ft_uh/features/auth/sign_in_screen.dart';
 import 'package:alumni_hub_ft_uh/features/home/home_screen.dart';
 import 'package:alumni_hub_ft_uh/features/user/bloc/user_bloc.dart';
+import 'package:alumni_hub_ft_uh/features/user/bloc/user_event.dart';
+import 'package:alumni_hub_ft_uh/features/user/bloc/user_state.dart';
 import 'package:alumni_hub_ft_uh/locator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

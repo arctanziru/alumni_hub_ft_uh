@@ -1,4 +1,11 @@
+import 'package:alumni_hub_ft_uh/common/utils/ui_helper.dart';
+import 'package:alumni_hub_ft_uh/features/user/bloc/user_event.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:alumni_hub_ft_uh/features/user/bloc/user_bloc.dart'; // Import UserBloc
+import 'package:provider/provider.dart'; // Import Provider for context.read()
+
 
 import '../../common/widgets/button/button_widget.dart';
 import '../../common/widgets/textField/text_field_widget.dart';
@@ -32,9 +39,28 @@ class _SignUpScreenState extends State<SignUpScreen> {
     Navigator.pushNamed(context, '/claim_alumni_data');
   }
 
-  void _handleGoogleSignUp() {
-    Navigator.pushNamed(context, '/home');
+  void _handleGoogleSignIn() async {
+    try {
+      final GoogleSignIn googleSignIn = GoogleSignIn(
+        clientId: dotenv.env['GOOGLE_CLIENT_ID'] ?? '',
+      );
+
+      final googleUser = await googleSignIn.signIn();
+
+      if (googleUser != null) {
+        final googleAuth = await googleUser.authentication;
+
+        // Make sure UserBloc is provided in the widget tree
+        context.read<UserBloc>().add(
+          UserEventSignInWithGoogle(accessToken: googleAuth.accessToken ?? ''),
+        );
+      }
+    } catch (error) {
+      debugPrint("Google Sign-In Error: $error");
+      showSnackBar(context, 'Google Sign-In gagal. Silakan coba lagi.');
+    }
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -87,7 +113,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       SizedBox(
                         width: double.infinity,
                         child: ElevatedButton(
-                          onPressed: _handleGoogleSignUp,
+                          onPressed: _handleGoogleSignIn,
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.white,
                             foregroundColor: Colors.black,

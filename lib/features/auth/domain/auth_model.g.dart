@@ -87,3 +87,21 @@ Map<String, dynamic> _$$SignUpBodyImplToJson(_$SignUpBodyImpl instance) =>
       'longitudes': instance.longitudes,
       'latitudes': instance.latitudes,
     };
+
+_$SignInWithGoogleResponseImpl _$$SignInWithGoogleResponseImplFromJson(
+        Map<String, dynamic> json) =>
+    _$SignInWithGoogleResponseImpl(
+      token: json['token'] as String,
+      user: UserGetOneData.fromJson(json['user'] as Map<String, dynamic>),
+      message: json['message'] as String,
+      success: json['success'] as bool,
+    );
+
+Map<String, dynamic> _$$SignInWithGoogleResponseImplToJson(
+        _$SignInWithGoogleResponseImpl instance) =>
+    <String, dynamic>{
+      'token': instance.token,
+      'user': instance.user,
+      'message': instance.message,
+      'success': instance.success,
+    };

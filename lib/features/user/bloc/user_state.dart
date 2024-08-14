@@ -1,4 +1,8 @@
-part of 'user_bloc.dart';
+import 'package:alumni_hub_ft_uh/features/auth/domain/auth_model.dart';
+import 'package:alumni_hub_ft_uh/features/user/domain/models/user_get_one.dart';
+import 'package:alumni_hub_ft_uh/middleware/custom_exception.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+
 
 @immutable
 abstract class UserState {}
@@ -12,6 +16,8 @@ class UserStateSignUpLoading extends UserState {}
 class UserStateSignOutLoading extends UserState {}
 
 class UserStateGetProfileLoading extends UserState {}
+
+class UserStateSignInWithGoogleLoading extends UserState {}
 
 class UserStateSuccessSignIn extends UserState {
   final SignInResponse signInResponse;
@@ -28,6 +34,11 @@ class UserStateSuccessSignOut extends UserState {}
 class UserStateSuccessGetProfile extends UserState {
   final UserGetOneResponse userModel;
   UserStateSuccessGetProfile(this.userModel);
+}
+
+class UserStateSuccessSignInWithGoogle extends UserState {
+  final SignInWithGoogleResponse signInWithGoogleResponse;
+  UserStateSuccessSignInWithGoogle(this.signInWithGoogleResponse);
 }
 
 class UserStateException extends UserState {

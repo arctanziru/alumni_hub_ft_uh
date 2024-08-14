@@ -1019,3 +1019,214 @@ abstract class _SignUpBody implements SignUpBody {
   _$$SignUpBodyImplCopyWith<_$SignUpBodyImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
+
+SignInWithGoogleResponse _$SignInWithGoogleResponseFromJson(
+    Map<String, dynamic> json) {
+  return _SignInWithGoogleResponse.fromJson(json);
+}
+
+/// @nodoc
+mixin _$SignInWithGoogleResponse {
+  String get token => throw _privateConstructorUsedError;
+  UserGetOneData get user => throw _privateConstructorUsedError;
+  String get message => throw _privateConstructorUsedError;
+  bool get success => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $SignInWithGoogleResponseCopyWith<SignInWithGoogleResponse> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $SignInWithGoogleResponseCopyWith<$Res> {
+  factory $SignInWithGoogleResponseCopyWith(SignInWithGoogleResponse value,
+          $Res Function(SignInWithGoogleResponse) then) =
+      _$SignInWithGoogleResponseCopyWithImpl<$Res, SignInWithGoogleResponse>;
+  @useResult
+  $Res call({String token, UserGetOneData user, String message, bool success});
+
+  $UserGetOneDataCopyWith<$Res> get user;
+}
+
+/// @nodoc
+class _$SignInWithGoogleResponseCopyWithImpl<$Res,
+        $Val extends SignInWithGoogleResponse>
+    implements $SignInWithGoogleResponseCopyWith<$Res> {
+  _$SignInWithGoogleResponseCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? token = null,
+    Object? user = null,
+    Object? message = null,
+    Object? success = null,
+  }) {
+    return _then(_value.copyWith(
+      token: null == token
+          ? _value.token
+          : token // ignore: cast_nullable_to_non_nullable
+              as String,
+      user: null == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as UserGetOneData,
+      message: null == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String,
+      success: null == success
+          ? _value.success
+          : success // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $UserGetOneDataCopyWith<$Res> get user {
+    return $UserGetOneDataCopyWith<$Res>(_value.user, (value) {
+      return _then(_value.copyWith(user: value) as $Val);
+    });
+  }
+}
+
+/// @nodoc
+abstract class _$$SignInWithGoogleResponseImplCopyWith<$Res>
+    implements $SignInWithGoogleResponseCopyWith<$Res> {
+  factory _$$SignInWithGoogleResponseImplCopyWith(
+          _$SignInWithGoogleResponseImpl value,
+          $Res Function(_$SignInWithGoogleResponseImpl) then) =
+      __$$SignInWithGoogleResponseImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call({String token, UserGetOneData user, String message, bool success});
+
+  @override
+  $UserGetOneDataCopyWith<$Res> get user;
+}
+
+/// @nodoc
+class __$$SignInWithGoogleResponseImplCopyWithImpl<$Res>
+    extends _$SignInWithGoogleResponseCopyWithImpl<$Res,
+        _$SignInWithGoogleResponseImpl>
+    implements _$$SignInWithGoogleResponseImplCopyWith<$Res> {
+  __$$SignInWithGoogleResponseImplCopyWithImpl(
+      _$SignInWithGoogleResponseImpl _value,
+      $Res Function(_$SignInWithGoogleResponseImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? token = null,
+    Object? user = null,
+    Object? message = null,
+    Object? success = null,
+  }) {
+    return _then(_$SignInWithGoogleResponseImpl(
+      token: null == token
+          ? _value.token
+          : token // ignore: cast_nullable_to_non_nullable
+              as String,
+      user: null == user
+          ? _value.user
+          : user // ignore: cast_nullable_to_non_nullable
+              as UserGetOneData,
+      message: null == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String,
+      success: null == success
+          ? _value.success
+          : success // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$SignInWithGoogleResponseImpl implements _SignInWithGoogleResponse {
+  const _$SignInWithGoogleResponseImpl(
+      {required this.token,
+      required this.user,
+      required this.message,
+      required this.success});
+
+  factory _$SignInWithGoogleResponseImpl.fromJson(Map<String, dynamic> json) =>
+      _$$SignInWithGoogleResponseImplFromJson(json);
+
+  @override
+  final String token;
+  @override
+  final UserGetOneData user;
+  @override
+  final String message;
+  @override
+  final bool success;
+
+  @override
+  String toString() {
+    return 'SignInWithGoogleResponse(token: $token, user: $user, message: $message, success: $success)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$SignInWithGoogleResponseImpl &&
+            (identical(other.token, token) || other.token == token) &&
+            (identical(other.user, user) || other.user == user) &&
+            (identical(other.message, message) || other.message == message) &&
+            (identical(other.success, success) || other.success == success));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, token, user, message, success);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$SignInWithGoogleResponseImplCopyWith<_$SignInWithGoogleResponseImpl>
+      get copyWith => __$$SignInWithGoogleResponseImplCopyWithImpl<
+          _$SignInWithGoogleResponseImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$SignInWithGoogleResponseImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _SignInWithGoogleResponse implements SignInWithGoogleResponse {
+  const factory _SignInWithGoogleResponse(
+      {required final String token,
+      required final UserGetOneData user,
+      required final String message,
+      required final bool success}) = _$SignInWithGoogleResponseImpl;
+
+  factory _SignInWithGoogleResponse.fromJson(Map<String, dynamic> json) =
+      _$SignInWithGoogleResponseImpl.fromJson;
+
+  @override
+  String get token;
+  @override
+  UserGetOneData get user;
+  @override
+  String get message;
+  @override
+  bool get success;
+  @override
+  @JsonKey(ignore: true)
+  _$$SignInWithGoogleResponseImplCopyWith<_$SignInWithGoogleResponseImpl>
+      get copyWith => throw _privateConstructorUsedError;
+}

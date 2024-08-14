@@ -32,4 +32,13 @@ class AuthRemoteDataSource {
       method: NetworkCallMethod.post,
     );
   }
+
+  Future<SignInWithGoogleResponse> signInWithGoogle(String accessToken) async {
+    final response = await _api.createApiCall(
+      endpoint: '/auth/google',
+      method: NetworkCallMethod.post,
+      body: {'access_token_client': accessToken},
+    );
+    return SignInWithGoogleResponse.fromJson(response.data);
+  }
 }

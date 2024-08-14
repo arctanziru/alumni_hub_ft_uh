@@ -1,6 +1,8 @@
 import 'package:alumni_hub_ft_uh/features/user/domain/models/user_model.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
+import '../../user/domain/models/user_get_one.dart';
+
 part 'auth_model.freezed.dart';
 part 'auth_model.g.dart';
 
@@ -66,4 +68,18 @@ class SignUpBody with _$SignUpBody {
 
   factory SignUpBody.fromJson(Map<String, dynamic> json) =>
       _$SignUpBodyFromJson(json);
+}
+
+// New model for Google Sign-In response
+@freezed
+class SignInWithGoogleResponse with _$SignInWithGoogleResponse {
+  const factory SignInWithGoogleResponse({
+    required String token,
+    required UserGetOneData user,
+    required String message,
+    required bool success,
+  }) = _SignInWithGoogleResponse;
+
+  factory SignInWithGoogleResponse.fromJson(Map<String, dynamic> json) =>
+      _$SignInWithGoogleResponseFromJson(json);
 }

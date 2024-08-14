@@ -2,6 +2,8 @@ import 'package:alumni_hub_ft_uh/common/utils/app_navigation.dart';
 import 'package:alumni_hub_ft_uh/features/auth/sign_in_screen.dart';
 import 'package:alumni_hub_ft_uh/features/search/search_screen.dart';
 import 'package:alumni_hub_ft_uh/features/user/bloc/user_bloc.dart';
+import 'package:alumni_hub_ft_uh/features/user/bloc/user_event.dart';
+import 'package:alumni_hub_ft_uh/features/user/bloc/user_state.dart';
 import 'package:alumni_hub_ft_uh/locator.dart';
 import 'package:flutter/material.dart';
 import 'package:alumni_hub_ft_uh/common/widgets/button/button_widget.dart';

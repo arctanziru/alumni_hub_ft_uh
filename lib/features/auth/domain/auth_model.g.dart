@@ -6,6 +6,55 @@ part of 'auth_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
+_$SignUpResponseImpl _$$SignUpResponseImplFromJson(Map<String, dynamic> json) =>
+    _$SignUpResponseImpl(
+      success: json['success'] as bool,
+      message: json['message'] as String,
+      data: SignUpResponseData.fromJson(json['data'] as Map<String, dynamic>),
+      token: json['token'] as String,
+    );
+
+Map<String, dynamic> _$$SignUpResponseImplToJson(
+        _$SignUpResponseImpl instance) =>
+    <String, dynamic>{
+      'success': instance.success,
+      'message': instance.message,
+      'data': instance.data,
+      'token': instance.token,
+    };
+
+_$SignUpResponseDataImpl _$$SignUpResponseDataImplFromJson(
+        Map<String, dynamic> json) =>
+    _$SignUpResponseDataImpl(
+      email: json['email'] as String,
+      updatedAt: json['updated_at'] as String,
+      createdAt: json['created_at'] as String,
+      idUser: (json['id_user'] as num).toInt(),
+    );
+
+Map<String, dynamic> _$$SignUpResponseDataImplToJson(
+        _$SignUpResponseDataImpl instance) =>
+    <String, dynamic>{
+      'email': instance.email,
+      'updated_at': instance.updatedAt,
+      'created_at': instance.createdAt,
+      'id_user': instance.idUser,
+    };
+
+_$SignUpBodyImpl _$$SignUpBodyImplFromJson(Map<String, dynamic> json) =>
+    _$SignUpBodyImpl(
+      email: json['email'] as String,
+      password: json['password'] as String,
+      confirmPassword: json['password_confirmation'] as String,
+    );
+
+Map<String, dynamic> _$$SignUpBodyImplToJson(_$SignUpBodyImpl instance) =>
+    <String, dynamic>{
+      'email': instance.email,
+      'password': instance.password,
+      'password_confirmation': instance.confirmPassword,
+    };
+
 _$SignInResponseImpl _$$SignInResponseImplFromJson(Map<String, dynamic> json) =>
     _$SignInResponseImpl(
       token: json['token'] as String,
@@ -45,47 +94,6 @@ Map<String, dynamic> _$$SignInBodyImplToJson(_$SignInBodyImpl instance) =>
     <String, dynamic>{
       'email': instance.email,
       'password': instance.password,
-    };
-
-_$SignUpResponseImpl _$$SignUpResponseImplFromJson(Map<String, dynamic> json) =>
-    _$SignUpResponseImpl(
-      token: json['token'] as String,
-      user: UserModel.fromJson(json['user'] as Map<String, dynamic>),
-    );
-
-Map<String, dynamic> _$$SignUpResponseImplToJson(
-        _$SignUpResponseImpl instance) =>
-    <String, dynamic>{
-      'token': instance.token,
-      'user': instance.user,
-    };
-
-_$SignUpBodyImpl _$$SignUpBodyImplFromJson(Map<String, dynamic> json) =>
-    _$SignUpBodyImpl(
-      email: json['email'] as String,
-      password: json['password'] as String,
-      name: json['name'] as String,
-      department: json['department'] as String,
-      batch: json['batch'] as String,
-      graduationYear: json['graduationYear'] as String,
-      phoneNumber: json['phoneNumber'] as String,
-      address: json['address'] as String,
-      longitudes: json['longitudes'] as String?,
-      latitudes: json['latitudes'] as String?,
-    );
-
-Map<String, dynamic> _$$SignUpBodyImplToJson(_$SignUpBodyImpl instance) =>
-    <String, dynamic>{
-      'email': instance.email,
-      'password': instance.password,
-      'name': instance.name,
-      'department': instance.department,
-      'batch': instance.batch,
-      'graduationYear': instance.graduationYear,
-      'phoneNumber': instance.phoneNumber,
-      'address': instance.address,
-      'longitudes': instance.longitudes,
-      'latitudes': instance.latitudes,
     };
 
 _$SignInWithGoogleResponseImpl _$$SignInWithGoogleResponseImplFromJson(

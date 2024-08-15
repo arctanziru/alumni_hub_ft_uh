@@ -25,12 +25,12 @@ mixin _$AlumniModel {
   @JsonKey(name: 'id_user')
   int get idUser => throw _privateConstructorUsedError;
   String get nim => throw _privateConstructorUsedError;
+  @JsonKey(name: 'no_anggota')
+  String? get NoAnggota => throw _privateConstructorUsedError;
   String get nama => throw _privateConstructorUsedError;
   @JsonKey(name: 'tgl_lahir')
   String get tglLahir => throw _privateConstructorUsedError;
   String get jurusan => throw _privateConstructorUsedError;
-  @JsonKey(name: 'no_telp')
-  String get noTelp => throw _privateConstructorUsedError;
   String get angkatan => throw _privateConstructorUsedError;
   String get kelamin => throw _privateConstructorUsedError;
   String get agama => throw _privateConstructorUsedError;
@@ -58,10 +58,10 @@ abstract class $AlumniModelCopyWith<$Res> {
       {@JsonKey(name: 'id_alumni') int idAlumni,
       @JsonKey(name: 'id_user') int idUser,
       String nim,
+      @JsonKey(name: 'no_anggota') String? NoAnggota,
       String nama,
       @JsonKey(name: 'tgl_lahir') String tglLahir,
       String jurusan,
-      @JsonKey(name: 'no_telp') String noTelp,
       String angkatan,
       String kelamin,
       String agama,
@@ -87,10 +87,10 @@ class _$AlumniModelCopyWithImpl<$Res, $Val extends AlumniModel>
     Object? idAlumni = null,
     Object? idUser = null,
     Object? nim = null,
+    Object? NoAnggota = freezed,
     Object? nama = null,
     Object? tglLahir = null,
     Object? jurusan = null,
-    Object? noTelp = null,
     Object? angkatan = null,
     Object? kelamin = null,
     Object? agama = null,
@@ -112,6 +112,10 @@ class _$AlumniModelCopyWithImpl<$Res, $Val extends AlumniModel>
           ? _value.nim
           : nim // ignore: cast_nullable_to_non_nullable
               as String,
+      NoAnggota: freezed == NoAnggota
+          ? _value.NoAnggota
+          : NoAnggota // ignore: cast_nullable_to_non_nullable
+              as String?,
       nama: null == nama
           ? _value.nama
           : nama // ignore: cast_nullable_to_non_nullable
@@ -123,10 +127,6 @@ class _$AlumniModelCopyWithImpl<$Res, $Val extends AlumniModel>
       jurusan: null == jurusan
           ? _value.jurusan
           : jurusan // ignore: cast_nullable_to_non_nullable
-              as String,
-      noTelp: null == noTelp
-          ? _value.noTelp
-          : noTelp // ignore: cast_nullable_to_non_nullable
               as String,
       angkatan: null == angkatan
           ? _value.angkatan
@@ -172,10 +172,10 @@ abstract class _$$AlumniModelImplCopyWith<$Res>
       {@JsonKey(name: 'id_alumni') int idAlumni,
       @JsonKey(name: 'id_user') int idUser,
       String nim,
+      @JsonKey(name: 'no_anggota') String? NoAnggota,
       String nama,
       @JsonKey(name: 'tgl_lahir') String tglLahir,
       String jurusan,
-      @JsonKey(name: 'no_telp') String noTelp,
       String angkatan,
       String kelamin,
       String agama,
@@ -199,10 +199,10 @@ class __$$AlumniModelImplCopyWithImpl<$Res>
     Object? idAlumni = null,
     Object? idUser = null,
     Object? nim = null,
+    Object? NoAnggota = freezed,
     Object? nama = null,
     Object? tglLahir = null,
     Object? jurusan = null,
-    Object? noTelp = null,
     Object? angkatan = null,
     Object? kelamin = null,
     Object? agama = null,
@@ -224,6 +224,10 @@ class __$$AlumniModelImplCopyWithImpl<$Res>
           ? _value.nim
           : nim // ignore: cast_nullable_to_non_nullable
               as String,
+      NoAnggota: freezed == NoAnggota
+          ? _value.NoAnggota
+          : NoAnggota // ignore: cast_nullable_to_non_nullable
+              as String?,
       nama: null == nama
           ? _value.nama
           : nama // ignore: cast_nullable_to_non_nullable
@@ -235,10 +239,6 @@ class __$$AlumniModelImplCopyWithImpl<$Res>
       jurusan: null == jurusan
           ? _value.jurusan
           : jurusan // ignore: cast_nullable_to_non_nullable
-              as String,
-      noTelp: null == noTelp
-          ? _value.noTelp
-          : noTelp // ignore: cast_nullable_to_non_nullable
               as String,
       angkatan: null == angkatan
           ? _value.angkatan
@@ -279,10 +279,10 @@ class _$AlumniModelImpl implements _AlumniModel {
       {@JsonKey(name: 'id_alumni') required this.idAlumni,
       @JsonKey(name: 'id_user') required this.idUser,
       required this.nim,
+      @JsonKey(name: 'no_anggota') required this.NoAnggota,
       required this.nama,
       @JsonKey(name: 'tgl_lahir') required this.tglLahir,
       required this.jurusan,
-      @JsonKey(name: 'no_telp') required this.noTelp,
       required this.angkatan,
       required this.kelamin,
       required this.agama,
@@ -303,15 +303,15 @@ class _$AlumniModelImpl implements _AlumniModel {
   @override
   final String nim;
   @override
+  @JsonKey(name: 'no_anggota')
+  final String? NoAnggota;
+  @override
   final String nama;
   @override
   @JsonKey(name: 'tgl_lahir')
   final String tglLahir;
   @override
   final String jurusan;
-  @override
-  @JsonKey(name: 'no_telp')
-  final String noTelp;
   @override
   final String angkatan;
   @override
@@ -332,7 +332,7 @@ class _$AlumniModelImpl implements _AlumniModel {
 
   @override
   String toString() {
-    return 'AlumniModel(idAlumni: $idAlumni, idUser: $idUser, nim: $nim, nama: $nama, tglLahir: $tglLahir, jurusan: $jurusan, noTelp: $noTelp, angkatan: $angkatan, kelamin: $kelamin, agama: $agama, golonganDarah: $golonganDarah, validated: $validated, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'AlumniModel(idAlumni: $idAlumni, idUser: $idUser, nim: $nim, NoAnggota: $NoAnggota, nama: $nama, tglLahir: $tglLahir, jurusan: $jurusan, angkatan: $angkatan, kelamin: $kelamin, agama: $agama, golonganDarah: $golonganDarah, validated: $validated, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 
   @override
@@ -344,11 +344,12 @@ class _$AlumniModelImpl implements _AlumniModel {
                 other.idAlumni == idAlumni) &&
             (identical(other.idUser, idUser) || other.idUser == idUser) &&
             (identical(other.nim, nim) || other.nim == nim) &&
+            (identical(other.NoAnggota, NoAnggota) ||
+                other.NoAnggota == NoAnggota) &&
             (identical(other.nama, nama) || other.nama == nama) &&
             (identical(other.tglLahir, tglLahir) ||
                 other.tglLahir == tglLahir) &&
             (identical(other.jurusan, jurusan) || other.jurusan == jurusan) &&
-            (identical(other.noTelp, noTelp) || other.noTelp == noTelp) &&
             (identical(other.angkatan, angkatan) ||
                 other.angkatan == angkatan) &&
             (identical(other.kelamin, kelamin) || other.kelamin == kelamin) &&
@@ -370,10 +371,10 @@ class _$AlumniModelImpl implements _AlumniModel {
       idAlumni,
       idUser,
       nim,
+      NoAnggota,
       nama,
       tglLahir,
       jurusan,
-      noTelp,
       angkatan,
       kelamin,
       agama,
@@ -401,10 +402,10 @@ abstract class _AlumniModel implements AlumniModel {
           {@JsonKey(name: 'id_alumni') required final int idAlumni,
           @JsonKey(name: 'id_user') required final int idUser,
           required final String nim,
+          @JsonKey(name: 'no_anggota') required final String? NoAnggota,
           required final String nama,
           @JsonKey(name: 'tgl_lahir') required final String tglLahir,
           required final String jurusan,
-          @JsonKey(name: 'no_telp') required final String noTelp,
           required final String angkatan,
           required final String kelamin,
           required final String agama,
@@ -426,15 +427,15 @@ abstract class _AlumniModel implements AlumniModel {
   @override
   String get nim;
   @override
+  @JsonKey(name: 'no_anggota')
+  String? get NoAnggota;
+  @override
   String get nama;
   @override
   @JsonKey(name: 'tgl_lahir')
   String get tglLahir;
   @override
   String get jurusan;
-  @override
-  @JsonKey(name: 'no_telp')
-  String get noTelp;
   @override
   String get angkatan;
   @override

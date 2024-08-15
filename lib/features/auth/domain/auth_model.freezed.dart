@@ -14,6 +14,615 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
+SignUpResponse _$SignUpResponseFromJson(Map<String, dynamic> json) {
+  return _SignUpResponse.fromJson(json);
+}
+
+/// @nodoc
+mixin _$SignUpResponse {
+  bool get success => throw _privateConstructorUsedError;
+  String get message => throw _privateConstructorUsedError;
+  SignUpResponseData get data => throw _privateConstructorUsedError;
+  String get token => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $SignUpResponseCopyWith<SignUpResponse> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $SignUpResponseCopyWith<$Res> {
+  factory $SignUpResponseCopyWith(
+          SignUpResponse value, $Res Function(SignUpResponse) then) =
+      _$SignUpResponseCopyWithImpl<$Res, SignUpResponse>;
+  @useResult
+  $Res call(
+      {bool success, String message, SignUpResponseData data, String token});
+
+  $SignUpResponseDataCopyWith<$Res> get data;
+}
+
+/// @nodoc
+class _$SignUpResponseCopyWithImpl<$Res, $Val extends SignUpResponse>
+    implements $SignUpResponseCopyWith<$Res> {
+  _$SignUpResponseCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? success = null,
+    Object? message = null,
+    Object? data = null,
+    Object? token = null,
+  }) {
+    return _then(_value.copyWith(
+      success: null == success
+          ? _value.success
+          : success // ignore: cast_nullable_to_non_nullable
+              as bool,
+      message: null == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String,
+      data: null == data
+          ? _value.data
+          : data // ignore: cast_nullable_to_non_nullable
+              as SignUpResponseData,
+      token: null == token
+          ? _value.token
+          : token // ignore: cast_nullable_to_non_nullable
+              as String,
+    ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $SignUpResponseDataCopyWith<$Res> get data {
+    return $SignUpResponseDataCopyWith<$Res>(_value.data, (value) {
+      return _then(_value.copyWith(data: value) as $Val);
+    });
+  }
+}
+
+/// @nodoc
+abstract class _$$SignUpResponseImplCopyWith<$Res>
+    implements $SignUpResponseCopyWith<$Res> {
+  factory _$$SignUpResponseImplCopyWith(_$SignUpResponseImpl value,
+          $Res Function(_$SignUpResponseImpl) then) =
+      __$$SignUpResponseImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {bool success, String message, SignUpResponseData data, String token});
+
+  @override
+  $SignUpResponseDataCopyWith<$Res> get data;
+}
+
+/// @nodoc
+class __$$SignUpResponseImplCopyWithImpl<$Res>
+    extends _$SignUpResponseCopyWithImpl<$Res, _$SignUpResponseImpl>
+    implements _$$SignUpResponseImplCopyWith<$Res> {
+  __$$SignUpResponseImplCopyWithImpl(
+      _$SignUpResponseImpl _value, $Res Function(_$SignUpResponseImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? success = null,
+    Object? message = null,
+    Object? data = null,
+    Object? token = null,
+  }) {
+    return _then(_$SignUpResponseImpl(
+      success: null == success
+          ? _value.success
+          : success // ignore: cast_nullable_to_non_nullable
+              as bool,
+      message: null == message
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String,
+      data: null == data
+          ? _value.data
+          : data // ignore: cast_nullable_to_non_nullable
+              as SignUpResponseData,
+      token: null == token
+          ? _value.token
+          : token // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$SignUpResponseImpl implements _SignUpResponse {
+  const _$SignUpResponseImpl(
+      {required this.success,
+      required this.message,
+      required this.data,
+      required this.token});
+
+  factory _$SignUpResponseImpl.fromJson(Map<String, dynamic> json) =>
+      _$$SignUpResponseImplFromJson(json);
+
+  @override
+  final bool success;
+  @override
+  final String message;
+  @override
+  final SignUpResponseData data;
+  @override
+  final String token;
+
+  @override
+  String toString() {
+    return 'SignUpResponse(success: $success, message: $message, data: $data, token: $token)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$SignUpResponseImpl &&
+            (identical(other.success, success) || other.success == success) &&
+            (identical(other.message, message) || other.message == message) &&
+            (identical(other.data, data) || other.data == data) &&
+            (identical(other.token, token) || other.token == token));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(runtimeType, success, message, data, token);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$SignUpResponseImplCopyWith<_$SignUpResponseImpl> get copyWith =>
+      __$$SignUpResponseImplCopyWithImpl<_$SignUpResponseImpl>(
+          this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$SignUpResponseImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _SignUpResponse implements SignUpResponse {
+  const factory _SignUpResponse(
+      {required final bool success,
+      required final String message,
+      required final SignUpResponseData data,
+      required final String token}) = _$SignUpResponseImpl;
+
+  factory _SignUpResponse.fromJson(Map<String, dynamic> json) =
+      _$SignUpResponseImpl.fromJson;
+
+  @override
+  bool get success;
+  @override
+  String get message;
+  @override
+  SignUpResponseData get data;
+  @override
+  String get token;
+  @override
+  @JsonKey(ignore: true)
+  _$$SignUpResponseImplCopyWith<_$SignUpResponseImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+SignUpResponseData _$SignUpResponseDataFromJson(Map<String, dynamic> json) {
+  return _SignUpResponseData.fromJson(json);
+}
+
+/// @nodoc
+mixin _$SignUpResponseData {
+  String get email => throw _privateConstructorUsedError;
+  @JsonKey(name: 'updated_at')
+  String get updatedAt => throw _privateConstructorUsedError;
+  @JsonKey(name: 'created_at')
+  String get createdAt => throw _privateConstructorUsedError;
+  @JsonKey(name: 'id_user')
+  int get idUser => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $SignUpResponseDataCopyWith<SignUpResponseData> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $SignUpResponseDataCopyWith<$Res> {
+  factory $SignUpResponseDataCopyWith(
+          SignUpResponseData value, $Res Function(SignUpResponseData) then) =
+      _$SignUpResponseDataCopyWithImpl<$Res, SignUpResponseData>;
+  @useResult
+  $Res call(
+      {String email,
+      @JsonKey(name: 'updated_at') String updatedAt,
+      @JsonKey(name: 'created_at') String createdAt,
+      @JsonKey(name: 'id_user') int idUser});
+}
+
+/// @nodoc
+class _$SignUpResponseDataCopyWithImpl<$Res, $Val extends SignUpResponseData>
+    implements $SignUpResponseDataCopyWith<$Res> {
+  _$SignUpResponseDataCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? email = null,
+    Object? updatedAt = null,
+    Object? createdAt = null,
+    Object? idUser = null,
+  }) {
+    return _then(_value.copyWith(
+      email: null == email
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String,
+      updatedAt: null == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as String,
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as String,
+      idUser: null == idUser
+          ? _value.idUser
+          : idUser // ignore: cast_nullable_to_non_nullable
+              as int,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$SignUpResponseDataImplCopyWith<$Res>
+    implements $SignUpResponseDataCopyWith<$Res> {
+  factory _$$SignUpResponseDataImplCopyWith(_$SignUpResponseDataImpl value,
+          $Res Function(_$SignUpResponseDataImpl) then) =
+      __$$SignUpResponseDataImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {String email,
+      @JsonKey(name: 'updated_at') String updatedAt,
+      @JsonKey(name: 'created_at') String createdAt,
+      @JsonKey(name: 'id_user') int idUser});
+}
+
+/// @nodoc
+class __$$SignUpResponseDataImplCopyWithImpl<$Res>
+    extends _$SignUpResponseDataCopyWithImpl<$Res, _$SignUpResponseDataImpl>
+    implements _$$SignUpResponseDataImplCopyWith<$Res> {
+  __$$SignUpResponseDataImplCopyWithImpl(_$SignUpResponseDataImpl _value,
+      $Res Function(_$SignUpResponseDataImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? email = null,
+    Object? updatedAt = null,
+    Object? createdAt = null,
+    Object? idUser = null,
+  }) {
+    return _then(_$SignUpResponseDataImpl(
+      email: null == email
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String,
+      updatedAt: null == updatedAt
+          ? _value.updatedAt
+          : updatedAt // ignore: cast_nullable_to_non_nullable
+              as String,
+      createdAt: null == createdAt
+          ? _value.createdAt
+          : createdAt // ignore: cast_nullable_to_non_nullable
+              as String,
+      idUser: null == idUser
+          ? _value.idUser
+          : idUser // ignore: cast_nullable_to_non_nullable
+              as int,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$SignUpResponseDataImpl implements _SignUpResponseData {
+  const _$SignUpResponseDataImpl(
+      {required this.email,
+      @JsonKey(name: 'updated_at') required this.updatedAt,
+      @JsonKey(name: 'created_at') required this.createdAt,
+      @JsonKey(name: 'id_user') required this.idUser});
+
+  factory _$SignUpResponseDataImpl.fromJson(Map<String, dynamic> json) =>
+      _$$SignUpResponseDataImplFromJson(json);
+
+  @override
+  final String email;
+  @override
+  @JsonKey(name: 'updated_at')
+  final String updatedAt;
+  @override
+  @JsonKey(name: 'created_at')
+  final String createdAt;
+  @override
+  @JsonKey(name: 'id_user')
+  final int idUser;
+
+  @override
+  String toString() {
+    return 'SignUpResponseData(email: $email, updatedAt: $updatedAt, createdAt: $createdAt, idUser: $idUser)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$SignUpResponseDataImpl &&
+            (identical(other.email, email) || other.email == email) &&
+            (identical(other.updatedAt, updatedAt) ||
+                other.updatedAt == updatedAt) &&
+            (identical(other.createdAt, createdAt) ||
+                other.createdAt == createdAt) &&
+            (identical(other.idUser, idUser) || other.idUser == idUser));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, email, updatedAt, createdAt, idUser);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$SignUpResponseDataImplCopyWith<_$SignUpResponseDataImpl> get copyWith =>
+      __$$SignUpResponseDataImplCopyWithImpl<_$SignUpResponseDataImpl>(
+          this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$SignUpResponseDataImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _SignUpResponseData implements SignUpResponseData {
+  const factory _SignUpResponseData(
+          {required final String email,
+          @JsonKey(name: 'updated_at') required final String updatedAt,
+          @JsonKey(name: 'created_at') required final String createdAt,
+          @JsonKey(name: 'id_user') required final int idUser}) =
+      _$SignUpResponseDataImpl;
+
+  factory _SignUpResponseData.fromJson(Map<String, dynamic> json) =
+      _$SignUpResponseDataImpl.fromJson;
+
+  @override
+  String get email;
+  @override
+  @JsonKey(name: 'updated_at')
+  String get updatedAt;
+  @override
+  @JsonKey(name: 'created_at')
+  String get createdAt;
+  @override
+  @JsonKey(name: 'id_user')
+  int get idUser;
+  @override
+  @JsonKey(ignore: true)
+  _$$SignUpResponseDataImplCopyWith<_$SignUpResponseDataImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+SignUpBody _$SignUpBodyFromJson(Map<String, dynamic> json) {
+  return _SignUpBody.fromJson(json);
+}
+
+/// @nodoc
+mixin _$SignUpBody {
+  String get email => throw _privateConstructorUsedError;
+  String get password => throw _privateConstructorUsedError;
+  @JsonKey(name: 'password_confirmation')
+  String get confirmPassword => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $SignUpBodyCopyWith<SignUpBody> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $SignUpBodyCopyWith<$Res> {
+  factory $SignUpBodyCopyWith(
+          SignUpBody value, $Res Function(SignUpBody) then) =
+      _$SignUpBodyCopyWithImpl<$Res, SignUpBody>;
+  @useResult
+  $Res call(
+      {String email,
+      String password,
+      @JsonKey(name: 'password_confirmation') String confirmPassword});
+}
+
+/// @nodoc
+class _$SignUpBodyCopyWithImpl<$Res, $Val extends SignUpBody>
+    implements $SignUpBodyCopyWith<$Res> {
+  _$SignUpBodyCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? email = null,
+    Object? password = null,
+    Object? confirmPassword = null,
+  }) {
+    return _then(_value.copyWith(
+      email: null == email
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String,
+      password: null == password
+          ? _value.password
+          : password // ignore: cast_nullable_to_non_nullable
+              as String,
+      confirmPassword: null == confirmPassword
+          ? _value.confirmPassword
+          : confirmPassword // ignore: cast_nullable_to_non_nullable
+              as String,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$SignUpBodyImplCopyWith<$Res>
+    implements $SignUpBodyCopyWith<$Res> {
+  factory _$$SignUpBodyImplCopyWith(
+          _$SignUpBodyImpl value, $Res Function(_$SignUpBodyImpl) then) =
+      __$$SignUpBodyImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {String email,
+      String password,
+      @JsonKey(name: 'password_confirmation') String confirmPassword});
+}
+
+/// @nodoc
+class __$$SignUpBodyImplCopyWithImpl<$Res>
+    extends _$SignUpBodyCopyWithImpl<$Res, _$SignUpBodyImpl>
+    implements _$$SignUpBodyImplCopyWith<$Res> {
+  __$$SignUpBodyImplCopyWithImpl(
+      _$SignUpBodyImpl _value, $Res Function(_$SignUpBodyImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? email = null,
+    Object? password = null,
+    Object? confirmPassword = null,
+  }) {
+    return _then(_$SignUpBodyImpl(
+      email: null == email
+          ? _value.email
+          : email // ignore: cast_nullable_to_non_nullable
+              as String,
+      password: null == password
+          ? _value.password
+          : password // ignore: cast_nullable_to_non_nullable
+              as String,
+      confirmPassword: null == confirmPassword
+          ? _value.confirmPassword
+          : confirmPassword // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$SignUpBodyImpl implements _SignUpBody {
+  const _$SignUpBodyImpl(
+      {required this.email,
+      required this.password,
+      @JsonKey(name: 'password_confirmation') required this.confirmPassword});
+
+  factory _$SignUpBodyImpl.fromJson(Map<String, dynamic> json) =>
+      _$$SignUpBodyImplFromJson(json);
+
+  @override
+  final String email;
+  @override
+  final String password;
+  @override
+  @JsonKey(name: 'password_confirmation')
+  final String confirmPassword;
+
+  @override
+  String toString() {
+    return 'SignUpBody(email: $email, password: $password, confirmPassword: $confirmPassword)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$SignUpBodyImpl &&
+            (identical(other.email, email) || other.email == email) &&
+            (identical(other.password, password) ||
+                other.password == password) &&
+            (identical(other.confirmPassword, confirmPassword) ||
+                other.confirmPassword == confirmPassword));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode =>
+      Object.hash(runtimeType, email, password, confirmPassword);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$SignUpBodyImplCopyWith<_$SignUpBodyImpl> get copyWith =>
+      __$$SignUpBodyImplCopyWithImpl<_$SignUpBodyImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$SignUpBodyImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _SignUpBody implements SignUpBody {
+  const factory _SignUpBody(
+      {required final String email,
+      required final String password,
+      @JsonKey(name: 'password_confirmation')
+      required final String confirmPassword}) = _$SignUpBodyImpl;
+
+  factory _SignUpBody.fromJson(Map<String, dynamic> json) =
+      _$SignUpBodyImpl.fromJson;
+
+  @override
+  String get email;
+  @override
+  String get password;
+  @override
+  @JsonKey(name: 'password_confirmation')
+  String get confirmPassword;
+  @override
+  @JsonKey(ignore: true)
+  _$$SignUpBodyImplCopyWith<_$SignUpBodyImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
 SignInResponse _$SignInResponseFromJson(Map<String, dynamic> json) {
   return _SignInResponse.fromJson(json);
 }
@@ -512,511 +1121,6 @@ abstract class _SignInBody implements SignInBody {
   @override
   @JsonKey(ignore: true)
   _$$SignInBodyImplCopyWith<_$SignInBodyImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-SignUpResponse _$SignUpResponseFromJson(Map<String, dynamic> json) {
-  return _SignUpResponse.fromJson(json);
-}
-
-/// @nodoc
-mixin _$SignUpResponse {
-  String get token => throw _privateConstructorUsedError;
-  UserModel get user => throw _privateConstructorUsedError;
-
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  $SignUpResponseCopyWith<SignUpResponse> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $SignUpResponseCopyWith<$Res> {
-  factory $SignUpResponseCopyWith(
-          SignUpResponse value, $Res Function(SignUpResponse) then) =
-      _$SignUpResponseCopyWithImpl<$Res, SignUpResponse>;
-  @useResult
-  $Res call({String token, UserModel user});
-
-  $UserModelCopyWith<$Res> get user;
-}
-
-/// @nodoc
-class _$SignUpResponseCopyWithImpl<$Res, $Val extends SignUpResponse>
-    implements $SignUpResponseCopyWith<$Res> {
-  _$SignUpResponseCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? token = null,
-    Object? user = null,
-  }) {
-    return _then(_value.copyWith(
-      token: null == token
-          ? _value.token
-          : token // ignore: cast_nullable_to_non_nullable
-              as String,
-      user: null == user
-          ? _value.user
-          : user // ignore: cast_nullable_to_non_nullable
-              as UserModel,
-    ) as $Val);
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $UserModelCopyWith<$Res> get user {
-    return $UserModelCopyWith<$Res>(_value.user, (value) {
-      return _then(_value.copyWith(user: value) as $Val);
-    });
-  }
-}
-
-/// @nodoc
-abstract class _$$SignUpResponseImplCopyWith<$Res>
-    implements $SignUpResponseCopyWith<$Res> {
-  factory _$$SignUpResponseImplCopyWith(_$SignUpResponseImpl value,
-          $Res Function(_$SignUpResponseImpl) then) =
-      __$$SignUpResponseImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call({String token, UserModel user});
-
-  @override
-  $UserModelCopyWith<$Res> get user;
-}
-
-/// @nodoc
-class __$$SignUpResponseImplCopyWithImpl<$Res>
-    extends _$SignUpResponseCopyWithImpl<$Res, _$SignUpResponseImpl>
-    implements _$$SignUpResponseImplCopyWith<$Res> {
-  __$$SignUpResponseImplCopyWithImpl(
-      _$SignUpResponseImpl _value, $Res Function(_$SignUpResponseImpl) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? token = null,
-    Object? user = null,
-  }) {
-    return _then(_$SignUpResponseImpl(
-      token: null == token
-          ? _value.token
-          : token // ignore: cast_nullable_to_non_nullable
-              as String,
-      user: null == user
-          ? _value.user
-          : user // ignore: cast_nullable_to_non_nullable
-              as UserModel,
-    ));
-  }
-}
-
-/// @nodoc
-@JsonSerializable()
-class _$SignUpResponseImpl implements _SignUpResponse {
-  const _$SignUpResponseImpl({required this.token, required this.user});
-
-  factory _$SignUpResponseImpl.fromJson(Map<String, dynamic> json) =>
-      _$$SignUpResponseImplFromJson(json);
-
-  @override
-  final String token;
-  @override
-  final UserModel user;
-
-  @override
-  String toString() {
-    return 'SignUpResponse(token: $token, user: $user)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$SignUpResponseImpl &&
-            (identical(other.token, token) || other.token == token) &&
-            (identical(other.user, user) || other.user == user));
-  }
-
-  @JsonKey(ignore: true)
-  @override
-  int get hashCode => Object.hash(runtimeType, token, user);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$SignUpResponseImplCopyWith<_$SignUpResponseImpl> get copyWith =>
-      __$$SignUpResponseImplCopyWithImpl<_$SignUpResponseImpl>(
-          this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$SignUpResponseImplToJson(
-      this,
-    );
-  }
-}
-
-abstract class _SignUpResponse implements SignUpResponse {
-  const factory _SignUpResponse(
-      {required final String token,
-      required final UserModel user}) = _$SignUpResponseImpl;
-
-  factory _SignUpResponse.fromJson(Map<String, dynamic> json) =
-      _$SignUpResponseImpl.fromJson;
-
-  @override
-  String get token;
-  @override
-  UserModel get user;
-  @override
-  @JsonKey(ignore: true)
-  _$$SignUpResponseImplCopyWith<_$SignUpResponseImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-SignUpBody _$SignUpBodyFromJson(Map<String, dynamic> json) {
-  return _SignUpBody.fromJson(json);
-}
-
-/// @nodoc
-mixin _$SignUpBody {
-  String get email => throw _privateConstructorUsedError;
-  String get password => throw _privateConstructorUsedError;
-  String get name => throw _privateConstructorUsedError;
-  String get department => throw _privateConstructorUsedError;
-  String get batch => throw _privateConstructorUsedError;
-  String get graduationYear => throw _privateConstructorUsedError;
-  String get phoneNumber => throw _privateConstructorUsedError;
-  String get address => throw _privateConstructorUsedError;
-  String? get longitudes => throw _privateConstructorUsedError;
-  String? get latitudes => throw _privateConstructorUsedError;
-
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  $SignUpBodyCopyWith<SignUpBody> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $SignUpBodyCopyWith<$Res> {
-  factory $SignUpBodyCopyWith(
-          SignUpBody value, $Res Function(SignUpBody) then) =
-      _$SignUpBodyCopyWithImpl<$Res, SignUpBody>;
-  @useResult
-  $Res call(
-      {String email,
-      String password,
-      String name,
-      String department,
-      String batch,
-      String graduationYear,
-      String phoneNumber,
-      String address,
-      String? longitudes,
-      String? latitudes});
-}
-
-/// @nodoc
-class _$SignUpBodyCopyWithImpl<$Res, $Val extends SignUpBody>
-    implements $SignUpBodyCopyWith<$Res> {
-  _$SignUpBodyCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? email = null,
-    Object? password = null,
-    Object? name = null,
-    Object? department = null,
-    Object? batch = null,
-    Object? graduationYear = null,
-    Object? phoneNumber = null,
-    Object? address = null,
-    Object? longitudes = freezed,
-    Object? latitudes = freezed,
-  }) {
-    return _then(_value.copyWith(
-      email: null == email
-          ? _value.email
-          : email // ignore: cast_nullable_to_non_nullable
-              as String,
-      password: null == password
-          ? _value.password
-          : password // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      department: null == department
-          ? _value.department
-          : department // ignore: cast_nullable_to_non_nullable
-              as String,
-      batch: null == batch
-          ? _value.batch
-          : batch // ignore: cast_nullable_to_non_nullable
-              as String,
-      graduationYear: null == graduationYear
-          ? _value.graduationYear
-          : graduationYear // ignore: cast_nullable_to_non_nullable
-              as String,
-      phoneNumber: null == phoneNumber
-          ? _value.phoneNumber
-          : phoneNumber // ignore: cast_nullable_to_non_nullable
-              as String,
-      address: null == address
-          ? _value.address
-          : address // ignore: cast_nullable_to_non_nullable
-              as String,
-      longitudes: freezed == longitudes
-          ? _value.longitudes
-          : longitudes // ignore: cast_nullable_to_non_nullable
-              as String?,
-      latitudes: freezed == latitudes
-          ? _value.latitudes
-          : latitudes // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ) as $Val);
-  }
-}
-
-/// @nodoc
-abstract class _$$SignUpBodyImplCopyWith<$Res>
-    implements $SignUpBodyCopyWith<$Res> {
-  factory _$$SignUpBodyImplCopyWith(
-          _$SignUpBodyImpl value, $Res Function(_$SignUpBodyImpl) then) =
-      __$$SignUpBodyImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call(
-      {String email,
-      String password,
-      String name,
-      String department,
-      String batch,
-      String graduationYear,
-      String phoneNumber,
-      String address,
-      String? longitudes,
-      String? latitudes});
-}
-
-/// @nodoc
-class __$$SignUpBodyImplCopyWithImpl<$Res>
-    extends _$SignUpBodyCopyWithImpl<$Res, _$SignUpBodyImpl>
-    implements _$$SignUpBodyImplCopyWith<$Res> {
-  __$$SignUpBodyImplCopyWithImpl(
-      _$SignUpBodyImpl _value, $Res Function(_$SignUpBodyImpl) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? email = null,
-    Object? password = null,
-    Object? name = null,
-    Object? department = null,
-    Object? batch = null,
-    Object? graduationYear = null,
-    Object? phoneNumber = null,
-    Object? address = null,
-    Object? longitudes = freezed,
-    Object? latitudes = freezed,
-  }) {
-    return _then(_$SignUpBodyImpl(
-      email: null == email
-          ? _value.email
-          : email // ignore: cast_nullable_to_non_nullable
-              as String,
-      password: null == password
-          ? _value.password
-          : password // ignore: cast_nullable_to_non_nullable
-              as String,
-      name: null == name
-          ? _value.name
-          : name // ignore: cast_nullable_to_non_nullable
-              as String,
-      department: null == department
-          ? _value.department
-          : department // ignore: cast_nullable_to_non_nullable
-              as String,
-      batch: null == batch
-          ? _value.batch
-          : batch // ignore: cast_nullable_to_non_nullable
-              as String,
-      graduationYear: null == graduationYear
-          ? _value.graduationYear
-          : graduationYear // ignore: cast_nullable_to_non_nullable
-              as String,
-      phoneNumber: null == phoneNumber
-          ? _value.phoneNumber
-          : phoneNumber // ignore: cast_nullable_to_non_nullable
-              as String,
-      address: null == address
-          ? _value.address
-          : address // ignore: cast_nullable_to_non_nullable
-              as String,
-      longitudes: freezed == longitudes
-          ? _value.longitudes
-          : longitudes // ignore: cast_nullable_to_non_nullable
-              as String?,
-      latitudes: freezed == latitudes
-          ? _value.latitudes
-          : latitudes // ignore: cast_nullable_to_non_nullable
-              as String?,
-    ));
-  }
-}
-
-/// @nodoc
-@JsonSerializable()
-class _$SignUpBodyImpl implements _SignUpBody {
-  const _$SignUpBodyImpl(
-      {required this.email,
-      required this.password,
-      required this.name,
-      required this.department,
-      required this.batch,
-      required this.graduationYear,
-      required this.phoneNumber,
-      required this.address,
-      this.longitudes,
-      this.latitudes});
-
-  factory _$SignUpBodyImpl.fromJson(Map<String, dynamic> json) =>
-      _$$SignUpBodyImplFromJson(json);
-
-  @override
-  final String email;
-  @override
-  final String password;
-  @override
-  final String name;
-  @override
-  final String department;
-  @override
-  final String batch;
-  @override
-  final String graduationYear;
-  @override
-  final String phoneNumber;
-  @override
-  final String address;
-  @override
-  final String? longitudes;
-  @override
-  final String? latitudes;
-
-  @override
-  String toString() {
-    return 'SignUpBody(email: $email, password: $password, name: $name, department: $department, batch: $batch, graduationYear: $graduationYear, phoneNumber: $phoneNumber, address: $address, longitudes: $longitudes, latitudes: $latitudes)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$SignUpBodyImpl &&
-            (identical(other.email, email) || other.email == email) &&
-            (identical(other.password, password) ||
-                other.password == password) &&
-            (identical(other.name, name) || other.name == name) &&
-            (identical(other.department, department) ||
-                other.department == department) &&
-            (identical(other.batch, batch) || other.batch == batch) &&
-            (identical(other.graduationYear, graduationYear) ||
-                other.graduationYear == graduationYear) &&
-            (identical(other.phoneNumber, phoneNumber) ||
-                other.phoneNumber == phoneNumber) &&
-            (identical(other.address, address) || other.address == address) &&
-            (identical(other.longitudes, longitudes) ||
-                other.longitudes == longitudes) &&
-            (identical(other.latitudes, latitudes) ||
-                other.latitudes == latitudes));
-  }
-
-  @JsonKey(ignore: true)
-  @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      email,
-      password,
-      name,
-      department,
-      batch,
-      graduationYear,
-      phoneNumber,
-      address,
-      longitudes,
-      latitudes);
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$SignUpBodyImplCopyWith<_$SignUpBodyImpl> get copyWith =>
-      __$$SignUpBodyImplCopyWithImpl<_$SignUpBodyImpl>(this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$SignUpBodyImplToJson(
-      this,
-    );
-  }
-}
-
-abstract class _SignUpBody implements SignUpBody {
-  const factory _SignUpBody(
-      {required final String email,
-      required final String password,
-      required final String name,
-      required final String department,
-      required final String batch,
-      required final String graduationYear,
-      required final String phoneNumber,
-      required final String address,
-      final String? longitudes,
-      final String? latitudes}) = _$SignUpBodyImpl;
-
-  factory _SignUpBody.fromJson(Map<String, dynamic> json) =
-      _$SignUpBodyImpl.fromJson;
-
-  @override
-  String get email;
-  @override
-  String get password;
-  @override
-  String get name;
-  @override
-  String get department;
-  @override
-  String get batch;
-  @override
-  String get graduationYear;
-  @override
-  String get phoneNumber;
-  @override
-  String get address;
-  @override
-  String? get longitudes;
-  @override
-  String? get latitudes;
-  @override
-  @JsonKey(ignore: true)
-  _$$SignUpBodyImplCopyWith<_$SignUpBodyImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 

@@ -1,11 +1,49 @@
+import 'package:alumni_hub_ft_uh/features/user/domain/models/user_get_one.dart';
 import 'package:alumni_hub_ft_uh/features/user/domain/models/user_model.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-
-import '../../user/domain/models/user_get_one.dart';
 
 part 'auth_model.freezed.dart';
 part 'auth_model.g.dart';
 
+@freezed
+class SignUpResponse with _$SignUpResponse {
+  const factory SignUpResponse({
+    required bool success,
+    required String message,
+    required SignUpResponseData data,
+    required String token,
+  }) = _SignUpResponse;
+
+  factory SignUpResponse.fromJson(Map<String, dynamic> json) =>
+      _$SignUpResponseFromJson(json);
+}
+
+@freezed
+class SignUpResponseData with _$SignUpResponseData {
+  const factory SignUpResponseData({
+    required String email,
+    @JsonKey(name: 'updated_at') required String updatedAt,
+    @JsonKey(name: 'created_at') required String createdAt,
+    @JsonKey(name: 'id_user') required int idUser,
+  }) = _SignUpResponseData;
+
+  factory SignUpResponseData.fromJson(Map<String, dynamic> json) =>
+      _$SignUpResponseDataFromJson(json);
+}
+
+@freezed
+class SignUpBody with _$SignUpBody {
+  const factory SignUpBody({
+    required String email,
+    required String password,
+    @JsonKey(name: 'password_confirmation') required String confirmPassword,
+  }) = _SignUpBody;
+
+  factory SignUpBody.fromJson(Map<String, dynamic> json) =>
+      _$SignUpBodyFromJson(json);
+}
+
+// Example for other models, like SignInResponse:
 @freezed
 class SignInResponse with _$SignInResponse {
   const factory SignInResponse({
@@ -29,6 +67,7 @@ class SignInResponseData with _$SignInResponseData {
       _$SignInResponseDataFromJson(json);
 }
 
+// Example of SignInBody
 @freezed
 class SignInBody with _$SignInBody {
   const factory SignInBody({
@@ -38,36 +77,6 @@ class SignInBody with _$SignInBody {
 
   factory SignInBody.fromJson(Map<String, dynamic> json) =>
       _$SignInBodyFromJson(json);
-}
-
-@freezed
-class SignUpResponse with _$SignUpResponse {
-  const factory SignUpResponse({
-    required String token,
-    required UserModel user,
-  }) = _SignUpResponse;
-
-  factory SignUpResponse.fromJson(Map<String, dynamic> json) =>
-      _$SignUpResponseFromJson(json);
-}
-
-@freezed
-class SignUpBody with _$SignUpBody {
-  const factory SignUpBody({
-    required String email,
-    required String password,
-    required String name,
-    required String department,
-    required String batch,
-    required String graduationYear,
-    required String phoneNumber,
-    required String address,
-    String? longitudes,
-    String? latitudes,
-  }) = _SignUpBody;
-
-  factory SignUpBody.fromJson(Map<String, dynamic> json) =>
-      _$SignUpBodyFromJson(json);
 }
 
 // New model for Google Sign-In response

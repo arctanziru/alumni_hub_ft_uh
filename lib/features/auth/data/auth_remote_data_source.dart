@@ -19,7 +19,7 @@ class AuthRemoteDataSource {
 
   Future<SignUpResponse> signUp(SignUpBody body) async {
     final response = await _api.createApiCall(
-      endpoint: '/auth/signup',
+      endpoint: '/auth/register',
       method: NetworkCallMethod.post,
       body: body.toJson(),
     );

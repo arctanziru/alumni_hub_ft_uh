@@ -31,11 +31,13 @@ class UserBloc extends Bloc<UserEvent, UserState> {
     on<UserEventSignUp>((event, emit) async {
       emit(UserStateSignUpLoading());
       try {
-        final response = await _authRepository.signUp(event.signUpBody);
+        final signUpResponse = await _authRepository.signUp(event.signUpBody);
+        _userRepository.saveUserSession(
+            UserSession(token: signUpResponse.token, user: null));
         final user = await _userRepository.getProfile();
         _userRepository.saveUserSession(
-            UserSession(token: response.token, user: user.data));
-        emit(UserStateSuccessSignUp(response));
+            UserSession(token: signUpResponse.token, user: user.data));
+        emit(UserStateSuccessSignUp(signUpResponse));
       } on CustomException catch (e) {
         emit(UserStateException(e));
       }

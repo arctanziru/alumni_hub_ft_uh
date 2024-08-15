@@ -11,12 +11,10 @@ import 'package:alumni_hub_ft_uh/features/auth/insert_alumni_data_screen.dart';
 import 'package:alumni_hub_ft_uh/features/auth/splash_screen.dart';
 import 'package:alumni_hub_ft_uh/features/donation/donation_screen.dart';
 import 'package:alumni_hub_ft_uh/features/home/home_screen.dart';
-import 'package:alumni_hub_ft_uh/features/news/news_search_screen.dart';
 import 'package:alumni_hub_ft_uh/features/user/screens/setting_screen.dart';
 import 'package:alumni_hub_ft_uh/features/vacancy/vacancy_screen.dart';
 import 'package:alumni_hub_ft_uh/features/news/news_screen.dart';
 import 'package:alumni_hub_ft_uh/features/search/search_screen.dart';
-import 'package:alumni_hub_ft_uh/features/vacancy/vacancy_search_screen.dart';
 import 'package:flutter/material.dart';
 
 import 'features/auth/sign_up_screen.dart';

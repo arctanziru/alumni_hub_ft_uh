@@ -28,7 +28,6 @@ class AlumniGetManyModelBody with _$AlumniGetManyModelBody {
       _$AlumniGetManyModelBodyFromJson(json);
 }
 
-// The parameters for querying alumni data
 class AlumniGetManyParams extends GetManyParams {
   final int? idAlumni;
   final String? nama;
@@ -40,16 +39,11 @@ class AlumniGetManyParams extends GetManyParams {
     this.nama,
     this.tglLahir,
     this.nim,
-    int? page,
-    int? limit,
-    String? search,
-  }) : super(
-    page: page,
-    limit: limit,
-    search: search,
-  );
+    super.page,
+    super.limit,
+    super.search,
+  });
 
-  // Converts the parameters to a JSON map for the API request
   Map<String, dynamic> toJson() {
     return {
       'id_alumni': idAlumni,

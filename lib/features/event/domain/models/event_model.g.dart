@@ -18,6 +18,7 @@ _$EventModelImpl _$$EventModelImplFromJson(Map<String, dynamic> json) =>
       lokasiEvent: json['lokasi_event'] as String,
       kuota: (json['kuota'] as num).toInt(),
       peserta: (json['peserta'] as num).toInt(),
+      isRegistered: json['isRegistered'] as bool?,
       createdAt: DateTime.parse(json['created_at'] as String),
       updatedAt: DateTime.parse(json['updated_at'] as String),
     );
@@ -34,6 +35,7 @@ Map<String, dynamic> _$$EventModelImplToJson(_$EventModelImpl instance) =>
       'lokasi_event': instance.lokasiEvent,
       'kuota': instance.kuota,
       'peserta': instance.peserta,
+      'isRegistered': instance.isRegistered,
       'created_at': instance.createdAt.toIso8601String(),
       'updated_at': instance.updatedAt.toIso8601String(),
     };

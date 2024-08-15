@@ -6,6 +6,8 @@ import 'package:injectable/injectable.dart';
 abstract class EventRepository {
   InfiniteQuery<EventGetManyModelResponse, int> getEvents(
       EventGetManyParams? params);
+  Mutation<void, int> registerEvent();
+  Mutation<void, int> unregisterEvent();
 }
 
 @LazySingleton(as: EventRepository)
@@ -35,6 +37,24 @@ class EventRepositoryImpl implements EventRepository {
         }
         return state.lastPage!.data.currentPage + 1;
       },
+    );
+  }
+
+  @override
+  Mutation<void, int> registerEvent() {
+    return Mutation<void, int>(
+      key: ['register_event'],
+      queryFn: (idEvent) => _eventRemoteDataSource.registerEvent(idEvent),
+      refetchQueries: ['events'],
+    );
+  }
+
+  @override
+  Mutation<void, int> unregisterEvent() {
+    return Mutation<void, int>(
+      key: ['unregister_event'],
+      queryFn: (idEvent) => _eventRemoteDataSource.unregisterEvent(idEvent),
+      refetchQueries: ['events'],
     );
   }
 }

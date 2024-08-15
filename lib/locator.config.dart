@@ -15,7 +15,6 @@ import 'package:shared_preferences/shared_preferences.dart' as _i460;
 
 import 'data/api.dart' as _i420;
 import 'features/alumni/data/alumni_remote_data_source.dart' as _i475;
-import 'features/alumni/domain/alumni_repository.dart' as _i332;
 import 'features/auth/data/auth_remote_data_source.dart' as _i516;
 import 'features/auth/domain/auth_repository.dart' as _i260;
 import 'features/event/bloc/event_bloc.dart' as _i859;
@@ -56,18 +55,18 @@ Future<_i174.GetIt> $initGetIt(
   gh.lazySingleton<_i420.Api>(() => _i420.Api(gh<_i361.Dio>()));
   gh.singleton<_i225.UserLocalDataSource>(
       () => _i225.UserLocalDataSource(gh<_i460.SharedPreferences>()));
-  gh.singleton<_i785.VacancyRemoteDataSource>(
-      () => _i785.VacancyRemoteDataSource(gh<_i420.Api>()));
   gh.singleton<_i516.AuthRemoteDataSource>(
       () => _i516.AuthRemoteDataSource(gh<_i420.Api>()));
-  gh.singleton<_i444.UserRemoteDataSource>(
-      () => _i444.UserRemoteDataSource(gh<_i420.Api>()));
-  gh.singleton<_i37.SearchRemoteDataSource>(
-      () => _i37.SearchRemoteDataSource(gh<_i420.Api>()));
-  gh.singleton<_i901.NewsRemoteDataSource>(
-      () => _i901.NewsRemoteDataSource(gh<_i420.Api>()));
   gh.singleton<_i163.EventRemoteDataSource>(
       () => _i163.EventRemoteDataSource(gh<_i420.Api>()));
+  gh.singleton<_i901.NewsRemoteDataSource>(
+      () => _i901.NewsRemoteDataSource(gh<_i420.Api>()));
+  gh.singleton<_i37.SearchRemoteDataSource>(
+      () => _i37.SearchRemoteDataSource(gh<_i420.Api>()));
+  gh.singleton<_i444.UserRemoteDataSource>(
+      () => _i444.UserRemoteDataSource(gh<_i420.Api>()));
+  gh.singleton<_i785.VacancyRemoteDataSource>(
+      () => _i785.VacancyRemoteDataSource(gh<_i420.Api>()));
   gh.singleton<_i475.AlumniRemoteDataSource>(
       () => _i475.AlumniRemoteDataSource(gh<_i420.Api>()));
   gh.lazySingleton<_i731.VacancyRepository>(
@@ -88,8 +87,6 @@ Future<_i174.GetIt> $initGetIt(
       authRemoteDataSource: gh<_i516.AuthRemoteDataSource>()));
   gh.lazySingleton<_i220.NewsRepository>(
       () => _i220.NewsRepositoryImpl(gh<_i901.NewsRemoteDataSource>()));
-  gh.lazySingleton<_i332.AlumniRepository>(
-      () => _i332.AlumniRepositoryImpl(gh<_i475.AlumniRemoteDataSource>()));
   gh.factory<_i926.SearchBloc>(
       () => _i926.SearchBloc(gh<_i3.SearchRepository>()));
   gh.factory<_i662.NewsBloc>(() => _i662.NewsBloc(gh<_i220.NewsRepository>()));

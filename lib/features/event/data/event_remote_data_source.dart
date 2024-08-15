@@ -17,4 +17,20 @@ class EventRemoteDataSource {
     );
     return EventGetManyModelResponse.fromJson(response.data);
   }
+
+  Future<void> registerEvent(int eventId) async {
+    await _api.createApiCall(
+      endpoint: '/event/register',
+      method: NetworkCallMethod.post,
+      body: {'id_event': eventId},
+    );
+  }
+
+  Future<void> unregisterEvent(int eventId) async {
+    await _api.createApiCall(
+      endpoint: '/event/unregister',
+      method: NetworkCallMethod.post,
+      body: {'id_event': eventId},
+    );
+  }
 }

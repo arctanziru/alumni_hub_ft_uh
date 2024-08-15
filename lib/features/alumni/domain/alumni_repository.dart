@@ -4,7 +4,8 @@ import 'package:cached_query/cached_query.dart';
 import 'package:injectable/injectable.dart';
 
 abstract class AlumniRepository {
-  InfiniteQuery<AlumniGetManyModelResponse, int> getAlumni(AlumniGetManyParams? params);
+  InfiniteQuery<AlumniGetManyModelResponse, int> getAlumni(
+      AlumniGetManyParams? params);
 }
 
 @LazySingleton(as: AlumniRepository)
@@ -14,7 +15,8 @@ class AlumniRepositoryImpl implements AlumniRepository {
   AlumniRepositoryImpl(this._alumniRemoteDataSource);
 
   @override
-  InfiniteQuery<AlumniGetManyModelResponse, int> getAlumni(AlumniGetManyParams? params) {
+  InfiniteQuery<AlumniGetManyModelResponse, int> getAlumni(
+      AlumniGetManyParams? params) {
     return InfiniteQuery<AlumniGetManyModelResponse, int>(
       key: ['alumni', params?.search],
       queryFn: (page) => _alumniRemoteDataSource.AlumniData(
@@ -29,12 +31,7 @@ class AlumniRepositoryImpl implements AlumniRepository {
         ),
       ),
       getNextArg: (state) {
-        if (state.lastPage == null) return 1;
-        if (state.lastPage!.data.isEmpty) return null;
-        if (state.lastPage!.currentPage >= state.lastPage!.lastPage) {
-          return null;
-        }
-        return state.lastPage!.currentPage + 1;
+        return 1;
       },
     );
   }

@@ -12,17 +12,20 @@ class VacancyState {
     this.status = VacancyStatus.initial,
     this.vacancies = const <VacancyModel>[],
     this.error,
+    this.search,
   });
 
   VacancyState copyWith({
     VacancyStatus? status,
     List<VacancyModel>? vacancies,
     CustomException? error,
+    String? search,
   }) {
     return VacancyState(
       status: status ?? this.status,
       vacancies: vacancies ?? this.vacancies,
       error: error ?? this.error,
+      search: search ?? this.search,
     );
   }
 

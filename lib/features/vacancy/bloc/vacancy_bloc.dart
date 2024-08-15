@@ -23,32 +23,33 @@ class VacancyBloc extends Bloc<VacancyEvent, VacancyState> {
     on<VacancyNextPage>(_onVacancyNextPage);
   }
 
-  FutureOr<void> _onVacancyFetched(VacancyFetched event, Emitter<VacancyState> emit) {
+  FutureOr<void> _onVacancyFetched(
+      VacancyFetched event, Emitter<VacancyState> emit) {
     return emit.forEach<InfiniteQueryState<VacancyGetManyModelResponse>>(
         _vacancyRepository
             .getVacancies(
-          VacancyGetManyParams(
-            search: state.search,
-          ),
-        )
+              VacancyGetManyParams(
+                search: state.search,
+              ),
+            )
             .stream, onData: (queryState) {
       return state.copyWith(
         status: queryState.status == QueryStatus.loading
             ? VacancyStatus.loading
             : queryState.status == QueryStatus.error
-            ? VacancyStatus.error
-            : VacancyStatus.loaded,
-        vacancies: queryState.data?.expand((page) => page.data.data).toList() ?? [],
+                ? VacancyStatus.error
+                : VacancyStatus.loaded,
+        vacancies:
+            queryState.data?.expand((page) => page.data.data).toList() ?? [],
         error: CustomException(queryState.error?.message ?? 'Unknown error'),
       );
     });
   }
 
-  FutureOr<void> _onVacancyRefreshed(VacancyRefreshed event, Emitter<VacancyState> emit) {
+  FutureOr<void> _onVacancyRefreshed(
+      VacancyRefreshed event, Emitter<VacancyState> emit) {
     if (event.isClear) {
-      emit(state.copyWith(
-        vacancies: [],
-      ));
+      emit(state.copyWith(vacancies: [], search: event.search));
     }
     final query = _vacancyRepository.getVacancies(
       VacancyGetManyParams(
@@ -56,16 +57,17 @@ class VacancyBloc extends Bloc<VacancyEvent, VacancyState> {
       ),
     );
     query.refetch();
-    return _onVacancyFetched(VacancyFetched(), emit);
+    add(VacancyFetched());
   }
 
-  FutureOr<void> _onVacancyNextPage(VacancyNextPage event, Emitter<VacancyState> emit) {
+  FutureOr<void> _onVacancyNextPage(
+      VacancyNextPage event, Emitter<VacancyState> emit) {
     _vacancyRepository
         .getVacancies(
-      VacancyGetManyParams(
-        search: state.search,
-      ),
-    )
+          VacancyGetManyParams(
+            search: state.search,
+          ),
+        )
         .getNextPage();
   }
 }

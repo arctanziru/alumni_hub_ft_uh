@@ -12,3 +12,15 @@ class EventRefreshed extends EventEvent {
 }
 
 class EventNextPage extends EventEvent {}
+
+class EventRegister extends EventEvent {
+  final int idEvent;
+
+  EventRegister(this.idEvent);
+}
+
+class EventUnregister extends EventEvent {
+  final int idEvent;
+
+  EventUnregister(this.idEvent);
+}

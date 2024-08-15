@@ -32,7 +32,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     final user = userSession?.user;
 
     nameController = TextEditingController(text: user?.alumni?.nama ?? '');
-    phoneController = TextEditingController(text: user?.alumni?.noTelp ?? '');
+    phoneController = TextEditingController(text: '');
     locationController = TextEditingController(text: '');
     departmentController =
         TextEditingController(text: user?.alumni?.jurusan ?? '');

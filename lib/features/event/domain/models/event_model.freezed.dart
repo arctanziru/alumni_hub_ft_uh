@@ -33,6 +33,7 @@ mixin _$EventModel {
   String get lokasiEvent => throw _privateConstructorUsedError;
   int get kuota => throw _privateConstructorUsedError;
   int get peserta => throw _privateConstructorUsedError;
+  bool? get isRegistered => throw _privateConstructorUsedError;
   @JsonKey(name: 'created_at')
   DateTime get createdAt => throw _privateConstructorUsedError;
   @JsonKey(name: 'updated_at')
@@ -61,6 +62,7 @@ abstract class $EventModelCopyWith<$Res> {
       @JsonKey(name: 'lokasi_event') String lokasiEvent,
       int kuota,
       int peserta,
+      bool? isRegistered,
       @JsonKey(name: 'created_at') DateTime createdAt,
       @JsonKey(name: 'updated_at') DateTime updatedAt});
 }
@@ -88,6 +90,7 @@ class _$EventModelCopyWithImpl<$Res, $Val extends EventModel>
     Object? lokasiEvent = null,
     Object? kuota = null,
     Object? peserta = null,
+    Object? isRegistered = freezed,
     Object? createdAt = null,
     Object? updatedAt = null,
   }) {
@@ -132,6 +135,10 @@ class _$EventModelCopyWithImpl<$Res, $Val extends EventModel>
           ? _value.peserta
           : peserta // ignore: cast_nullable_to_non_nullable
               as int,
+      isRegistered: freezed == isRegistered
+          ? _value.isRegistered
+          : isRegistered // ignore: cast_nullable_to_non_nullable
+              as bool?,
       createdAt: null == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -163,6 +170,7 @@ abstract class _$$EventModelImplCopyWith<$Res>
       @JsonKey(name: 'lokasi_event') String lokasiEvent,
       int kuota,
       int peserta,
+      bool? isRegistered,
       @JsonKey(name: 'created_at') DateTime createdAt,
       @JsonKey(name: 'updated_at') DateTime updatedAt});
 }
@@ -188,6 +196,7 @@ class __$$EventModelImplCopyWithImpl<$Res>
     Object? lokasiEvent = null,
     Object? kuota = null,
     Object? peserta = null,
+    Object? isRegistered = freezed,
     Object? createdAt = null,
     Object? updatedAt = null,
   }) {
@@ -232,6 +241,10 @@ class __$$EventModelImplCopyWithImpl<$Res>
           ? _value.peserta
           : peserta // ignore: cast_nullable_to_non_nullable
               as int,
+      isRegistered: freezed == isRegistered
+          ? _value.isRegistered
+          : isRegistered // ignore: cast_nullable_to_non_nullable
+              as bool?,
       createdAt: null == createdAt
           ? _value.createdAt
           : createdAt // ignore: cast_nullable_to_non_nullable
@@ -258,6 +271,7 @@ class _$EventModelImpl implements _EventModel {
       @JsonKey(name: 'lokasi_event') required this.lokasiEvent,
       required this.kuota,
       required this.peserta,
+      this.isRegistered,
       @JsonKey(name: 'created_at') required this.createdAt,
       @JsonKey(name: 'updated_at') required this.updatedAt});
 
@@ -288,6 +302,8 @@ class _$EventModelImpl implements _EventModel {
   @override
   final int peserta;
   @override
+  final bool? isRegistered;
+  @override
   @JsonKey(name: 'created_at')
   final DateTime createdAt;
   @override
@@ -296,7 +312,7 @@ class _$EventModelImpl implements _EventModel {
 
   @override
   String toString() {
-    return 'EventModel(idEvent: $idEvent, judul: $judul, slug: $slug, gambar: $gambar, konten: $konten, penyelenggara: $penyelenggara, tglEvent: $tglEvent, lokasiEvent: $lokasiEvent, kuota: $kuota, peserta: $peserta, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'EventModel(idEvent: $idEvent, judul: $judul, slug: $slug, gambar: $gambar, konten: $konten, penyelenggara: $penyelenggara, tglEvent: $tglEvent, lokasiEvent: $lokasiEvent, kuota: $kuota, peserta: $peserta, isRegistered: $isRegistered, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 
   @override
@@ -317,6 +333,8 @@ class _$EventModelImpl implements _EventModel {
                 other.lokasiEvent == lokasiEvent) &&
             (identical(other.kuota, kuota) || other.kuota == kuota) &&
             (identical(other.peserta, peserta) || other.peserta == peserta) &&
+            (identical(other.isRegistered, isRegistered) ||
+                other.isRegistered == isRegistered) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
             (identical(other.updatedAt, updatedAt) ||
@@ -337,6 +355,7 @@ class _$EventModelImpl implements _EventModel {
       lokasiEvent,
       kuota,
       peserta,
+      isRegistered,
       createdAt,
       updatedAt);
 
@@ -366,6 +385,7 @@ abstract class _EventModel implements EventModel {
           @JsonKey(name: 'lokasi_event') required final String lokasiEvent,
           required final int kuota,
           required final int peserta,
+          final bool? isRegistered,
           @JsonKey(name: 'created_at') required final DateTime createdAt,
           @JsonKey(name: 'updated_at') required final DateTime updatedAt}) =
       _$EventModelImpl;
@@ -396,6 +416,8 @@ abstract class _EventModel implements EventModel {
   int get kuota;
   @override
   int get peserta;
+  @override
+  bool? get isRegistered;
   @override
   @JsonKey(name: 'created_at')
   DateTime get createdAt;

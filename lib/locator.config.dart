@@ -14,6 +14,7 @@ import 'package:injectable/injectable.dart' as _i526;
 import 'package:shared_preferences/shared_preferences.dart' as _i460;
 
 import 'data/api.dart' as _i420;
+import 'features/alumni/bloc/alumni_bloc.dart' as _i905;
 import 'features/alumni/data/alumni_remote_data_source.dart' as _i475;
 import 'features/alumni/domain/alumni_repository.dart' as _i332;
 import 'features/auth/data/auth_remote_data_source.dart' as _i516;
@@ -93,6 +94,8 @@ Future<_i174.GetIt> $initGetIt(
   gh.factory<_i926.SearchBloc>(
       () => _i926.SearchBloc(gh<_i3.SearchRepository>()));
   gh.factory<_i662.NewsBloc>(() => _i662.NewsBloc(gh<_i220.NewsRepository>()));
+  gh.factory<_i905.AlumniBloc>(
+      () => _i905.AlumniBloc(gh<_i332.AlumniRepository>()));
   gh.factory<_i898.UserBloc>(() => _i898.UserBloc(
         gh<_i902.UserRepository>(),
         gh<_i260.AuthRepository>(),

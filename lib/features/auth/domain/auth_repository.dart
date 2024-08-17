@@ -42,16 +42,11 @@ class AuthRepositoryImpl implements AuthRepository {
     try {
       debugPrint('Starting Google Sign-In process');
 
-      GoogleSignIn googleSignIn = GoogleSignIn(scopes: ['email']);
+      debugPrint('Google Client ID: ${dotenv.env['GOOGLE_CLIENT_ID']}');
 
-      if (Platform.isIOS) {
-        googleSignIn = GoogleSignIn(
-          clientId: dotenv.env['GOOGLE_CLIENT_ID'],
-          scopes: [
-            'email',
-          ],
-        );
-      }
+      GoogleSignIn googleSignIn = GoogleSignIn(
+        serverClientId: dotenv.env['GOOGLE_CLIENT_ID'],
+      );
 
       await googleSignIn.signOut();
 

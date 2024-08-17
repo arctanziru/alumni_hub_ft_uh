@@ -354,7 +354,7 @@ AlumniJurusanParams _$AlumniJurusanParamsFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$AlumniJurusanParams {
-  int get angkatan => throw _privateConstructorUsedError;
+  String get angkatan => throw _privateConstructorUsedError;
   String? get search => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -369,7 +369,7 @@ abstract class $AlumniJurusanParamsCopyWith<$Res> {
           AlumniJurusanParams value, $Res Function(AlumniJurusanParams) then) =
       _$AlumniJurusanParamsCopyWithImpl<$Res, AlumniJurusanParams>;
   @useResult
-  $Res call({int angkatan, String? search});
+  $Res call({String angkatan, String? search});
 }
 
 /// @nodoc
@@ -392,7 +392,7 @@ class _$AlumniJurusanParamsCopyWithImpl<$Res, $Val extends AlumniJurusanParams>
       angkatan: null == angkatan
           ? _value.angkatan
           : angkatan // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       search: freezed == search
           ? _value.search
           : search // ignore: cast_nullable_to_non_nullable
@@ -409,7 +409,7 @@ abstract class _$$AlumniJurusanParamsImplCopyWith<$Res>
       __$$AlumniJurusanParamsImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int angkatan, String? search});
+  $Res call({String angkatan, String? search});
 }
 
 /// @nodoc
@@ -430,7 +430,7 @@ class __$$AlumniJurusanParamsImplCopyWithImpl<$Res>
       angkatan: null == angkatan
           ? _value.angkatan
           : angkatan // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       search: freezed == search
           ? _value.search
           : search // ignore: cast_nullable_to_non_nullable
@@ -448,7 +448,7 @@ class _$AlumniJurusanParamsImpl implements _AlumniJurusanParams {
       _$$AlumniJurusanParamsImplFromJson(json);
 
   @override
-  final int angkatan;
+  final String angkatan;
   @override
   final String? search;
 
@@ -488,14 +488,14 @@ class _$AlumniJurusanParamsImpl implements _AlumniJurusanParams {
 
 abstract class _AlumniJurusanParams implements AlumniJurusanParams {
   const factory _AlumniJurusanParams(
-      {required final int angkatan,
+      {required final String angkatan,
       final String? search}) = _$AlumniJurusanParamsImpl;
 
   factory _AlumniJurusanParams.fromJson(Map<String, dynamic> json) =
       _$AlumniJurusanParamsImpl.fromJson;
 
   @override
-  int get angkatan;
+  String get angkatan;
   @override
   String? get search;
   @override
@@ -1133,7 +1133,7 @@ AlumniGetManyParams _$AlumniGetManyParamsFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$AlumniGetManyParams {
-  int get angkatan => throw _privateConstructorUsedError;
+  String get angkatan => throw _privateConstructorUsedError;
   String get jurusan => throw _privateConstructorUsedError;
   String? get search => throw _privateConstructorUsedError;
 
@@ -1149,7 +1149,7 @@ abstract class $AlumniGetManyParamsCopyWith<$Res> {
           AlumniGetManyParams value, $Res Function(AlumniGetManyParams) then) =
       _$AlumniGetManyParamsCopyWithImpl<$Res, AlumniGetManyParams>;
   @useResult
-  $Res call({int angkatan, String jurusan, String? search});
+  $Res call({String angkatan, String jurusan, String? search});
 }
 
 /// @nodoc
@@ -1173,7 +1173,7 @@ class _$AlumniGetManyParamsCopyWithImpl<$Res, $Val extends AlumniGetManyParams>
       angkatan: null == angkatan
           ? _value.angkatan
           : angkatan // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       jurusan: null == jurusan
           ? _value.jurusan
           : jurusan // ignore: cast_nullable_to_non_nullable
@@ -1194,7 +1194,7 @@ abstract class _$$AlumniGetManyParamsImplCopyWith<$Res>
       __$$AlumniGetManyParamsImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int angkatan, String jurusan, String? search});
+  $Res call({String angkatan, String jurusan, String? search});
 }
 
 /// @nodoc
@@ -1216,7 +1216,7 @@ class __$$AlumniGetManyParamsImplCopyWithImpl<$Res>
       angkatan: null == angkatan
           ? _value.angkatan
           : angkatan // ignore: cast_nullable_to_non_nullable
-              as int,
+              as String,
       jurusan: null == jurusan
           ? _value.jurusan
           : jurusan // ignore: cast_nullable_to_non_nullable
@@ -1239,7 +1239,7 @@ class _$AlumniGetManyParamsImpl implements _AlumniGetManyParams {
       _$$AlumniGetManyParamsImplFromJson(json);
 
   @override
-  final int angkatan;
+  final String angkatan;
   @override
   final String jurusan;
   @override
@@ -1282,7 +1282,7 @@ class _$AlumniGetManyParamsImpl implements _AlumniGetManyParams {
 
 abstract class _AlumniGetManyParams implements AlumniGetManyParams {
   const factory _AlumniGetManyParams(
-      {required final int angkatan,
+      {required final String angkatan,
       required final String jurusan,
       final String? search}) = _$AlumniGetManyParamsImpl;
 
@@ -1290,7 +1290,7 @@ abstract class _AlumniGetManyParams implements AlumniGetManyParams {
       _$AlumniGetManyParamsImpl.fromJson;
 
   @override
-  int get angkatan;
+  String get angkatan;
   @override
   String get jurusan;
   @override

@@ -41,7 +41,7 @@ Map<String, dynamic> _$$AlumniJurusanResponseImplToJson(
 _$AlumniJurusanParamsImpl _$$AlumniJurusanParamsImplFromJson(
         Map<String, dynamic> json) =>
     _$AlumniJurusanParamsImpl(
-      angkatan: (json['angkatan'] as num).toInt(),
+      angkatan: json['angkatan'] as String,
       search: json['search'] as String?,
     );
 
@@ -105,7 +105,7 @@ Map<String, dynamic> _$$AngkatanDataImplToJson(_$AngkatanDataImpl instance) =>
 _$AlumniGetManyParamsImpl _$$AlumniGetManyParamsImplFromJson(
         Map<String, dynamic> json) =>
     _$AlumniGetManyParamsImpl(
-      angkatan: (json['angkatan'] as num).toInt(),
+      angkatan: json['angkatan'] as String,
       jurusan: json['jurusan'] as String,
       search: json['search'] as String?,
     );

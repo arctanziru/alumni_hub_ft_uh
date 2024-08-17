@@ -29,7 +29,7 @@ class AlumniJurusanResponse with _$AlumniJurusanResponse {
 @freezed
 class AlumniJurusanParams with _$AlumniJurusanParams {
   const factory AlumniJurusanParams({
-    required int angkatan,
+    required String angkatan,
     String? search,
   }) = _AlumniJurusanParams;
 
@@ -83,7 +83,7 @@ class AngkatanData with _$AngkatanData {
 @freezed
 class AlumniGetManyParams with _$AlumniGetManyParams {
   const factory AlumniGetManyParams({
-    required int angkatan,
+    required String angkatan,
     required String jurusan,
     String? search,
   }) = _AlumniGetManyParams;

@@ -12,7 +12,7 @@ part "alumni_state.dart";
 class AlumniBloc extends Bloc<AlumniEvent, AlumniState> {
   final AlumniRepository _alumniRepository;
   String? jurusan;
-  int? angkatan;
+  String? angkatan;
   String? search;
 
   AlumniBloc(this._alumniRepository) : super(AlumniAngkatanInitial()) {

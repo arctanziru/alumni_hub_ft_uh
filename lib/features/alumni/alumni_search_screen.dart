@@ -1,5 +1,7 @@
 import 'package:alumni_hub_ft_uh/common/widgets/appBar/app_bar_secondary_widget.dart';
+import 'package:alumni_hub_ft_uh/features/alumni/bloc/alumni_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../common/widgets/card/card_alumni_widget.dart'; // Import your CardAlumniWidget
 // Import the new screen
 import 'package:alumni_hub_ft_uh/features/alumni/alumni_detail_search_screen.dart';
@@ -11,9 +13,11 @@ class AlumniSearchScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final alumniBloc = context.read<AlumniBloc>();
+
     return Scaffold(
-      appBar: const AppBarSecondaryWidget(
-        title: 'Profil Alumni',
+      appBar: AppBarSecondaryWidget(
+        title: 'Angkatan ${alumniBloc.angkatan}',
       ),
       body: SafeArea(
         child: Padding(
@@ -21,32 +25,20 @@ class AlumniSearchScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(
-                    'Angkatan 2022',
-                    textAlign: TextAlign.left,
-                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 24,
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 16),
-              // Add a list of CardAlumniWidget instances with spacing
               Expanded(
                 child: ListView.separated(
                   itemCount: 10, // Adjust the number of cards as needed
-                  separatorBuilder: (context, index) => const SizedBox(height: 10), // Space between cards
+                  separatorBuilder: (context, index) =>
+                      const SizedBox(height: 10), // Space between cards
                   itemBuilder: (context, index) {
-                    final letter = String.fromCharCode(65 + index); // Generates A, B, C, etc.
+                    final letter = String.fromCharCode(
+                        65 + index); // Generates A, B, C, etc.
                     return CardAlumniWidget(
                       label: 'Jurusan $letter',
                       subtitle: '${(index + 1) * 100} Alumni',
                       onTap: () {
-                        Navigator.of(context).pushNamed(AlumniDetailSearchScreen.route);
+                        Navigator.of(context)
+                            .pushNamed(AlumniDetailSearchScreen.route);
                       },
                     );
                   },

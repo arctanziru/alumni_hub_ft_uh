@@ -1,12 +1,12 @@
+import 'package:alumni_hub_ft_uh/common/widgets/appBar/app_bar_search_widget.dart';
+import 'package:alumni_hub_ft_uh/common/widgets/bottomBar/bottom_bar_widget.dart';
 import 'package:alumni_hub_ft_uh/common/widgets/button/button_widget.dart';
+import 'package:alumni_hub_ft_uh/common/widgets/card/card_alumni_widget.dart';
 import 'package:alumni_hub_ft_uh/features/alumni/alumni_search_screen.dart';
 import 'package:alumni_hub_ft_uh/features/alumni/bloc/alumni_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:skeletonizer/skeletonizer.dart';
-import '../../common/widgets/appBar/app_bar_search_widget.dart';
-import '../../common/widgets/bottomBar/bottom_bar_widget.dart';
-import '../../common/widgets/card/card_alumni_widget.dart';
 import 'search_alumni_screen.dart';
 import 'popup_alumni_widget.dart';
 
@@ -64,7 +64,6 @@ class _AlumniScreenState extends State<AlumniScreen> {
                 ),
                 const SizedBox(height: 16.0),
 
-                // Buttons
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
@@ -131,6 +130,8 @@ class _AlumniScreenState extends State<AlumniScreen> {
                           subtitle:
                               '${state.alumniAngkatanResponse.data.count} Alumni',
                           onTap: () {
+                            context.read<AlumniBloc>().angkatan =
+                                state.alumniAngkatanResponse.data.angkatan;
                             Navigator.of(context).push(
                               MaterialPageRoute(
                                 builder: (context) =>

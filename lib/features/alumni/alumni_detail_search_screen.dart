@@ -1,19 +1,52 @@
+import 'package:alumni_hub_ft_uh/common/utils/app_navigation.dart';
+import 'package:alumni_hub_ft_uh/features/alumni/bloc/alumni_bloc.dart';
+import 'package:alumni_hub_ft_uh/features/alumni/domain/models/alumni_get_many_model.dart';
+import 'package:alumni_hub_ft_uh/locator.dart';
 import 'package:flutter/material.dart';
 import 'package:alumni_hub_ft_uh/common/widgets/card/card_alumni_profile_widget.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 import '../../common/widgets/appBar/app_bar_secondary_widget.dart';
 import 'alumni_profile_detail_screen.dart'; // Import your CardAlumniProfileWidget // Import the AlumniProfileDetailScreen
 
-class AlumniDetailSearchScreen extends StatelessWidget {
-  static const String route = '/alumniDetailSearch'; // Update the route name here
+// class AlumniDetailSearchScreen extends StatefulWidget {
+//   static const String route = '/alumniDetailSearch';
 
-  const AlumniDetailSearchScreen({super.key});
+//   const AlumniDetailSearchScreen({super.key});
+
+//   @override
+//   State<AlumniDetailSearchScreen> createState() =>
+//       _AlumniDetailSearchScreenState();
+// }
+// need arguments
+
+class AlumniDetailSearchScreen extends StatefulWidget {
+  static const String route = '/alumniDetailSearch';
+  final AlumniGetManyParams alumniGetManyParams;
+
+  const AlumniDetailSearchScreen(
+      {required this.alumniGetManyParams, super.key});
+
+  @override
+  State<AlumniDetailSearchScreen> createState() =>
+      _AlumniDetailSearchScreenState();
+}
+
+class _AlumniDetailSearchScreenState extends State<AlumniDetailSearchScreen> {
+  @override
+  void initState() {
+    super.initState();
+    context
+        .read<AlumniGetManyBloc>()
+        .add(AlumniEventGetMany(widget.alumniGetManyParams));
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const AppBarSecondaryWidget(
-        title: 'Profil Alumni',
+      appBar: AppBarSecondaryWidget(
+        title: widget.alumniGetManyParams.jurusan,
       ),
       body: SafeArea(
         child: Padding(
@@ -21,39 +54,70 @@ class AlumniDetailSearchScreen extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(
-                    'Jurusan A',
-                    textAlign: TextAlign.left,
-                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 24,
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 16),
-              // Add a list of CardAlumniProfileWidget instances with spacing
               Expanded(
-                child: ListView.separated(
-                  itemCount: 10, // Adjust the number of cards as needed
-                  separatorBuilder: (context, index) => const SizedBox(height: 10), // Space between cards
-                  itemBuilder: (context, index) {
-                    final letter = String.fromCharCode(65 + index); // Generates A, B, C, etc.
-                    return CardAlumniProfileWidget(
-                      name: 'Nama $letter',
-                      details: 'D12122100${index + 1}',
-                      avatarUrl: 'https://example.com/avatar${index + 1}.png', // Provide a valid URL or placeholder
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const AlumniProfileDetailScreen(),
-                          ),
-                        );
-                      },
+                child: BlocBuilder<AlumniGetManyBloc, AlumniState>(
+                  builder: (context, state) {
+                    if (state is AlumniGetManyError) {
+                      debugPrint('Error: ${state.message}');
+                      return Center(
+                        child: Text('Error: ${state.message}'),
+                      );
+                    }
+
+                    if (state is AlumniGetManySuccess &&
+                        state.alumniGetManyResponse.data.isNotEmpty) {
+                      return RefreshIndicator(
+                        onRefresh: () async {
+                          context.read<AlumniGetManyBloc>().add(
+                              AlumniEventGetMany(widget.alumniGetManyParams));
+                        },
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Expanded(
+                              child: ListView.separated(
+                                itemCount:
+                                    state.alumniGetManyResponse.data.length,
+                                separatorBuilder: (context, index) =>
+                                    const SizedBox(height: 10),
+                                itemBuilder: (context, index) {
+                                  final alumni =
+                                      state.alumniGetManyResponse.data[index];
+                                  return CardAlumniProfileWidget(
+                                    name: alumni.nama,
+                                    details: alumni.nim,
+                                    onTap: () {
+                                      locator<AppNavigation>().navigateTo(
+                                          AlumniProfileDetailScreen.route);
+                                    },
+                                  );
+                                },
+                              ),
+                            ),
+                          ],
+                        ),
+                      );
+                    }
+
+                    if (state is AlumniGetManySuccess &&
+                        state.alumniGetManyResponse.data.isEmpty) {
+                      return const Center(
+                        child: Text('Data tidak ditemukan'),
+                      );
+                    }
+
+                    return Skeletonizer(
+                      child: ListView.separated(
+                        itemCount: 10,
+                        separatorBuilder: (context, index) =>
+                            const SizedBox(height: 10),
+                        itemBuilder: (context, index) {
+                          return const CardAlumniProfileWidget(
+                            name: 'Ahmad Sultani',
+                            details: 'D121211080',
+                          );
+                        },
+                      ),
                     );
                   },
                 ),

@@ -5,6 +5,12 @@ abstract class AlumniEvent {}
 
 class AlumniEventGetAngkatan extends AlumniEvent {}
 
-class AlumniEventGetJurusan extends AlumniEvent {}
+class AlumniEventGetJurusan extends AlumniEvent {
+  final AlumniJurusanParams alumniJurusanParams;
+  AlumniEventGetJurusan(this.alumniJurusanParams);
+}
 
-class AlumniEventGetMany extends AlumniEvent {}
+class AlumniEventGetMany extends AlumniEvent {
+  final AlumniGetManyParams alumniGetManyParams;
+  AlumniEventGetMany(this.alumniGetManyParams);
+}

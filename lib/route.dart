@@ -1,5 +1,6 @@
 import 'package:alumni_hub_ft_uh/features/alumni/alumni_detail_search_screen.dart';
 import 'package:alumni_hub_ft_uh/features/alumni/alumni_screen.dart';
+import 'package:alumni_hub_ft_uh/features/alumni/alumni_search_screen.dart';
 import 'package:alumni_hub_ft_uh/features/alumni/search_alumni_screen.dart';
 import 'package:alumni_hub_ft_uh/features/auth/claim_alumni_data_screen.dart';
 import 'package:alumni_hub_ft_uh/features/coming_soon/coming_soon_screen.dart';
@@ -45,8 +46,12 @@ Route<dynamic> routeGenerators(RouteSettings settings) {
       return _buildPageRoute(const ProfileScreen());
     case AlumniScreen.route:
       return _buildPageRoute(const AlumniScreen());
+    case AlumniSearchScreen.route:
+      return _buildPageRoute(AlumniSearchScreen(
+          alumniJurusanParams: settings.arguments as dynamic));
     case AlumniDetailSearchScreen.route:
-      return _buildPageRoute(const AlumniDetailSearchScreen());
+      return _buildPageRoute(AlumniDetailSearchScreen(
+          alumniGetManyParams: settings.arguments as dynamic));
     case SearchAlumniScreen.route:
       return _buildPageRoute(const SearchAlumniScreen());
     case ClaimAlumniDataScreen.route:

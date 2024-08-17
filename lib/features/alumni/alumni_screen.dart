@@ -1,13 +1,15 @@
+import 'package:alumni_hub_ft_uh/common/utils/app_navigation.dart';
 import 'package:alumni_hub_ft_uh/common/widgets/appBar/app_bar_search_widget.dart';
 import 'package:alumni_hub_ft_uh/common/widgets/bottomBar/bottom_bar_widget.dart';
 import 'package:alumni_hub_ft_uh/common/widgets/button/button_widget.dart';
 import 'package:alumni_hub_ft_uh/common/widgets/card/card_alumni_widget.dart';
 import 'package:alumni_hub_ft_uh/features/alumni/alumni_search_screen.dart';
 import 'package:alumni_hub_ft_uh/features/alumni/bloc/alumni_bloc.dart';
+import 'package:alumni_hub_ft_uh/features/alumni/domain/models/alumni_get_many_model.dart';
+import 'package:alumni_hub_ft_uh/locator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:skeletonizer/skeletonizer.dart';
-import 'search_alumni_screen.dart';
 import 'popup_alumni_widget.dart';
 
 class AlumniScreen extends StatefulWidget {
@@ -37,8 +39,8 @@ class _AlumniScreenState extends State<AlumniScreen> {
 
   @override
   void initState() {
-    context.read<AlumniBloc>().add(AlumniEventGetAngkatan());
     super.initState();
+    context.read<AlumniAngkatanBloc>().add(AlumniEventGetAngkatan());
   }
 
   @override
@@ -53,7 +55,6 @@ class _AlumniScreenState extends State<AlumniScreen> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                // Title
                 Text(
                   'Data Alumni',
                   textAlign: TextAlign.left,
@@ -74,14 +75,7 @@ class _AlumniScreenState extends State<AlumniScreen> {
                       rounded: false,
                     ),
                     const SizedBox(width: 8.0), // Space between the buttons
-                    ButtonWidget(
-                      onPressed: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (context) => const SearchAlumniScreen(),
-                          ),
-                        );
-                      },
+                    const ButtonWidget(
                       icon: Icons.search,
                       label: 'Cari Alumni',
                       rounded: false,
@@ -90,7 +84,7 @@ class _AlumniScreenState extends State<AlumniScreen> {
                 ),
                 const SizedBox(height: 20),
 
-                BlocBuilder<AlumniBloc, AlumniState>(
+                BlocBuilder<AlumniAngkatanBloc, AlumniState>(
                   builder: (context, state) {
                     if (state is AlumniAngkatanError) {
                       debugPrint('Error: ${state.message}');
@@ -99,29 +93,11 @@ class _AlumniScreenState extends State<AlumniScreen> {
                       );
                     }
 
-                    if (state is AlumniAngkatanLoading) {
-                      return Skeletonizer(
-                          child: Column(
-                              children: List.generate(
-                        10,
-                        (index) => Column(
-                          children: [
-                            CardAlumniWidget(
-                              label:
-                                  'Angkatan ${1990 + index} (${1990 + index})',
-                              subtitle: '${(index + 1) * 200} Alumni',
-                            ),
-                            const SizedBox(height: 10.0), // Space between cards
-                          ],
-                        ),
-                      )));
-                    }
-
                     if (state is AlumniAngkatanSuccess) {
                       return RefreshIndicator(
                         onRefresh: () async {
                           context
-                              .read<AlumniBloc>()
+                              .read<AlumniAngkatanBloc>()
                               .add(AlumniEventGetAngkatan());
                         },
                         child: CardAlumniWidget(
@@ -130,12 +106,11 @@ class _AlumniScreenState extends State<AlumniScreen> {
                           subtitle:
                               '${state.alumniAngkatanResponse.data.count} Alumni',
                           onTap: () {
-                            context.read<AlumniBloc>().angkatan =
-                                state.alumniAngkatanResponse.data.angkatan;
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) =>
-                                    const AlumniSearchScreen(),
+                            locator<AppNavigation>().navigateTo(
+                              AlumniSearchScreen.route,
+                              arguments: AlumniJurusanParams(
+                                angkatan:
+                                    state.alumniAngkatanResponse.data.angkatan,
                               ),
                             );
                           },
@@ -143,9 +118,20 @@ class _AlumniScreenState extends State<AlumniScreen> {
                       );
                     }
 
-                    return const Center(
-                      child: Text('No data'),
-                    );
+                    return Skeletonizer(
+                        child: Column(
+                            children: List.generate(
+                      10,
+                      (index) => Column(
+                        children: [
+                          CardAlumniWidget(
+                            label: 'Angkatan ${1990 + index} (${1990 + index})',
+                            subtitle: '${(index + 1) * 200} Alumni',
+                          ),
+                          const SizedBox(height: 10.0), // Space between cards
+                        ],
+                      ),
+                    )));
                   },
                 ),
                 const SizedBox(height: 20), // Adjust spacing if needed

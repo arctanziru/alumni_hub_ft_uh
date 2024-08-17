@@ -23,7 +23,7 @@ mixin _$AlumniModel {
   @JsonKey(name: 'id_alumni')
   int get idAlumni => throw _privateConstructorUsedError;
   @JsonKey(name: 'id_user')
-  int get idUser => throw _privateConstructorUsedError;
+  int? get idUser => throw _privateConstructorUsedError;
   String get nim => throw _privateConstructorUsedError;
   @JsonKey(name: 'no_anggota')
   String? get noAnggota => throw _privateConstructorUsedError;
@@ -56,7 +56,7 @@ abstract class $AlumniModelCopyWith<$Res> {
   @useResult
   $Res call(
       {@JsonKey(name: 'id_alumni') int idAlumni,
-      @JsonKey(name: 'id_user') int idUser,
+      @JsonKey(name: 'id_user') int? idUser,
       String nim,
       @JsonKey(name: 'no_anggota') String? noAnggota,
       String nama,
@@ -85,7 +85,7 @@ class _$AlumniModelCopyWithImpl<$Res, $Val extends AlumniModel>
   @override
   $Res call({
     Object? idAlumni = null,
-    Object? idUser = null,
+    Object? idUser = freezed,
     Object? nim = null,
     Object? noAnggota = freezed,
     Object? nama = null,
@@ -104,10 +104,10 @@ class _$AlumniModelCopyWithImpl<$Res, $Val extends AlumniModel>
           ? _value.idAlumni
           : idAlumni // ignore: cast_nullable_to_non_nullable
               as int,
-      idUser: null == idUser
+      idUser: freezed == idUser
           ? _value.idUser
           : idUser // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       nim: null == nim
           ? _value.nim
           : nim // ignore: cast_nullable_to_non_nullable
@@ -170,7 +170,7 @@ abstract class _$$AlumniModelImplCopyWith<$Res>
   @useResult
   $Res call(
       {@JsonKey(name: 'id_alumni') int idAlumni,
-      @JsonKey(name: 'id_user') int idUser,
+      @JsonKey(name: 'id_user') int? idUser,
       String nim,
       @JsonKey(name: 'no_anggota') String? noAnggota,
       String nama,
@@ -197,7 +197,7 @@ class __$$AlumniModelImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? idAlumni = null,
-    Object? idUser = null,
+    Object? idUser = freezed,
     Object? nim = null,
     Object? noAnggota = freezed,
     Object? nama = null,
@@ -216,10 +216,10 @@ class __$$AlumniModelImplCopyWithImpl<$Res>
           ? _value.idAlumni
           : idAlumni // ignore: cast_nullable_to_non_nullable
               as int,
-      idUser: null == idUser
+      idUser: freezed == idUser
           ? _value.idUser
           : idUser // ignore: cast_nullable_to_non_nullable
-              as int,
+              as int?,
       nim: null == nim
           ? _value.nim
           : nim // ignore: cast_nullable_to_non_nullable
@@ -277,7 +277,7 @@ class __$$AlumniModelImplCopyWithImpl<$Res>
 class _$AlumniModelImpl implements _AlumniModel {
   const _$AlumniModelImpl(
       {@JsonKey(name: 'id_alumni') required this.idAlumni,
-      @JsonKey(name: 'id_user') required this.idUser,
+      @JsonKey(name: 'id_user') this.idUser,
       required this.nim,
       @JsonKey(name: 'no_anggota') required this.noAnggota,
       required this.nama,
@@ -299,7 +299,7 @@ class _$AlumniModelImpl implements _AlumniModel {
   final int idAlumni;
   @override
   @JsonKey(name: 'id_user')
-  final int idUser;
+  final int? idUser;
   @override
   final String nim;
   @override
@@ -400,7 +400,7 @@ class _$AlumniModelImpl implements _AlumniModel {
 abstract class _AlumniModel implements AlumniModel {
   const factory _AlumniModel(
           {@JsonKey(name: 'id_alumni') required final int idAlumni,
-          @JsonKey(name: 'id_user') required final int idUser,
+          @JsonKey(name: 'id_user') final int? idUser,
           required final String nim,
           @JsonKey(name: 'no_anggota') required final String? noAnggota,
           required final String nama,
@@ -423,7 +423,7 @@ abstract class _AlumniModel implements AlumniModel {
   int get idAlumni;
   @override
   @JsonKey(name: 'id_user')
-  int get idUser;
+  int? get idUser;
   @override
   String get nim;
   @override

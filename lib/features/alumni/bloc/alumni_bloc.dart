@@ -9,13 +9,11 @@ part "alumni_event.dart";
 part "alumni_state.dart";
 
 @injectable
-class AlumniBloc extends Bloc<AlumniEvent, AlumniState> {
+class AlumniAngkatanBloc extends Bloc<AlumniEvent, AlumniState> {
   final AlumniRepository _alumniRepository;
-  String? jurusan;
-  String? angkatan;
   String? search;
 
-  AlumniBloc(this._alumniRepository) : super(AlumniAngkatanInitial()) {
+  AlumniAngkatanBloc(this._alumniRepository) : super(AlumniAngkatanInitial()) {
     on<AlumniEventGetAngkatan>((event, emit) async {
       final query = _alumniRepository.getAngkatanAlumni(AlumniAngkatanParams(
         search: search,
@@ -30,12 +28,17 @@ class AlumniBloc extends Bloc<AlumniEvent, AlumniState> {
         return AlumniAngkatanSuccess(queryState.data!);
       });
     });
+  }
+}
 
+@injectable
+class AlumniJurusanBloc extends Bloc<AlumniEvent, AlumniState> {
+  final AlumniRepository _alumniRepository;
+
+  AlumniJurusanBloc(this._alumniRepository) : super(AlumniJurusanInitial()) {
     on<AlumniEventGetJurusan>((event, emit) async {
-      final query = _alumniRepository.getJurusanAlumni(AlumniJurusanParams(
-        angkatan: angkatan!,
-        search: search,
-      ));
+      final query =
+          _alumniRepository.getJurusanAlumni(event.alumniJurusanParams);
       return emit.forEach<QueryState<AlumniJurusanResponse>>(query.stream,
           onData: (queryState) {
         if (queryState.status == QueryStatus.loading) {
@@ -46,13 +49,17 @@ class AlumniBloc extends Bloc<AlumniEvent, AlumniState> {
         return AlumniJurusanSuccess(queryState.data!);
       });
     });
+  }
+}
 
+@injectable
+class AlumniGetManyBloc extends Bloc<AlumniEvent, AlumniState> {
+  final AlumniRepository _alumniRepository;
+
+  AlumniGetManyBloc(this._alumniRepository) : super(AlumniGetManyInitial()) {
     on<AlumniEventGetMany>((event, emit) async {
-      final query = _alumniRepository.getAlumniClaimData(AlumniGetManyParams(
-        angkatan: angkatan!,
-        jurusan: jurusan!,
-        search: search,
-      ));
+      final query =
+          _alumniRepository.getAlumniClaimData(event.alumniGetManyParams);
       return emit.forEach<QueryState<AlumniGetManyResponse>>(query.stream,
           onData: (queryState) {
         if (queryState.status == QueryStatus.loading) {

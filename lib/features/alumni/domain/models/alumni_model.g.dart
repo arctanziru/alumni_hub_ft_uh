@@ -9,7 +9,7 @@ part of 'alumni_model.dart';
 _$AlumniModelImpl _$$AlumniModelImplFromJson(Map<String, dynamic> json) =>
     _$AlumniModelImpl(
       idAlumni: (json['id_alumni'] as num).toInt(),
-      idUser: (json['id_user'] as num).toInt(),
+      idUser: (json['id_user'] as num?)?.toInt(),
       nim: json['nim'] as String,
       noAnggota: json['no_anggota'] as String?,
       nama: json['nama'] as String,

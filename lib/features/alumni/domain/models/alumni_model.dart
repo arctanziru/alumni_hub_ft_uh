@@ -9,7 +9,7 @@ enum EKelamin { l, p }
 class AlumniModel with _$AlumniModel {
   const factory AlumniModel({
     @JsonKey(name: 'id_alumni') required int idAlumni,
-    @JsonKey(name: 'id_user') required int idUser,
+    @JsonKey(name: 'id_user') int? idUser,
     required String nim,
     @JsonKey(name: 'no_anggota') required String? noAnggota,
     required String nama,

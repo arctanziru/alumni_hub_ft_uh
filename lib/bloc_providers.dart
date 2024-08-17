@@ -23,7 +23,13 @@ final blocProviders = [
   BlocProvider<SearchBloc>(
     create: (context) => locator<SearchBloc>(),
   ),
-  BlocProvider<AlumniBloc>(
-    create: (context) => locator<AlumniBloc>(),
+  BlocProvider<AlumniAngkatanBloc>(
+    create: (context) => locator<AlumniAngkatanBloc>(),
+  ),
+  BlocProvider<AlumniJurusanBloc>(
+    create: (context) => locator<AlumniJurusanBloc>(),
+  ),
+  BlocProvider<AlumniGetManyBloc>(
+    create: (context) => locator<AlumniGetManyBloc>(),
   ),
 ];

@@ -94,8 +94,12 @@ Future<_i174.GetIt> $initGetIt(
   gh.factory<_i926.SearchBloc>(
       () => _i926.SearchBloc(gh<_i3.SearchRepository>()));
   gh.factory<_i662.NewsBloc>(() => _i662.NewsBloc(gh<_i220.NewsRepository>()));
-  gh.factory<_i905.AlumniBloc>(
-      () => _i905.AlumniBloc(gh<_i332.AlumniRepository>()));
+  gh.factory<_i905.AlumniAngkatanBloc>(
+      () => _i905.AlumniAngkatanBloc(gh<_i332.AlumniRepository>()));
+  gh.factory<_i905.AlumniJurusanBloc>(
+      () => _i905.AlumniJurusanBloc(gh<_i332.AlumniRepository>()));
+  gh.factory<_i905.AlumniGetManyBloc>(
+      () => _i905.AlumniGetManyBloc(gh<_i332.AlumniRepository>()));
   gh.factory<_i898.UserBloc>(() => _i898.UserBloc(
         gh<_i902.UserRepository>(),
         gh<_i260.AuthRepository>(),

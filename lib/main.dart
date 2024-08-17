@@ -10,6 +10,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
+final RouteObserver<ModalRoute> routeObserver = RouteObserver<ModalRoute>();
+
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await dotenv.load();
@@ -43,6 +45,7 @@ class _AlumniHubFtUhAppState extends State<AlumniHubFtUhApp> {
         navigatorKey: locator<AppNavigation>().navigatorKey,
         initialRoute: SplashScreen.route,
         onGenerateRoute: routeGenerators,
+        navigatorObservers: [routeObserver],
       ),
     );
   }

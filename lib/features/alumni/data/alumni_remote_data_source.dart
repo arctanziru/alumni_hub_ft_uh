@@ -22,6 +22,7 @@ class AlumniRemoteDataSource {
     final response = await _api.createApiCall(
       endpoint: '/alumni',
       method: NetworkCallMethod.get,
+      params: params.toJson(),
     );
     return AlumniAngkatanResponse.fromJson(response.data);
   }

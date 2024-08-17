@@ -17,12 +17,13 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen> {
   bool _isEditing = false;
 
+  late TextEditingController noAnggotaController;
   late TextEditingController nameController;
-  late TextEditingController phoneController;
-  late TextEditingController locationController;
   late TextEditingController departmentController;
   late TextEditingController batchController;
-  late TextEditingController businessFieldController;
+  late TextEditingController birthDateController;
+  late TextEditingController religionController;
+  late TextEditingController bloodTypeController;
 
   @override
   void initState() {
@@ -31,14 +32,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
     final userSession = context.read<UserBloc>().getUserSession();
     final user = userSession?.user;
 
+    noAnggotaController =
+        TextEditingController(text: user?.alumni?.noAnggota ?? '');
     nameController = TextEditingController(text: user?.alumni?.nama ?? '');
-    phoneController = TextEditingController(text: '');
-    locationController = TextEditingController(text: '');
     departmentController =
         TextEditingController(text: user?.alumni?.jurusan ?? '');
     batchController = TextEditingController(text: user?.alumni?.angkatan ?? '');
-    businessFieldController =
-        TextEditingController(text: '71204 - Jasa Inspeksi Teknik Instalasi');
+    birthDateController =
+        TextEditingController(text: user?.alumni?.tglLahir ?? '');
+    religionController = TextEditingController(text: user?.alumni?.agama ?? '');
+    bloodTypeController =
+        TextEditingController(text: user?.alumni?.golonganDarah ?? '');
 
     debugPrint("User session: $userSession");
   }
@@ -120,24 +124,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 child: Column(
                   children: [
                     TextFieldProfileWidget(
+                      label: 'No. Anggota',
+                      description: noAnggotaController.text,
+                      icon: Icons.person,
+                      controller: noAnggotaController,
+                      readOnly: true,
+                    ),
+                    TextFieldProfileWidget(
                       label: 'Nama Lengkap',
                       description: nameController.text,
                       icon: Icons.person,
                       controller: nameController,
-                      readOnly: !_isEditing,
-                    ),
-                    TextFieldProfileWidget(
-                      label: 'Phone',
-                      description: phoneController.text,
-                      icon: Icons.phone,
-                      controller: phoneController,
-                      readOnly: !_isEditing,
-                    ),
-                    TextFieldProfileWidget(
-                      label: 'Domisili',
-                      description: locationController.text,
-                      icon: Icons.location_on,
-                      controller: locationController,
                       readOnly: !_isEditing,
                     ),
                     TextFieldProfileWidget(
@@ -155,10 +152,24 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       readOnly: !_isEditing,
                     ),
                     TextFieldProfileWidget(
-                      label: 'Bidang Usaha',
-                      description: businessFieldController.text,
-                      icon: Icons.business,
-                      controller: businessFieldController,
+                      label: 'Tanggal lahir',
+                      description: birthDateController.text,
+                      icon: Icons.calendar_view_day,
+                      controller: birthDateController,
+                      readOnly: !_isEditing,
+                    ),
+                    TextFieldProfileWidget(
+                      label: 'Agama',
+                      description: religionController.text,
+                      icon: Icons.star,
+                      controller: religionController,
+                      readOnly: !_isEditing,
+                    ),
+                    TextFieldProfileWidget(
+                      label: 'Golongan Darah',
+                      description: bloodTypeController.text,
+                      icon: Icons.local_hospital,
+                      controller: bloodTypeController,
                       readOnly: !_isEditing,
                     ),
                   ],

@@ -1,6 +1,7 @@
 import 'package:alumni_hub_ft_uh/features/alumni/domain/alumni_repository.dart';
 import 'package:alumni_hub_ft_uh/features/alumni/domain/models/alumni_get_many_model.dart';
 import 'package:bloc/bloc.dart';
+import 'package:cached_query/cached_query.dart';
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 
@@ -16,43 +17,51 @@ class AlumniBloc extends Bloc<AlumniEvent, AlumniState> {
 
   AlumniBloc(this._alumniRepository) : super(AlumniAngkatanInitial()) {
     on<AlumniEventGetAngkatan>((event, emit) async {
-      try {
-        emit(AlumniAngkatanLoading());
-        final query = _alumniRepository.getAngkatanAlumni(AlumniAngkatanParams(
-          search: search,
-        ));
-        await for (final queryState in query.stream) {
-          emit(AlumniAngkatanSuccess(queryState.data!));
+      final query = _alumniRepository.getAngkatanAlumni(AlumniAngkatanParams(
+        search: search,
+      ));
+      return emit.forEach<QueryState<AlumniAngkatanResponse>>(query.stream,
+          onData: (queryState) {
+        if (queryState.status == QueryStatus.loading) {
+          return AlumniAngkatanLoading();
+        } else if (queryState.status == QueryStatus.error) {
+          return AlumniAngkatanError(queryState.error.toString());
         }
-      } catch (e) {
-        emit(AlumniAngkatanError(e.toString()));
-      }
+        return AlumniAngkatanSuccess(queryState.data!);
+      });
     });
 
     on<AlumniEventGetJurusan>((event, emit) async {
-      try {
-        emit(AlumniJurusanLoading());
-        final query = _alumniRepository.getJurusanAlumni(
-            AlumniJurusanParams(angkatan: angkatan!, search: search));
-        await for (final queryState in query.stream) {
-          emit(AlumniJurusanSuccess(queryState.data!));
+      final query = _alumniRepository.getJurusanAlumni(AlumniJurusanParams(
+        angkatan: angkatan!,
+        search: search,
+      ));
+      return emit.forEach<QueryState<AlumniJurusanResponse>>(query.stream,
+          onData: (queryState) {
+        if (queryState.status == QueryStatus.loading) {
+          return AlumniJurusanLoading();
+        } else if (queryState.status == QueryStatus.error) {
+          return AlumniJurusanError(queryState.error.toString());
         }
-      } catch (e) {
-        emit(AlumniJurusanError(e.toString()));
-      }
+        return AlumniJurusanSuccess(queryState.data!);
+      });
     });
 
     on<AlumniEventGetMany>((event, emit) async {
-      try {
-        emit(AlumniGetManyLoading());
-        final query = _alumniRepository.getAlumniClaimData(
-            AlumniGetManyParams(jurusan: jurusan!, angkatan: angkatan!));
-        await for (final queryState in query.stream) {
-          emit(AlumniGetManySuccess(queryState.data!));
+      final query = _alumniRepository.getAlumniClaimData(AlumniGetManyParams(
+        angkatan: angkatan!,
+        jurusan: jurusan!,
+        search: search,
+      ));
+      return emit.forEach<QueryState<AlumniGetManyResponse>>(query.stream,
+          onData: (queryState) {
+        if (queryState.status == QueryStatus.loading) {
+          return AlumniGetManyLoading();
+        } else if (queryState.status == QueryStatus.error) {
+          return AlumniGetManyError(queryState.error.toString());
         }
-      } catch (e) {
-        emit(AlumniGetManyError(e.toString()));
-      }
+        return AlumniGetManySuccess(queryState.data!);
+      });
     });
   }
 }

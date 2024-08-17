@@ -92,14 +92,14 @@ Map<String, dynamic> _$$AlumniAngkatanParamsImplToJson(
 
 _$AngkatanDataImpl _$$AngkatanDataImplFromJson(Map<String, dynamic> json) =>
     _$AngkatanDataImpl(
-      angkatan: (json['angkatan'] as num).toInt(),
-      total: (json['total'] as num).toInt(),
+      angkatan: json['angkatan'] as String,
+      count: (json['count'] as num).toInt(),
     );
 
 Map<String, dynamic> _$$AngkatanDataImplToJson(_$AngkatanDataImpl instance) =>
     <String, dynamic>{
       'angkatan': instance.angkatan,
-      'total': instance.total,
+      'count': instance.count,
     };
 
 _$AlumniGetManyParamsImpl _$$AlumniGetManyParamsImplFromJson(

@@ -72,8 +72,8 @@ class AlumniAngkatanParams with _$AlumniAngkatanParams {
 @freezed
 class AngkatanData with _$AngkatanData {
   const factory AngkatanData({
-    required int angkatan,
-    required int total,
+    required String angkatan,
+    required int count,
   }) = _AngkatanData;
 
   factory AngkatanData.fromJson(Map<String, dynamic> json) =>

@@ -18,7 +18,7 @@ _$AlumniModelImpl _$$AlumniModelImplFromJson(Map<String, dynamic> json) =>
       angkatan: json['angkatan'] as String,
       kelamin: $enumDecode(_$EKelaminEnumMap, json['kelamin']),
       agama: json['agama'] as String,
-      golonganDarah: json['golongan_darah'] as String,
+      golonganDarah: json['golongan_darah'] as String?,
       validated: json['validated'] as bool,
       createdAt: DateTime.parse(json['created_at'] as String),
       updatedAt: DateTime.parse(json['updated_at'] as String),

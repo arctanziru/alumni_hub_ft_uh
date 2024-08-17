@@ -18,7 +18,7 @@ class AlumniModel with _$AlumniModel {
     required String angkatan,
     required EKelamin kelamin,
     required String agama,
-    @JsonKey(name: 'golongan_darah') required String golonganDarah,
+    @JsonKey(name: 'golongan_darah') String? golonganDarah,
     required bool validated,
     @JsonKey(name: 'created_at') required DateTime createdAt,
     @JsonKey(name: 'updated_at') required DateTime updatedAt,

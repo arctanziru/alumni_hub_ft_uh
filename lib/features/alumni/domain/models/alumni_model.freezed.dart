@@ -35,7 +35,7 @@ mixin _$AlumniModel {
   EKelamin get kelamin => throw _privateConstructorUsedError;
   String get agama => throw _privateConstructorUsedError;
   @JsonKey(name: 'golongan_darah')
-  String get golonganDarah => throw _privateConstructorUsedError;
+  String? get golonganDarah => throw _privateConstructorUsedError;
   bool get validated => throw _privateConstructorUsedError;
   @JsonKey(name: 'created_at')
   DateTime get createdAt => throw _privateConstructorUsedError;
@@ -65,7 +65,7 @@ abstract class $AlumniModelCopyWith<$Res> {
       String angkatan,
       EKelamin kelamin,
       String agama,
-      @JsonKey(name: 'golongan_darah') String golonganDarah,
+      @JsonKey(name: 'golongan_darah') String? golonganDarah,
       bool validated,
       @JsonKey(name: 'created_at') DateTime createdAt,
       @JsonKey(name: 'updated_at') DateTime updatedAt});
@@ -94,7 +94,7 @@ class _$AlumniModelCopyWithImpl<$Res, $Val extends AlumniModel>
     Object? angkatan = null,
     Object? kelamin = null,
     Object? agama = null,
-    Object? golonganDarah = null,
+    Object? golonganDarah = freezed,
     Object? validated = null,
     Object? createdAt = null,
     Object? updatedAt = null,
@@ -140,10 +140,10 @@ class _$AlumniModelCopyWithImpl<$Res, $Val extends AlumniModel>
           ? _value.agama
           : agama // ignore: cast_nullable_to_non_nullable
               as String,
-      golonganDarah: null == golonganDarah
+      golonganDarah: freezed == golonganDarah
           ? _value.golonganDarah
           : golonganDarah // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       validated: null == validated
           ? _value.validated
           : validated // ignore: cast_nullable_to_non_nullable
@@ -179,7 +179,7 @@ abstract class _$$AlumniModelImplCopyWith<$Res>
       String angkatan,
       EKelamin kelamin,
       String agama,
-      @JsonKey(name: 'golongan_darah') String golonganDarah,
+      @JsonKey(name: 'golongan_darah') String? golonganDarah,
       bool validated,
       @JsonKey(name: 'created_at') DateTime createdAt,
       @JsonKey(name: 'updated_at') DateTime updatedAt});
@@ -206,7 +206,7 @@ class __$$AlumniModelImplCopyWithImpl<$Res>
     Object? angkatan = null,
     Object? kelamin = null,
     Object? agama = null,
-    Object? golonganDarah = null,
+    Object? golonganDarah = freezed,
     Object? validated = null,
     Object? createdAt = null,
     Object? updatedAt = null,
@@ -252,10 +252,10 @@ class __$$AlumniModelImplCopyWithImpl<$Res>
           ? _value.agama
           : agama // ignore: cast_nullable_to_non_nullable
               as String,
-      golonganDarah: null == golonganDarah
+      golonganDarah: freezed == golonganDarah
           ? _value.golonganDarah
           : golonganDarah // ignore: cast_nullable_to_non_nullable
-              as String,
+              as String?,
       validated: null == validated
           ? _value.validated
           : validated // ignore: cast_nullable_to_non_nullable
@@ -286,7 +286,7 @@ class _$AlumniModelImpl implements _AlumniModel {
       required this.angkatan,
       required this.kelamin,
       required this.agama,
-      @JsonKey(name: 'golongan_darah') required this.golonganDarah,
+      @JsonKey(name: 'golongan_darah') this.golonganDarah,
       required this.validated,
       @JsonKey(name: 'created_at') required this.createdAt,
       @JsonKey(name: 'updated_at') required this.updatedAt});
@@ -320,7 +320,7 @@ class _$AlumniModelImpl implements _AlumniModel {
   final String agama;
   @override
   @JsonKey(name: 'golongan_darah')
-  final String golonganDarah;
+  final String? golonganDarah;
   @override
   final bool validated;
   @override
@@ -409,7 +409,7 @@ abstract class _AlumniModel implements AlumniModel {
           required final String angkatan,
           required final EKelamin kelamin,
           required final String agama,
-          @JsonKey(name: 'golongan_darah') required final String golonganDarah,
+          @JsonKey(name: 'golongan_darah') final String? golonganDarah,
           required final bool validated,
           @JsonKey(name: 'created_at') required final DateTime createdAt,
           @JsonKey(name: 'updated_at') required final DateTime updatedAt}) =
@@ -444,7 +444,7 @@ abstract class _AlumniModel implements AlumniModel {
   String get agama;
   @override
   @JsonKey(name: 'golongan_darah')
-  String get golonganDarah;
+  String? get golonganDarah;
   @override
   bool get validated;
   @override

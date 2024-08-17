@@ -43,6 +43,14 @@ class _AlumniDetailSearchScreenState extends State<AlumniDetailSearchScreen> {
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    context
+        .read<AlumniGetManyBloc>()
+        .add(AlumniEventGetMany(widget.alumniGetManyParams));
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBarSecondaryWidget(

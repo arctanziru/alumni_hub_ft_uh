@@ -42,6 +42,7 @@ class _AlumniScreenState extends State<AlumniScreen> {
     super.initState();
     context.read<AlumniAngkatanBloc>().add(AlumniEventGetAngkatan());
   }
+  
 
   @override
   Widget build(BuildContext context) {

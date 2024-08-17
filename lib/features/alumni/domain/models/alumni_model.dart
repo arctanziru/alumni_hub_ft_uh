@@ -3,18 +3,20 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'alumni_model.freezed.dart';
 part 'alumni_model.g.dart';
 
+enum EKelamin { l, p }
+
 @freezed
 class AlumniModel with _$AlumniModel {
   const factory AlumniModel({
     @JsonKey(name: 'id_alumni') required int idAlumni,
     @JsonKey(name: 'id_user') required int idUser,
     required String nim,
-    @JsonKey(name: 'no_anggota') required String? NoAnggota,
+    @JsonKey(name: 'no_anggota') required String? noAnggota,
     required String nama,
     @JsonKey(name: 'tgl_lahir') required String tglLahir,
     required String jurusan,
     required String angkatan,
-    required String kelamin,
+    required EKelamin kelamin,
     required String agama,
     @JsonKey(name: 'golongan_darah') required String golonganDarah,
     required bool validated,

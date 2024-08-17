@@ -1,13 +1,18 @@
+import 'package:alumni_hub_ft_uh/features/user/bloc/user_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:alumni_hub_ft_uh/features/search/search_screen.dart';
 import 'package:alumni_hub_ft_uh/common/widgets/appBar/app_bar_menu_widget.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 // Import ProfileScreen
 
-class AppBarSearchWidget extends StatelessWidget implements PreferredSizeWidget {
+class AppBarSearchWidget extends StatelessWidget
+    implements PreferredSizeWidget {
   const AppBarSearchWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final userSession = context.read<UserBloc>().getUserSession();
+
     return AppBar(
       backgroundColor: Colors.white,
       elevation: 0,
@@ -21,12 +26,14 @@ class AppBarSearchWidget extends StatelessWidget implements PreferredSizeWidget 
               pageBuilder: (context, animation, secondaryAnimation) {
                 return const AppBarMenuWidget();
               },
-              transitionsBuilder: (context, animation, secondaryAnimation, child) {
+              transitionsBuilder:
+                  (context, animation, secondaryAnimation, child) {
                 const begin = Offset(-1.0, 0.0);
                 const end = Offset.zero;
                 const curve = Curves.easeInOut;
 
-                var tween = Tween(begin: begin, end: end).chain(CurveTween(curve: curve));
+                var tween = Tween(begin: begin, end: end)
+                    .chain(CurveTween(curve: curve));
                 var offsetAnimation = animation.drive(tween);
 
                 return SlideTransition(position: offsetAnimation, child: child);
@@ -51,7 +58,8 @@ class AppBarSearchWidget extends StatelessWidget implements PreferredSizeWidget 
                 onTap: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => const SearchScreen()),
+                    MaterialPageRoute(
+                        builder: (context) => const SearchScreen()),
                   );
                 },
                 child: AbsorbPointer(
@@ -59,11 +67,18 @@ class AppBarSearchWidget extends StatelessWidget implements PreferredSizeWidget 
                     readOnly: true,
                     decoration: InputDecoration(
                       hintText: 'Search',
-                      hintStyle: Theme.of(context).textTheme.bodySmall?.copyWith(color: Colors.black54),
+                      hintStyle: Theme.of(context)
+                          .textTheme
+                          .bodySmall
+                          ?.copyWith(color: Colors.black54),
                       border: InputBorder.none,
-                      contentPadding: const EdgeInsets.symmetric(vertical: 14, horizontal: 8.0),
+                      contentPadding: const EdgeInsets.symmetric(
+                          vertical: 14, horizontal: 8.0),
                     ),
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Colors.black),
+                    style: Theme.of(context)
+                        .textTheme
+                        .bodyMedium
+                        ?.copyWith(color: Colors.black),
                   ),
                 ),
               ),
@@ -73,8 +88,11 @@ class AppBarSearchWidget extends StatelessWidget implements PreferredSizeWidget 
       ),
       actions: [
         IconButton(
-          icon: const CircleAvatar(
-            backgroundImage: NetworkImage('https://via.placeholder.com/150'),
+          icon: CircleAvatar(
+            backgroundImage: NetworkImage(
+              userSession?.user?.avatar ??
+                  'https://example.com/profile_pic.jpg',
+            ),
           ),
           onPressed: () {
             Navigator.pushNamed(context, '/profile');

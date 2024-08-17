@@ -22,7 +22,7 @@ class AlumniScreen extends StatefulWidget {
 }
 
 class _AlumniScreenState extends State<AlumniScreen> {
-  void _showFilterDialog() {
+  void _showFilterDialog(bool autoFocus) {
     showModalBottomSheet(
       context: context,
       isScrollControlled: true,
@@ -31,7 +31,9 @@ class _AlumniScreenState extends State<AlumniScreen> {
           padding: EdgeInsets.only(
             bottom: MediaQuery.of(context).viewInsets.bottom,
           ),
-          child: const PopupAlumniWidget(),
+          child: PopupAlumniWidget(
+            autoFocus: autoFocus,
+          ),
         );
       },
     );
@@ -42,7 +44,6 @@ class _AlumniScreenState extends State<AlumniScreen> {
     super.initState();
     context.read<AlumniAngkatanBloc>().add(AlumniEventGetAngkatan());
   }
-  
 
   @override
   Widget build(BuildContext context) {
@@ -65,26 +66,25 @@ class _AlumniScreenState extends State<AlumniScreen> {
                       ),
                 ),
                 const SizedBox(height: 16.0),
-
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     ButtonWidget(
-                      onPressed: _showFilterDialog, // Show filter dialog
+                      onPressed: () => _showFilterDialog(false),
                       icon: Icons.filter_list,
                       label: 'Filter',
                       rounded: false,
                     ),
                     const SizedBox(width: 8.0), // Space between the buttons
-                    const ButtonWidget(
+                    ButtonWidget(
                       icon: Icons.search,
                       label: 'Cari Alumni',
                       rounded: false,
+                      onPressed: () => _showFilterDialog(true),
                     ),
                   ],
                 ),
                 const SizedBox(height: 20),
-
                 BlocBuilder<AlumniAngkatanBloc, AlumniState>(
                   builder: (context, state) {
                     if (state is AlumniAngkatanError) {
@@ -135,10 +135,10 @@ class _AlumniScreenState extends State<AlumniScreen> {
                     )));
                   },
                 ),
-                const SizedBox(height: 20), // Adjust spacing if needed
+                const SizedBox(height: 20),
                 Center(
                   child: GestureDetector(
-                    onTap: _showFilterDialog, // Show filter dialog on tap
+                    onTap: () => _showFilterDialog(false),
                     child: RichText(
                       text: TextSpan(
                         text: 'Ingin mencari angkatan lain? ',

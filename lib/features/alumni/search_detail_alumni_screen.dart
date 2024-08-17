@@ -1,12 +1,14 @@
+import 'package:alumni_hub_ft_uh/features/alumni/domain/models/alumni_model.dart';
 import 'package:flutter/material.dart';
 import 'package:alumni_hub_ft_uh/common/widgets/card/card_alumni_profile_widget.dart';
 import '../../common/widgets/appBar/app_bar_secondary_widget.dart';
-import 'alumni_profile_detail_screen.dart'; // Import the AlumniProfileDetailScreen
 
 class SearchDetailAlumniScreen extends StatelessWidget {
-  static const String route = '/searchDetailAlumni'; // Update the route name here
+  static const String route = '/searchDetailAlumni';
 
-  const SearchDetailAlumniScreen({super.key});
+  final AlumniModel alumniModel;
+
+  const SearchDetailAlumniScreen({super.key, required this.alumniModel});
 
   @override
   Widget build(BuildContext context) {
@@ -27,9 +29,9 @@ class SearchDetailAlumniScreen extends StatelessWidget {
                     'Nama',
                     textAlign: TextAlign.left,
                     style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 24,
-                    ),
+                          fontWeight: FontWeight.bold,
+                          fontSize: 24,
+                        ),
                   ),
                 ],
               ),
@@ -42,21 +44,17 @@ class SearchDetailAlumniScreen extends StatelessWidget {
               Expanded(
                 child: ListView.separated(
                   itemCount: 10, // Adjust the number of cards as needed
-                  separatorBuilder: (context, index) => const SizedBox(height: 10), // Space between cards
+                  separatorBuilder: (context, index) =>
+                      const SizedBox(height: 10), // Space between cards
                   itemBuilder: (context, index) {
-                    final letter = String.fromCharCode(65 + index); // Generates A, B, C, etc.
+                    final letter = String.fromCharCode(
+                        65 + index); // Generates A, B, C, etc.
                     return CardAlumniProfileWidget(
                       name: 'Agus $letter', // Title of the card
-                      details: 'Angkatan 2005- Jurusan $letter', // Description of the card
-                      avatarUrl: 'https://example.com/avatar${index + 1}.png', // Provide a valid URL or placeholder
-                      onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const AlumniProfileDetailScreen(),
-                          ),
-                        );
-                      },
+                      details:
+                          'Angkatan 2005- Jurusan $letter', // Description of the card
+                      avatarUrl:
+                          'https://example.com/avatar${index + 1}.png', // Provide a valid URL or placeholder
                     );
                   },
                 ),

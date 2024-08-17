@@ -1,54 +1,67 @@
+import 'package:alumni_hub_ft_uh/features/alumni/domain/models/alumni_model.dart';
 import 'package:flutter/material.dart';
 import 'package:alumni_hub_ft_uh/common/widgets/textField/text_field_profile_widget.dart';
 import 'package:alumni_hub_ft_uh/common/widgets/appBar/app_bar_secondary_widget.dart';
+import 'package:qr_flutter/qr_flutter.dart';
 
 class AlumniProfileDetailScreen extends StatelessWidget {
   static const String route = '/alumniProfileDetail';
 
-  const AlumniProfileDetailScreen({super.key});
+  final AlumniModel alumni;
+
+  const AlumniProfileDetailScreen({super.key, required this.alumni});
 
   @override
   Widget build(BuildContext context) {
     final textTheme = Theme.of(context).textTheme;
 
-    // Controllers to manage the text fields
-    final TextEditingController nameController = TextEditingController(text: 'Syukri Ruly');
-    final TextEditingController phoneController = TextEditingController(text: '+62 813-4073-4686');
-    final TextEditingController locationController = TextEditingController(text: 'Indonesia, Sulawesi Selatan, Makassar');
-    final TextEditingController departmentController = TextEditingController(text: 'Teknik Mesin');
-    final TextEditingController batchController = TextEditingController(text: '1996');
-    final TextEditingController businessFieldController = TextEditingController(text: '71204 - Jasa Inspeksi Teknik Instalasi');
+    final TextEditingController nameController =
+        TextEditingController(text: alumni.nama);
+    final TextEditingController departmentController =
+        TextEditingController(text: alumni.jurusan);
+    final TextEditingController batchController =
+        TextEditingController(text: alumni.angkatan);
+    final TextEditingController birthDateController =
+        TextEditingController(text: alumni.tglLahir);
+    final TextEditingController religionController =
+        TextEditingController(text: alumni.agama);
+    final TextEditingController bloodTypeController =
+        TextEditingController(text: alumni.golonganDarah ?? '');
 
     return Scaffold(
       appBar: const AppBarSecondaryWidget(
-        title: 'Profil Saya',
+        title: 'Profil Alumni',
       ),
       body: Container(
-        color: Colors.grey[100], // Set the background color of the entire screen
+        color:
+            Colors.grey[100], // Set the background color of the entire screen
         child: SafeArea(
           child: SingleChildScrollView(
             child: Column(
               children: [
                 Container(
-                  padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
                   child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       const CircleAvatar(
                         radius: 40, // Reduced size for avatar
-                        backgroundImage: NetworkImage('https://example.com/profile_pic.jpg'),
+                        backgroundImage:
+                            NetworkImage('https://example.com/profile_pic.jpg'),
                       ),
-                      const SizedBox(width: 40),
+                      const SizedBox(width: 12),
                       Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              'M. Syukri T.',
-                              style: textTheme.labelLarge!.copyWith(fontSize: 25),
+                              alumni.nama,
+                              style:
+                                  textTheme.labelLarge!.copyWith(fontSize: 25),
                             ),
                             Text(
-                              'D121221001',
+                              alumni.nim,
                               style: textTheme.bodyMedium,
                             ),
                           ],
@@ -58,13 +71,19 @@ class AlumniProfileDetailScreen extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
                   child: Center(
-                    child: Image.network(
-                      'https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=Example',
-                      width: 300,
-                      height: 300,
-                      fit: BoxFit.cover,
+                    child: QrImageView(
+                      data: 'This QR code has an embedded image as well',
+                      version: QrVersions.auto,
+                      size: 320,
+                      gapless: false,
+                      embeddedImage:
+                          const AssetImage('assets/logos/ikatek_unhas.png'),
+                      embeddedImageStyle: const QrEmbeddedImageStyle(
+                        size: Size(80, 80),
+                      ),
                     ),
                   ),
                 ),
@@ -81,50 +100,51 @@ class AlumniProfileDetailScreen extends StatelessWidget {
                       ),
                     ],
                   ),
-                  padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 16, horizontal: 16),
                   margin: const EdgeInsets.symmetric(horizontal: 16),
                   child: Column(
                     children: [
                       TextFieldProfileWidget(
                         label: 'Nama Lengkap',
-                        description: 'Syukri Ruly',
+                        description: alumni.nama,
                         icon: Icons.person,
                         controller: nameController,
-                        readOnly: true, // Set to read-only
-                      ),
-                      TextFieldProfileWidget(
-                        label: 'Phone',
-                        description: '+62 813-4073-4686',
-                        icon: Icons.phone,
-                        controller: phoneController,
-                        readOnly: true,
-                      ),
-                      TextFieldProfileWidget(
-                        label: 'Domisili',
-                        description: 'Indonesia, Sulawesi Selatan, Makassar',
-                        icon: Icons.location_on,
-                        controller: locationController,
                         readOnly: true,
                       ),
                       TextFieldProfileWidget(
                         label: 'Jurusan',
-                        description: 'Teknik Mesin',
+                        description: alumni.jurusan,
                         icon: Icons.school,
                         controller: departmentController,
                         readOnly: true,
                       ),
                       TextFieldProfileWidget(
                         label: 'Angkatan',
-                        description: '1996',
+                        description: alumni.angkatan,
                         icon: Icons.calendar_today,
                         controller: batchController,
                         readOnly: true,
                       ),
                       TextFieldProfileWidget(
-                        label: 'Bidang Usaha',
-                        description: '71204 - Jasa Inspeksi Teknik Instalasi',
-                        icon: Icons.business,
-                        controller: businessFieldController,
+                        label: 'Tanggal lahir',
+                        description: alumni.tglLahir,
+                        icon: Icons.calendar_view_day,
+                        controller: birthDateController,
+                        readOnly: true,
+                      ),
+                      TextFieldProfileWidget(
+                        label: 'Agama',
+                        description: alumni.agama,
+                        icon: Icons.book,
+                        controller: religionController,
+                        readOnly: true,
+                      ),
+                      TextFieldProfileWidget(
+                        label: 'Golongan Darah',
+                        description: alumni.golonganDarah ?? '-',
+                        icon: Icons.local_hospital,
+                        controller: bloodTypeController,
                         readOnly: true,
                       ),
                     ],

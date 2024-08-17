@@ -96,7 +96,8 @@ class _AlumniDetailSearchScreenState extends State<AlumniDetailSearchScreen> {
                                     details: alumni.nim,
                                     onTap: () {
                                       locator<AppNavigation>().navigateTo(
-                                          AlumniProfileDetailScreen.route);
+                                          AlumniProfileDetailScreen.route,
+                                          arguments: alumni);
                                     },
                                   );
                                 },

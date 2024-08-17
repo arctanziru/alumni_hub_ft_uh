@@ -4,7 +4,7 @@ class TextFieldProfileWidget extends StatelessWidget {
   final String label;
   final String description;
   final IconData icon;
-  final TextEditingController controller;
+  final TextEditingController? controller;
   final bool readOnly;
 
   const TextFieldProfileWidget({
@@ -12,7 +12,7 @@ class TextFieldProfileWidget extends StatelessWidget {
     required this.label,
     required this.description,
     required this.icon,
-    required this.controller,
+    this.controller,
     this.readOnly = false,
   });
 

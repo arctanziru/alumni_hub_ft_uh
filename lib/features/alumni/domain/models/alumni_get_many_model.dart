@@ -1,4 +1,3 @@
-import 'package:alumni_hub_ft_uh/common/domain/common_model.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'alumni_model.dart';
 

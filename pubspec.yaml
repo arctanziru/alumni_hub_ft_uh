@@ -61,6 +61,7 @@ dependencies:
   cached_query: ^2.0.5
   stream_transform: ^2.1.0
   google_sign_in: ^6.2.1
+  fluttertoast: ^8.2.8
 
 dev_dependencies:
   flutter_test:

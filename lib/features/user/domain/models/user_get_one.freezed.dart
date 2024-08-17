@@ -373,7 +373,7 @@ class _$UserGetOneDataImpl implements _UserGetOneData {
       @JsonKey(name: 'last_active') this.lastActive,
       @JsonKey(name: 'created_at') required this.createdAt,
       @JsonKey(name: 'updated_at') required this.updatedAt,
-      required this.alumni});
+      this.alumni});
 
   factory _$UserGetOneDataImpl.fromJson(Map<String, dynamic> json) =>
       _$$UserGetOneDataImplFromJson(json);
@@ -447,7 +447,7 @@ abstract class _UserGetOneData implements UserGetOneData {
       @JsonKey(name: 'last_active') final String? lastActive,
       @JsonKey(name: 'created_at') required final String createdAt,
       @JsonKey(name: 'updated_at') required final String updatedAt,
-      required final AlumniModel? alumni}) = _$UserGetOneDataImpl;
+      final AlumniModel? alumni}) = _$UserGetOneDataImpl;
 
   factory _UserGetOneData.fromJson(Map<String, dynamic> json) =
       _$UserGetOneDataImpl.fromJson;

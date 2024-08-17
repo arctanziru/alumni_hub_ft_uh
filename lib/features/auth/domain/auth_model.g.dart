@@ -100,7 +100,7 @@ _$SignInWithGoogleResponseImpl _$$SignInWithGoogleResponseImplFromJson(
         Map<String, dynamic> json) =>
     _$SignInWithGoogleResponseImpl(
       token: json['token'] as String,
-      user: UserGetOneData.fromJson(json['user'] as Map<String, dynamic>),
+      data: UserGetOneData.fromJson(json['data'] as Map<String, dynamic>),
       message: json['message'] as String,
       success: json['success'] as bool,
     );
@@ -109,7 +109,7 @@ Map<String, dynamic> _$$SignInWithGoogleResponseImplToJson(
         _$SignInWithGoogleResponseImpl instance) =>
     <String, dynamic>{
       'token': instance.token,
-      'user': instance.user,
+      'data': instance.data,
       'message': instance.message,
       'success': instance.success,
     };

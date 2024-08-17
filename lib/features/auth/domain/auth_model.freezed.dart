@@ -1132,7 +1132,7 @@ SignInWithGoogleResponse _$SignInWithGoogleResponseFromJson(
 /// @nodoc
 mixin _$SignInWithGoogleResponse {
   String get token => throw _privateConstructorUsedError;
-  UserGetOneData get user => throw _privateConstructorUsedError;
+  UserGetOneData get data => throw _privateConstructorUsedError;
   String get message => throw _privateConstructorUsedError;
   bool get success => throw _privateConstructorUsedError;
 
@@ -1148,9 +1148,9 @@ abstract class $SignInWithGoogleResponseCopyWith<$Res> {
           $Res Function(SignInWithGoogleResponse) then) =
       _$SignInWithGoogleResponseCopyWithImpl<$Res, SignInWithGoogleResponse>;
   @useResult
-  $Res call({String token, UserGetOneData user, String message, bool success});
+  $Res call({String token, UserGetOneData data, String message, bool success});
 
-  $UserGetOneDataCopyWith<$Res> get user;
+  $UserGetOneDataCopyWith<$Res> get data;
 }
 
 /// @nodoc
@@ -1168,7 +1168,7 @@ class _$SignInWithGoogleResponseCopyWithImpl<$Res,
   @override
   $Res call({
     Object? token = null,
-    Object? user = null,
+    Object? data = null,
     Object? message = null,
     Object? success = null,
   }) {
@@ -1177,9 +1177,9 @@ class _$SignInWithGoogleResponseCopyWithImpl<$Res,
           ? _value.token
           : token // ignore: cast_nullable_to_non_nullable
               as String,
-      user: null == user
-          ? _value.user
-          : user // ignore: cast_nullable_to_non_nullable
+      data: null == data
+          ? _value.data
+          : data // ignore: cast_nullable_to_non_nullable
               as UserGetOneData,
       message: null == message
           ? _value.message
@@ -1194,9 +1194,9 @@ class _$SignInWithGoogleResponseCopyWithImpl<$Res,
 
   @override
   @pragma('vm:prefer-inline')
-  $UserGetOneDataCopyWith<$Res> get user {
-    return $UserGetOneDataCopyWith<$Res>(_value.user, (value) {
-      return _then(_value.copyWith(user: value) as $Val);
+  $UserGetOneDataCopyWith<$Res> get data {
+    return $UserGetOneDataCopyWith<$Res>(_value.data, (value) {
+      return _then(_value.copyWith(data: value) as $Val);
     });
   }
 }
@@ -1210,10 +1210,10 @@ abstract class _$$SignInWithGoogleResponseImplCopyWith<$Res>
       __$$SignInWithGoogleResponseImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String token, UserGetOneData user, String message, bool success});
+  $Res call({String token, UserGetOneData data, String message, bool success});
 
   @override
-  $UserGetOneDataCopyWith<$Res> get user;
+  $UserGetOneDataCopyWith<$Res> get data;
 }
 
 /// @nodoc
@@ -1230,7 +1230,7 @@ class __$$SignInWithGoogleResponseImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? token = null,
-    Object? user = null,
+    Object? data = null,
     Object? message = null,
     Object? success = null,
   }) {
@@ -1239,9 +1239,9 @@ class __$$SignInWithGoogleResponseImplCopyWithImpl<$Res>
           ? _value.token
           : token // ignore: cast_nullable_to_non_nullable
               as String,
-      user: null == user
-          ? _value.user
-          : user // ignore: cast_nullable_to_non_nullable
+      data: null == data
+          ? _value.data
+          : data // ignore: cast_nullable_to_non_nullable
               as UserGetOneData,
       message: null == message
           ? _value.message
@@ -1260,7 +1260,7 @@ class __$$SignInWithGoogleResponseImplCopyWithImpl<$Res>
 class _$SignInWithGoogleResponseImpl implements _SignInWithGoogleResponse {
   const _$SignInWithGoogleResponseImpl(
       {required this.token,
-      required this.user,
+      required this.data,
       required this.message,
       required this.success});
 
@@ -1270,7 +1270,7 @@ class _$SignInWithGoogleResponseImpl implements _SignInWithGoogleResponse {
   @override
   final String token;
   @override
-  final UserGetOneData user;
+  final UserGetOneData data;
   @override
   final String message;
   @override
@@ -1278,7 +1278,7 @@ class _$SignInWithGoogleResponseImpl implements _SignInWithGoogleResponse {
 
   @override
   String toString() {
-    return 'SignInWithGoogleResponse(token: $token, user: $user, message: $message, success: $success)';
+    return 'SignInWithGoogleResponse(token: $token, data: $data, message: $message, success: $success)';
   }
 
   @override
@@ -1287,14 +1287,14 @@ class _$SignInWithGoogleResponseImpl implements _SignInWithGoogleResponse {
         (other.runtimeType == runtimeType &&
             other is _$SignInWithGoogleResponseImpl &&
             (identical(other.token, token) || other.token == token) &&
-            (identical(other.user, user) || other.user == user) &&
+            (identical(other.data, data) || other.data == data) &&
             (identical(other.message, message) || other.message == message) &&
             (identical(other.success, success) || other.success == success));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, token, user, message, success);
+  int get hashCode => Object.hash(runtimeType, token, data, message, success);
 
   @JsonKey(ignore: true)
   @override
@@ -1314,7 +1314,7 @@ class _$SignInWithGoogleResponseImpl implements _SignInWithGoogleResponse {
 abstract class _SignInWithGoogleResponse implements SignInWithGoogleResponse {
   const factory _SignInWithGoogleResponse(
       {required final String token,
-      required final UserGetOneData user,
+      required final UserGetOneData data,
       required final String message,
       required final bool success}) = _$SignInWithGoogleResponseImpl;
 
@@ -1324,7 +1324,7 @@ abstract class _SignInWithGoogleResponse implements SignInWithGoogleResponse {
   @override
   String get token;
   @override
-  UserGetOneData get user;
+  UserGetOneData get data;
   @override
   String get message;
   @override

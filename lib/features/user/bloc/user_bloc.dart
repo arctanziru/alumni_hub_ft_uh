@@ -71,7 +71,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
         final googleResponse = await _authRepository.signInWithGoogle();
         _userRepository.saveUserSession(UserSession(
           token: googleResponse.token,
-          user: googleResponse.user,
+          user: googleResponse.data,
         ));
         emit(UserStateSuccessSignInWithGoogle(googleResponse));
       } on CustomException catch (e) {

@@ -44,9 +44,7 @@ class AuthRepositoryImpl implements AuthRepository {
 
       debugPrint('Google Client ID: ${dotenv.env['GOOGLE_CLIENT_ID']}');
 
-      GoogleSignIn googleSignIn = GoogleSignIn(
-        serverClientId: dotenv.env['GOOGLE_CLIENT_ID'],
-      );
+      GoogleSignIn googleSignIn = GoogleSignIn();
 
       await googleSignIn.signOut();
 

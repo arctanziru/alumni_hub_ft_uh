@@ -24,7 +24,7 @@ class UserGetOneData with _$UserGetOneData {
     @JsonKey(name: 'last_active') String? lastActive,
     @JsonKey(name: 'created_at') required String createdAt,
     @JsonKey(name: 'updated_at') required String updatedAt,
-    required AlumniModel? alumni,
+    AlumniModel? alumni,
   }) = _UserGetOneData;
 
   factory UserGetOneData.fromJson(Map<String, dynamic> json) =>

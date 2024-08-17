@@ -83,7 +83,7 @@ class SignInBody with _$SignInBody {
 class SignInWithGoogleResponse with _$SignInWithGoogleResponse {
   const factory SignInWithGoogleResponse({
     required String token,
-    required UserGetOneData user,
+    required UserGetOneData data,
     required String message,
     required bool success,
   }) = _SignInWithGoogleResponse;

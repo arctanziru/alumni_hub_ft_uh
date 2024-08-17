@@ -7,16 +7,14 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class HttpInterceptor extends Interceptor {
   @override
-  void onRequest(
-      RequestOptions options, RequestInterceptorHandler handler) async {
-    if (options.headers['requiresToken']) {
+  void onRequest(RequestOptions options, RequestInterceptorHandler handler) async {
+    
+    if (options.headers['requiresToken'] && options.path != '/auth/login') {
       try {
         options.headers.remove('requiresToken');
         SharedPreferences prefs = await SharedPreferences.getInstance();
-        final userSession =
-            UserSession.fromJson(json.decode(prefs.getString(kUserSession)!));
-        options.headers
-            .addAll({'Authorization': 'Bearer ${userSession.token}'});
+        final userSession = UserSession.fromJson(json.decode(prefs.getString(kUserSession)!));
+        options.headers.addAll({'Authorization': 'Bearer ${userSession.token}'});
       } catch (e) {
         debugPrint("Error in adding token to request $e");
       }

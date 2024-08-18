@@ -52,7 +52,7 @@ class JurusanData with _$JurusanData {
 class AlumniAngkatanResponse with _$AlumniAngkatanResponse {
   const factory AlumniAngkatanResponse({
     required String message,
-    required AngkatanData data,
+    required List<AngkatanData> data,
   }) = _AlumniAngkatanResponse;
 
   factory AlumniAngkatanResponse.fromJson(Map<String, dynamic> json) =>
@@ -73,7 +73,7 @@ class AlumniAngkatanParams with _$AlumniAngkatanParams {
 class AngkatanData with _$AngkatanData {
   const factory AngkatanData({
     required String angkatan,
-    required int count,
+    required int total,
   }) = _AngkatanData;
 
   factory AngkatanData.fromJson(Map<String, dynamic> json) =>

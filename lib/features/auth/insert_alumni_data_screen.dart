@@ -37,8 +37,30 @@ class _InsertAlumniDataScreenState extends State<InsertAlumniDataScreen> {
   final _noTelpController = TextEditingController();
   final _angkatanController = TextEditingController();
   final _jurusanController = TextEditingController();
-  final _golonganDarahController = TextEditingController();
-  final _agamaController = TextEditingController();
+  // final _golonganDarahController = TextEditingController();
+  // final _agamaController = TextEditingController();
+  String? _golonganDarahController;
+  String? _agamaController;
+
+  List<String> agamaList = [
+    'Islam',
+    'Kristen Protestan',
+    'Kristen Katolik',
+    'Hindu',
+    'Buddha',
+    'Konghucu',
+  ];
+
+  List<String> golonganDarahList = [
+    'A+',
+    'A-',
+    'B+',
+    'B-',
+    'O+',
+    'O-',
+    'AB+',
+    'AB-',
+  ];
 
   @override
   void dispose() {
@@ -48,8 +70,8 @@ class _InsertAlumniDataScreenState extends State<InsertAlumniDataScreen> {
     _noTelpController.dispose();
     _angkatanController.dispose();
     _jurusanController.dispose();
-    _golonganDarahController.dispose();
-    _agamaController.dispose();
+    // _golonganDarahController.dispose();
+    // _agamaController.dispose();
 
     super.dispose();
   }
@@ -91,8 +113,8 @@ class _InsertAlumniDataScreenState extends State<InsertAlumniDataScreen> {
                 tglLahir: _tanggalLahirController.text,
                 jurusan: _jurusanController.text,
                 angkatan: _angkatanController.text,
-                golonganDarah: _golonganDarahController.text,
-                agama: _agamaController.text,
+                golonganDarah: _golonganDarahController ?? '',
+                agama: _agamaController ?? '',
               ),
               token: userSession?.token,
             ),
@@ -307,17 +329,79 @@ class _InsertAlumniDataScreenState extends State<InsertAlumniDataScreen> {
                       controller: _jurusanController,
                     ),
                     const SizedBox(height: 12),
-                    TextFieldWidget(
-                      label: 'Golongan Darah',
-                      hint: 'Masukkan golongan darah (opsional)',
-                      controller: _golonganDarahController,
+                    // dropdown golongan darah
+                    const Text(
+                      'Golongan Darah',
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
+                    const SizedBox(height: 8),
+                    DropdownButtonFormField<String>(
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        contentPadding: const EdgeInsets.symmetric(horizontal: 16),
+                        hintStyle: Theme.of(context).textTheme.bodyMedium,
+                        labelStyle: Theme.of(context).textTheme.bodyMedium,
+                      ),
+                      hint: const Text('Pilih golongan darah'),
+                      value: _golonganDarahController,
+                      onChanged: (String? newValue) {
+                        setState(() {
+                          _golonganDarahController = newValue;
+                        });
+                      },
+                      items: golonganDarahList.map((String value) {
+                        return DropdownMenuItem<String>(
+                          value: value,
+                          child: Text(value),
+                        );
+                      }).toList(),
+                    ),
+                    // TextFieldWidget(
+                    //   label: 'Golongan Darah',
+                    //   hint: 'Masukkan golongan darah (opsional)',
+                    //   controller: _golonganDarahController,
+                    // ),
                     const SizedBox(height: 12),
-                    TextFieldWidget(
-                      label: 'Agama',
-                      hint: 'Masukkan agama',
-                      controller: _agamaController,
+                    // dropdown agama
+                    const Text(
+                      'Agama',
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
+                    const SizedBox(height: 8),
+                    DropdownButtonFormField<String>(
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        contentPadding: const EdgeInsets.symmetric(horizontal: 16),
+                      ),
+                      hint: const Text('Pilih agama'),
+                      value: _agamaController,
+                      onChanged: (String? newValue) {
+                        setState(() {
+                          _agamaController = newValue;
+                        });
+                      },
+                      items: agamaList.map((String value) {
+                        return DropdownMenuItem<String>(
+                          value: value,
+                          child: Text(value),
+                        );
+                      }).toList(),
+                    ),
+                    // TextFieldWidget(
+                    //   label: 'Agama',
+                    //   hint: 'Masukkan agama',
+                    //   controller: _agamaController,
+                    // ),
                     const SizedBox(height: 12),
                     Row(
                       children: [

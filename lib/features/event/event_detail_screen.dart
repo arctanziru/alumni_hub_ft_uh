@@ -4,7 +4,6 @@ import 'package:alumni_hub_ft_uh/common/widgets/bottomBar/bottom_bar_widget.dart
 import 'package:alumni_hub_ft_uh/common/widgets/button/button_widget.dart';
 import 'package:alumni_hub_ft_uh/constants/colors.dart';
 import 'package:alumni_hub_ft_uh/features/event/bloc/event_bloc.dart';
-import 'package:alumni_hub_ft_uh/features/event/domain/models/event_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -133,26 +132,22 @@ class _EventDetailScreenState extends State<EventDetailScreen> {
                               width: 12,
                             ),
                             ButtonWidget(
-                              label: state.selectedEvent?.isRegistered == true
-                                  ? 'Batal Daftar'
-                                  : 'Daftar',
-                              onPressed: () {
-                                context
-                                    .read<EventBloc>()
-                                    .add(EventToggleRegister(widget.eventId));
-                              },
-                              isLoading: state.selectedEventStatus ==
-                                      EventStatus.loading &&
-                                  state.selectedEvent == null,
-                              disabled:
-                                  state.selectedEvent?.isRegistered == false
-                                      ? state.selectedEvent?.peserta != null &&
-                                              state.selectedEvent?.kuota != null
-                                          ? state.selectedEvent!.peserta >=
-                                              state.selectedEvent!.kuota
-                                          : false
-                                      : false,
-                            ),
+                                label: state.selectedEvent?.isRegistered == true
+                                    ? 'Batal Daftar'
+                                    : 'Daftar',
+                                onPressed: () {
+                                  context
+                                      .read<EventBloc>()
+                                      .add(EventToggleRegister(widget.eventId));
+                                },
+                                isLoading: state.selectedEventStatus ==
+                                        EventStatus.loading &&
+                                    state.selectedEvent == null,
+                                disabled: state.selectedEvent == null ||
+                                    (state.selectedEvent?.isRegistered ==
+                                            false &&
+                                        state.selectedEvent!.peserta >=
+                                            state.selectedEvent!.kuota)),
                           ],
                         ),
                         const SizedBox(height: 16),

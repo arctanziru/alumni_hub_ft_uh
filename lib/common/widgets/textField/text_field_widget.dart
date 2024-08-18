@@ -7,6 +7,7 @@ class TextFieldWidget extends StatefulWidget {
   final bool obscureText;
   final TextInputType keyboardType;
   final Widget? icon; // Icon parameter for suffix icon
+  final int? maxLength;
 
   const TextFieldWidget({
     super.key,
@@ -16,6 +17,7 @@ class TextFieldWidget extends StatefulWidget {
     this.obscureText = false,
     this.keyboardType = TextInputType.text,
     this.icon, // Initialize icon parameter
+    this.maxLength,
   });
 
   @override
@@ -60,6 +62,7 @@ class _TextFieldWidgetState extends State<TextFieldWidget> {
           focusNode: _focusNode,
           controller: widget.controller,
           obscureText: widget.obscureText,
+          maxLength: widget.maxLength,
           decoration: InputDecoration(
             hintText: widget.hint,
             border: OutlineInputBorder(

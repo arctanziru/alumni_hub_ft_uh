@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:alumni_hub_ft_uh/constants/keys.dart';
 import 'package:alumni_hub_ft_uh/features/auth/domain/auth_repository.dart';
 import 'package:alumni_hub_ft_uh/features/user/bloc/user_event.dart';
 import 'package:alumni_hub_ft_uh/features/user/bloc/user_state.dart';
@@ -6,6 +9,7 @@ import 'package:alumni_hub_ft_uh/features/user/domain/user_repository.dart';
 import 'package:alumni_hub_ft_uh/middleware/custom_exception.dart';
 import 'package:bloc/bloc.dart';
 import 'package:injectable/injectable.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 @injectable
 class UserBloc extends Bloc<UserEvent, UserState> {
@@ -47,6 +51,11 @@ class UserBloc extends Bloc<UserEvent, UserState> {
       emit(UserStateGetProfileLoading());
       try {
         final user = await _userRepository.getProfile();
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        final userSession =
+            UserSession.fromJson(json.decode(prefs.getString(kUserSession)!));
+        _userRepository.saveUserSession(
+            UserSession(token: userSession.token, user: user.data));
         emit(UserStateSuccessGetProfile(user));
       } on CustomException catch (e) {
         emit(UserStateException(e));

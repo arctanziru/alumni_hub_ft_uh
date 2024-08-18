@@ -71,22 +71,22 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 padding:
                     const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
                 child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     CircleAvatar(
                       radius: 60,
                       backgroundImage: NetworkImage(
-                        user?.avatar ?? 'https://example.com/profile_pic.jpg',
+                        user?.avatar ?? '',
                       ),
                     ),
-                    const SizedBox(width: 40),
+                    const SizedBox(width: 12),
                     Expanded(
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
                             user?.alumni?.nama ?? '',
-                            style: textTheme.labelLarge!.copyWith(fontSize: 25),
+                            style: textTheme.titleMedium,
                           ),
                           Text(
                             user?.email ?? '',

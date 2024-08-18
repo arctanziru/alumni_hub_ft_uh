@@ -9,11 +9,15 @@ class AlumniJurusanInitial extends AlumniState {}
 
 class AlumniGetManyInitial extends AlumniState {}
 
+class AlumniUpdateInitial extends AlumniState {}
+
 class AlumniAngkatanLoading extends AlumniState {}
 
 class AlumniJurusanLoading extends AlumniState {}
 
 class AlumniGetManyLoading extends AlumniState {}
+
+class AlumniUpdateLoading extends AlumniState {}
 
 class AlumniAngkatanSuccess extends AlumniState {
   final AlumniAngkatanResponse alumniAngkatanResponse;
@@ -30,6 +34,11 @@ class AlumniGetManySuccess extends AlumniState {
   AlumniGetManySuccess(this.alumniGetManyResponse);
 }
 
+class AlumniUpdateSuccess extends AlumniState {
+  final AlumniResponse alumniUpdateResponse;
+  AlumniUpdateSuccess(this.alumniUpdateResponse);
+}
+
 class AlumniAngkatanError extends AlumniState {
   final String message;
   AlumniAngkatanError(this.message);
@@ -43,4 +52,9 @@ class AlumniJurusanError extends AlumniState {
 class AlumniGetManyError extends AlumniState {
   final String message;
   AlumniGetManyError(this.message);
+}
+
+class AlumniUpdateError extends AlumniState {
+  final String message;
+  AlumniUpdateError(this.message);
 }

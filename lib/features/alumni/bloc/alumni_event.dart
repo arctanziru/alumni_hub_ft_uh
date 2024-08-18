@@ -14,3 +14,8 @@ class AlumniEventGetMany extends AlumniEvent {
   final AlumniGetManyParams alumniGetManyParams;
   AlumniEventGetMany(this.alumniGetManyParams);
 }
+
+class AlumniEventUpdate extends AlumniEvent {
+  final AlumniUpdateBody alumniUpdateBody;
+  AlumniEventUpdate(this.alumniUpdateBody);
+}

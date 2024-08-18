@@ -91,8 +91,8 @@ class AppBarMenuWidget extends StatelessWidget {
                   children: [
                     CircleAvatar(
                       radius: 40,
-                      backgroundImage: NetworkImage(userSession?.user?.avatar ??
-                          'https://example.com/profile_pic.jpg'),
+                      backgroundImage:
+                          NetworkImage(userSession?.user?.avatar ?? ''),
                     ),
                     const SizedBox(width: 16),
                     Column(

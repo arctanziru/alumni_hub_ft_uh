@@ -25,8 +25,7 @@ class CardAlumniProfileWidget extends StatelessWidget {
       child: ListTile(
         contentPadding: const EdgeInsets.symmetric(horizontal: 16.0),
         leading: CircleAvatar(
-          backgroundImage:
-              NetworkImage(avatarUrl ?? 'https://example.com/profile_pic.jpg'),
+          backgroundImage: NetworkImage(avatarUrl ?? ''),
           radius: 20.0,
         ),
         title: Text(

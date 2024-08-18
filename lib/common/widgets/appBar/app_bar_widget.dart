@@ -65,8 +65,7 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
         IconButton(
           icon: CircleAvatar(
             backgroundImage: NetworkImage(
-              userSession?.user?.avatar ??
-                  'https://example.com/profile_pic.jpg',
+              userSession?.user?.avatar ?? '',
             ),
           ),
           onPressed: () {

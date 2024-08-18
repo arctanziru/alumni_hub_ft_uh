@@ -1,6 +1,7 @@
 import 'package:alumni_hub_ft_uh/data/api.dart';
 import 'package:alumni_hub_ft_uh/features/alumni/domain/models/alumni_data_model.dart';
 import 'package:alumni_hub_ft_uh/features/alumni/domain/models/alumni_get_many_model.dart';
+import 'package:alumni_hub_ft_uh/features/alumni/domain/models/alumni_response.dart';
 import 'package:injectable/injectable.dart';
 
 @singleton
@@ -56,11 +57,12 @@ class AlumniRemoteDataSource {
     return AlumniGetManyResponse.fromJson(response.data);
   }
 
-  Future<void> updateAlumni(AlumniBody body) async {
-    await _api.createApiCall(
+  Future<AlumniResponse> updateAlumni(AlumniUpdateBody body) async {
+    final response = await _api.createApiCall(
       endpoint: '/alumni',
       method: NetworkCallMethod.put,
       body: body.toJson(),
     );
+    return AlumniResponse.fromJson(response.data);
   }
 }

@@ -47,8 +47,7 @@ class AlumniProfileDetailScreen extends StatelessWidget {
                     children: [
                       const CircleAvatar(
                         radius: 40, // Reduced size for avatar
-                        backgroundImage:
-                            NetworkImage('https://example.com/profile_pic.jpg'),
+                        backgroundImage: NetworkImage(''),
                       ),
                       const SizedBox(width: 12),
                       Expanded(
@@ -75,7 +74,7 @@ class AlumniProfileDetailScreen extends StatelessWidget {
                       const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
                   child: Center(
                     child: QrImageView(
-                      data: 'This QR code has an embedded image as well',
+                      data: alumni.noAnggota ?? alumni.nama,
                       version: QrVersions.auto,
                       size: 320,
                       gapless: false,

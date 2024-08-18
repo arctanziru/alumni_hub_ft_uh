@@ -1,5 +1,6 @@
 import 'package:alumni_hub_ft_uh/features/alumni/domain/alumni_repository.dart';
 import 'package:alumni_hub_ft_uh/features/alumni/domain/models/alumni_get_many_model.dart';
+import 'package:alumni_hub_ft_uh/features/alumni/domain/models/alumni_response.dart';
 import 'package:bloc/bloc.dart';
 import 'package:cached_query/cached_query.dart';
 import 'package:flutter/material.dart';
@@ -72,6 +73,23 @@ class AlumniGetManyBloc extends Bloc<AlumniEvent, AlumniState> {
         }
         return AlumniGetManySuccess(queryState.data!);
       });
+    });
+  }
+}
+
+class AlumniUpdateBloc extends Bloc<AlumniEvent, AlumniState> {
+  final AlumniRepository _alumniRepository;
+
+  AlumniUpdateBloc(this._alumniRepository) : super(AlumniUpdateInitial()) {
+    on<AlumniEventUpdate>((event, emit) async {
+      emit(AlumniUpdateLoading());
+      try {
+        final response =
+            await _alumniRepository.updateAlumni(event.alumniUpdateBody);
+        emit(AlumniUpdateSuccess(response));
+      } catch (e) {
+        emit(AlumniUpdateError(e.toString()));
+      }
     });
   }
 }

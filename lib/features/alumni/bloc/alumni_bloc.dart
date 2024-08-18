@@ -12,11 +12,14 @@ part "alumni_state.dart";
 class AlumniAngkatanBloc extends Bloc<AlumniEvent, AlumniState> {
   final AlumniRepository _alumniRepository;
   String? search;
+  String? angkatan;
 
   AlumniAngkatanBloc(this._alumniRepository) : super(AlumniAngkatanInitial()) {
     on<AlumniEventGetAngkatan>((event, emit) async {
       final query = _alumniRepository.getAngkatanAlumni(AlumniAngkatanParams(
         search: search,
+        all: angkatan == 'all',
+        angkatan: angkatan,
       ));
       return emit.forEach<QueryState<AlumniAngkatanResponse>>(query.stream,
           onData: (queryState) {

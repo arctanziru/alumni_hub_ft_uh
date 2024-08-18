@@ -63,6 +63,8 @@ class AlumniAngkatanResponse with _$AlumniAngkatanResponse {
 class AlumniAngkatanParams with _$AlumniAngkatanParams {
   const factory AlumniAngkatanParams({
     String? search,
+    bool? all,
+    String? angkatan,
   }) = _AlumniAngkatanParams;
 
   factory AlumniAngkatanParams.fromJson(Map<String, dynamic> json) =>

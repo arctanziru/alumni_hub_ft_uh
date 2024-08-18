@@ -833,6 +833,8 @@ AlumniAngkatanParams _$AlumniAngkatanParamsFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$AlumniAngkatanParams {
   String? get search => throw _privateConstructorUsedError;
+  bool? get all => throw _privateConstructorUsedError;
+  String? get angkatan => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -846,7 +848,7 @@ abstract class $AlumniAngkatanParamsCopyWith<$Res> {
           $Res Function(AlumniAngkatanParams) then) =
       _$AlumniAngkatanParamsCopyWithImpl<$Res, AlumniAngkatanParams>;
   @useResult
-  $Res call({String? search});
+  $Res call({String? search, bool? all, String? angkatan});
 }
 
 /// @nodoc
@@ -864,11 +866,21 @@ class _$AlumniAngkatanParamsCopyWithImpl<$Res,
   @override
   $Res call({
     Object? search = freezed,
+    Object? all = freezed,
+    Object? angkatan = freezed,
   }) {
     return _then(_value.copyWith(
       search: freezed == search
           ? _value.search
           : search // ignore: cast_nullable_to_non_nullable
+              as String?,
+      all: freezed == all
+          ? _value.all
+          : all // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      angkatan: freezed == angkatan
+          ? _value.angkatan
+          : angkatan // ignore: cast_nullable_to_non_nullable
               as String?,
     ) as $Val);
   }
@@ -882,7 +894,7 @@ abstract class _$$AlumniAngkatanParamsImplCopyWith<$Res>
       __$$AlumniAngkatanParamsImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String? search});
+  $Res call({String? search, bool? all, String? angkatan});
 }
 
 /// @nodoc
@@ -897,11 +909,21 @@ class __$$AlumniAngkatanParamsImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? search = freezed,
+    Object? all = freezed,
+    Object? angkatan = freezed,
   }) {
     return _then(_$AlumniAngkatanParamsImpl(
       search: freezed == search
           ? _value.search
           : search // ignore: cast_nullable_to_non_nullable
+              as String?,
+      all: freezed == all
+          ? _value.all
+          : all // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      angkatan: freezed == angkatan
+          ? _value.angkatan
+          : angkatan // ignore: cast_nullable_to_non_nullable
               as String?,
     ));
   }
@@ -910,17 +932,21 @@ class __$$AlumniAngkatanParamsImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$AlumniAngkatanParamsImpl implements _AlumniAngkatanParams {
-  const _$AlumniAngkatanParamsImpl({this.search});
+  const _$AlumniAngkatanParamsImpl({this.search, this.all, this.angkatan});
 
   factory _$AlumniAngkatanParamsImpl.fromJson(Map<String, dynamic> json) =>
       _$$AlumniAngkatanParamsImplFromJson(json);
 
   @override
   final String? search;
+  @override
+  final bool? all;
+  @override
+  final String? angkatan;
 
   @override
   String toString() {
-    return 'AlumniAngkatanParams(search: $search)';
+    return 'AlumniAngkatanParams(search: $search, all: $all, angkatan: $angkatan)';
   }
 
   @override
@@ -928,12 +954,15 @@ class _$AlumniAngkatanParamsImpl implements _AlumniAngkatanParams {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$AlumniAngkatanParamsImpl &&
-            (identical(other.search, search) || other.search == search));
+            (identical(other.search, search) || other.search == search) &&
+            (identical(other.all, all) || other.all == all) &&
+            (identical(other.angkatan, angkatan) ||
+                other.angkatan == angkatan));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, search);
+  int get hashCode => Object.hash(runtimeType, search, all, angkatan);
 
   @JsonKey(ignore: true)
   @override
@@ -952,14 +981,20 @@ class _$AlumniAngkatanParamsImpl implements _AlumniAngkatanParams {
 }
 
 abstract class _AlumniAngkatanParams implements AlumniAngkatanParams {
-  const factory _AlumniAngkatanParams({final String? search}) =
-      _$AlumniAngkatanParamsImpl;
+  const factory _AlumniAngkatanParams(
+      {final String? search,
+      final bool? all,
+      final String? angkatan}) = _$AlumniAngkatanParamsImpl;
 
   factory _AlumniAngkatanParams.fromJson(Map<String, dynamic> json) =
       _$AlumniAngkatanParamsImpl.fromJson;
 
   @override
   String? get search;
+  @override
+  bool? get all;
+  @override
+  String? get angkatan;
   @override
   @JsonKey(ignore: true)
   _$$AlumniAngkatanParamsImplCopyWith<_$AlumniAngkatanParamsImpl>

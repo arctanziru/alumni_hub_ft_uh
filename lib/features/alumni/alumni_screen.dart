@@ -84,7 +84,19 @@ class _AlumniScreenState extends State<AlumniScreen> {
                     ),
                   ],
                 ),
-                const SizedBox(height: 20),
+                const SizedBox(height: 12),
+                BlocBuilder<AlumniAngkatanBloc, AlumniState>(
+                  builder: (context, state) {
+                    return Text(
+                      'Nama yang dicari: ${context.read<AlumniAngkatanBloc>().search ?? '-'}',
+                      textAlign: TextAlign.left,
+                      style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                            fontWeight: FontWeight.w600,
+                          ),
+                    );
+                  },
+                ),
+                const SizedBox(height: 16),
                 BlocBuilder<AlumniAngkatanBloc, AlumniState>(
                   builder: (context, state) {
                     if (state is AlumniAngkatanError) {
@@ -94,7 +106,61 @@ class _AlumniScreenState extends State<AlumniScreen> {
                       );
                     }
 
-                    if (state is AlumniAngkatanSuccess) {
+                    if (state is AlumniAngkatanSuccess &&
+                        state.alumniAngkatanResponse.data.isNotEmpty) {
+                      final angkatan =
+                          context.read<AlumniAngkatanBloc>().angkatan;
+
+                      List<Widget> children = [];
+
+                      if (angkatan == 'all') {
+                        children.add(
+                          CardAlumniWidget(
+                            label: 'Semua Angkatan',
+                            subtitle: '',
+                            onTap: () {
+                              locator<AppNavigation>().navigateTo(
+                                AlumniSearchScreen.route,
+                                arguments: AlumniJurusanParams(
+                                  angkatan: 'all',
+                                  search:
+                                      context.read<AlumniAngkatanBloc>().search,
+                                ),
+                              );
+                            },
+                          ),
+                        );
+                        children.add(const SizedBox(height: 10));
+                      }
+
+                      children.add(
+                        ListView.separated(
+                          shrinkWrap: true,
+                          itemCount: state.alumniAngkatanResponse.data.length,
+                          separatorBuilder: (context, index) =>
+                              const SizedBox(height: 10),
+                          itemBuilder: (context, index) {
+                            final angkatan =
+                                state.alumniAngkatanResponse.data[index];
+                            return CardAlumniWidget(
+                              label: 'Angkatan ${angkatan.angkatan}',
+                              subtitle: '${angkatan.total} Alumni',
+                              onTap: () {
+                                locator<AppNavigation>().navigateTo(
+                                  AlumniSearchScreen.route,
+                                  arguments: AlumniJurusanParams(
+                                    angkatan: angkatan.angkatan,
+                                    search: context
+                                        .read<AlumniAngkatanBloc>()
+                                        .search,
+                                  ),
+                                );
+                              },
+                            );
+                          },
+                        ),
+                      );
+
                       return RefreshIndicator(
                         onRefresh: () async {
                           context
@@ -102,24 +168,7 @@ class _AlumniScreenState extends State<AlumniScreen> {
                               .add(AlumniEventGetAngkatan());
                         },
                         child: Column(
-                          children: List.generate(
-                            state.alumniAngkatanResponse.data.length,
-                            (index) {
-                              final angkatan =
-                                  state.alumniAngkatanResponse.data[index];
-                              return Column(
-                                children: [
-                                  CardAlumniWidget(
-                                    label:
-                                        'Angkatan ${angkatan.angkatan} (${angkatan.angkatan})',
-                                    subtitle: '${angkatan.total} Alumni',
-                                  ),
-                                  const SizedBox(
-                                      height: 10.0), // Space between cards
-                                ],
-                              );
-                            },
-                          ),
+                          children: children,
                         ),
                       );
                     }

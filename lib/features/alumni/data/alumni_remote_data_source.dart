@@ -20,20 +20,25 @@ class AlumniRemoteDataSource {
   Future<AlumniAngkatanResponse> getAngkatanAlumni(
       AlumniAngkatanParams params) async {
     final response = await _api.createApiCall(
-      endpoint: '/alumni',
-      method: NetworkCallMethod.get,
-      params: params.toJson(),
-    );
+        endpoint: '/alumni',
+        method: NetworkCallMethod.get,
+        params: {
+          if (params.search != null) 'search': params.search,
+          if (params.all != null) 'all': params.all,
+          if (params.angkatan != null) 'angkatan': params.angkatan,
+        });
     return AlumniAngkatanResponse.fromJson(response.data);
   }
 
   Future<AlumniJurusanResponse> getJurusanAlumni(
       AlumniJurusanParams params) async {
     final response = await _api.createApiCall(
-      endpoint: '/alumni',
-      method: NetworkCallMethod.get,
-      params: params.toJson(),
-    );
+        endpoint: '/alumni',
+        method: NetworkCallMethod.get,
+        params: {
+          if (params.search != null) 'search': params.search,
+          'angkatan': params.angkatan,
+        });
     return AlumniJurusanResponse.fromJson(response.data);
   }
 
@@ -42,7 +47,11 @@ class AlumniRemoteDataSource {
     final response = await _api.createApiCall(
       endpoint: '/alumni',
       method: NetworkCallMethod.get,
-      params: params.toJson(),
+      params: {
+        if (params.search != null) 'search': params.search,
+        'angkatan': params.angkatan,
+        'jurusan': params.jurusan,
+      },
     );
     return AlumniGetManyResponse.fromJson(response.data);
   }

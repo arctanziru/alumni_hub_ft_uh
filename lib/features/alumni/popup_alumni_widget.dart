@@ -1,5 +1,10 @@
+import 'package:alumni_hub_ft_uh/common/utils/app_navigation.dart';
+import 'package:alumni_hub_ft_uh/common/widgets/button/button_widget.dart';
+import 'package:alumni_hub_ft_uh/features/alumni/bloc/alumni_bloc.dart';
+import 'package:alumni_hub_ft_uh/locator.dart';
+import 'package:alumni_hub_ft_uh/main.dart';
 import 'package:flutter/material.dart';
-import '../../common/widgets/button/button_widget.dart'; // Import your custom ButtonWidget
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class PopupAlumniWidget extends StatefulWidget {
   final bool autoFocus;
@@ -10,23 +15,32 @@ class PopupAlumniWidget extends StatefulWidget {
   PopupAlumniWidgetState createState() => PopupAlumniWidgetState();
 }
 
-class PopupAlumniWidgetState extends State<PopupAlumniWidget> {
-  // Track the selected button
-  bool _isAngkatanSayaSelected = false;
+class PopupAlumniWidgetState extends State<PopupAlumniWidget> with RouteAware {
+  String? _selectedAngkatan;
+  late TextEditingController _searchController;
+
+  @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      routeObserver.subscribe(this, ModalRoute.of(context)!);
+    });
+    super.initState();
+    _selectedAngkatan = context.read<AlumniAngkatanBloc>().angkatan;
+    _searchController =
+        TextEditingController(text: context.read<AlumniAngkatanBloc>().search);
+  }
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
-    // Generate the list of years from 1990 to 2000
-    List<String> years =
-        List.generate(2000 - 1990 + 1, (index) => (1990 + index).toString());
+    List<String> years = List.generate(
+        DateTime.now().year - 1990 + 1, (index) => (1990 + index).toString());
 
     return Container(
-      padding: const EdgeInsets.fromLTRB(
-          16.0, 48.0, 16.0, 48.0), // Apply padding to all sides
+      padding: const EdgeInsets.fromLTRB(16.0, 48.0, 16.0, 48.0),
       decoration: BoxDecoration(
-        color: Colors.grey[100], // Set background color to grey[100]
+        color: Colors.grey[100],
         borderRadius: const BorderRadius.vertical(top: Radius.circular(20.0)),
       ),
       child: Column(
@@ -36,34 +50,31 @@ class PopupAlumniWidgetState extends State<PopupAlumniWidget> {
             'FILTER',
             style: TextStyle(
               fontSize: 20,
-              fontWeight: FontWeight
-                  .bold, // You can customize the style further if needed
+              fontWeight: FontWeight.bold,
             ),
           ),
           const SizedBox(height: 20),
-          const Divider(
-              color: Colors.black), // Add a divider below the FILTER text
+          const Divider(color: Colors.black),
           const SizedBox(height: 20),
           SizedBox(
-            width: double
-                .infinity, // Make the TextField take full width of its parent
+            width: double.infinity,
             child: Container(
               decoration: BoxDecoration(
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withOpacity(0.2), // Shadow color
+                    color: Colors.black.withOpacity(0.2),
                     spreadRadius: 2,
                     blurRadius: 8,
-                    offset: const Offset(0, 4), // Shadow position
+                    offset: const Offset(0, 4),
                   ),
                 ],
                 borderRadius: BorderRadius.circular(15.0),
               ),
               child: TextField(
+                controller: _searchController,
                 decoration: InputDecoration(
                   labelText: 'Nama',
-                  labelStyle:
-                      theme.textTheme.bodyMedium, // Apply bodyMedium text style
+                  labelStyle: theme.textTheme.bodyMedium,
                   prefixIcon: const Icon(Icons.search),
                   border: const OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(15.0)),
@@ -72,47 +83,41 @@ class PopupAlumniWidgetState extends State<PopupAlumniWidget> {
                   filled: true,
                   fillColor: Colors.white,
                 ),
+                autofocus: widget.autoFocus,
               ),
             ),
           ),
           const SizedBox(height: 30),
           Row(
-            mainAxisAlignment:
-                MainAxisAlignment.center, // Center the buttons horizontally
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Expanded(
                 child: Padding(
-                  padding: const EdgeInsets.only(
-                      right: 5.0), // Space between buttons
+                  padding: const EdgeInsets.only(right: 5.0),
                   child: ButtonWidget(
                     onPressed: () {
                       setState(() {
-                        _isAngkatanSayaSelected = true;
+                        _selectedAngkatan = null;
                       });
                     },
-                    label: 'angkatan saya',
+                    label: 'Angkatan saya',
                     rounded: false,
-                    color: _isAngkatanSayaSelected
-                        ? null
-                        : Colors.grey[700], // Change color based on selection
+                    color: _selectedAngkatan == null ? null : Colors.grey[700],
                   ),
                 ),
               ),
               Expanded(
                 child: Padding(
-                  padding:
-                      const EdgeInsets.only(left: 5.0), // Space between buttons
+                  padding: const EdgeInsets.only(left: 5.0),
                   child: ButtonWidget(
                     onPressed: () {
                       setState(() {
-                        _isAngkatanSayaSelected = false;
+                        _selectedAngkatan = "all";
                       });
                     },
-                    label: 'semua angkatan',
+                    label: 'Semua angkatan',
                     rounded: false,
-                    color: !_isAngkatanSayaSelected
-                        ? null
-                        : Colors.grey[700], // Change color based on selection
+                    color: _selectedAngkatan == 'all' ? null : Colors.grey[700],
                   ),
                 ),
               ),
@@ -120,16 +125,15 @@ class PopupAlumniWidgetState extends State<PopupAlumniWidget> {
           ),
           const SizedBox(height: 5),
           SizedBox(
-            width: double
-                .infinity, // Make the DropdownButtonFormField take full width of its parent
+            width: double.infinity,
             child: Container(
               decoration: BoxDecoration(
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withOpacity(0.2), // Shadow color
+                    color: Colors.black.withOpacity(0.2),
                     spreadRadius: 2,
                     blurRadius: 8,
-                    offset: const Offset(0, 4), // Shadow position
+                    offset: const Offset(0, 4),
                   ),
                 ],
                 borderRadius: BorderRadius.circular(15.0),
@@ -138,8 +142,7 @@ class PopupAlumniWidgetState extends State<PopupAlumniWidget> {
               child: DropdownButtonFormField<String>(
                 decoration: InputDecoration(
                   labelText: 'Angkatan Kustom',
-                  labelStyle:
-                      theme.textTheme.bodyMedium, // Apply bodyMedium text style
+                  labelStyle: theme.textTheme.bodyMedium,
                   border: const OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(15.0)),
                     borderSide: BorderSide.none,
@@ -152,12 +155,15 @@ class PopupAlumniWidgetState extends State<PopupAlumniWidget> {
                     value: year,
                     child: Text(
                       year,
-                      style: theme
-                          .textTheme.bodyMedium, // Apply bodyMedium text style
+                      style: theme.textTheme.bodyMedium,
                     ),
                   );
                 }).toList(),
-                onChanged: (newValue) {},
+                onChanged: (newValue) {
+                  setState(() {
+                    _selectedAngkatan = newValue;
+                  });
+                },
               ),
             ),
           ),
@@ -169,8 +175,16 @@ class PopupAlumniWidgetState extends State<PopupAlumniWidget> {
                   Expanded(
                     child: ButtonWidget(
                       onPressed: () {
-                        // Apply filter logic
-                        Navigator.of(context).pop();
+                        context.read<AlumniAngkatanBloc>().angkatan =
+                            _selectedAngkatan;
+                        context.read<AlumniAngkatanBloc>().search =
+                            _searchController.value.text.isEmpty
+                                ? null
+                                : _searchController.value.text;
+                        context
+                            .read<AlumniAngkatanBloc>()
+                            .add(AlumniEventGetAngkatan());
+                        locator<AppNavigation>().goBack();
                       },
                       label: 'Simpan',
                       rounded: false,
@@ -183,11 +197,11 @@ class PopupAlumniWidgetState extends State<PopupAlumniWidget> {
                   Expanded(
                     child: ButtonWidget(
                       onPressed: () {
-                        Navigator.of(context).pop();
+                        locator<AppNavigation>().goBack();
                       },
                       label: 'Kembali',
                       rounded: false,
-                      color: Colors.grey[700], // Set the color to dark grey
+                      color: Colors.grey[700],
                     ),
                   ),
                 ],

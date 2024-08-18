@@ -55,6 +55,9 @@ class _AlumniDetailSearchScreenState extends State<AlumniDetailSearchScreen> {
     return Scaffold(
       appBar: AppBarSecondaryWidget(
         title: widget.alumniGetManyParams.jurusan,
+        subtitle: widget.alumniGetManyParams.search != null
+            ? 'Search: ${widget.alumniGetManyParams.search}'
+            : null,
       ),
       body: SafeArea(
         child: Padding(

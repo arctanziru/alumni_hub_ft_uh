@@ -84,12 +84,16 @@ _$AlumniAngkatanParamsImpl _$$AlumniAngkatanParamsImplFromJson(
         Map<String, dynamic> json) =>
     _$AlumniAngkatanParamsImpl(
       search: json['search'] as String?,
+      all: json['all'] as bool?,
+      angkatan: json['angkatan'] as String?,
     );
 
 Map<String, dynamic> _$$AlumniAngkatanParamsImplToJson(
         _$AlumniAngkatanParamsImpl instance) =>
     <String, dynamic>{
       'search': instance.search,
+      'all': instance.all,
+      'angkatan': instance.angkatan,
     };
 
 _$AngkatanDataImpl _$$AngkatanDataImplFromJson(Map<String, dynamic> json) =>

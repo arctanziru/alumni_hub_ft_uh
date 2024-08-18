@@ -32,7 +32,12 @@ class _AlumniSearchScreenState extends State<AlumniSearchScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBarSecondaryWidget(
-        title: 'Angkatan ${widget.alumniJurusanParams.angkatan}',
+        title: widget.alumniJurusanParams.angkatan == 'all'
+            ? 'Semua Angkatan'
+            : 'Angkatan ${widget.alumniJurusanParams.angkatan}',
+        subtitle: widget.alumniJurusanParams.search != null
+            ? 'Search: ${widget.alumniJurusanParams.search}'
+            : null,
       ),
       body: SafeArea(
         child: Padding(
@@ -69,13 +74,15 @@ class _AlumniSearchScreenState extends State<AlumniSearchScreen> {
                               label: jurusan.jurusan,
                               subtitle: '${jurusan.total} Alumni',
                               onTap: () {
-                                debugPrint('Navigating to Jurusan: ${jurusan.jurusan}');
+                                debugPrint(
+                                    'Navigating to Jurusan: ${jurusan.jurusan}');
                                 locator<AppNavigation>().navigateTo(
                                   AlumniDetailSearchScreen.route,
                                   arguments: AlumniGetManyParams(
                                     angkatan:
                                         widget.alumniJurusanParams.angkatan,
                                     jurusan: jurusan.jurusan,
+                                    search: widget.alumniJurusanParams.search,
                                   ),
                                 );
                               },

@@ -1,3 +1,4 @@
+import 'package:alumni_hub_ft_uh/common/utils/ui_helper.dart';
 import 'package:alumni_hub_ft_uh/features/claim_alumni/bloc/add/add_alumni_bloc.dart';
 import 'package:alumni_hub_ft_uh/features/claim_alumni/domain/models/add_alumni_model.dart';
 import 'package:alumni_hub_ft_uh/features/user/bloc/user_bloc.dart';
@@ -86,7 +87,8 @@ class _InsertAlumniDataScreenState extends State<InsertAlumniDataScreen> {
 
     if (selectedDate != null) {
       setState(() {
-        _tanggalLahirController.text = DateFormat('dd/MM/yyyy').format(selectedDate);
+        _tanggalLahirController.text =
+            DateFormat('dd/MM/yyyy').format(selectedDate);
       });
     }
   }
@@ -94,12 +96,8 @@ class _InsertAlumniDataScreenState extends State<InsertAlumniDataScreen> {
   void _handleAddData() {
     if (!agreeToTerms) {
       // Show SnackBar if terms are not agreed upon
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text(
-            'Anda harus menyetujui syarat dan ketentuan terlebih dahulu.',
-          ),
-        ),
+      showToastMessage(
+        message: 'Anda harus menyetujui syarat dan ketentuan terlebih dahulu.',
       );
     } else {
       // Proceed with sign up if terms are agreed
@@ -133,10 +131,12 @@ class _InsertAlumniDataScreenState extends State<InsertAlumniDataScreen> {
         child: LayoutBuilder(builder: (context, constraints) {
           return ConstrainedBox(
             constraints: BoxConstraints(
-              maxHeight: constraints.maxHeight - MediaQuery.of(context).padding.top,
+              maxHeight:
+                  constraints.maxHeight - MediaQuery.of(context).padding.top,
             ),
             child: Container(
-              margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.2),
+              margin: EdgeInsets.only(
+                  top: MediaQuery.of(context).size.height * 0.2),
               decoration: const BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.only(
@@ -147,7 +147,8 @@ class _InsertAlumniDataScreenState extends State<InsertAlumniDataScreen> {
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
               height: MediaQuery.of(context).size.height * 0.8,
               child: SingleChildScrollView(
-                padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+                padding: EdgeInsets.only(
+                    bottom: MediaQuery.of(context).viewInsets.bottom),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
@@ -219,8 +220,9 @@ class _InsertAlumniDataScreenState extends State<InsertAlumniDataScreen> {
                                 child: Text(
                                   'Laki-laki',
                                   style: textTheme.bodyMedium?.copyWith(
-                                    color:
-                                        selectedGender == 'Laki-laki' ? Colors.white : Colors.black,
+                                    color: selectedGender == 'Laki-laki'
+                                        ? Colors.white
+                                        : Colors.black,
                                   ),
                                 ),
                               ),
@@ -248,8 +250,9 @@ class _InsertAlumniDataScreenState extends State<InsertAlumniDataScreen> {
                                 child: Text(
                                   'Perempuan',
                                   style: textTheme.bodyMedium?.copyWith(
-                                    color:
-                                        selectedGender == 'Perempuan' ? Colors.white : Colors.black,
+                                    color: selectedGender == 'Perempuan'
+                                        ? Colors.white
+                                        : Colors.black,
                                   ),
                                 ),
                               ),
@@ -343,7 +346,8 @@ class _InsertAlumniDataScreenState extends State<InsertAlumniDataScreen> {
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
                         ),
-                        contentPadding: const EdgeInsets.symmetric(horizontal: 16),
+                        contentPadding:
+                            const EdgeInsets.symmetric(horizontal: 16),
                         hintStyle: Theme.of(context).textTheme.bodyMedium,
                         labelStyle: Theme.of(context).textTheme.bodyMedium,
                       ),
@@ -381,7 +385,8 @@ class _InsertAlumniDataScreenState extends State<InsertAlumniDataScreen> {
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(12),
                         ),
-                        contentPadding: const EdgeInsets.symmetric(horizontal: 16),
+                        contentPadding:
+                            const EdgeInsets.symmetric(horizontal: 16),
                       ),
                       hint: const Text('Pilih agama'),
                       value: _agamaController,
@@ -414,7 +419,8 @@ class _InsertAlumniDataScreenState extends State<InsertAlumniDataScreen> {
                                 agreeToTerms = value ?? false;
                               });
                             },
-                            materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                            materialTapTargetSize:
+                                MaterialTapTargetSize.shrinkWrap,
                           ),
                         ),
                         Expanded(
@@ -449,18 +455,11 @@ class _InsertAlumniDataScreenState extends State<InsertAlumniDataScreen> {
                     BlocConsumer<AddAlumniBloc, AddAlumniState>(
                       listener: (context, state) {
                         if (state is AddAlumniSuccess) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              content: Text('Data alumni berhasil ditambahkan'),
-                            ),
-                          );
+                          showToastMessage(
+                              message: 'Data alumni berhasil ditambahkan');
                           Navigator.pushNamed(context, '/home');
                         } else if (state is AddAlumniError) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content: Text(state.exception.message),
-                            ),
-                          );
+                          showToastMessage(message: state.exception.message);
                         }
                       },
                       builder: (context, state) {
@@ -470,7 +469,9 @@ class _InsertAlumniDataScreenState extends State<InsertAlumniDataScreen> {
                             onPressed: _handleAddData,
                             label: 'Daftar',
                             isLoading: state is AddAlumniLoading,
-                            color: agreeToTerms ? Theme.of(context).primaryColor : Colors.grey,
+                            color: agreeToTerms
+                                ? Theme.of(context).primaryColor
+                                : Colors.grey,
                           ),
                         );
                       },

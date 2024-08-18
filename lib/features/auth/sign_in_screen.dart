@@ -10,7 +10,6 @@ import 'package:alumni_hub_ft_uh/features/user/bloc/user_state.dart';
 import 'package:alumni_hub_ft_uh/locator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:fluttertoast/fluttertoast.dart';
 
 class SignInScreen extends StatefulWidget {
   static const route = "/sign_in";
@@ -43,10 +42,12 @@ class _SignInScreenState extends State<SignInScreen> {
           builder: (context, constraints) {
             return ConstrainedBox(
               constraints: BoxConstraints(
-                maxHeight: constraints.maxHeight - MediaQuery.of(context).padding.top,
+                maxHeight:
+                    constraints.maxHeight - MediaQuery.of(context).padding.top,
               ),
               child: Container(
-                margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.2),
+                margin: EdgeInsets.only(
+                    top: MediaQuery.of(context).size.height * 0.2),
                 decoration: const BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.only(
@@ -62,7 +63,8 @@ class _SignInScreenState extends State<SignInScreen> {
                   bottom: 16,
                 ),
                 child: SingleChildScrollView(
-                  padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+                  padding: EdgeInsets.only(
+                      bottom: MediaQuery.of(context).viewInsets.bottom),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
@@ -88,21 +90,21 @@ class _SignInScreenState extends State<SignInScreen> {
                         child: BlocConsumer<UserBloc, UserState>(
                           listener: (context, state) {
                             if (state is UserStateSuccessSignInWithGoogle) {
-                              showSnackBar(context, 'Selamat datang');
+                              showToastMessage(message: 'Selamat datang!');
                               locator<AppNavigation>().navigateReplace('/home');
                             } else if (state is UserStateException) {
-                              Fluttertoast.showToast(
-                                msg: state.exception.message,
-                                toastLength: Toast.LENGTH_SHORT,
+                              showToastMessage(
+                                message: state.exception.message,
+                                backgroundColor: Colors.red,
                               );
-                              // debugPrint(
-                              //     "Exception: ${state.exception.message}");
                             }
                           },
                           builder: (context, state) {
                             return ElevatedButton(
                               onPressed: () {
-                                context.read<UserBloc>().add(UserEventSignInWithGoogle());
+                                context
+                                    .read<UserBloc>()
+                                    .add(UserEventSignInWithGoogle());
                               },
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: Colors.white,
@@ -110,7 +112,8 @@ class _SignInScreenState extends State<SignInScreen> {
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(48),
                                 ),
-                                padding: const EdgeInsets.symmetric(vertical: 16),
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 16),
                                 elevation: 5,
                                 side: const BorderSide(
                                   color: AppColors.gray1, // Set outline color
@@ -128,8 +131,12 @@ class _SignInScreenState extends State<SignInScreen> {
                                   const SizedBox(width: 8),
                                   Text(
                                     'Registrasi dengan Google',
-                                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                                          color: Colors.black, // Set the text color to black
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .bodyLarge
+                                        ?.copyWith(
+                                          color: Colors
+                                              .black, // Set the text color to black
                                         ),
                                   ),
                                 ],
@@ -178,7 +185,9 @@ class _SignInScreenState extends State<SignInScreen> {
                         obscureText: _isPasswordObscured,
                         controller: _passwordController,
                         icon: IconButton(
-                          icon: Icon(_isPasswordObscured ? Icons.visibility : Icons.visibility_off),
+                          icon: Icon(_isPasswordObscured
+                              ? Icons.visibility
+                              : Icons.visibility_off),
                           onPressed: () {
                             setState(() {
                               _isPasswordObscured = !_isPasswordObscured;
@@ -192,11 +201,13 @@ class _SignInScreenState extends State<SignInScreen> {
                         child: BlocConsumer<UserBloc, UserState>(
                           listener: (context, state) {
                             if (state is UserStateSuccessSignIn) {
-                              showSnackBar(context, 'Selamat datang');
-                              debugPrint("Token: ${state.signInResponse.token}");
+                              showToastMessage(message: 'Selamat datang!');
+                              debugPrint(
+                                  "Token: ${state.signInResponse.token}");
                               locator<AppNavigation>().navigateReplace('/home');
                             } else if (state is UserStateException) {
-                              debugPrint("Exception: ${state.exception.message}");
+                              debugPrint(
+                                  "Exception: ${state.exception.message}");
                             }
                           },
                           builder: (context, state) {
@@ -210,10 +221,10 @@ class _SignInScreenState extends State<SignInScreen> {
                                     ),
                                   ),
                               label: 'Masuk',
-                              isLoading:
-                                  state is UserStateSignInLoading && state is! UserStateException,
-                              disabled:
-                                  _emailController.text.isEmpty || _passwordController.text.isEmpty,
+                              isLoading: state is UserStateSignInLoading &&
+                                  state is! UserStateException,
+                              disabled: _emailController.text.isEmpty ||
+                                  _passwordController.text.isEmpty,
                             );
                           },
                         ),

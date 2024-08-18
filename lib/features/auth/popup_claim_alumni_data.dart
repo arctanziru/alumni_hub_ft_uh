@@ -1,3 +1,4 @@
+import 'package:alumni_hub_ft_uh/common/utils/ui_helper.dart';
 import 'package:alumni_hub_ft_uh/features/alumni/domain/models/alumni_model.dart';
 import 'package:alumni_hub_ft_uh/features/claim_alumni/bloc/claim/claim_alumni_bloc.dart';
 import 'package:alumni_hub_ft_uh/features/claim_alumni/domain/models/claim_alumni_model.dart';
@@ -133,24 +134,10 @@ class PopupClaimAlumniData extends StatelessWidget {
           child: BlocConsumer<ClaimAlumniBloc, ClaimAlumniState>(
             listener: (context, state) {
               if (state is ClaimAlumniSuccess) {
+                showToastMessage(message: 'Data alumni berhasil diklaim.');
                 Navigator.pushReplacementNamed(context, '/home');
-                // Show a success message
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: Text('Data berhasil diklaim'),
-                    duration: Duration(seconds: 2),
-                  ),
-                );
-                // navigate to home
               } else if (state is ClaimAlumniError) {
-                // Show an error message
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    content: Text(
-                        'Gagal mengklaim data: ${state.exception.message}'),
-                    duration: const Duration(seconds: 2),
-                  ),
-                );
+                showToastMessage(message: state.exception.message);
               }
             },
             builder: (context, state) {
@@ -177,7 +164,6 @@ class PopupClaimAlumniData extends StatelessWidget {
                                           token: userSession?.token,
                                         ),
                                       );
-                                  
                                 },
                                 onCancel: () {
                                   Navigator.of(context)

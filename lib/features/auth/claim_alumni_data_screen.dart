@@ -1,3 +1,4 @@
+import 'package:alumni_hub_ft_uh/common/utils/ui_helper.dart';
 import 'package:alumni_hub_ft_uh/features/alumni/domain/models/alumni_model.dart';
 import 'package:alumni_hub_ft_uh/features/claim_alumni/bloc/get/get_alumnis_bloc.dart';
 import 'package:alumni_hub_ft_uh/features/claim_alumni/domain/models/get_alumnis_model.dart';
@@ -352,12 +353,7 @@ class _ClaimAlumniDataScreenState extends State<ClaimAlumniDataScreen> {
                             _showDataNotFoundPopup();
                           }
                         } else if (state is GetAlumnisError) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
-                              content: Text(state.exception.message),
-                              backgroundColor: Colors.red,
-                            ),
-                          );
+                          showToastMessage(message: state.exception.message);
                         }
                       },
                       builder: (context, state) {

@@ -47,7 +47,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
             return ConstrainedBox(
               constraints: BoxConstraints(
                 maxHeight:
-                constraints.maxHeight - MediaQuery.of(context).padding.top,
+                    constraints.maxHeight - MediaQuery.of(context).padding.top,
               ),
               child: Container(
                 margin: EdgeInsets.only(
@@ -62,7 +62,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 ),
                 height: MediaQuery.of(context).size.height * 0.8,
                 padding:
-                const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
                 child: SingleChildScrollView(
                   padding: EdgeInsets.only(
                     bottom: MediaQuery.of(context).viewInsets.bottom,
@@ -92,11 +92,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         child: BlocConsumer<UserBloc, UserState>(
                           listener: (context, state) {
                             if (state is UserStateSuccessSignUp) {
-                              showSnackBar(context, 'Registrasi berhasil');
+                              showToastMessage(message: 'Registrasi berhasil');
                               locator<AppNavigation>().navigateReplace('/home');
                             } else if (state is UserStateException) {
-                              showSnackBar(
-                                  context, 'Terjadi kesalahan: ${state.exception}');
+                              showToastMessage(
+                                  message: state.exception.message);
                             }
                           },
                           builder: (context, state) {
@@ -113,7 +113,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   borderRadius: BorderRadius.circular(48),
                                 ),
                                 padding:
-                                const EdgeInsets.symmetric(vertical: 16),
+                                    const EdgeInsets.symmetric(vertical: 16),
                                 elevation: 5,
                                 side: const BorderSide(
                                   color: AppColors.gray1, // Set outline color
@@ -135,9 +135,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                         .textTheme
                                         .bodyLarge
                                         ?.copyWith(
-                                      color: Colors
-                                          .black, // Set the text color to black
-                                    ),
+                                          color: Colors
+                                              .black, // Set the text color to black
+                                        ),
                                   ),
                                 ],
                               ),
@@ -191,10 +191,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         child: BlocConsumer<UserBloc, UserState>(
                           listener: (context, state) {
                             if (state is UserStateSuccessSignUp) {
-                              showSnackBar(context, 'Selamat datang');
+                              showToastMessage(message: 'Selamat datang');
                               debugPrint(
                                   "Token: ${state.signUpResponse.token}");
-                              locator<AppNavigation>().navigateReplace('/claim_alumni_data');
+                              locator<AppNavigation>()
+                                  .navigateReplace('/claim_alumni_data');
                             } else if (state is UserStateException) {
                               debugPrint(
                                   "Exception: ${state.exception.message}");
@@ -203,20 +204,21 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           builder: (context, state) {
                             return ButtonWidget(
                               onPressed: () => context.read<UserBloc>().add(
-                                UserEventSignUp(
-                                  signUpBody: SignUpBody(
-                                    email: _emailController.text,
-                                    password: _passwordController.text,
-                                    confirmPassword: _confirmPasswordController.text,
+                                    UserEventSignUp(
+                                      signUpBody: SignUpBody(
+                                        email: _emailController.text,
+                                        password: _passwordController.text,
+                                        confirmPassword:
+                                            _confirmPasswordController.text,
+                                      ),
+                                    ),
                                   ),
-                                ),
-                              ),
                               label: 'Daftar',
                               isLoading: state is UserStateSignUpLoading &&
                                   state is! UserStateException,
-                              disabled: _emailController.text.isEmpty|
-                                  _passwordController.text.isEmpty|
-                                _confirmPasswordController.text.isEmpty,
+                              disabled: _emailController.text.isEmpty |
+                                  _passwordController.text.isEmpty |
+                                  _confirmPasswordController.text.isEmpty,
                             );
                           },
                         ),

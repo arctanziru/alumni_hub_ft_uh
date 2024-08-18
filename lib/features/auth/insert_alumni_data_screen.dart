@@ -324,7 +324,10 @@ class _InsertAlumniDataScreenState extends State<InsertAlumniDataScreen> {
                         hintStyle: Theme.of(context).textTheme.bodyMedium,
                         labelStyle: Theme.of(context).textTheme.bodyMedium,
                       ),
-                      hint: const Text('Pilih golongan darah'),
+                      hint: Text(
+                        'Pilih golongan darah',
+                        style: Theme.of(context).textTheme.bodyMedium,
+                      ),
                       value: _golonganDarahController,
                       onChanged: (String? newValue) {
                         setState(() {
@@ -334,7 +337,10 @@ class _InsertAlumniDataScreenState extends State<InsertAlumniDataScreen> {
                       items: golonganDarahList.map((String value) {
                         return DropdownMenuItem<String>(
                           value: value,
-                          child: Text(value),
+                          child: Text(
+                            value,
+                            style: Theme.of(context).textTheme.bodyMedium,
+                          ),
                         );
                       }).toList(),
                     ),
@@ -355,7 +361,10 @@ class _InsertAlumniDataScreenState extends State<InsertAlumniDataScreen> {
                         contentPadding:
                             const EdgeInsets.symmetric(horizontal: 16),
                       ),
-                      hint: const Text('Pilih agama'),
+                      hint: Text(
+                        'Pilih agama',
+                        style: Theme.of(context).textTheme.bodyMedium,
+                      ),
                       value: _agamaController,
                       onChanged: (String? newValue) {
                         setState(() {
@@ -365,7 +374,10 @@ class _InsertAlumniDataScreenState extends State<InsertAlumniDataScreen> {
                       items: agamaList.map((String value) {
                         return DropdownMenuItem<String>(
                           value: value,
-                          child: Text(value),
+                          child: Text(
+                            value,
+                            style: Theme.of(context).textTheme.bodyMedium,
+                          ),
                         );
                       }).toList(),
                     ),

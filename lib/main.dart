@@ -7,7 +7,6 @@ import 'package:alumni_hub_ft_uh/locator.dart';
 import 'package:alumni_hub_ft_uh/route.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_downloader/flutter_downloader.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
@@ -15,9 +14,6 @@ final RouteObserver<ModalRoute> routeObserver = RouteObserver<ModalRoute>();
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await FlutterDownloader.initialize(
-    debug: true,
-  );
   await dotenv.load();
   await setupLocator();
   await initializeDateFormatting('id_ID')

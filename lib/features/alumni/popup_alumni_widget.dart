@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import '../../common/widgets/button/button_widget.dart'; // Import your custom ButtonWidget
 
 class PopupAlumniWidget extends StatefulWidget {
-  const PopupAlumniWidget({super.key});
+  final bool autoFocus;
+
+  const PopupAlumniWidget({super.key, this.autoFocus = false});
 
   @override
   PopupAlumniWidgetState createState() => PopupAlumniWidgetState();
@@ -17,10 +19,12 @@ class PopupAlumniWidgetState extends State<PopupAlumniWidget> {
     final theme = Theme.of(context);
 
     // Generate the list of years from 1990 to 2000
-    List<String> years = List.generate(2000 - 1990 + 1, (index) => (1990 + index).toString());
+    List<String> years =
+        List.generate(2000 - 1990 + 1, (index) => (1990 + index).toString());
 
     return Container(
-      padding: const EdgeInsets.fromLTRB(16.0, 48.0, 16.0, 48.0), // Apply padding to all sides
+      padding: const EdgeInsets.fromLTRB(
+          16.0, 48.0, 16.0, 48.0), // Apply padding to all sides
       decoration: BoxDecoration(
         color: Colors.grey[100], // Set background color to grey[100]
         borderRadius: const BorderRadius.vertical(top: Radius.circular(20.0)),
@@ -32,14 +36,17 @@ class PopupAlumniWidgetState extends State<PopupAlumniWidget> {
             'FILTER',
             style: TextStyle(
               fontSize: 20,
-              fontWeight: FontWeight.bold, // You can customize the style further if needed
+              fontWeight: FontWeight
+                  .bold, // You can customize the style further if needed
             ),
           ),
           const SizedBox(height: 20),
-          const Divider(color: Colors.black), // Add a divider below the FILTER text
+          const Divider(
+              color: Colors.black), // Add a divider below the FILTER text
           const SizedBox(height: 20),
           SizedBox(
-            width: double.infinity, // Make the TextField take full width of its parent
+            width: double
+                .infinity, // Make the TextField take full width of its parent
             child: Container(
               decoration: BoxDecoration(
                 boxShadow: [
@@ -55,7 +62,8 @@ class PopupAlumniWidgetState extends State<PopupAlumniWidget> {
               child: TextField(
                 decoration: InputDecoration(
                   labelText: 'Nama',
-                  labelStyle: theme.textTheme.bodyMedium, // Apply bodyMedium text style
+                  labelStyle:
+                      theme.textTheme.bodyMedium, // Apply bodyMedium text style
                   prefixIcon: const Icon(Icons.search),
                   border: const OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(15.0)),
@@ -69,11 +77,13 @@ class PopupAlumniWidgetState extends State<PopupAlumniWidget> {
           ),
           const SizedBox(height: 30),
           Row(
-            mainAxisAlignment: MainAxisAlignment.center, // Center the buttons horizontally
+            mainAxisAlignment:
+                MainAxisAlignment.center, // Center the buttons horizontally
             children: [
               Expanded(
                 child: Padding(
-                  padding: const EdgeInsets.only(right: 5.0), // Space between buttons
+                  padding: const EdgeInsets.only(
+                      right: 5.0), // Space between buttons
                   child: ButtonWidget(
                     onPressed: () {
                       setState(() {
@@ -82,13 +92,16 @@ class PopupAlumniWidgetState extends State<PopupAlumniWidget> {
                     },
                     label: 'angkatan saya',
                     rounded: false,
-                    color: _isAngkatanSayaSelected ? null : Colors.grey[700], // Change color based on selection
+                    color: _isAngkatanSayaSelected
+                        ? null
+                        : Colors.grey[700], // Change color based on selection
                   ),
                 ),
               ),
               Expanded(
                 child: Padding(
-                  padding: const EdgeInsets.only(left: 5.0), // Space between buttons
+                  padding:
+                      const EdgeInsets.only(left: 5.0), // Space between buttons
                   child: ButtonWidget(
                     onPressed: () {
                       setState(() {
@@ -97,7 +110,9 @@ class PopupAlumniWidgetState extends State<PopupAlumniWidget> {
                     },
                     label: 'semua angkatan',
                     rounded: false,
-                    color: !_isAngkatanSayaSelected ? null : Colors.grey[700], // Change color based on selection
+                    color: !_isAngkatanSayaSelected
+                        ? null
+                        : Colors.grey[700], // Change color based on selection
                   ),
                 ),
               ),
@@ -105,7 +120,8 @@ class PopupAlumniWidgetState extends State<PopupAlumniWidget> {
           ),
           const SizedBox(height: 5),
           SizedBox(
-            width: double.infinity, // Make the DropdownButtonFormField take full width of its parent
+            width: double
+                .infinity, // Make the DropdownButtonFormField take full width of its parent
             child: Container(
               decoration: BoxDecoration(
                 boxShadow: [
@@ -122,7 +138,8 @@ class PopupAlumniWidgetState extends State<PopupAlumniWidget> {
               child: DropdownButtonFormField<String>(
                 decoration: InputDecoration(
                   labelText: 'Angkatan Kustom',
-                  labelStyle: theme.textTheme.bodyMedium, // Apply bodyMedium text style
+                  labelStyle:
+                      theme.textTheme.bodyMedium, // Apply bodyMedium text style
                   border: const OutlineInputBorder(
                     borderRadius: BorderRadius.all(Radius.circular(15.0)),
                     borderSide: BorderSide.none,
@@ -135,7 +152,8 @@ class PopupAlumniWidgetState extends State<PopupAlumniWidget> {
                     value: year,
                     child: Text(
                       year,
-                      style: theme.textTheme.bodyMedium, // Apply bodyMedium text style
+                      style: theme
+                          .textTheme.bodyMedium, // Apply bodyMedium text style
                     ),
                   );
                 }).toList(),

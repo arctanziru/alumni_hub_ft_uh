@@ -69,6 +69,7 @@ class _AlumniSearchScreenState extends State<AlumniSearchScreen> {
                               label: jurusan.jurusan,
                               subtitle: '${jurusan.total} Alumni',
                               onTap: () {
+                                debugPrint('Navigating to Jurusan: ${jurusan.jurusan}');
                                 locator<AppNavigation>().navigateTo(
                                   AlumniDetailSearchScreen.route,
                                   arguments: AlumniGetManyParams(

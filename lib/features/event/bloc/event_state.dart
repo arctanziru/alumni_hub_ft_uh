@@ -6,6 +6,8 @@ class EventState {
   final EventStatus status;
   final List<EventModel> events;
   final CustomException? error;
+  final EventStatus selectedEventStatus;
+  final EventModel? selectedEvent;
   String? search;
 
   EventState({
@@ -13,6 +15,8 @@ class EventState {
     this.events = const <EventModel>[],
     this.error,
     this.search,
+    this.selectedEventStatus = EventStatus.initial,
+    this.selectedEvent,
   });
 
   EventState copyWith({
@@ -20,12 +24,16 @@ class EventState {
     List<EventModel>? events,
     CustomException? error,
     String? search,
+    EventStatus? selectedEventStatus,
+    EventModel? selectedEvent,
   }) {
     return EventState(
       status: status ?? this.status,
       events: events ?? this.events,
       error: error ?? this.error,
       search: search ?? this.search,
+      selectedEventStatus: selectedEventStatus ?? this.selectedEventStatus,
+      selectedEvent: selectedEvent ?? this.selectedEvent,
     );
   }
 

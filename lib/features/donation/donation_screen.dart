@@ -1,7 +1,11 @@
+import 'dart:io';
+
 import 'package:alumni_hub_ft_uh/common/widgets/bottomBar/bottom_bar_widget.dart';
 import 'package:alumni_hub_ft_uh/common/widgets/button/button_widget.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_downloader/flutter_downloader.dart';
+import 'package:path_provider/path_provider.dart';
 
 import '../../common/widgets/appBar/app_bar_search_widget.dart';
 
@@ -104,6 +108,38 @@ class _DonationScreenState extends State<DonationScreen> {
     );
   }
 
+  Future<void> _downloadQRCode() async {
+    try {
+      // Get the directory to save the file
+      final directory = await getApplicationDocumentsDirectory();
+      final filePath = '${directory.path}/qris.png';
+
+      final byteData =
+          await DefaultAssetBundle.of(context).load('assets/images/qris.png');
+      final buffer = byteData.buffer;
+      final file = File(filePath);
+      await file.writeAsBytes(
+          buffer.asUint8List(byteData.offsetInBytes, byteData.lengthInBytes));
+
+      // Use flutter_downloader to download the file
+      await FlutterDownloader.enqueue(
+        url: filePath,
+        savedDir: directory.path,
+        fileName: 'qris.png',
+        showNotification: true,
+        openFileFromNotification: true,
+      );
+
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('QR Code downloaded successfully!')),
+      );
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Error downloading QR Code: $e')),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -148,10 +184,8 @@ class _DonationScreenState extends State<DonationScreen> {
                       Text('TID', style: Theme.of(context).textTheme.bodySmall),
                       const SizedBox(height: 20),
                       Expanded(
-                          child: Image.network(
-                        'https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=Example',
-                        fit: BoxFit.fill,
-                        // contain
+                          child: Image.asset(
+                        'assets/images/qris.png',
                         alignment: Alignment.center,
                       )),
                       const SizedBox(height: 20),
@@ -193,8 +227,10 @@ class _DonationScreenState extends State<DonationScreen> {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     ButtonWidget(
-                      onPressed: () {},
                       label: 'Download QR Code',
+                      onPressed: () async {
+                        await _downloadQRCode();
+                      },
                     ),
                     const SizedBox(height: 16), // Reduced spacing
                     RichText(

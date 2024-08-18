@@ -1,5 +1,4 @@
 import 'package:alumni_hub_ft_uh/common/widgets/appBar/app_bar_secondary_widget.dart';
-import 'package:alumni_hub_ft_uh/features/alumni/search_detail_alumni_screen.dart';
 import 'package:alumni_hub_ft_uh/features/alumni/popup_alumni_widget.dart';
 import 'package:flutter/material.dart';
 import '../../common/widgets/bottomBar/bottom_bar_widget.dart';
@@ -48,7 +47,8 @@ class _SearchAlumniScreenState extends State<SearchAlumniScreen> {
               children: [
                 // Expanded Search Bar
                 SizedBox(
-                  width: double.infinity, // Make the TextField take full width of its parent
+                  width: double
+                      .infinity, // Make the TextField take full width of its parent
                   child: Container(
                     decoration: BoxDecoration(
                       boxShadow: [
@@ -64,7 +64,8 @@ class _SearchAlumniScreenState extends State<SearchAlumniScreen> {
                     child: TextField(
                       decoration: InputDecoration(
                         labelText: 'Nama',
-                        labelStyle: theme.textTheme.bodyMedium, // Apply bodyMedium text style
+                        labelStyle: theme.textTheme
+                            .bodyMedium, // Apply bodyMedium text style
                         prefixIcon: const Icon(Icons.search),
                         border: const OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(15.0)),
@@ -96,18 +97,11 @@ class _SearchAlumniScreenState extends State<SearchAlumniScreen> {
                 Column(
                   children: List.generate(
                     10,
-                        (index) => Column(
+                    (index) => Column(
                       children: [
                         CardAlumniWidget(
                           label: 'Angkatan ${1990 + index} (${1990 + index})',
                           subtitle: '${(index + 1) * 200} Alumni',
-                          onTap: () {
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) => const SearchDetailAlumniScreen(),
-                              ),
-                            );
-                          },
                         ),
                         const SizedBox(height: 10.0), // Space between cards
                       ],
@@ -129,9 +123,12 @@ class _SearchAlumniScreenState extends State<SearchAlumniScreen> {
                             text: 'FILTER',
                             style: TextStyle(
                               color: Colors.red,
-                              decoration: TextDecoration.underline, // Add underline
-                              decorationColor: Colors.red, // Set underline color to red
-                              decorationThickness: 2.0, // Optional: Adjust thickness of the underline
+                              decoration:
+                                  TextDecoration.underline, // Add underline
+                              decorationColor:
+                                  Colors.red, // Set underline color to red
+                              decorationThickness:
+                                  2.0, // Optional: Adjust thickness of the underline
                             ),
                           ),
                         ],

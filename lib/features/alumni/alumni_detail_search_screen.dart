@@ -43,6 +43,14 @@ class _AlumniDetailSearchScreenState extends State<AlumniDetailSearchScreen> {
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    context
+        .read<AlumniGetManyBloc>()
+        .add(AlumniEventGetMany(widget.alumniGetManyParams));
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBarSecondaryWidget(
@@ -88,7 +96,8 @@ class _AlumniDetailSearchScreenState extends State<AlumniDetailSearchScreen> {
                                     details: alumni.nim,
                                     onTap: () {
                                       locator<AppNavigation>().navigateTo(
-                                          AlumniProfileDetailScreen.route);
+                                          AlumniProfileDetailScreen.route,
+                                          arguments: alumni);
                                     },
                                   );
                                 },

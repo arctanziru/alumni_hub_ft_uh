@@ -27,7 +27,7 @@ class AlumniRepositoryImpl implements AlumniRepository {
   @override
   Query<AlumniAngkatanResponse> getAngkatanAlumni(AlumniAngkatanParams params) {
     return Query<AlumniAngkatanResponse>(
-      key: ['alumni_angkatan'],
+      key: ['alumni_angkatan', params],
       queryFn: () => _alumniRemoteDataSource.getAngkatanAlumni(params),
     );
   }
@@ -35,7 +35,7 @@ class AlumniRepositoryImpl implements AlumniRepository {
   @override
   Query<AlumniJurusanResponse> getJurusanAlumni(AlumniJurusanParams params) {
     return Query<AlumniJurusanResponse>(
-      key: ['alumni_jurusan'],
+      key: ['alumni_jurusan', params],
       queryFn: () => _alumniRemoteDataSource.getJurusanAlumni(params),
     );
   }
@@ -43,7 +43,7 @@ class AlumniRepositoryImpl implements AlumniRepository {
   @override
   Query<AlumniGetManyResponse> getAlumniClaimData(AlumniGetManyParams params) {
     return Query<AlumniGetManyResponse>(
-      key: ['alumni_claim_data'],
+      key: ['alumni_claim_data', params],
       queryFn: () => _alumniRemoteDataSource.getAlumniClaimData(params),
     );
   }

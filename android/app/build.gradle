@@ -52,7 +52,7 @@ android {
         release {
             keyAlias 'ikatek-hub-release-key'
             keyPassword 'ikatekhub'
-            storeFile file('ik`atekhub-release-key.jks')
+            storeFile file('ikatekhub-release-key.jks')
             storePassword 'ikatekhub'
         }
     }

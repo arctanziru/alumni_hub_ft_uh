@@ -13,6 +13,8 @@ class BottomBarWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final userSession = context.read<UserBloc>().getUserSession();
+
     return Container(
       decoration: const BoxDecoration(
         color: Colors.white,
@@ -51,7 +53,42 @@ class BottomBarWidget extends StatelessWidget {
             iconAsset: 'assets/icons/vacancy.svg',
             label: 'Loker',
             isSelected: currentIndex == 3,
-            onTap: () => Navigator.of(context).pushNamed('/vacancy'),
+            onTap: () {
+              if (userSession?.user?.alumni != null) {
+                Navigator.of(context).pushNamed('/vacancy');
+              } else {
+                CustomDialog.showCustomDialog(
+                  context,
+                  title: 'Klaim Data Alumni',
+                  content: Text(
+                    'Untuk mendapatkan akses full, isi kelengkapan data alumni',
+                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                          fontWeight: FontWeight.bold,
+                        ),
+                  ),
+                  actions: [
+                    Expanded(
+                      child: ButtonWidget(
+                        label: 'Nanti',
+                        color: AppColors.secondaryColor,
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                      ),
+                    ),
+                    const SizedBox(width: 16),
+                    Expanded(
+                      child: ButtonWidget(
+                        label: 'Klaim Data',
+                        onPressed: () {
+                          Navigator.of(context).pushNamed('/claim_alumni_data');
+                        },
+                      ),
+                    ),
+                  ],
+                );
+              }
+            },
           ),
           BottomBarItemWidget(
             index: 4,
@@ -59,12 +96,9 @@ class BottomBarWidget extends StatelessWidget {
             label: 'Alumni',
             isSelected: currentIndex == 4,
             onTap: () {
-              final userSession = context.read<UserBloc>().getUserSession();
-              // check if user already claim alumni
               if (userSession?.user?.alumni != null) {
                 Navigator.of(context).pushNamed('/alumni');
               } else {
-                // Navigator.of(context).pushNamed('/claim-alumni');
                 CustomDialog.showCustomDialog(
                   context,
                   title: 'Klaim Data Alumni',

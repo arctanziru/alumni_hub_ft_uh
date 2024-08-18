@@ -10,18 +10,19 @@ class AlumniModel with _$AlumniModel {
   const factory AlumniModel({
     @JsonKey(name: 'id_alumni') required int idAlumni,
     @JsonKey(name: 'id_user') int? idUser,
-    required String nim,
-    @JsonKey(name: 'no_anggota') required String? noAnggota,
+    required String? nim,
+    @JsonKey(name: 'no_anggota') String? noAnggota,
     required String nama,
     @JsonKey(name: 'tgl_lahir') required String tglLahir,
     required String jurusan,
     required String angkatan,
-    required EKelamin kelamin,
-    required String agama,
+    EKelamin? kelamin,
+    String? agama,
     @JsonKey(name: 'golongan_darah') String? golonganDarah,
-    required bool validated,
-    @JsonKey(name: 'created_at') required DateTime createdAt,
-    @JsonKey(name: 'updated_at') required DateTime updatedAt,
+    bool? validated,
+    @JsonKey(name: 'is_claim') bool? isClaimed,
+    @JsonKey(name: 'created_at') DateTime? createdAt,
+    @JsonKey(name: 'updated_at') DateTime? updatedAt,
   }) = _AlumniModel;
 
   factory AlumniModel.fromJson(Map<String, dynamic> json) =>

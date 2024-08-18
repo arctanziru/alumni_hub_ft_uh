@@ -99,7 +99,7 @@ class AppBarMenuWidget extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          userSession?.user?.alumni?.nama ?? '',
+                          userSession?.user?.alumni?.nama ?? 'Guest',
                           style: Theme.of(context).textTheme.titleLarge,
                         ),
                         Text(
@@ -140,11 +140,11 @@ class AppBarMenuWidget extends StatelessWidget {
                 title: 'Tracer Study',
                 onTap: () => Navigator.pushNamed(context, '/coming-soon'),
               ),
-              ListTileWidget(
-                icon: Icons.settings_outlined,
-                title: 'Pengaturan',
-                onTap: () => Navigator.pushNamed(context, '/setting'),
-              ),
+              // ListTileWidget(
+              //   icon: Icons.settings_outlined,
+              //   title: 'Pengaturan',
+              //   onTap: () => Navigator.pushNamed(context, '/setting'),
+              // ),
               const SizedBox(height: 12),
               Padding(
                 padding: const EdgeInsets.symmetric(

@@ -30,9 +30,10 @@ class CustomDialog {
                   Expanded(
                     child: Text(
                       title,
-                      style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                            fontWeight: FontWeight.bold,
-                          ),
+                      style:
+                          Theme.of(context).textTheme.headlineSmall?.copyWith(
+                                fontWeight: FontWeight.bold,
+                              ),
                     ),
                   ),
                   if (titleAction != null)
@@ -56,12 +57,12 @@ class CustomDialog {
                 content,
                 const SizedBox(height: 16),
                 Row(
-                  mainAxisSize: MainAxisSize.min,
                   children: actions,
                 ),
               ],
             ),
           ),
+          clipBehavior: Clip.none
         );
       },
     );

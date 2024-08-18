@@ -5,5 +5,6 @@ abstract class ClaimAlumniEvent {}
 
 class ClaimAlumni extends ClaimAlumniEvent {
   final ClaimAlumniBody claimAlumniBody;
-  ClaimAlumni({required this.claimAlumniBody});
+  final String? token;
+  ClaimAlumni({required this.claimAlumniBody, this.token});
 }

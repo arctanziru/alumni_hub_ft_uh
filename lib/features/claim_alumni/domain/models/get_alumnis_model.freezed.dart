@@ -337,6 +337,7 @@ mixin _$GetAlumnisBody {
   String get name => throw _privateConstructorUsedError;
   @JsonKey(name: 'tgl_lahir')
   String get tglLahir => throw _privateConstructorUsedError;
+  String get jurusan => throw _privateConstructorUsedError;
   String? get nim => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -354,6 +355,7 @@ abstract class $GetAlumnisBodyCopyWith<$Res> {
   $Res call(
       {@JsonKey(name: 'nama') String name,
       @JsonKey(name: 'tgl_lahir') String tglLahir,
+      String jurusan,
       String? nim});
 }
 
@@ -372,6 +374,7 @@ class _$GetAlumnisBodyCopyWithImpl<$Res, $Val extends GetAlumnisBody>
   $Res call({
     Object? name = null,
     Object? tglLahir = null,
+    Object? jurusan = null,
     Object? nim = freezed,
   }) {
     return _then(_value.copyWith(
@@ -382,6 +385,10 @@ class _$GetAlumnisBodyCopyWithImpl<$Res, $Val extends GetAlumnisBody>
       tglLahir: null == tglLahir
           ? _value.tglLahir
           : tglLahir // ignore: cast_nullable_to_non_nullable
+              as String,
+      jurusan: null == jurusan
+          ? _value.jurusan
+          : jurusan // ignore: cast_nullable_to_non_nullable
               as String,
       nim: freezed == nim
           ? _value.nim
@@ -402,6 +409,7 @@ abstract class _$$GetAlumnisBodyImplCopyWith<$Res>
   $Res call(
       {@JsonKey(name: 'nama') String name,
       @JsonKey(name: 'tgl_lahir') String tglLahir,
+      String jurusan,
       String? nim});
 }
 
@@ -418,6 +426,7 @@ class __$$GetAlumnisBodyImplCopyWithImpl<$Res>
   $Res call({
     Object? name = null,
     Object? tglLahir = null,
+    Object? jurusan = null,
     Object? nim = freezed,
   }) {
     return _then(_$GetAlumnisBodyImpl(
@@ -428,6 +437,10 @@ class __$$GetAlumnisBodyImplCopyWithImpl<$Res>
       tglLahir: null == tglLahir
           ? _value.tglLahir
           : tglLahir // ignore: cast_nullable_to_non_nullable
+              as String,
+      jurusan: null == jurusan
+          ? _value.jurusan
+          : jurusan // ignore: cast_nullable_to_non_nullable
               as String,
       nim: freezed == nim
           ? _value.nim
@@ -443,6 +456,7 @@ class _$GetAlumnisBodyImpl implements _GetAlumnisBody {
   const _$GetAlumnisBodyImpl(
       {@JsonKey(name: 'nama') required this.name,
       @JsonKey(name: 'tgl_lahir') required this.tglLahir,
+      required this.jurusan,
       required this.nim});
 
   factory _$GetAlumnisBodyImpl.fromJson(Map<String, dynamic> json) =>
@@ -455,11 +469,13 @@ class _$GetAlumnisBodyImpl implements _GetAlumnisBody {
   @JsonKey(name: 'tgl_lahir')
   final String tglLahir;
   @override
+  final String jurusan;
+  @override
   final String? nim;
 
   @override
   String toString() {
-    return 'GetAlumnisBody(name: $name, tglLahir: $tglLahir, nim: $nim)';
+    return 'GetAlumnisBody(name: $name, tglLahir: $tglLahir, jurusan: $jurusan, nim: $nim)';
   }
 
   @override
@@ -470,12 +486,13 @@ class _$GetAlumnisBodyImpl implements _GetAlumnisBody {
             (identical(other.name, name) || other.name == name) &&
             (identical(other.tglLahir, tglLahir) ||
                 other.tglLahir == tglLahir) &&
+            (identical(other.jurusan, jurusan) || other.jurusan == jurusan) &&
             (identical(other.nim, nim) || other.nim == nim));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, name, tglLahir, nim);
+  int get hashCode => Object.hash(runtimeType, name, tglLahir, jurusan, nim);
 
   @JsonKey(ignore: true)
   @override
@@ -496,6 +513,7 @@ abstract class _GetAlumnisBody implements GetAlumnisBody {
   const factory _GetAlumnisBody(
       {@JsonKey(name: 'nama') required final String name,
       @JsonKey(name: 'tgl_lahir') required final String tglLahir,
+      required final String jurusan,
       required final String? nim}) = _$GetAlumnisBodyImpl;
 
   factory _GetAlumnisBody.fromJson(Map<String, dynamic> json) =
@@ -507,6 +525,8 @@ abstract class _GetAlumnisBody implements GetAlumnisBody {
   @override
   @JsonKey(name: 'tgl_lahir')
   String get tglLahir;
+  @override
+  String get jurusan;
   @override
   String? get nim;
   @override

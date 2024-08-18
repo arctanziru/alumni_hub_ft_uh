@@ -40,6 +40,7 @@ _$GetAlumnisBodyImpl _$$GetAlumnisBodyImplFromJson(Map<String, dynamic> json) =>
     _$GetAlumnisBodyImpl(
       name: json['nama'] as String,
       tglLahir: json['tgl_lahir'] as String,
+      jurusan: json['jurusan'] as String,
       nim: json['nim'] as String?,
     );
 
@@ -48,5 +49,6 @@ Map<String, dynamic> _$$GetAlumnisBodyImplToJson(
     <String, dynamic>{
       'nama': instance.name,
       'tgl_lahir': instance.tglLahir,
+      'jurusan': instance.jurusan,
       'nim': instance.nim,
     };

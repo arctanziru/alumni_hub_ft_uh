@@ -21,16 +21,19 @@ class ClaimAlumniRemoteDataSource {
 
   Future<AddAlumniResponse> addAlumni(AddAlumniBody body) async {
     final response = await _api.createApiCall(
-        endpoint: '/alumni', method: NetworkCallMethod.post, body: body.toJson());
+        endpoint: '/alumni',
+        method: NetworkCallMethod.post,
+        body: body.toJson());
     return AddAlumniResponse.fromJson(response.data);
   }
 
-  Future<ClaimAlumniResponse> claimAlumni(ClaimAlumniBody params) async {
+  Future<ClaimAlumniResponse> claimAlumni(ClaimAlumniBody body) async {
     final response = await _api.createApiCall(
-      endpoint: '/alumni/claim-data',
-      method: NetworkCallMethod.get,
-      params: params.toJson(),
-    );
+        endpoint: '/alumni/claim-data',
+        method: NetworkCallMethod.post,
+        body: {
+          'id_alumni': body.idAlumni,
+        });
     return ClaimAlumniResponse.fromJson(response.data);
   }
 }

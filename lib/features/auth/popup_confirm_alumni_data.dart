@@ -17,7 +17,7 @@ class PopupConfirmAlumniData extends StatefulWidget {
   });
 
   @override
-  _PopupConfirmAlumniDataState createState() => _PopupConfirmAlumniDataState();
+  State<PopupConfirmAlumniData> createState() => _PopupConfirmAlumniDataState();
 }
 
 class _PopupConfirmAlumniDataState extends State<PopupConfirmAlumniData> {
@@ -30,7 +30,8 @@ class _PopupConfirmAlumniDataState extends State<PopupConfirmAlumniData> {
     return AlertDialog(
       title: Text(
         'Klaim Data Alumni',
-        style: textTheme.headlineMedium?.copyWith(color: Colors.black, fontWeight: FontWeight.bold),
+        style: textTheme.headlineMedium
+            ?.copyWith(color: Colors.black, fontWeight: FontWeight.bold),
       ),
       content: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -51,7 +52,8 @@ class _PopupConfirmAlumniDataState extends State<PopupConfirmAlumniData> {
           ),
           const SizedBox(height: 24),
           _buildDataRow('Nama Lengkap', widget.alumniData.nama, textTheme),
-          _buildDataRow('NIM / Stambuk', widget.alumniData.nim, textTheme),
+          _buildDataRow(
+              'NIM / Stambuk', widget.alumniData.nim ?? '-', textTheme),
           _buildDataRow('Tanggal Lahir', widget.alumniData.tglLahir, textTheme),
           _buildDataRow('Jurusan', widget.alumniData.jurusan, textTheme),
           _buildDataRow('Angkatan', widget.alumniData.angkatan, textTheme),
@@ -101,10 +103,7 @@ class _PopupConfirmAlumniDataState extends State<PopupConfirmAlumniData> {
   }
 
   void _handleSubmit() {
-    widget.onConfirm(); // Call the original onConfirm callback
-    Navigator.of(context).pushReplacement(
-      MaterialPageRoute(builder: (context) => const HomeScreen()), // Navigate to HomeScreen
-    );
+    widget.onConfirm();
   }
 
   Widget _buildDataRow(String label, String value, TextTheme textTheme) {
@@ -119,7 +118,8 @@ class _PopupConfirmAlumniDataState extends State<PopupConfirmAlumniData> {
               alignment: Alignment.centerLeft,
               child: Text(
                 '$label :',
-                style: textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold),
+                style:
+                    textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold),
               ),
             ),
           ),

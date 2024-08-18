@@ -173,16 +173,18 @@ class _DonationScreenState extends State<DonationScreen> {
                     children: [
                       Text(
                         'DAUH TEKNIK',
-                        style: Theme.of(context).textTheme.bodyLarge,
+                        style: Theme.of(context).textTheme.titleLarge,
                       ),
-                      const SizedBox(height: 8),
+                      const SizedBox(height: 14),
                       Text('NMID: ID1023255148950',
-                          style: Theme.of(context).textTheme.bodySmall),
-                      Text('TID', style: Theme.of(context).textTheme.bodySmall),
-                      const SizedBox(height: 20),
+                          style: Theme.of(context).textTheme.bodyMedium),
+                      Text('TID',
+                          style: Theme.of(context).textTheme.bodyMedium),
+                      const SizedBox(height: 11),
                       Expanded(
                           child: Image.asset(
                         'assets/images/qris.png',
+                        width: 320,
                         alignment: Alignment.center,
                       )),
                       const SizedBox(height: 20),

@@ -1,3 +1,6 @@
+import 'package:alumni_hub_ft_uh/common/utils/custom_dialog.dart';
+import 'package:alumni_hub_ft_uh/common/widgets/button/button_widget.dart';
+import 'package:alumni_hub_ft_uh/constants/colors.dart';
 import 'package:alumni_hub_ft_uh/features/user/bloc/user_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:alumni_hub_ft_uh/features/search/search_screen.dart';
@@ -89,12 +92,43 @@ class AppBarSearchWidget extends StatelessWidget
       actions: [
         IconButton(
           icon: CircleAvatar(
-            backgroundImage: NetworkImage(
-              '${userSession?.user?.avatar}'
-            ),
+            backgroundImage: NetworkImage('${userSession?.user?.avatar}'),
           ),
           onPressed: () {
-            Navigator.pushNamed(context, '/profile');
+            if (userSession?.user?.alumni != null) {
+              Navigator.pushNamed(context, '/profile');
+            } else {
+              CustomDialog.showCustomDialog(
+                context,
+                title: 'Klaim Data Alumni',
+                content: Text(
+                  'Untuk mendapatkan akses full, isi kelengkapan data alumni',
+                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                        fontWeight: FontWeight.bold,
+                      ),
+                ),
+                actions: [
+                  Expanded(
+                    child: ButtonWidget(
+                      label: 'Nanti',
+                      color: AppColors.secondaryColor,
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                    ),
+                  ),
+                  const SizedBox(width: 16),
+                  Expanded(
+                    child: ButtonWidget(
+                      label: 'Klaim Data',
+                      onPressed: () {
+                        Navigator.of(context).pushNamed('/claim_alumni_data');
+                      },
+                    ),
+                  ),
+                ],
+              );
+            }
           },
         ),
       ],

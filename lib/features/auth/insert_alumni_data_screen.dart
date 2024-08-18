@@ -1,4 +1,5 @@
 import 'package:alumni_hub_ft_uh/common/utils/ui_helper.dart';
+import 'package:alumni_hub_ft_uh/constants/common.dart';
 import 'package:alumni_hub_ft_uh/features/claim_alumni/bloc/add/add_alumni_bloc.dart';
 import 'package:alumni_hub_ft_uh/features/claim_alumni/domain/models/add_alumni_model.dart';
 import 'package:alumni_hub_ft_uh/features/user/bloc/user_bloc.dart';
@@ -24,14 +25,6 @@ class _InsertAlumniDataScreenState extends State<InsertAlumniDataScreen> {
   String? selectedGender;
   bool agreeToTerms = false;
 
-  final List<String> jurusanList = [
-    'Teknik Elektro',
-    'Teknik Mesin',
-    'Teknik Sipil',
-    'Teknik Informatika'
-  ];
-  final List<String> angkatanList = ['2010', '2011', '2012', '2013', '2014'];
-
   final _namaLengkapController = TextEditingController();
   final _tanggalLahirController = TextEditingController();
   final _stambukController = TextEditingController();
@@ -42,26 +35,6 @@ class _InsertAlumniDataScreenState extends State<InsertAlumniDataScreen> {
   // final _agamaController = TextEditingController();
   String? _golonganDarahController;
   String? _agamaController;
-
-  List<String> agamaList = [
-    'Islam',
-    'Kristen Protestan',
-    'Kristen Katolik',
-    'Hindu',
-    'Buddha',
-    'Konghucu',
-  ];
-
-  List<String> golonganDarahList = [
-    'A+',
-    'A-',
-    'B+',
-    'B-',
-    'O+',
-    'O-',
-    'AB+',
-    'AB-',
-  ];
 
   @override
   void dispose() {
@@ -365,13 +338,7 @@ class _InsertAlumniDataScreenState extends State<InsertAlumniDataScreen> {
                         );
                       }).toList(),
                     ),
-                    // TextFieldWidget(
-                    //   label: 'Golongan Darah',
-                    //   hint: 'Masukkan golongan darah (opsional)',
-                    //   controller: _golonganDarahController,
-                    // ),
                     const SizedBox(height: 12),
-                    // dropdown agama
                     const Text(
                       'Agama',
                       style: TextStyle(

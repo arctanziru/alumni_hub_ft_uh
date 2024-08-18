@@ -23,7 +23,7 @@ class AlumniUpdateBody with _$AlumniUpdateBody {
     @JsonKey(name: 'tgl_lahir') required String tglLahir,
     required String jurusan,
     required String angkatan,
-    EKelamin? kelamin,
+    String? kelamin,
     String? agama,
     @JsonKey(name: 'golongan_darah') String? golonganDarah,
   }) = _AlumniUpdateBody;

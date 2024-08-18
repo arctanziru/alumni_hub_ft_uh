@@ -44,4 +44,7 @@ final blocProviders = [
   BlocProvider<GetAlumnisBloc>(
     create: (context) => locator<GetAlumnisBloc>(),
   ),
+  BlocProvider<AlumniUpdateBloc>(
+    create: (context) => locator<AlumniUpdateBloc>(),
+  ),
 ];

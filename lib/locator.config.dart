@@ -118,6 +118,10 @@ Future<_i174.GetIt> $initGetIt(
         gh<_i902.UserRepository>(),
         gh<_i260.AuthRepository>(),
       ));
+  gh.factory<_i905.AlumniUpdateBloc>(() => _i905.AlumniUpdateBloc(
+        gh<_i332.AlumniRepository>(),
+        gh<_i902.UserRepository>(),
+      ));
   gh.factory<_i894.GetAlumnisBloc>(
       () => _i894.GetAlumnisBloc(gh<_i118.ClaimAlumniRepository>()));
   gh.factory<_i968.AddAlumniBloc>(() => _i968.AddAlumniBloc(

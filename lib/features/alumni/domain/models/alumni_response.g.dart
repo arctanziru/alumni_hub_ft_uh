@@ -27,7 +27,7 @@ _$AlumniUpdateBodyImpl _$$AlumniUpdateBodyImplFromJson(
       tglLahir: json['tgl_lahir'] as String,
       jurusan: json['jurusan'] as String,
       angkatan: json['angkatan'] as String,
-      kelamin: $enumDecodeNullable(_$EKelaminEnumMap, json['kelamin']),
+      kelamin: json['kelamin'] as String?,
       agama: json['agama'] as String?,
       golonganDarah: json['golongan_darah'] as String?,
     );
@@ -40,12 +40,7 @@ Map<String, dynamic> _$$AlumniUpdateBodyImplToJson(
       'tgl_lahir': instance.tglLahir,
       'jurusan': instance.jurusan,
       'angkatan': instance.angkatan,
-      'kelamin': _$EKelaminEnumMap[instance.kelamin],
+      'kelamin': instance.kelamin,
       'agama': instance.agama,
       'golongan_darah': instance.golonganDarah,
     };
-
-const _$EKelaminEnumMap = {
-  EKelamin.l: 'l',
-  EKelamin.p: 'p',
-};

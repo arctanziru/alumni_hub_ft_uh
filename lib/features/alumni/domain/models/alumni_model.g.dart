@@ -12,11 +12,12 @@ _$AlumniModelImpl _$$AlumniModelImplFromJson(Map<String, dynamic> json) =>
       idUser: (json['id_user'] as num?)?.toInt(),
       nim: json['nim'] as String?,
       noAnggota: json['no_anggota'] as String?,
+      noTelp: json['no_telp'] as String?,
       nama: json['nama'] as String,
       tglLahir: json['tgl_lahir'] as String,
       jurusan: json['jurusan'] as String,
       angkatan: json['angkatan'] as String,
-      kelamin: $enumDecodeNullable(_$EKelaminEnumMap, json['kelamin']),
+      kelamin: json['kelamin'] as String?,
       agama: json['agama'] as String?,
       golonganDarah: json['golongan_darah'] as String?,
       validated: json['validated'] as bool?,
@@ -35,11 +36,12 @@ Map<String, dynamic> _$$AlumniModelImplToJson(_$AlumniModelImpl instance) =>
       'id_user': instance.idUser,
       'nim': instance.nim,
       'no_anggota': instance.noAnggota,
+      'no_telp': instance.noTelp,
       'nama': instance.nama,
       'tgl_lahir': instance.tglLahir,
       'jurusan': instance.jurusan,
       'angkatan': instance.angkatan,
-      'kelamin': _$EKelaminEnumMap[instance.kelamin],
+      'kelamin': instance.kelamin,
       'agama': instance.agama,
       'golongan_darah': instance.golonganDarah,
       'validated': instance.validated,
@@ -47,8 +49,3 @@ Map<String, dynamic> _$$AlumniModelImplToJson(_$AlumniModelImpl instance) =>
       'created_at': instance.createdAt?.toIso8601String(),
       'updated_at': instance.updatedAt?.toIso8601String(),
     };
-
-const _$EKelaminEnumMap = {
-  EKelamin.l: 'l',
-  EKelamin.p: 'p',
-};

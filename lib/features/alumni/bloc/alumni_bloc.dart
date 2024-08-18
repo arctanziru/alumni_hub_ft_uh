@@ -1,10 +1,16 @@
+import 'dart:convert';
+
+import 'package:alumni_hub_ft_uh/constants/keys.dart';
 import 'package:alumni_hub_ft_uh/features/alumni/domain/alumni_repository.dart';
 import 'package:alumni_hub_ft_uh/features/alumni/domain/models/alumni_get_many_model.dart';
 import 'package:alumni_hub_ft_uh/features/alumni/domain/models/alumni_response.dart';
+import 'package:alumni_hub_ft_uh/features/user/domain/models/user_model.dart';
+import 'package:alumni_hub_ft_uh/features/user/domain/user_repository.dart';
 import 'package:bloc/bloc.dart';
 import 'package:cached_query/cached_query.dart';
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 part "alumni_event.dart";
 part "alumni_state.dart";
@@ -77,15 +83,24 @@ class AlumniGetManyBloc extends Bloc<AlumniEvent, AlumniState> {
   }
 }
 
+@injectable
 class AlumniUpdateBloc extends Bloc<AlumniEvent, AlumniState> {
   final AlumniRepository _alumniRepository;
+  final UserRepository _userRepository;
 
-  AlumniUpdateBloc(this._alumniRepository) : super(AlumniUpdateInitial()) {
+  AlumniUpdateBloc(this._alumniRepository, this._userRepository)
+      : super(AlumniUpdateInitial()) {
     on<AlumniEventUpdate>((event, emit) async {
       emit(AlumniUpdateLoading());
       try {
         final response =
             await _alumniRepository.updateAlumni(event.alumniUpdateBody);
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        final userSession =
+            UserSession.fromJson(json.decode(prefs.getString(kUserSession)!));
+        await _userRepository.saveUserSession(UserSession(
+            token: userSession.token,
+            user: userSession.user?.copyWith(alumni: response.data)));
         emit(AlumniUpdateSuccess(response));
       } catch (e) {
         emit(AlumniUpdateError(e.toString()));

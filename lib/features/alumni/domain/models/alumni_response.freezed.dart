@@ -194,7 +194,7 @@ mixin _$AlumniUpdateBody {
   String get tglLahir => throw _privateConstructorUsedError;
   String get jurusan => throw _privateConstructorUsedError;
   String get angkatan => throw _privateConstructorUsedError;
-  EKelamin? get kelamin => throw _privateConstructorUsedError;
+  String? get kelamin => throw _privateConstructorUsedError;
   String? get agama => throw _privateConstructorUsedError;
   @JsonKey(name: 'golongan_darah')
   String? get golonganDarah => throw _privateConstructorUsedError;
@@ -217,7 +217,7 @@ abstract class $AlumniUpdateBodyCopyWith<$Res> {
       @JsonKey(name: 'tgl_lahir') String tglLahir,
       String jurusan,
       String angkatan,
-      EKelamin? kelamin,
+      String? kelamin,
       String? agama,
       @JsonKey(name: 'golongan_darah') String? golonganDarah});
 }
@@ -268,7 +268,7 @@ class _$AlumniUpdateBodyCopyWithImpl<$Res, $Val extends AlumniUpdateBody>
       kelamin: freezed == kelamin
           ? _value.kelamin
           : kelamin // ignore: cast_nullable_to_non_nullable
-              as EKelamin?,
+              as String?,
       agama: freezed == agama
           ? _value.agama
           : agama // ignore: cast_nullable_to_non_nullable
@@ -295,7 +295,7 @@ abstract class _$$AlumniUpdateBodyImplCopyWith<$Res>
       @JsonKey(name: 'tgl_lahir') String tglLahir,
       String jurusan,
       String angkatan,
-      EKelamin? kelamin,
+      String? kelamin,
       String? agama,
       @JsonKey(name: 'golongan_darah') String? golonganDarah});
 }
@@ -344,7 +344,7 @@ class __$$AlumniUpdateBodyImplCopyWithImpl<$Res>
       kelamin: freezed == kelamin
           ? _value.kelamin
           : kelamin // ignore: cast_nullable_to_non_nullable
-              as EKelamin?,
+              as String?,
       agama: freezed == agama
           ? _value.agama
           : agama // ignore: cast_nullable_to_non_nullable
@@ -385,7 +385,7 @@ class _$AlumniUpdateBodyImpl implements _AlumniUpdateBody {
   @override
   final String angkatan;
   @override
-  final EKelamin? kelamin;
+  final String? kelamin;
   @override
   final String? agama;
   @override
@@ -442,7 +442,7 @@ abstract class _AlumniUpdateBody implements AlumniUpdateBody {
           @JsonKey(name: 'tgl_lahir') required final String tglLahir,
           required final String jurusan,
           required final String angkatan,
-          final EKelamin? kelamin,
+          final String? kelamin,
           final String? agama,
           @JsonKey(name: 'golongan_darah') final String? golonganDarah}) =
       _$AlumniUpdateBodyImpl;
@@ -462,7 +462,7 @@ abstract class _AlumniUpdateBody implements AlumniUpdateBody {
   @override
   String get angkatan;
   @override
-  EKelamin? get kelamin;
+  String? get kelamin;
   @override
   String? get agama;
   @override

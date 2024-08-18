@@ -63,7 +63,6 @@ dependencies:
   google_sign_in: ^6.2.1
   fluttertoast: ^8.2.8
   qr_flutter: ^4.1.0
-  flutter_downloader: ^1.11.8
 
 dev_dependencies:
   flutter_test:

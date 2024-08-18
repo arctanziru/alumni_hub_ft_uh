@@ -1,3 +1,6 @@
+import 'package:alumni_hub_ft_uh/features/claim_alumni/bloc/add/add_alumni_bloc.dart';
+import 'package:alumni_hub_ft_uh/features/claim_alumni/bloc/claim/claim_alumni_bloc.dart';
+import 'package:alumni_hub_ft_uh/features/claim_alumni/bloc/get/get_alumnis_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:alumni_hub_ft_uh/features/alumni/bloc/alumni_bloc.dart';
 import 'package:alumni_hub_ft_uh/features/news/bloc/news_bloc.dart';
@@ -31,5 +34,14 @@ final blocProviders = [
   ),
   BlocProvider<AlumniGetManyBloc>(
     create: (context) => locator<AlumniGetManyBloc>(),
+  ),
+  BlocProvider<ClaimAlumniBloc>(
+    create: (context) => locator<ClaimAlumniBloc>(),
+  ),
+  BlocProvider<AddAlumniBloc>(
+    create: (context) => locator<AddAlumniBloc>(),
+  ),
+  BlocProvider<GetAlumnisBloc>(
+    create: (context) => locator<GetAlumnisBloc>(),
   ),
 ];

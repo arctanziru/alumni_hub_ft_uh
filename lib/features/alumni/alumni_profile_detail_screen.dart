@@ -61,7 +61,7 @@ class AlumniProfileDetailScreen extends StatelessWidget {
                                   textTheme.labelLarge!.copyWith(fontSize: 25),
                             ),
                             Text(
-                              alumni.nim,
+                              alumni.nim ?? '-',
                               style: textTheme.bodyMedium,
                             ),
                           ],
@@ -135,7 +135,7 @@ class AlumniProfileDetailScreen extends StatelessWidget {
                       ),
                       TextFieldProfileWidget(
                         label: 'Agama',
-                        description: alumni.agama,
+                        description: alumni.agama ?? '-',
                         icon: Icons.book,
                         controller: religionController,
                         readOnly: true,

@@ -29,7 +29,8 @@ class GetAlumnisResponseData with _$GetAlumnisResponseData {
 class GetAlumnisBody with _$GetAlumnisBody {
   const factory GetAlumnisBody({
     @JsonKey(name: 'nama') required String name,
-    @JsonKey(name: 'tgl_lahir')required String tglLahir,
+    @JsonKey(name: 'tgl_lahir') required String tglLahir,
+    required String jurusan,
     required String? nim,
   }) = _GetAlumnisBody;
 

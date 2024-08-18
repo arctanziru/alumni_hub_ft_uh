@@ -103,8 +103,10 @@ Future<_i174.GetIt> $initGetIt(
       () => _i926.SearchBloc(gh<_i3.SearchRepository>()));
   gh.lazySingleton<_i118.ClaimAlumniRepository>(() =>
       _i118.ClaimAlumniRepositoryImpl(gh<_i480.ClaimAlumniRemoteDataSource>()));
-  gh.factory<_i178.ClaimAlumniBloc>(
-      () => _i178.ClaimAlumniBloc(gh<_i118.ClaimAlumniRepository>()));
+  gh.factory<_i178.ClaimAlumniBloc>(() => _i178.ClaimAlumniBloc(
+        gh<_i118.ClaimAlumniRepository>(),
+        gh<_i902.UserRepository>(),
+      ));
   gh.factory<_i662.NewsBloc>(() => _i662.NewsBloc(gh<_i220.NewsRepository>()));
   gh.factory<_i905.AlumniAngkatanBloc>(
       () => _i905.AlumniAngkatanBloc(gh<_i332.AlumniRepository>()));

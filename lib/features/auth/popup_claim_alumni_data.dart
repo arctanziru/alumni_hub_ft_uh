@@ -1,6 +1,7 @@
 import 'package:alumni_hub_ft_uh/features/alumni/domain/models/alumni_model.dart';
 import 'package:alumni_hub_ft_uh/features/claim_alumni/bloc/claim/claim_alumni_bloc.dart';
 import 'package:alumni_hub_ft_uh/features/claim_alumni/domain/models/claim_alumni_model.dart';
+import 'package:alumni_hub_ft_uh/features/user/bloc/user_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:alumni_hub_ft_uh/constants/colors.dart';
 import 'package:alumni_hub_ft_uh/common/widgets/button/button_widget.dart';
@@ -43,7 +44,8 @@ class PopupClaimAlumniData extends StatelessWidget {
     final alumniCount = alumniDataList.length;
 
     return AlertDialog(
-      contentPadding: const EdgeInsets.all(16), // Add padding to the content area
+      contentPadding:
+          const EdgeInsets.all(16), // Add padding to the content area
       title: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -54,7 +56,8 @@ class PopupClaimAlumniData extends StatelessWidget {
           ),
           Text(
             '($alumniCount)',
-            style: textTheme.bodyMedium?.copyWith(color: Colors.black, fontWeight: FontWeight.bold),
+            style: textTheme.bodyMedium
+                ?.copyWith(color: Colors.black, fontWeight: FontWeight.bold),
           ),
         ],
       ),
@@ -78,7 +81,8 @@ class PopupClaimAlumniData extends StatelessWidget {
       ),
       actions: [
         Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8.0), // Add horizontal padding
+          padding: const EdgeInsets.symmetric(
+              horizontal: 8.0), // Add horizontal padding
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -86,7 +90,8 @@ class PopupClaimAlumniData extends StatelessWidget {
                 width: double.infinity, // Make the button expand to full width
                 child: ButtonWidget(
                   onPressed: () {
-                    Navigator.of(context).pop(); // Close the dialog when this button is pressed
+                    Navigator.of(context)
+                        .pop(); // Close the dialog when this button is pressed
                   },
                   label: 'Kembali',
                   color: AppColors.gray3,
@@ -95,7 +100,8 @@ class PopupClaimAlumniData extends StatelessWidget {
               const SizedBox(height: 8),
               TextButton(
                 onPressed: () {
-                  Navigator.of(context).pop(); // Close the dialog when this button is pressed
+                  Navigator.of(context)
+                      .pop(); // Close the dialog when this button is pressed
                 },
                 child: Text(
                   'Data saya diklaim orang lain',
@@ -112,12 +118,13 @@ class PopupClaimAlumniData extends StatelessWidget {
     );
   }
 
-  Widget _buildDataSection(AlumniModel alumni, TextTheme textTheme, BuildContext context) {
+  Widget _buildDataSection(
+      AlumniModel alumni, TextTheme textTheme, BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         _buildDataRow('Nama Lengkap', alumni.nama, textTheme),
-        _buildDataRow('NIM / Stambuk', alumni.nim, textTheme),
+        _buildDataRow('NIM / Stambuk', alumni.nim ?? '-', textTheme),
         _buildDataRow('Tanggal Lahir', alumni.tglLahir, textTheme),
         _buildDataRow('Jurusan', alumni.jurusan, textTheme),
         _buildDataRow('Angkatan', alumni.angkatan, textTheme),
@@ -139,7 +146,8 @@ class PopupClaimAlumniData extends StatelessWidget {
                 // Show an error message
                 ScaffoldMessenger.of(context).showSnackBar(
                   SnackBar(
-                    content: Text('Gagal mengklaim data: ${state.exception.message}'),
+                    content: Text(
+                        'Gagal mengklaim data: ${state.exception.message}'),
                     duration: const Duration(seconds: 2),
                   ),
                 );
@@ -149,34 +157,43 @@ class PopupClaimAlumniData extends StatelessWidget {
               return SizedBox(
                 width: 200, // Set a fixed width for the button
                 child: ButtonWidget(
-                  onPressed: alumni.validated
+                  onPressed: alumni.isClaimed == true
                       ? null
                       : () {
                           showDialog(
                             context: context,
                             builder: (BuildContext context) {
                               return PopupConfirmAlumniData(
-                                alumniData: alumni, // Pass the entire AlumniData object
+                                alumniData: alumni,
                                 onConfirm: () {
-                                  Navigator.of(context).pop(); // Close confirmation dialog
+                                  Navigator.of(context).pop();
+                                  final userSession =
+                                      context.read<UserBloc>().getUserSession();
                                   context.read<ClaimAlumniBloc>().add(
                                         ClaimAlumni(
                                           claimAlumniBody: ClaimAlumniBody(
                                             idAlumni: alumni.idAlumni,
                                           ),
+                                          token: userSession?.token,
                                         ),
                                       );
+                                  
                                 },
                                 onCancel: () {
-                                  Navigator.of(context).pop(); // Close confirmation dialog
+                                  Navigator.of(context)
+                                      .pop(); // Close confirmation dialog
                                 },
                               );
                             },
                           );
                         },
                   isLoading: state is ClaimAlumniLoading,
-                  label: alumni.validated ? 'Data telah diklaim' : 'Klaim Data',
-                  color: alumni.validated ? AppColors.gray3 : AppColors.primaryColor,
+                  label: alumni.isClaimed == true
+                      ? 'Data telah diklaim'
+                      : 'Klaim Data',
+                  color: alumni.isClaimed == true
+                      ? AppColors.gray3
+                      : AppColors.primaryColor,
                 ),
               );
             },
@@ -199,7 +216,8 @@ class PopupClaimAlumniData extends StatelessWidget {
               alignment: Alignment.centerLeft,
               child: Text(
                 '$label :',
-                style: textTheme.bodySmall?.copyWith(fontWeight: FontWeight.bold),
+                style:
+                    textTheme.bodySmall?.copyWith(fontWeight: FontWeight.bold),
               ),
             ),
           ),

@@ -96,7 +96,7 @@ class _AlumniDetailSearchScreenState extends State<AlumniDetailSearchScreen> {
                                       state.alumniGetManyResponse.data[index];
                                   return CardAlumniProfileWidget(
                                     name: alumni.nama,
-                                    details: alumni.nim,
+                                    details: alumni.nim ?? '-',
                                     onTap: () {
                                       locator<AppNavigation>().navigateTo(
                                           AlumniProfileDetailScreen.route,

@@ -5,5 +5,6 @@ abstract class AddAlumniEvent {}
 
 class AddAlumni extends AddAlumniEvent {
   final AddAlumniBody addAlumniBody;
-  AddAlumni({required this.addAlumniBody});
+  final String? token;
+  AddAlumni({required this.addAlumniBody, this.token});
 }

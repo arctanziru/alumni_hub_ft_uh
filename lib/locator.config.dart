@@ -120,8 +120,10 @@ Future<_i174.GetIt> $initGetIt(
       ));
   gh.factory<_i894.GetAlumnisBloc>(
       () => _i894.GetAlumnisBloc(gh<_i118.ClaimAlumniRepository>()));
-  gh.factory<_i968.AddAlumniBloc>(
-      () => _i968.AddAlumniBloc(gh<_i118.ClaimAlumniRepository>()));
+  gh.factory<_i968.AddAlumniBloc>(() => _i968.AddAlumniBloc(
+        gh<_i118.ClaimAlumniRepository>(),
+        gh<_i902.UserRepository>(),
+      ));
   return getIt;
 }
 

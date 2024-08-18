@@ -1,5 +1,6 @@
 import 'package:alumni_hub_ft_uh/features/claim_alumni/bloc/add/add_alumni_bloc.dart';
 import 'package:alumni_hub_ft_uh/features/claim_alumni/domain/models/add_alumni_model.dart';
+import 'package:alumni_hub_ft_uh/features/user/bloc/user_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:alumni_hub_ft_uh/common/widgets/button/button_widget.dart';
 import 'package:alumni_hub_ft_uh/common/widgets/textField/text_field_widget.dart';
@@ -80,6 +81,7 @@ class _InsertAlumniDataScreenState extends State<InsertAlumniDataScreen> {
       );
     } else {
       // Proceed with sign up if terms are agreed
+      final userSession = context.read<UserBloc>().getUserSession();
       context.read<AddAlumniBloc>().add(
             AddAlumni(
               addAlumniBody: AddAlumniBody(
@@ -92,6 +94,7 @@ class _InsertAlumniDataScreenState extends State<InsertAlumniDataScreen> {
                 golonganDarah: _golonganDarahController.text,
                 agama: _agamaController.text,
               ),
+              token: userSession?.token,
             ),
           );
     }
@@ -295,6 +298,7 @@ class _InsertAlumniDataScreenState extends State<InsertAlumniDataScreen> {
                       label: 'Angkatan',
                       hint: 'Masukkan angkatan',
                       controller: _angkatanController,
+                      maxLength: 4,
                     ),
                     const SizedBox(height: 12),
                     TextFieldWidget(

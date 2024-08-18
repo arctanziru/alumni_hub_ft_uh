@@ -33,9 +33,10 @@ class AddAlumniBody with _$AddAlumniBody {
     required String nim,
     @JsonKey(name: 'tgl_lahir')required String tglLahir,
     @JsonKey(name: 'jurusan') required String jurusan,
+    required String angkatan,
     required String kelamin,
     required String agama,
-    @JsonKey(name: 'golonga_darah') required String golonganDarah,
+    @JsonKey(name: 'golongan_darah') required String golonganDarah,
   }) = _AddAlumniBody;
 
   factory AddAlumniBody.fromJson(Map<String, dynamic> json) =>

@@ -63,22 +63,22 @@ Future<_i174.GetIt> $initGetIt(
   gh.lazySingleton<_i420.Api>(() => _i420.Api(gh<_i361.Dio>()));
   gh.singleton<_i225.UserLocalDataSource>(
       () => _i225.UserLocalDataSource(gh<_i460.SharedPreferences>()));
-  gh.singleton<_i475.AlumniRemoteDataSource>(
-      () => _i475.AlumniRemoteDataSource(gh<_i420.Api>()));
-  gh.singleton<_i516.AuthRemoteDataSource>(
-      () => _i516.AuthRemoteDataSource(gh<_i420.Api>()));
   gh.singleton<_i480.ClaimAlumniRemoteDataSource>(
       () => _i480.ClaimAlumniRemoteDataSource(gh<_i420.Api>()));
-  gh.singleton<_i163.EventRemoteDataSource>(
-      () => _i163.EventRemoteDataSource(gh<_i420.Api>()));
-  gh.singleton<_i901.NewsRemoteDataSource>(
-      () => _i901.NewsRemoteDataSource(gh<_i420.Api>()));
-  gh.singleton<_i37.SearchRemoteDataSource>(
-      () => _i37.SearchRemoteDataSource(gh<_i420.Api>()));
-  gh.singleton<_i444.UserRemoteDataSource>(
-      () => _i444.UserRemoteDataSource(gh<_i420.Api>()));
   gh.singleton<_i785.VacancyRemoteDataSource>(
       () => _i785.VacancyRemoteDataSource(gh<_i420.Api>()));
+  gh.singleton<_i516.AuthRemoteDataSource>(
+      () => _i516.AuthRemoteDataSource(gh<_i420.Api>()));
+  gh.singleton<_i444.UserRemoteDataSource>(
+      () => _i444.UserRemoteDataSource(gh<_i420.Api>()));
+  gh.singleton<_i37.SearchRemoteDataSource>(
+      () => _i37.SearchRemoteDataSource(gh<_i420.Api>()));
+  gh.singleton<_i901.NewsRemoteDataSource>(
+      () => _i901.NewsRemoteDataSource(gh<_i420.Api>()));
+  gh.singleton<_i475.AlumniRemoteDataSource>(
+      () => _i475.AlumniRemoteDataSource(gh<_i420.Api>()));
+  gh.singleton<_i163.EventRemoteDataSource>(
+      () => _i163.EventRemoteDataSource(gh<_i420.Api>()));
   gh.lazySingleton<_i731.VacancyRepository>(
       () => _i731.VacancyRepositoryImpl(gh<_i785.VacancyRemoteDataSource>()));
   gh.lazySingleton<_i742.EventRepository>(
@@ -118,10 +118,10 @@ Future<_i174.GetIt> $initGetIt(
         gh<_i902.UserRepository>(),
         gh<_i260.AuthRepository>(),
       ));
-  gh.factory<_i968.AddAlumniBloc>(
-      () => _i968.AddAlumniBloc(gh<_i118.ClaimAlumniRepository>()));
   gh.factory<_i894.GetAlumnisBloc>(
       () => _i894.GetAlumnisBloc(gh<_i118.ClaimAlumniRepository>()));
+  gh.factory<_i968.AddAlumniBloc>(
+      () => _i968.AddAlumniBloc(gh<_i118.ClaimAlumniRepository>()));
   return getIt;
 }
 

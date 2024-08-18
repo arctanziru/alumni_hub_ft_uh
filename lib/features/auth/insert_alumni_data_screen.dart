@@ -85,9 +85,10 @@ class _InsertAlumniDataScreenState extends State<InsertAlumniDataScreen> {
               addAlumniBody: AddAlumniBody(
                 name: _namaLengkapController.text,
                 nim: _stambukController.text,
-                kelamin: selectedGender!,
+                kelamin: selectedGender! == 'Laki-laki' ? 'l' : 'p',
                 tglLahir: _tanggalLahirController.text,
                 jurusan: _jurusanController.text,
+                angkatan: _angkatanController.text,
                 golonganDarah: _golonganDarahController.text,
                 agama: _agamaController.text,
               ),

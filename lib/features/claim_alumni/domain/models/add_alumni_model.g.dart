@@ -40,9 +40,10 @@ _$AddAlumniBodyImpl _$$AddAlumniBodyImplFromJson(Map<String, dynamic> json) =>
       nim: json['nim'] as String,
       tglLahir: json['tgl_lahir'] as String,
       jurusan: json['jurusan'] as String,
+      angkatan: json['angkatan'] as String,
       kelamin: json['kelamin'] as String,
       agama: json['agama'] as String,
-      golonganDarah: json['golonga_darah'] as String,
+      golonganDarah: json['golongan_darah'] as String,
     );
 
 Map<String, dynamic> _$$AddAlumniBodyImplToJson(_$AddAlumniBodyImpl instance) =>
@@ -51,7 +52,8 @@ Map<String, dynamic> _$$AddAlumniBodyImplToJson(_$AddAlumniBodyImpl instance) =>
       'nim': instance.nim,
       'tgl_lahir': instance.tglLahir,
       'jurusan': instance.jurusan,
+      'angkatan': instance.angkatan,
       'kelamin': instance.kelamin,
       'agama': instance.agama,
-      'golonga_darah': instance.golonganDarah,
+      'golongan_darah': instance.golonganDarah,
     };

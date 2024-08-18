@@ -1,7 +1,10 @@
 import 'package:alumni_hub_ft_uh/common/utils/app_navigation.dart';
+import 'package:alumni_hub_ft_uh/common/utils/custom_dialog.dart';
+import 'package:alumni_hub_ft_uh/common/widgets/button/button_widget.dart';
 import 'package:alumni_hub_ft_uh/constants/colors.dart';
 import 'package:alumni_hub_ft_uh/features/news/news_search_screen.dart';
 import 'package:alumni_hub_ft_uh/features/search/blocs/search_bloc.dart';
+import 'package:alumni_hub_ft_uh/features/user/bloc/user_bloc.dart';
 import 'package:alumni_hub_ft_uh/features/vacancy/vacancy_search_screen.dart';
 import 'package:alumni_hub_ft_uh/locator.dart';
 import 'package:flutter/material.dart';
@@ -25,6 +28,8 @@ class _SearchScreenState extends State<SearchScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final userSession = context.read<UserBloc>().getUserSession();
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -103,13 +108,48 @@ class _SearchScreenState extends State<SearchScreen> {
                   count: state.search?.data.loker ?? 0,
                   isLoading: state.status == SearchStatus.loading,
                   onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => VacancySearchScreen(
-                                searchQuery: state.searchQuery!,
-                              )),
-                    );
+                    if (userSession?.user?.alumni != null) {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => VacancySearchScreen(
+                                  searchQuery: state.searchQuery!,
+                                )),
+                      );
+                    } else {
+                      CustomDialog.showCustomDialog(
+                        context,
+                        title: 'Klaim Data Alumni',
+                        content: Text(
+                          'Untuk mendapatkan akses full, isi kelengkapan data alumni',
+                          style:
+                              Theme.of(context).textTheme.bodyMedium?.copyWith(
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                        ),
+                        actions: [
+                          Expanded(
+                            child: ButtonWidget(
+                              label: 'Nanti',
+                              color: AppColors.secondaryColor,
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                            ),
+                          ),
+                          const SizedBox(width: 16),
+                          Expanded(
+                            child: ButtonWidget(
+                              label: 'Klaim Data',
+                              onPressed: () {
+                                Navigator.of(context)
+                                    .pushNamed('/claim_alumni_data');
+                              },
+                            ),
+                          ),
+                        ],
+                      );
+                    }
                   },
                 ),
               ],

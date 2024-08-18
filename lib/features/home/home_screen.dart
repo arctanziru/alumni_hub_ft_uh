@@ -10,6 +10,7 @@ import 'package:alumni_hub_ft_uh/common/widgets/card/card_vacancy_widget.dart';
 import 'package:alumni_hub_ft_uh/features/news/bloc/news_bloc.dart';
 import 'package:alumni_hub_ft_uh/features/news/news_detail_screen.dart';
 import 'package:alumni_hub_ft_uh/features/news/news_screen.dart';
+import 'package:alumni_hub_ft_uh/features/user/bloc/user_bloc.dart';
 import 'package:alumni_hub_ft_uh/features/vacancy/bloc/vacancy_bloc.dart';
 import 'package:alumni_hub_ft_uh/features/vacancy/vacancy_detail_screen.dart';
 import 'package:alumni_hub_ft_uh/features/vacancy/vacancy_screen.dart';
@@ -45,6 +46,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final userSession = context.read<UserBloc>().getUserSession();
+
     return Scaffold(
       backgroundColor: Colors.grey[200],
       bottomNavigationBar: const BottomBarWidget(currentIndex: 0),
@@ -255,116 +258,119 @@ class _HomeScreenState extends State<HomeScreen> {
                       },
                     ),
                     const SizedBox(height: 20),
-                    Row(
-                      mainAxisSize: MainAxisSize.max,
-                      children: [
-                        Text(
-                          'Lowongan Kerja',
-                          textAlign: TextAlign.left,
-                          style:
-                              Theme.of(context).textTheme.bodyLarge?.copyWith(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 24,
-                                  ),
-                        ),
-                        IconButton(
-                          icon: const Icon(Icons.arrow_forward_rounded),
-                          onPressed: () {
-                            Navigator.pushNamed(context, VacancyScreen.route);
-                          },
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 8.0),
-                    BlocBuilder<VacancyBloc, VacancyState>(
-                      builder: (context, state) {
-                        if (state.status == VacancyStatus.loading) {
-                          return Skeletonizer(
-                            child: Column(
-                              children: List.generate(
-                                5,
-                                (index) => Column(
-                                  children: [
-                                    CardVacancyWidget(
-                                      onTap: () {},
-                                      title: 'Loading...',
-                                      company: 'Loading...',
-                                      type: 'Loading...',
-                                      location: 'Loading...',
-                                      experience: 'Loading...',
-                                      postedAt: DateTime.now(),
-                                      description: 'Loading...' * 10,
-                                      companyImgUrl: 'Loading...',
+                    if (userSession?.user?.alumni != null) ...[
+                      Row(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          Text(
+                            'Lowongan Kerja',
+                            textAlign: TextAlign.left,
+                            style:
+                                Theme.of(context).textTheme.bodyLarge?.copyWith(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 24,
                                     ),
-                                    const SizedBox(height: 10),
-                                  ],
+                          ),
+                          IconButton(
+                            icon: const Icon(Icons.arrow_forward_rounded),
+                            onPressed: () {
+                              Navigator.pushNamed(context, VacancyScreen.route);
+                            },
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 8.0),
+                      BlocBuilder<VacancyBloc, VacancyState>(
+                        builder: (context, state) {
+                          if (state.status == VacancyStatus.loading) {
+                            return Skeletonizer(
+                              child: Column(
+                                children: List.generate(
+                                  5,
+                                  (index) => Column(
+                                    children: [
+                                      CardVacancyWidget(
+                                        onTap: () {},
+                                        title: 'Loading...',
+                                        company: 'Loading...',
+                                        type: 'Loading...',
+                                        location: 'Loading...',
+                                        experience: 'Loading...',
+                                        postedAt: DateTime.now(),
+                                        description: 'Loading...' * 10,
+                                        companyImgUrl: 'Loading...',
+                                      ),
+                                      const SizedBox(height: 10),
+                                    ],
+                                  ),
                                 ),
                               ),
-                            ),
-                          );
-                        }
+                            );
+                          }
 
-                        return Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: state.vacancies.isEmpty
-                              ? [
-                                  Text(
-                                    'Tidak ada lowongan kerja',
-                                    style:
-                                        Theme.of(context).textTheme.bodyLarge,
-                                  ),
-                                ]
-                              : [
-                                  ...List.generate(
-                                    min(state.vacancies.length, 5),
-                                    (index) {
-                                      final vacancy = state.vacancies[index];
-                                      return Column(
-                                        children: [
-                                          CardVacancyWidget(
-                                            onTap: () {
-                                              Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      VacancyDetailScreen(
-                                                    vacancy: vacancy,
-                                                  ),
-                                                ),
-                                              );
-                                            },
-                                            title: vacancy.judul,
-                                            company: vacancy
-                                                .perusahaan.namaPerusahaan,
-                                            type: vacancy.role,
-                                            location: vacancy.lokasi,
-                                            experience: vacancy.pengalamanKerja,
-                                            postedAt: vacancy.createdAt,
-                                            description: vacancy.konten,
-                                            companyImgUrl:
-                                                '${dotenv.get('STORAGE_URL')}${vacancy.perusahaan.logo}',
-                                          ),
-                                          const SizedBox(height: 10),
-                                        ],
-                                      );
-                                    },
-                                  ),
-                                  if (state.status == VacancyStatus.loaded &&
-                                      state.vacancies.length > 5)
-                                    Center(
-                                      child: ButtonWidget(
-                                        onPressed: () {
-                                          Navigator.pushNamed(
-                                              context, VacancyScreen.route);
-                                        },
-                                        label: 'Lainnya',
-                                        rounded: true,
-                                      ),
+                          return Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: state.vacancies.isEmpty
+                                ? [
+                                    Text(
+                                      'Tidak ada lowongan kerja',
+                                      style:
+                                          Theme.of(context).textTheme.bodyLarge,
                                     ),
-                                ],
-                        );
-                      },
-                    ),
+                                  ]
+                                : [
+                                    ...List.generate(
+                                      min(state.vacancies.length, 5),
+                                      (index) {
+                                        final vacancy = state.vacancies[index];
+                                        return Column(
+                                          children: [
+                                            CardVacancyWidget(
+                                              onTap: () {
+                                                Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        VacancyDetailScreen(
+                                                      vacancy: vacancy,
+                                                    ),
+                                                  ),
+                                                );
+                                              },
+                                              title: vacancy.judul,
+                                              company: vacancy
+                                                  .perusahaan.namaPerusahaan,
+                                              type: vacancy.role,
+                                              location: vacancy.lokasi,
+                                              experience:
+                                                  vacancy.pengalamanKerja,
+                                              postedAt: vacancy.createdAt,
+                                              description: vacancy.konten,
+                                              companyImgUrl:
+                                                  '${dotenv.get('STORAGE_URL')}${vacancy.perusahaan.logo}',
+                                            ),
+                                            const SizedBox(height: 10),
+                                          ],
+                                        );
+                                      },
+                                    ),
+                                    if (state.status == VacancyStatus.loaded &&
+                                        state.vacancies.length > 5)
+                                      Center(
+                                        child: ButtonWidget(
+                                          onPressed: () {
+                                            Navigator.pushNamed(
+                                                context, VacancyScreen.route);
+                                          },
+                                          label: 'Lainnya',
+                                          rounded: true,
+                                        ),
+                                      ),
+                                  ],
+                          );
+                        },
+                      ),
+                    ],
                   ],
                 ),
               ),

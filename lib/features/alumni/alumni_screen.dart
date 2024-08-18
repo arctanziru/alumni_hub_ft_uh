@@ -101,20 +101,25 @@ class _AlumniScreenState extends State<AlumniScreen> {
                               .read<AlumniAngkatanBloc>()
                               .add(AlumniEventGetAngkatan());
                         },
-                        child: CardAlumniWidget(
-                          label:
-                              'Angkatan ${state.alumniAngkatanResponse.data.angkatan}',
-                          subtitle:
-                              '${state.alumniAngkatanResponse.data.count} Alumni',
-                          onTap: () {
-                            locator<AppNavigation>().navigateTo(
-                              AlumniSearchScreen.route,
-                              arguments: AlumniJurusanParams(
-                                angkatan:
-                                    state.alumniAngkatanResponse.data.angkatan,
-                              ),
-                            );
-                          },
+                        child: Column(
+                          children: List.generate(
+                            state.alumniAngkatanResponse.data.length,
+                            (index) {
+                              final angkatan =
+                                  state.alumniAngkatanResponse.data[index];
+                              return Column(
+                                children: [
+                                  CardAlumniWidget(
+                                    label:
+                                        'Angkatan ${angkatan.angkatan} (${angkatan.angkatan})',
+                                    subtitle: '${angkatan.total} Alumni',
+                                  ),
+                                  const SizedBox(
+                                      height: 10.0), // Space between cards
+                                ],
+                              );
+                            },
+                          ),
                         ),
                       );
                     }

@@ -68,7 +68,9 @@ _$AlumniAngkatanResponseImpl _$$AlumniAngkatanResponseImplFromJson(
         Map<String, dynamic> json) =>
     _$AlumniAngkatanResponseImpl(
       message: json['message'] as String,
-      data: AngkatanData.fromJson(json['data'] as Map<String, dynamic>),
+      data: (json['data'] as List<dynamic>)
+          .map((e) => AngkatanData.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$$AlumniAngkatanResponseImplToJson(
@@ -93,13 +95,13 @@ Map<String, dynamic> _$$AlumniAngkatanParamsImplToJson(
 _$AngkatanDataImpl _$$AngkatanDataImplFromJson(Map<String, dynamic> json) =>
     _$AngkatanDataImpl(
       angkatan: json['angkatan'] as String,
-      count: (json['count'] as num).toInt(),
+      total: (json['total'] as num).toInt(),
     );
 
 Map<String, dynamic> _$$AngkatanDataImplToJson(_$AngkatanDataImpl instance) =>
     <String, dynamic>{
       'angkatan': instance.angkatan,
-      'count': instance.count,
+      'total': instance.total,
     };
 
 _$AlumniGetManyParamsImpl _$$AlumniGetManyParamsImplFromJson(

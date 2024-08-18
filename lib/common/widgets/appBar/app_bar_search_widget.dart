@@ -90,8 +90,7 @@ class AppBarSearchWidget extends StatelessWidget
         IconButton(
           icon: CircleAvatar(
             backgroundImage: NetworkImage(
-              userSession?.user?.avatar ??
-                  'https://example.com/profile_pic.jpg',
+              '${userSession?.user?.avatar}'
             ),
           ),
           onPressed: () {

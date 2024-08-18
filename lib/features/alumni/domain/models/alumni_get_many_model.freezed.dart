@@ -666,7 +666,7 @@ AlumniAngkatanResponse _$AlumniAngkatanResponseFromJson(
 /// @nodoc
 mixin _$AlumniAngkatanResponse {
   String get message => throw _privateConstructorUsedError;
-  AngkatanData get data => throw _privateConstructorUsedError;
+  List<AngkatanData> get data => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -680,9 +680,7 @@ abstract class $AlumniAngkatanResponseCopyWith<$Res> {
           $Res Function(AlumniAngkatanResponse) then) =
       _$AlumniAngkatanResponseCopyWithImpl<$Res, AlumniAngkatanResponse>;
   @useResult
-  $Res call({String message, AngkatanData data});
-
-  $AngkatanDataCopyWith<$Res> get data;
+  $Res call({String message, List<AngkatanData> data});
 }
 
 /// @nodoc
@@ -710,16 +708,8 @@ class _$AlumniAngkatanResponseCopyWithImpl<$Res,
       data: null == data
           ? _value.data
           : data // ignore: cast_nullable_to_non_nullable
-              as AngkatanData,
+              as List<AngkatanData>,
     ) as $Val);
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $AngkatanDataCopyWith<$Res> get data {
-    return $AngkatanDataCopyWith<$Res>(_value.data, (value) {
-      return _then(_value.copyWith(data: value) as $Val);
-    });
   }
 }
 
@@ -732,10 +722,7 @@ abstract class _$$AlumniAngkatanResponseImplCopyWith<$Res>
       __$$AlumniAngkatanResponseImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String message, AngkatanData data});
-
-  @override
-  $AngkatanDataCopyWith<$Res> get data;
+  $Res call({String message, List<AngkatanData> data});
 }
 
 /// @nodoc
@@ -760,9 +747,9 @@ class __$$AlumniAngkatanResponseImplCopyWithImpl<$Res>
           : message // ignore: cast_nullable_to_non_nullable
               as String,
       data: null == data
-          ? _value.data
+          ? _value._data
           : data // ignore: cast_nullable_to_non_nullable
-              as AngkatanData,
+              as List<AngkatanData>,
     ));
   }
 }
@@ -771,15 +758,21 @@ class __$$AlumniAngkatanResponseImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$AlumniAngkatanResponseImpl implements _AlumniAngkatanResponse {
   const _$AlumniAngkatanResponseImpl(
-      {required this.message, required this.data});
+      {required this.message, required final List<AngkatanData> data})
+      : _data = data;
 
   factory _$AlumniAngkatanResponseImpl.fromJson(Map<String, dynamic> json) =>
       _$$AlumniAngkatanResponseImplFromJson(json);
 
   @override
   final String message;
+  final List<AngkatanData> _data;
   @override
-  final AngkatanData data;
+  List<AngkatanData> get data {
+    if (_data is EqualUnmodifiableListView) return _data;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_data);
+  }
 
   @override
   String toString() {
@@ -792,12 +785,13 @@ class _$AlumniAngkatanResponseImpl implements _AlumniAngkatanResponse {
         (other.runtimeType == runtimeType &&
             other is _$AlumniAngkatanResponseImpl &&
             (identical(other.message, message) || other.message == message) &&
-            (identical(other.data, data) || other.data == data));
+            const DeepCollectionEquality().equals(other._data, _data));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, message, data);
+  int get hashCode => Object.hash(
+      runtimeType, message, const DeepCollectionEquality().hash(_data));
 
   @JsonKey(ignore: true)
   @override
@@ -817,7 +811,7 @@ class _$AlumniAngkatanResponseImpl implements _AlumniAngkatanResponse {
 abstract class _AlumniAngkatanResponse implements AlumniAngkatanResponse {
   const factory _AlumniAngkatanResponse(
       {required final String message,
-      required final AngkatanData data}) = _$AlumniAngkatanResponseImpl;
+      required final List<AngkatanData> data}) = _$AlumniAngkatanResponseImpl;
 
   factory _AlumniAngkatanResponse.fromJson(Map<String, dynamic> json) =
       _$AlumniAngkatanResponseImpl.fromJson;
@@ -825,7 +819,7 @@ abstract class _AlumniAngkatanResponse implements AlumniAngkatanResponse {
   @override
   String get message;
   @override
-  AngkatanData get data;
+  List<AngkatanData> get data;
   @override
   @JsonKey(ignore: true)
   _$$AlumniAngkatanResponseImplCopyWith<_$AlumniAngkatanResponseImpl>
@@ -979,7 +973,7 @@ AngkatanData _$AngkatanDataFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$AngkatanData {
   String get angkatan => throw _privateConstructorUsedError;
-  int get count => throw _privateConstructorUsedError;
+  int get total => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -993,7 +987,7 @@ abstract class $AngkatanDataCopyWith<$Res> {
           AngkatanData value, $Res Function(AngkatanData) then) =
       _$AngkatanDataCopyWithImpl<$Res, AngkatanData>;
   @useResult
-  $Res call({String angkatan, int count});
+  $Res call({String angkatan, int total});
 }
 
 /// @nodoc
@@ -1010,16 +1004,16 @@ class _$AngkatanDataCopyWithImpl<$Res, $Val extends AngkatanData>
   @override
   $Res call({
     Object? angkatan = null,
-    Object? count = null,
+    Object? total = null,
   }) {
     return _then(_value.copyWith(
       angkatan: null == angkatan
           ? _value.angkatan
           : angkatan // ignore: cast_nullable_to_non_nullable
               as String,
-      count: null == count
-          ? _value.count
-          : count // ignore: cast_nullable_to_non_nullable
+      total: null == total
+          ? _value.total
+          : total // ignore: cast_nullable_to_non_nullable
               as int,
     ) as $Val);
   }
@@ -1033,7 +1027,7 @@ abstract class _$$AngkatanDataImplCopyWith<$Res>
       __$$AngkatanDataImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String angkatan, int count});
+  $Res call({String angkatan, int total});
 }
 
 /// @nodoc
@@ -1048,16 +1042,16 @@ class __$$AngkatanDataImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? angkatan = null,
-    Object? count = null,
+    Object? total = null,
   }) {
     return _then(_$AngkatanDataImpl(
       angkatan: null == angkatan
           ? _value.angkatan
           : angkatan // ignore: cast_nullable_to_non_nullable
               as String,
-      count: null == count
-          ? _value.count
-          : count // ignore: cast_nullable_to_non_nullable
+      total: null == total
+          ? _value.total
+          : total // ignore: cast_nullable_to_non_nullable
               as int,
     ));
   }
@@ -1066,7 +1060,7 @@ class __$$AngkatanDataImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$AngkatanDataImpl implements _AngkatanData {
-  const _$AngkatanDataImpl({required this.angkatan, required this.count});
+  const _$AngkatanDataImpl({required this.angkatan, required this.total});
 
   factory _$AngkatanDataImpl.fromJson(Map<String, dynamic> json) =>
       _$$AngkatanDataImplFromJson(json);
@@ -1074,11 +1068,11 @@ class _$AngkatanDataImpl implements _AngkatanData {
   @override
   final String angkatan;
   @override
-  final int count;
+  final int total;
 
   @override
   String toString() {
-    return 'AngkatanData(angkatan: $angkatan, count: $count)';
+    return 'AngkatanData(angkatan: $angkatan, total: $total)';
   }
 
   @override
@@ -1088,12 +1082,12 @@ class _$AngkatanDataImpl implements _AngkatanData {
             other is _$AngkatanDataImpl &&
             (identical(other.angkatan, angkatan) ||
                 other.angkatan == angkatan) &&
-            (identical(other.count, count) || other.count == count));
+            (identical(other.total, total) || other.total == total));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, angkatan, count);
+  int get hashCode => Object.hash(runtimeType, angkatan, total);
 
   @JsonKey(ignore: true)
   @override
@@ -1112,7 +1106,7 @@ class _$AngkatanDataImpl implements _AngkatanData {
 abstract class _AngkatanData implements AngkatanData {
   const factory _AngkatanData(
       {required final String angkatan,
-      required final int count}) = _$AngkatanDataImpl;
+      required final int total}) = _$AngkatanDataImpl;
 
   factory _AngkatanData.fromJson(Map<String, dynamic> json) =
       _$AngkatanDataImpl.fromJson;
@@ -1120,7 +1114,7 @@ abstract class _AngkatanData implements AngkatanData {
   @override
   String get angkatan;
   @override
-  int get count;
+  int get total;
   @override
   @JsonKey(ignore: true)
   _$$AngkatanDataImplCopyWith<_$AngkatanDataImpl> get copyWith =>

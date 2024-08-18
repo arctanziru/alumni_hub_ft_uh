@@ -1,7 +1,10 @@
+import 'package:alumni_hub_ft_uh/features/claim_alumni/bloc/add/add_alumni_bloc.dart';
+import 'package:alumni_hub_ft_uh/features/claim_alumni/domain/models/add_alumni_model.dart';
 import 'package:flutter/material.dart';
 import 'package:alumni_hub_ft_uh/common/widgets/button/button_widget.dart';
 import 'package:alumni_hub_ft_uh/common/widgets/textField/text_field_widget.dart';
 import 'package:flutter/gestures.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 
 class InsertAlumniDataScreen extends StatefulWidget {
@@ -36,7 +39,6 @@ class _InsertAlumniDataScreenState extends State<InsertAlumniDataScreen> {
   final _golonganDarahController = TextEditingController();
   final _agamaController = TextEditingController();
 
-
   @override
   void dispose() {
     _namaLengkapController.dispose();
@@ -66,7 +68,7 @@ class _InsertAlumniDataScreenState extends State<InsertAlumniDataScreen> {
     }
   }
 
-  void _handleSignUp() {
+  void _handleAddData() {
     if (!agreeToTerms) {
       // Show SnackBar if terms are not agreed upon
       ScaffoldMessenger.of(context).showSnackBar(
@@ -78,7 +80,19 @@ class _InsertAlumniDataScreenState extends State<InsertAlumniDataScreen> {
       );
     } else {
       // Proceed with sign up if terms are agreed
-      Navigator.pushNamed(context, '/home');
+      context.read<AddAlumniBloc>().add(
+            AddAlumni(
+              addAlumniBody: AddAlumniBody(
+                name: _namaLengkapController.text,
+                nim: _stambukController.text,
+                kelamin: selectedGender!,
+                tglLahir: _tanggalLahirController.text,
+                jurusan: _jurusanController.text,
+                golonganDarah: _golonganDarahController.text,
+                agama: _agamaController.text,
+              ),
+            ),
+          );
     }
   }
 
@@ -93,12 +107,10 @@ class _InsertAlumniDataScreenState extends State<InsertAlumniDataScreen> {
         child: LayoutBuilder(builder: (context, constraints) {
           return ConstrainedBox(
             constraints: BoxConstraints(
-              maxHeight:
-              constraints.maxHeight - MediaQuery.of(context).padding.top,
+              maxHeight: constraints.maxHeight - MediaQuery.of(context).padding.top,
             ),
             child: Container(
-              margin: EdgeInsets.only(
-                  top: MediaQuery.of(context).size.height * 0.2),
+              margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.2),
               decoration: const BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.only(
@@ -109,8 +121,7 @@ class _InsertAlumniDataScreenState extends State<InsertAlumniDataScreen> {
               padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
               height: MediaQuery.of(context).size.height * 0.8,
               child: SingleChildScrollView(
-                padding: EdgeInsets.only(
-                    bottom: MediaQuery.of(context).viewInsets.bottom),
+                padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
@@ -182,9 +193,8 @@ class _InsertAlumniDataScreenState extends State<InsertAlumniDataScreen> {
                                 child: Text(
                                   'Laki-laki',
                                   style: textTheme.bodyMedium?.copyWith(
-                                    color: selectedGender == 'Laki-laki'
-                                        ? Colors.white
-                                        : Colors.black,
+                                    color:
+                                        selectedGender == 'Laki-laki' ? Colors.white : Colors.black,
                                   ),
                                 ),
                               ),
@@ -212,9 +222,8 @@ class _InsertAlumniDataScreenState extends State<InsertAlumniDataScreen> {
                                 child: Text(
                                   'Perempuan',
                                   style: textTheme.bodyMedium?.copyWith(
-                                    color: selectedGender == 'Perempuan'
-                                        ? Colors.white
-                                        : Colors.black,
+                                    color:
+                                        selectedGender == 'Perempuan' ? Colors.white : Colors.black,
                                   ),
                                 ),
                               ),
@@ -316,8 +325,7 @@ class _InsertAlumniDataScreenState extends State<InsertAlumniDataScreen> {
                                 agreeToTerms = value ?? false;
                               });
                             },
-                            materialTapTargetSize:
-                            MaterialTapTargetSize.shrinkWrap,
+                            materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
                           ),
                         ),
                         Expanded(
@@ -349,13 +357,34 @@ class _InsertAlumniDataScreenState extends State<InsertAlumniDataScreen> {
                       ],
                     ),
                     const SizedBox(height: 12),
-                    SizedBox(
-                      width: double.infinity,
-                      child: ButtonWidget(
-                        onPressed: _handleSignUp,
-                        label: 'Daftar',
-                        color: agreeToTerms ? Theme.of(context).primaryColor : Colors.grey,
-                      ),
+                    BlocConsumer<AddAlumniBloc, AddAlumniState>(
+                      listener: (context, state) {
+                        if (state is AddAlumniSuccess) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                              content: Text('Data alumni berhasil ditambahkan'),
+                            ),
+                          );
+                          Navigator.pushNamed(context, '/home');
+                        } else if (state is AddAlumniError) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(state.exception.message),
+                            ),
+                          );
+                        }
+                      },
+                      builder: (context, state) {
+                        return SizedBox(
+                          width: double.infinity,
+                          child: ButtonWidget(
+                            onPressed: _handleAddData,
+                            label: 'Daftar',
+                            isLoading: state is AddAlumniLoading,
+                            color: agreeToTerms ? Theme.of(context).primaryColor : Colors.grey,
+                          ),
+                        );
+                      },
                     ),
                   ],
                 ),

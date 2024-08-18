@@ -22,31 +22,26 @@ class Api {
       late Response response;
       switch (method) {
         case NetworkCallMethod.get:
-          response = await _dio.get(endpoint, queryParameters: params);
+          response = await _dio.get(endpoint, queryParameters: params, data: body);
           break;
         case NetworkCallMethod.post:
-          response =
-              await _dio.post(endpoint, queryParameters: params, data: body);
+          response = await _dio.post(endpoint, queryParameters: params, data: body);
           break;
         case NetworkCallMethod.put:
-          response =
-              await _dio.put(endpoint, queryParameters: params, data: body);
+          response = await _dio.put(endpoint, queryParameters: params, data: body);
           break;
         case NetworkCallMethod.delete:
-          response =
-              await _dio.delete(endpoint, queryParameters: params, data: body);
+          response = await _dio.delete(endpoint, queryParameters: params, data: body);
           break;
         case NetworkCallMethod.patch:
-          response =
-              await _dio.patch(endpoint, queryParameters: params, data: body);
+          response = await _dio.patch(endpoint, queryParameters: params, data: body);
           break;
       }
       if (response.statusCode == 200 || response.statusCode == 201) {
         return response;
       } else {
         debugPrint("Error in response ${response.data}");
-        throw CustomException(
-            "Terjadi kesalahan saat memuat data ${response.data?.message ?? ""}");
+        throw CustomException("Terjadi kesalahan saat memuat data ${response.data?.message ?? ""}");
       }
     } on DioException catch (e) {
       if (e.response != null) {
@@ -55,8 +50,7 @@ class Api {
           final errorResponse = ErrorResponse.fromJson(e.response?.data);
           throw CustomException(errorResponse.message);
         } catch (parseError) {
-          throw CustomException(e.response?.statusMessage ??
-              'Terjadi kesalahan saat memuat data');
+          throw CustomException(e.response?.statusMessage ?? 'Terjadi kesalahan saat memuat data');
         }
       } else {
         throw const CustomException('Terjadi kesalahan saat memuat data');

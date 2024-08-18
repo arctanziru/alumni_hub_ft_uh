@@ -1,11 +1,11 @@
+import 'package:alumni_hub_ft_uh/features/alumni/domain/models/alumni_model.dart';
 import 'package:flutter/material.dart';
 import 'package:alumni_hub_ft_uh/common/widgets/button/button_widget.dart';
-import 'package:alumni_hub_ft_uh/features/auth/popup_claim_alumni_data.dart';
 import '../../constants/colors.dart';
 import '../home/home_screen.dart'; // Import HomeScreen
 
 class PopupConfirmAlumniData extends StatefulWidget {
-  final AlumniData alumniData;
+  final AlumniModel alumniData;
   final VoidCallback onConfirm;
   final VoidCallback onCancel;
 
@@ -50,11 +50,11 @@ class _PopupConfirmAlumniDataState extends State<PopupConfirmAlumniData> {
             ),
           ),
           const SizedBox(height: 24),
-          _buildDataRow('Nama Lengkap', widget.alumniData.name, textTheme),
+          _buildDataRow('Nama Lengkap', widget.alumniData.nama, textTheme),
           _buildDataRow('NIM / Stambuk', widget.alumniData.nim, textTheme),
-          _buildDataRow('Tanggal Lahir', widget.alumniData.dob, textTheme),
-          _buildDataRow('Jurusan', widget.alumniData.department, textTheme),
-          _buildDataRow('Angkatan', widget.alumniData.year, textTheme),
+          _buildDataRow('Tanggal Lahir', widget.alumniData.tglLahir, textTheme),
+          _buildDataRow('Jurusan', widget.alumniData.jurusan, textTheme),
+          _buildDataRow('Angkatan', widget.alumniData.angkatan, textTheme),
           const SizedBox(height: 16),
           Row(
             children: [

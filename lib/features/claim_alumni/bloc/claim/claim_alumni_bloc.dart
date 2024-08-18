@@ -3,10 +3,12 @@ import 'package:alumni_hub_ft_uh/features/claim_alumni/domain/models/claim_alumn
 import 'package:alumni_hub_ft_uh/middleware/custom_exception.dart';
 import 'package:bloc/bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:injectable/injectable.dart';
 
 part 'claim_alumni_event.dart';
 part 'claim_alumni_state.dart';
 
+@injectable
 class ClaimAlumniBloc extends Bloc<ClaimAlumniEvent, ClaimAlumniState> {
   final ClaimAlumniRepository _claimAlumniRepository;
 

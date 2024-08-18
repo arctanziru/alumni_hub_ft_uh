@@ -21,7 +21,7 @@ GetAlumnisResponse _$GetAlumnisResponseFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$GetAlumnisResponse {
   String get message => throw _privateConstructorUsedError;
-  GetAlumnisResponseData get data => throw _privateConstructorUsedError;
+  List<AlumniModel> get data => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -35,9 +35,7 @@ abstract class $GetAlumnisResponseCopyWith<$Res> {
           GetAlumnisResponse value, $Res Function(GetAlumnisResponse) then) =
       _$GetAlumnisResponseCopyWithImpl<$Res, GetAlumnisResponse>;
   @useResult
-  $Res call({String message, GetAlumnisResponseData data});
-
-  $GetAlumnisResponseDataCopyWith<$Res> get data;
+  $Res call({String message, List<AlumniModel> data});
 }
 
 /// @nodoc
@@ -64,16 +62,8 @@ class _$GetAlumnisResponseCopyWithImpl<$Res, $Val extends GetAlumnisResponse>
       data: null == data
           ? _value.data
           : data // ignore: cast_nullable_to_non_nullable
-              as GetAlumnisResponseData,
+              as List<AlumniModel>,
     ) as $Val);
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $GetAlumnisResponseDataCopyWith<$Res> get data {
-    return $GetAlumnisResponseDataCopyWith<$Res>(_value.data, (value) {
-      return _then(_value.copyWith(data: value) as $Val);
-    });
   }
 }
 
@@ -85,10 +75,7 @@ abstract class _$$GetAlumnisResponseImplCopyWith<$Res>
       __$$GetAlumnisResponseImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String message, GetAlumnisResponseData data});
-
-  @override
-  $GetAlumnisResponseDataCopyWith<$Res> get data;
+  $Res call({String message, List<AlumniModel> data});
 }
 
 /// @nodoc
@@ -111,9 +98,9 @@ class __$$GetAlumnisResponseImplCopyWithImpl<$Res>
           : message // ignore: cast_nullable_to_non_nullable
               as String,
       data: null == data
-          ? _value.data
+          ? _value._data
           : data // ignore: cast_nullable_to_non_nullable
-              as GetAlumnisResponseData,
+              as List<AlumniModel>,
     ));
   }
 }
@@ -121,15 +108,22 @@ class __$$GetAlumnisResponseImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$GetAlumnisResponseImpl implements _GetAlumnisResponse {
-  const _$GetAlumnisResponseImpl({required this.message, required this.data});
+  const _$GetAlumnisResponseImpl(
+      {required this.message, required final List<AlumniModel> data})
+      : _data = data;
 
   factory _$GetAlumnisResponseImpl.fromJson(Map<String, dynamic> json) =>
       _$$GetAlumnisResponseImplFromJson(json);
 
   @override
   final String message;
+  final List<AlumniModel> _data;
   @override
-  final GetAlumnisResponseData data;
+  List<AlumniModel> get data {
+    if (_data is EqualUnmodifiableListView) return _data;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_data);
+  }
 
   @override
   String toString() {
@@ -142,12 +136,13 @@ class _$GetAlumnisResponseImpl implements _GetAlumnisResponse {
         (other.runtimeType == runtimeType &&
             other is _$GetAlumnisResponseImpl &&
             (identical(other.message, message) || other.message == message) &&
-            (identical(other.data, data) || other.data == data));
+            const DeepCollectionEquality().equals(other._data, _data));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, message, data);
+  int get hashCode => Object.hash(
+      runtimeType, message, const DeepCollectionEquality().hash(_data));
 
   @JsonKey(ignore: true)
   @override
@@ -167,7 +162,7 @@ class _$GetAlumnisResponseImpl implements _GetAlumnisResponse {
 abstract class _GetAlumnisResponse implements GetAlumnisResponse {
   const factory _GetAlumnisResponse(
       {required final String message,
-      required final GetAlumnisResponseData data}) = _$GetAlumnisResponseImpl;
+      required final List<AlumniModel> data}) = _$GetAlumnisResponseImpl;
 
   factory _GetAlumnisResponse.fromJson(Map<String, dynamic> json) =
       _$GetAlumnisResponseImpl.fromJson;
@@ -175,7 +170,7 @@ abstract class _GetAlumnisResponse implements GetAlumnisResponse {
   @override
   String get message;
   @override
-  GetAlumnisResponseData get data;
+  List<AlumniModel> get data;
   @override
   @JsonKey(ignore: true)
   _$$GetAlumnisResponseImplCopyWith<_$GetAlumnisResponseImpl> get copyWith =>

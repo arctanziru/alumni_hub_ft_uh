@@ -8,7 +8,7 @@ part 'get_alumnis_model.g.dart';
 class GetAlumnisResponse with _$GetAlumnisResponse {
   const factory GetAlumnisResponse({
     required String message,
-    required GetAlumnisResponseData data,
+    required List<AlumniModel> data,
   }) = _GetAlumnisResponse;
 
   factory GetAlumnisResponse.fromJson(Map<String, dynamic> json) =>

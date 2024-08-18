@@ -1,6 +1,10 @@
+import 'package:alumni_hub_ft_uh/features/alumni/domain/models/alumni_model.dart';
+import 'package:alumni_hub_ft_uh/features/claim_alumni/bloc/claim/claim_alumni_bloc.dart';
+import 'package:alumni_hub_ft_uh/features/claim_alumni/domain/models/claim_alumni_model.dart';
 import 'package:flutter/material.dart';
 import 'package:alumni_hub_ft_uh/constants/colors.dart';
 import 'package:alumni_hub_ft_uh/common/widgets/button/button_widget.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'popup_confirm_alumni_data.dart'; // Import the new confirmation popup widget
 
 class AlumniData {
@@ -24,7 +28,7 @@ class AlumniData {
 }
 
 class PopupClaimAlumniData extends StatelessWidget {
-  final List<AlumniData> alumniDataList;
+  final List<AlumniModel> alumniDataList;
   final VoidCallback onBack; // Added onBack callback
 
   const PopupClaimAlumniData({
@@ -45,7 +49,8 @@ class PopupClaimAlumniData extends StatelessWidget {
         children: [
           Text(
             'Data Alumni',
-            style: textTheme.headlineMedium?.copyWith(color: Colors.black, fontWeight: FontWeight.bold),
+            style: textTheme.headlineMedium
+                ?.copyWith(color: Colors.black, fontWeight: FontWeight.bold),
           ),
           Text(
             '($alumniCount)',
@@ -107,49 +112,80 @@ class PopupClaimAlumniData extends StatelessWidget {
     );
   }
 
-  Widget _buildDataSection(AlumniData alumni, TextTheme textTheme, BuildContext context) {
+  Widget _buildDataSection(AlumniModel alumni, TextTheme textTheme, BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        _buildDataRow('Nama Lengkap', alumni.name, textTheme),
+        _buildDataRow('Nama Lengkap', alumni.nama, textTheme),
         _buildDataRow('NIM / Stambuk', alumni.nim, textTheme),
-        _buildDataRow('Tanggal Lahir', alumni.dob, textTheme),
-        _buildDataRow('Jurusan', alumni.department, textTheme),
-        _buildDataRow('Angkatan', alumni.year, textTheme),
+        _buildDataRow('Tanggal Lahir', alumni.tglLahir, textTheme),
+        _buildDataRow('Jurusan', alumni.jurusan, textTheme),
+        _buildDataRow('Angkatan', alumni.angkatan, textTheme),
         const SizedBox(height: 16),
         Center(
-          child: SizedBox(
-            width: 200, // Set a fixed width for the button
-            child: ButtonWidget(
-              onPressed: alumni.isClaimed
-                  ? null
-                  : () {
-                showDialog(
-                  context: context,
-                  builder: (BuildContext context) {
-                    return PopupConfirmAlumniData(
-                      alumniData: alumni, // Pass the entire AlumniData object
-                      onConfirm: () {
-                        Navigator.of(context).pop(); // Close confirmation dialog
-                        alumni.onClaim(); // Call the onClaim callback
-                      },
-                      onCancel: () {
-                        Navigator.of(context).pop(); // Close confirmation dialog
-                      },
-                    );
-                  },
+          child: BlocConsumer<ClaimAlumniBloc, ClaimAlumniState>(
+            listener: (context, state) {
+              if (state is ClaimAlumniSuccess) {
+                Navigator.pushReplacementNamed(context, '/home');
+                // Show a success message
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text('Data berhasil diklaim'),
+                    duration: Duration(seconds: 2),
+                  ),
                 );
-              },
-              label: alumni.isClaimed ? 'Data telah diklaim' : 'Klaim Data',
-              color: alumni.isClaimed ? AppColors.gray3 : AppColors.primaryColor,
-            ),
+                // navigate to home
+              } else if (state is ClaimAlumniError) {
+                // Show an error message
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content: Text('Gagal mengklaim data: ${state.exception.message}'),
+                    duration: const Duration(seconds: 2),
+                  ),
+                );
+              }
+            },
+            builder: (context, state) {
+              return SizedBox(
+                width: 200, // Set a fixed width for the button
+                child: ButtonWidget(
+                  onPressed: alumni.validated
+                      ? null
+                      : () {
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return PopupConfirmAlumniData(
+                                alumniData: alumni, // Pass the entire AlumniData object
+                                onConfirm: () {
+                                  Navigator.of(context).pop(); // Close confirmation dialog
+                                  context.read<ClaimAlumniBloc>().add(
+                                        ClaimAlumni(
+                                          claimAlumniBody: ClaimAlumniBody(
+                                            idAlumni: alumni.idAlumni,
+                                          ),
+                                        ),
+                                      );
+                                },
+                                onCancel: () {
+                                  Navigator.of(context).pop(); // Close confirmation dialog
+                                },
+                              );
+                            },
+                          );
+                        },
+                  isLoading: state is ClaimAlumniLoading,
+                  label: alumni.validated ? 'Data telah diklaim' : 'Klaim Data',
+                  color: alumni.validated ? AppColors.gray3 : AppColors.primaryColor,
+                ),
+              );
+            },
           ),
         ),
         const SizedBox(height: 16),
       ],
     );
   }
-
 
   Widget _buildDataRow(String label, String value, TextTheme textTheme) {
     return Padding(

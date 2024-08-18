@@ -1,8 +1,12 @@
+import 'package:alumni_hub_ft_uh/features/alumni/domain/models/alumni_model.dart';
+import 'package:alumni_hub_ft_uh/features/claim_alumni/bloc/get/get_alumnis_bloc.dart';
+import 'package:alumni_hub_ft_uh/features/claim_alumni/domain/models/get_alumnis_model.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:alumni_hub_ft_uh/constants/colors.dart';
 import 'package:alumni_hub_ft_uh/common/widgets/button/button_widget.dart';
 import 'package:alumni_hub_ft_uh/common/widgets/textField/text_field_widget.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
 import 'package:alumni_hub_ft_uh/features/auth/popup_claim_alumni_data.dart';
 
@@ -40,7 +44,7 @@ class _ClaimAlumniDataScreenState extends State<ClaimAlumniDataScreen> {
 
     if (picked != null) {
       setState(() {
-        _tanggalLahirController.text = DateFormat('dd/MM/yyyy').format(picked);
+        _tanggalLahirController.text = DateFormat('yyyy-MM-dd').format(picked);
       });
     }
   }
@@ -60,11 +64,11 @@ class _ClaimAlumniDataScreenState extends State<ClaimAlumniDataScreen> {
               Text(
                 'Klaim Data Alumni',
                 style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                  fontWeight: FontWeight.bold,
-                ),
+                      fontWeight: FontWeight.bold,
+                    ),
               ),
               const Divider(
-                thickness: 1.0,    // Thickness of the divider
+                thickness: 1.0, // Thickness of the divider
               ),
             ],
           ),
@@ -103,7 +107,6 @@ class _ClaimAlumniDataScreenState extends State<ClaimAlumniDataScreen> {
     );
   }
 
-
   void _showDataNotFoundPopup() {
     showDialog(
       context: context,
@@ -114,8 +117,8 @@ class _ClaimAlumniDataScreenState extends State<ClaimAlumniDataScreen> {
               title: Text(
                 'Data Alumni Tidak Ditemukan',
                 style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                  fontWeight: FontWeight.bold,
-                ),
+                      fontWeight: FontWeight.bold,
+                    ),
               ),
               content: Column(
                 mainAxisSize: MainAxisSize.min, // To make sure the column height adapts to content
@@ -141,11 +144,12 @@ class _ClaimAlumniDataScreenState extends State<ClaimAlumniDataScreen> {
                               TextSpan(
                                 text: 'Syarat dan Ketentuan',
                                 style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                                  color: AppColors.primaryColor,
-                                  decoration: TextDecoration.underline,
-                                  decorationColor: Colors.red, // Set the color of the underline
-                                  decorationThickness: 2.0, // Adjust the thickness of the underline if needed
-                                ),
+                                      color: AppColors.primaryColor,
+                                      decoration: TextDecoration.underline,
+                                      decorationColor: Colors.red, // Set the color of the underline
+                                      decorationThickness:
+                                          2.0, // Adjust the thickness of the underline if needed
+                                    ),
                                 recognizer: TapGestureRecognizer()
                                   ..onTap = () {
                                     Navigator.pushNamed(context, '/license');
@@ -177,13 +181,14 @@ class _ClaimAlumniDataScreenState extends State<ClaimAlumniDataScreen> {
                       child: ButtonWidget(
                         onPressed: _isCheckboxChecked
                             ? () {
-                          Navigator.of(context).pop(); // Close the dialog
-                          Navigator.pushNamed(context, '/insert_alumni_data'); // Navigate to InsertAlumniDataScreen
-                        }
+                                Navigator.of(context).pop(); // Close the dialog
+                                Navigator.pushNamed(context,
+                                    '/insert_alumni_data'); // Navigate to InsertAlumniDataScreen
+                              }
                             : null, // Disable button when checkbox is unchecked
                         label: 'Isi Data',
                         color: _isCheckboxChecked ? Theme.of(context).primaryColor : Colors.grey,
-                          // Change color based on checkbox
+                        // Change color based on checkbox
                       ),
                     ),
                   ],
@@ -195,10 +200,6 @@ class _ClaimAlumniDataScreenState extends State<ClaimAlumniDataScreen> {
       },
     );
   }
-
-
-
-
 
   // Add list of alumni data
   List<AlumniData> alumniDataList = [
@@ -237,13 +238,13 @@ class _ClaimAlumniDataScreenState extends State<ClaimAlumniDataScreen> {
     ),
   ];
 
-  void _showPopupClaimAlumniData() {
+  void _showPopupClaimAlumniData(List<AlumniModel> alumniDataList) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
         return PopupClaimAlumniData(
           alumniDataList: alumniDataList,
-          onBack: () { /* Optional callback */ },
+          onBack: () {/* Optional callback */},
         );
       },
     );
@@ -316,24 +317,57 @@ class _ClaimAlumniDataScreenState extends State<ClaimAlumniDataScreen> {
                       controller: _nimController,
                     ),
                     const SizedBox(height: 24),
-                    SizedBox(
-                      width: double.infinity,
-                      child: ButtonWidget(
-                        onPressed: _showPopupClaimAlumniData,
-                        label: 'Klaim Data',
-                        color: AppColors.primaryColor,
-                      ),
+                    BlocConsumer<GetAlumnisBloc, GetAlumnisState>(
+                      listener: (context, state) {
+                        if (state is GetAlumnisSuccess) {
+                          if (state.getAlumnisResponse.data.isNotEmpty) {
+                            _showPopupClaimAlumniData(state.getAlumnisResponse.data);
+                          } else {
+                            _showDataNotFoundPopup();
+                          }
+                        } else if (state is GetAlumnisError) {
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(state.exception.message),
+                              backgroundColor: Colors.red,
+                            ),
+                          );
+                        }
+                      },
+                      builder: (context, state) {
+                        return SizedBox(
+                          width: double.infinity,
+                          child: ButtonWidget(
+                            // onPressed: _showPopupClaimAlumniData,
+                            onPressed: () {
+                              print(_tanggalLahirController.text);
+                              context.read<GetAlumnisBloc>().add(
+                                    GetAlumnis(
+                                      getAlumnisBody: GetAlumnisBody(
+                                        name: _namaLengkapController.text,
+                                        tglLahir: _tanggalLahirController.text,
+                                        nim: _nimController.text,
+                                      ),
+                                    ),
+                                  );
+                            },
+                            label: 'Klaim Data',
+                            isLoading: state is GetAlumnisLoading,
+                            color: AppColors.primaryColor,
+                          ),
+                        );
+                      },
                     ),
                     const SizedBox(height: 12),
-                    SizedBox(
-                      width: double.infinity,
-                      child: ButtonWidget(
-                        onPressed: _showDataNotFoundPopup, // Show the data not found popup
-                        label: 'Data tidak ditemukan',
-                        color: AppColors.primaryColor,
-                      ),
-                    ),
-                    const SizedBox(height: 12),
+                    // SizedBox(
+                    //   width: double.infinity,
+                    //   child: ButtonWidget(
+                    //     onPressed: _showDataNotFoundPopup, // Show the data not found popup
+                    //     label: 'Data tidak ditemukan',
+                    //     color: AppColors.primaryColor,
+                    //   ),
+                    // ),
+                    // const SizedBox(height: 12),
                     SizedBox(
                       width: double.infinity,
                       child: ButtonWidget(

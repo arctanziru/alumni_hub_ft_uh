@@ -33,6 +33,7 @@ mixin _$EventModel {
   String get lokasiEvent => throw _privateConstructorUsedError;
   int get kuota => throw _privateConstructorUsedError;
   int get peserta => throw _privateConstructorUsedError;
+  @JsonKey(name: 'is_registered')
   bool? get isRegistered => throw _privateConstructorUsedError;
   @JsonKey(name: 'created_at')
   DateTime get createdAt => throw _privateConstructorUsedError;
@@ -62,7 +63,7 @@ abstract class $EventModelCopyWith<$Res> {
       @JsonKey(name: 'lokasi_event') String lokasiEvent,
       int kuota,
       int peserta,
-      bool? isRegistered,
+      @JsonKey(name: 'is_registered') bool? isRegistered,
       @JsonKey(name: 'created_at') DateTime createdAt,
       @JsonKey(name: 'updated_at') DateTime updatedAt});
 }
@@ -170,7 +171,7 @@ abstract class _$$EventModelImplCopyWith<$Res>
       @JsonKey(name: 'lokasi_event') String lokasiEvent,
       int kuota,
       int peserta,
-      bool? isRegistered,
+      @JsonKey(name: 'is_registered') bool? isRegistered,
       @JsonKey(name: 'created_at') DateTime createdAt,
       @JsonKey(name: 'updated_at') DateTime updatedAt});
 }
@@ -271,7 +272,7 @@ class _$EventModelImpl implements _EventModel {
       @JsonKey(name: 'lokasi_event') required this.lokasiEvent,
       required this.kuota,
       required this.peserta,
-      this.isRegistered,
+      @JsonKey(name: 'is_registered') required this.isRegistered,
       @JsonKey(name: 'created_at') required this.createdAt,
       @JsonKey(name: 'updated_at') required this.updatedAt});
 
@@ -302,6 +303,7 @@ class _$EventModelImpl implements _EventModel {
   @override
   final int peserta;
   @override
+  @JsonKey(name: 'is_registered')
   final bool? isRegistered;
   @override
   @JsonKey(name: 'created_at')
@@ -385,7 +387,7 @@ abstract class _EventModel implements EventModel {
           @JsonKey(name: 'lokasi_event') required final String lokasiEvent,
           required final int kuota,
           required final int peserta,
-          final bool? isRegistered,
+          @JsonKey(name: 'is_registered') required final bool? isRegistered,
           @JsonKey(name: 'created_at') required final DateTime createdAt,
           @JsonKey(name: 'updated_at') required final DateTime updatedAt}) =
       _$EventModelImpl;
@@ -417,6 +419,7 @@ abstract class _EventModel implements EventModel {
   @override
   int get peserta;
   @override
+  @JsonKey(name: 'is_registered')
   bool? get isRegistered;
   @override
   @JsonKey(name: 'created_at')

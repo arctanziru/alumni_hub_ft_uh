@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:alumni_hub_ft_uh/features/event/domain/event_repository.dart';
 import 'package:alumni_hub_ft_uh/features/event/domain/models/event_get_many_model.dart';
+import 'package:alumni_hub_ft_uh/features/event/domain/models/event_get_one_model.dart';
 import 'package:alumni_hub_ft_uh/features/event/domain/models/event_model.dart';
 import 'package:alumni_hub_ft_uh/middleware/custom_exception.dart';
 import 'package:bloc/bloc.dart';
@@ -20,8 +21,8 @@ class EventBloc extends Bloc<EventEvent, EventState> {
     on<EventFetched>(_onEventFetched);
     on<EventRefreshed>(_onEventRefreshed);
     on<EventNextPage>(_onEventNextPage);
-    on<EventRegister>(_onEventRegister);
-    on<EventUnregister>(_onEventUnregister);
+    on<EventToggleRegister>(_onEventToggleRegister);
+    on<EventGetOne>(_onEventGetOne);
   }
 
   FutureOr<void> _onEventFetched(EventFetched event, Emitter<EventState> emit) {
@@ -72,26 +73,28 @@ class EventBloc extends Bloc<EventEvent, EventState> {
         .getNextPage();
   }
 
-  FutureOr<void> _onEventRegister(
-      EventRegister event, Emitter<EventState> emit) {
-    emit(state.copyWith(
-        events: state.events
-            .map((e) =>
-                e.idEvent == event.idEvent ? e.copyWith(isRegistered: true) : e)
-            .toList()));
-
-    add(EventRefreshed());
+  FutureOr<void> _onEventGetOne(EventGetOne event, Emitter<EventState> emit) {
+    return emit.forEach<QueryState<EventGetOneModelResponse>>(
+        _eventRepository.getEvent(event.idEvent).stream, onData: (queryState) {
+      return state.copyWith(
+        selectedEventStatus: queryState.status == QueryStatus.loading
+            ? EventStatus.loading
+            : queryState.status == QueryStatus.error
+                ? EventStatus.error
+                : EventStatus.loaded,
+        selectedEvent: queryState.data?.data,
+        error: CustomException(queryState.error?.message ?? 'Unknown error'),
+      );
+    });
   }
 
-  FutureOr<void> _onEventUnregister(
-      EventUnregister event, Emitter<EventState> emit) {
-    emit(state.copyWith(
-        events: state.events
-            .map((e) => e.idEvent == event.idEvent
-                ? e.copyWith(isRegistered: false)
-                : e)
-            .toList()));
+  FutureOr<void> _onEventToggleRegister(
+      EventToggleRegister event, Emitter<EventState> emit) async {
+    final mutation = _eventRepository.toggleRegisterEvent();
+    await mutation.mutate(event.idEvent);
 
-    add(EventRefreshed());
+    _eventRepository.getEvent(event.idEvent).refetch();
+
+    add(EventGetOne(event.idEvent));
   }
 }

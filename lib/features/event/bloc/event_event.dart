@@ -13,14 +13,14 @@ class EventRefreshed extends EventEvent {
 
 class EventNextPage extends EventEvent {}
 
-class EventRegister extends EventEvent {
+class EventGetOne extends EventEvent {
   final int idEvent;
 
-  EventRegister(this.idEvent);
+  EventGetOne(this.idEvent);
 }
 
-class EventUnregister extends EventEvent {
+class EventToggleRegister extends EventEvent {
   final int idEvent;
 
-  EventUnregister(this.idEvent);
+  EventToggleRegister(this.idEvent);
 }

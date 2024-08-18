@@ -16,7 +16,7 @@ class EventModel with _$EventModel {
     @JsonKey(name: 'lokasi_event') required String lokasiEvent,
     required int kuota,
     required int peserta,
-    bool? isRegistered,
+    @JsonKey(name: 'is_registered') required bool? isRegistered,
     @JsonKey(name: 'created_at') required DateTime createdAt,
     @JsonKey(name: 'updated_at') required DateTime updatedAt,
   }) = _EventModel;

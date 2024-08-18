@@ -1,13 +1,14 @@
 import 'package:alumni_hub_ft_uh/features/event/data/event_remote_data_source.dart';
 import 'package:alumni_hub_ft_uh/features/event/domain/models/event_get_many_model.dart';
+import 'package:alumni_hub_ft_uh/features/event/domain/models/event_get_one_model.dart';
 import 'package:cached_query/cached_query.dart';
 import 'package:injectable/injectable.dart';
 
 abstract class EventRepository {
   InfiniteQuery<EventGetManyModelResponse, int> getEvents(
       EventGetManyParams? params);
-  Mutation<void, int> registerEvent();
-  Mutation<void, int> unregisterEvent();
+  Mutation<EventGetOneModelResponse, int> toggleRegisterEvent();
+  Query<EventGetOneModelResponse> getEvent(int eventId);
 }
 
 @LazySingleton(as: EventRepository)
@@ -41,20 +42,19 @@ class EventRepositoryImpl implements EventRepository {
   }
 
   @override
-  Mutation<void, int> registerEvent() {
-    return Mutation<void, int>(
+  Mutation<EventGetOneModelResponse, int> toggleRegisterEvent() {
+    return Mutation<EventGetOneModelResponse, int>(
       key: ['register_event'],
-      queryFn: (idEvent) => _eventRemoteDataSource.registerEvent(idEvent),
-      refetchQueries: ['events'],
+      queryFn: (idEvent) => _eventRemoteDataSource.toggleRegisterEvent(idEvent),
+      refetchQueries: ['event'],
     );
   }
 
   @override
-  Mutation<void, int> unregisterEvent() {
-    return Mutation<void, int>(
-      key: ['unregister_event'],
-      queryFn: (idEvent) => _eventRemoteDataSource.unregisterEvent(idEvent),
-      refetchQueries: ['events'],
+  Query<EventGetOneModelResponse> getEvent(int eventId) {
+    return Query<EventGetOneModelResponse>(
+      key: ['event', eventId],
+      queryFn: () => _eventRemoteDataSource.getEvent(eventId),
     );
   }
 }

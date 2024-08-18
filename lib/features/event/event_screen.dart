@@ -50,9 +50,9 @@ class _EventScreenState extends State<EventScreen> {
                     'Daftar Event',
                     textAlign: TextAlign.left,
                     style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 24,
-                    ),
+                          fontWeight: FontWeight.bold,
+                          fontSize: 24,
+                        ),
                   ),
                 ],
               ),
@@ -83,7 +83,6 @@ class _EventScreenState extends State<EventScreen> {
                                   imageUrl: 'Loading...',
                                   peserta: 0,
                                   kuota: 0,
-
                                 ),
                                 const SizedBox(height: 10),
                               ],
@@ -97,49 +96,51 @@ class _EventScreenState extends State<EventScreen> {
                       onRefresh: () {
                         return Future.delayed(
                           Duration.zero,
-                              () {
+                          () {
                             context.read<EventBloc>().add(EventRefreshed());
                           },
                         );
                       },
                       child: state.events.isEmpty
                           ? Center(
-                        child: Text(
-                          'Tidak ada event',
-                          style: Theme.of(context).textTheme.bodyLarge,
-                        ),
-                      )
-                          : ListView.builder(
-                        controller: _scrollController,
-                        itemCount: state.events.length,
-                        itemBuilder: (context, index) {
-                          final event = state.events[index];
-                          return Column(
-                            children: [
-                              CardEventWidget(
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => EventDetailScreen(
-                                        event: event,
-                                      ),
-                                    ),
-                                  );
-                                },
-                                title: event.judul,
-                                location: event.lokasiEvent,
-                                date: event.tglEvent,
-                                description: event.konten,
-                                imageUrl: '${dotenv.get('STORAGE_URL')}${event.gambar}',
-                                peserta: event.peserta,
-                                kuota: event.kuota,
+                              child: Text(
+                                'Tidak ada event',
+                                style: Theme.of(context).textTheme.bodyLarge,
                               ),
-                              const SizedBox(height: 10),
-                            ],
-                          );
-                        },
-                      ),
+                            )
+                          : ListView.builder(
+                              controller: _scrollController,
+                              itemCount: state.events.length,
+                              itemBuilder: (context, index) {
+                                final event = state.events[index];
+                                return Column(
+                                  children: [
+                                    CardEventWidget(
+                                      onTap: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                EventDetailScreen(
+                                              eventId: event.idEvent,
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                      title: event.judul,
+                                      location: event.lokasiEvent,
+                                      date: event.tglEvent,
+                                      description: event.konten,
+                                      imageUrl:
+                                          '${dotenv.get('STORAGE_URL')}${event.gambar}',
+                                      peserta: event.peserta,
+                                      kuota: event.kuota,
+                                    ),
+                                    const SizedBox(height: 10),
+                                  ],
+                                );
+                              },
+                            ),
                     );
                   },
                 ),

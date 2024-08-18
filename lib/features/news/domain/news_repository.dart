@@ -85,6 +85,7 @@ class NewsRepositoryImpl implements NewsRepository {
           },
         );
       },
+      
     );
   }
 }

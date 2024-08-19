@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:alumni_hub_ft_uh/common/utils/ui_helper.dart';
 import 'package:alumni_hub_ft_uh/common/widgets/bottomBar/bottom_bar_widget.dart';
 import 'package:alumni_hub_ft_uh/common/widgets/button/button_widget.dart';
@@ -6,6 +8,8 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_gallery_saver/image_gallery_saver.dart';
+import 'package:open_filex/open_filex.dart';
+import 'package:path_provider/path_provider.dart';
 
 import '../../common/widgets/appBar/app_bar_search_widget.dart';
 
@@ -29,8 +33,7 @@ class _DonationScreenState extends State<DonationScreen> {
       backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       builder: (BuildContext context) {
         return Padding(
-          padding: const EdgeInsets.only(
-              top: 60.0, bottom: 60.0, left: 32.0, right: 32.0),
+          padding: const EdgeInsets.only(top: 60.0, bottom: 60.0, left: 32.0, right: 32.0),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -41,10 +44,7 @@ class _DonationScreenState extends State<DonationScreen> {
                 children: [
                   Text(
                     'ENDOWMENT FUND',
-                    style: Theme.of(context)
-                        .textTheme
-                        .bodyLarge
-                        ?.copyWith(color: Colors.grey),
+                    style: Theme.of(context).textTheme.bodyLarge?.copyWith(color: Colors.grey),
                   ),
                   IconButton(
                     icon: const Icon(Icons.close),
@@ -57,10 +57,7 @@ class _DonationScreenState extends State<DonationScreen> {
               const SizedBox(height: 4),
               Text(
                 'Dana Abadi',
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyLarge
-                    ?.copyWith(fontWeight: FontWeight.bold),
+                style: Theme.of(context).textTheme.bodyLarge?.copyWith(fontWeight: FontWeight.bold),
               ),
               const Divider(
                 height: 16,
@@ -68,10 +65,8 @@ class _DonationScreenState extends State<DonationScreen> {
               const SizedBox(height: 8),
               Text(
                 'Apa itu Dana Abadi?',
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyMedium
-                    ?.copyWith(fontWeight: FontWeight.bold),
+                style:
+                    Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold),
               ),
               const SizedBox(height: 8),
               Column(
@@ -82,8 +77,7 @@ class _DonationScreenState extends State<DonationScreen> {
                     style: Theme.of(context).textTheme.bodySmall?.copyWith(
                           height: 1.5, // Adjust line height as needed
                         ),
-                    textAlign:
-                        TextAlign.justify, // Optional: for text justification
+                    textAlign: TextAlign.justify, // Optional: for text justification
                   ),
                   const SizedBox(height: 8.0), // Set spacing below
                 ],
@@ -110,16 +104,33 @@ class _DonationScreenState extends State<DonationScreen> {
 
   Future<void> _downloadPdf() async {
     try {
-      final ByteData byteData =
-          await rootBundle.load('assets/files/brosur-dana-abadi.pdf');
+      // Get the directory to save the file (Downloads directory)
+      late Directory filePath;
 
-      final Uint8List pdfBytes = byteData.buffer.asUint8List();
+      if (Platform.isAndroid) {
+        filePath = Directory('/storage/emulated/0/Download/brosur-dana-abadi.pdf');
+      } else {
+        final directory = await getApplicationDocumentsDirectory();
+        filePath = Directory('${directory.path}/brosur-dana-abadi.pdf');
+      }
 
-      await DocumentFileSavePlus()
-          .saveFile(pdfBytes, "brosur-dana-abadi.pdf", "appliation/pdf");
-      showToastMessage(message: 'PDF telah diunduh di folder Download');
+      // Check if the file already exists
+      if (await filePath.exists()) {
+        showToastMessage(message: 'File sudah ada, membuka file...');
+        OpenFilex.open(filePath.path);
+      } else {
+        // Load the PDF file from assets
+        final ByteData byteData = await rootBundle.load('assets/files/brosur-dana-abadi.pdf');
+        final Uint8List pdfBytes = byteData.buffer.asUint8List();
+
+        // Save the file to the Downloads directory
+        await DocumentFileSavePlus().saveFile(pdfBytes, "brosur-dana-abadi.pdf", "application/pdf");
+
+        showToastMessage(message: 'PDF telah diunduh di folder Download');
+
+        OpenFilex.open(filePath.path);
+      }
     } catch (e) {
-      print(e);
       showToastMessage(message: 'Gagal mengunduh PDF');
     }
   }
@@ -136,7 +147,6 @@ class _DonationScreenState extends State<DonationScreen> {
         message: 'QR Code berhasil diunduh',
       );
     } catch (e) {
-      print(e);
       showToastMessage(
         message: 'Gagal mengunduh QR Code',
       );
@@ -162,15 +172,13 @@ class _DonationScreenState extends State<DonationScreen> {
                   padding: const EdgeInsets.all(16.0),
                   decoration: BoxDecoration(
                     color: Colors.white,
-                    borderRadius:
-                        BorderRadius.circular(12.0), // Rounded corners
+                    borderRadius: BorderRadius.circular(12.0), // Rounded corners
                     boxShadow: [
                       BoxShadow(
                         color: Colors.grey.withOpacity(0.3),
                         spreadRadius: 2,
                         blurRadius: 5,
-                        offset:
-                            const Offset(0, 3), // Changes position of shadow
+                        offset: const Offset(0, 3), // Changes position of shadow
                       ),
                     ],
                   ),
@@ -182,10 +190,8 @@ class _DonationScreenState extends State<DonationScreen> {
                         style: Theme.of(context).textTheme.titleLarge,
                       ),
                       const SizedBox(height: 14),
-                      Text('NMID: ID1023255148950',
-                          style: Theme.of(context).textTheme.bodyMedium),
-                      Text('TID',
-                          style: Theme.of(context).textTheme.bodyMedium),
+                      Text('NMID: ID1023255148950', style: Theme.of(context).textTheme.bodyMedium),
+                      Text('TID', style: Theme.of(context).textTheme.bodyMedium),
                       const SizedBox(height: 11),
                       Expanded(
                           child: Image.asset(
@@ -201,8 +207,7 @@ class _DonationScreenState extends State<DonationScreen> {
                       const SizedBox(height: 8),
                       Text('Cek aplikasi penyelenggara',
                           style: Theme.of(context).textTheme.bodySmall),
-                      Text('di: www.aspi-qris.id',
-                          style: Theme.of(context).textTheme.bodySmall),
+                      Text('di: www.aspi-qris.id', style: Theme.of(context).textTheme.bodySmall),
                     ],
                   ),
                 ),
@@ -241,25 +246,16 @@ class _DonationScreenState extends State<DonationScreen> {
                     RichText(
                       text: TextSpan(
                         text: 'Ketahui alokasi dana anda disini ',
-                        style: Theme.of(context)
-                            .textTheme
-                            .bodySmall
-                            ?.copyWith(color: Colors.black),
+                        style: Theme.of(context).textTheme.bodySmall?.copyWith(color: Colors.black),
                         children: [
                           TextSpan(
                             text: 'baca ketentuan donasi',
-                            style: Theme.of(context)
-                                .textTheme
-                                .bodySmall
-                                ?.copyWith(
+                            style: Theme.of(context).textTheme.bodySmall?.copyWith(
                                   color: Colors.red,
-                                  decoration:
-                                      TextDecoration.underline, // Add underline
-                                  decorationColor:
-                                      Colors.red, // Set underline color
+                                  decoration: TextDecoration.underline, // Add underline
+                                  decorationColor: Colors.red, // Set underline color
                                 ),
-                            recognizer: TapGestureRecognizer()
-                              ..onTap = _onReadTermsClicked,
+                            recognizer: TapGestureRecognizer()..onTap = _onReadTermsClicked,
                           ),
                         ],
                       ),

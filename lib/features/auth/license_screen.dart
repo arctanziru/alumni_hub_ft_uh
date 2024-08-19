@@ -1,6 +1,6 @@
 import 'package:alumni_hub_ft_uh/features/auth/sign_up_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:alumni_hub_ft_uh/common/widgets/button/button_widget.dart'; // Import yang benar
+import 'package:alumni_hub_ft_uh/common/widgets/button/button_widget.dart';
 
 class LicenseScreen extends StatefulWidget {
   static const route = "/license";
@@ -40,10 +40,9 @@ class _LicenseScreenState extends State<LicenseScreen> {
                   Text(
                     'Syarat dan Ketentuan',
                     style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                          color: Colors.black,
-                          fontWeight:
-                              FontWeight.bold, // Set font weight to bold
-                        ),
+                      color: Colors.black,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                   Text(
                     'terakhir di-update: 5/12/2006',
@@ -57,40 +56,63 @@ class _LicenseScreenState extends State<LicenseScreen> {
             ),
           ],
         ),
-        toolbarHeight: 100, // Adjust height as needed
+        toolbarHeight: 100,
       ),
-      body: Padding(
+      body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Expanded(
-              child: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    klausaSection(
-                      'Klausa 1',
-                      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer sit amet ex fermentum sapien ultrices ornare sit amet non nibh. Sed ullamcorper massa consectetur lacus efficitur facilisis. Sed tincidunt vestibulum semper. Vestibulum in lobortis metus. Suspendisse sed sem ut justo mattis tempor elementum sed quam. Etiam non justo nec lorem bibendum egestas vitae a metus. Ut sit amet elit vel est rhoncus porta ut sed sapien. Vestibulum a pharetra neque. Quisque commodo, augue eu egestas cursus, est augue pellentesque dui, quis sollicitudin dolor ante ut ex. Aenean pharetra non sapien at blandit. Phasellus a ex arcu. Integer vitae ornare nulla, vitae ornare sem. Proin vulputate, est ut auctor eleifend, lorem justo ullamcorper arcu, quis dignissim lorem massa vel enim. Aenean maximus eu quam non fermentum.',
-                    ),
-                    const SizedBox(height: 16),
-                    klausaSection(
-                      'Klausa 2',
-                      'Quisque commodo, augue eu egestas cursus, est augue pellentesque dui, quis sollicitudin dolor ante ut ex. Aenean pharetra non sapien at blandit. Phasellus a ex arcu. Integer vitae ornare nulla, vitae ornare sem. Proin vulputate, est ut auctor eleifend, lorem justo ullamcorper arcu, quis dignissim lorem massa vel enim. Aenean maximus eu quam non fermentum.',
-                    ),
-                    const SizedBox(height: 16),
-                    klausaSection(
-                      'Klausa 3',
-                      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat. Aenean faucibus nibh et justo cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus tristique posuere.',
-                    ),
-                    const SizedBox(height: 16),
-                    klausaSection(
-                      'Klausa 4',
-                      'Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec id elit non mi porta gravida at eget metus. Sed posuere consectetur est at lobortis. Aenean lacinia bibendum nulla sed consectetur.',
-                    ),
-                  ],
-                ),
+            const SizedBox(height: 8),
+            Center(
+              child: Text(
+                'Dengan menggunakan aplikasi ini, Anda menyetujui syarat dan ketentuan berikut:',
+                textAlign: TextAlign.center,
+                style: Theme.of(context).textTheme.bodyLarge,
               ),
+            ),
+            const SizedBox(height: 16),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                bulletSection(
+                  'Penggunaan Aplikasi',
+                  'Aplikasi ini hanya untuk alumni Fakultas Teknik Universitas Hasanuddin. Pengguna wajib mematuhi aturan penggunaan dan tidak menyalahgunakan fitur aplikasi.',
+                ),
+                const SizedBox(height: 16),
+                bulletSection(
+                  'Pendaftaran dan Keamanan Akun',
+                  'Pengguna wajib mendaftar dengan data yang akurat. Keamanan akun menjadi tanggung jawab pengguna.',
+                ),
+                const SizedBox(height: 16),
+                bulletSection(
+                  'Kebijakan Privasi',
+                  'Data pribadi pengguna dilindungi dan digunakan sesuai kebijakan privasi. Data tidak akan dibagikan kepada pihak ketiga tanpa izin pengguna.',
+                ),
+                const SizedBox(height: 16),
+                bulletSection(
+                  'Pembatasan Tanggung Jawab',
+                  'Pengelola tidak bertanggung jawab atas kerugian yang timbul dari penggunaan aplikasi, termasuk transaksi dan informasi yang disediakan.',
+                ),
+                const SizedBox(height: 16),
+                bulletSection(
+                  'Perubahan Syarat dan Ketentuan',
+                  'Pengelola berhak mengubah syarat dan ketentuan ini kapan saja tanpa pemberitahuan.',
+                ),
+                const SizedBox(height: 16),
+                bulletSection(
+                  'Hukum yang Berlaku',
+                  'Syarat dan ketentuan ini tunduk pada hukum yang berlaku di Indonesia.',
+                ),
+                const SizedBox(height: 16),
+                Center(
+                  child: Text(
+                    'Dengan menggunakan aplikasi ini, Anda dianggap telah menyetujui syarat dan ketentuan di atas.',
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context).textTheme.bodyLarge,
+                  ),
+                ),
+              ],
             ),
             const SizedBox(height: 16),
             SizedBox(
@@ -107,25 +129,30 @@ class _LicenseScreenState extends State<LicenseScreen> {
     );
   }
 
-  Widget klausaSection(String title, String content) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          title,
-          style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                fontWeight: FontWeight.bold, // Set font weight to bold
-              ),
+  Widget bulletSection(String title, String content) {
+    return RichText(
+      text: TextSpan(
+        style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+          color: Colors.black,
         ),
-        const SizedBox(height: 8),
-        Text(
-          content,
-          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                height: 1.5, // Adjust line height as needed
-              ),
-          textAlign: TextAlign.justify, // Justify text alignment
-        ),
-      ],
+        children: [
+          const WidgetSpan(
+            alignment: PlaceholderAlignment.middle,
+            child: Icon(Icons.circle, size: 6, color: Colors.black),
+          ),
+          const WidgetSpan(
+            alignment: PlaceholderAlignment.middle,
+            child: SizedBox(width: 8),
+          ),
+          TextSpan(
+            text: '$title: ',
+            style: Theme.of(context).textTheme.bodyLarge?.copyWith(
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          TextSpan(text: content),
+        ],
+      ),
     );
   }
 }

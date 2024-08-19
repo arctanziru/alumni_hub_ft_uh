@@ -1,4 +1,4 @@
-import 'package:alumni_hub_ft_uh/features/auth/sign_up_screen.dart';
+import 'package:alumni_hub_ft_uh/features/auth/insert_alumni_data_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:alumni_hub_ft_uh/common/widgets/button/button_widget.dart';
 
@@ -119,7 +119,7 @@ class _LicenseScreenState extends State<LicenseScreen> {
               width: double.infinity,
               child: ButtonWidget(
                 onPressed: () =>
-                    Navigator.pushNamed(context, SignUpScreen.route),
+                    Navigator.pushNamed(context, InsertAlumniDataScreen.route),
                 label: 'Setuju dan Lanjutkan',
               ),
             ),

@@ -111,56 +111,6 @@ class _AlumniScreenState extends State<AlumniScreen> {
                       final angkatan =
                           context.read<AlumniAngkatanBloc>().angkatan;
 
-                      List<Widget> children = [];
-
-                      if (angkatan == 'all') {
-                        children.add(
-                          CardAlumniWidget(
-                            label: 'Semua Angkatan',
-                            subtitle: '',
-                            onTap: () {
-                              locator<AppNavigation>().navigateTo(
-                                AlumniSearchScreen.route,
-                                arguments: AlumniJurusanParams(
-                                  angkatan: 'all',
-                                  search:
-                                      context.read<AlumniAngkatanBloc>().search,
-                                ),
-                              );
-                            },
-                          ),
-                        );
-                        children.add(const SizedBox(height: 10));
-                      }
-
-                      children.add(
-                        ListView.separated(
-                          shrinkWrap: true,
-                          itemCount: state.alumniAngkatanResponse.data.length,
-                          separatorBuilder: (context, index) =>
-                              const SizedBox(height: 10),
-                          itemBuilder: (context, index) {
-                            final angkatan =
-                                state.alumniAngkatanResponse.data[index];
-                            return CardAlumniWidget(
-                              label: 'Angkatan ${angkatan.angkatan}',
-                              subtitle: '${angkatan.total} Alumni',
-                              onTap: () {
-                                locator<AppNavigation>().navigateTo(
-                                  AlumniSearchScreen.route,
-                                  arguments: AlumniJurusanParams(
-                                    angkatan: angkatan.angkatan,
-                                    search: context
-                                        .read<AlumniAngkatanBloc>()
-                                        .search,
-                                  ),
-                                );
-                              },
-                            );
-                          },
-                        ),
-                      );
-
                       return RefreshIndicator(
                         onRefresh: () async {
                           context
@@ -168,8 +118,57 @@ class _AlumniScreenState extends State<AlumniScreen> {
                               .add(AlumniEventGetAngkatan());
                         },
                         child: Column(
-                          children: children,
+                          children: [
+                            if (angkatan == 'all')
+                              CardAlumniWidget(
+                                label: 'Semua Angkatan',
+                                subtitle: '',
+                                onTap: () {
+                                  locator<AppNavigation>().navigateTo(
+                                    AlumniSearchScreen.route,
+                                    arguments: AlumniJurusanParams(
+                                      angkatan: 'all',
+                                      search: context
+                                          .read<AlumniAngkatanBloc>()
+                                          .search,
+                                    ),
+                                  );
+                                },
+                              ),
+                            ...List.generate(
+                              state.alumniAngkatanResponse.data.length,
+                              (index) {
+                                final angkatan =
+                                    state.alumniAngkatanResponse.data[index];
+                                return Padding(
+                                  padding: const EdgeInsets.only(top: 10),
+                                  child: CardAlumniWidget(
+                                    label: 'Angkatan ${angkatan.angkatan}',
+                                    subtitle: '${angkatan.total} Alumni',
+                                    onTap: () {
+                                      locator<AppNavigation>().navigateTo(
+                                        AlumniSearchScreen.route,
+                                        arguments: AlumniJurusanParams(
+                                          angkatan: angkatan.angkatan,
+                                          search: context
+                                              .read<AlumniAngkatanBloc>()
+                                              .search,
+                                        ),
+                                      );
+                                    },
+                                  ),
+                                );
+                              },
+                            )
+                          ],
                         ),
+                      );
+                    }
+
+                    if (state is AlumniAngkatanSuccess &&
+                        state.alumniAngkatanResponse.data.isEmpty) {
+                      return const Center(
+                        child: Text('Data tidak ditemukan'),
                       );
                     }
 

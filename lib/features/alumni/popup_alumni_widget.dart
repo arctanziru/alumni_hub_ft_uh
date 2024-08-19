@@ -34,8 +34,8 @@ class PopupAlumniWidgetState extends State<PopupAlumniWidget> with RouteAware {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
-    List<String> years = List.generate(
-        DateTime.now().year - 1990 + 1, (index) => (1990 + index).toString());
+    List<String> years = List.generate(DateTime.now().year - 1975 + 1,
+        (index) => (DateTime.now().year - index).toString());
 
     return Container(
       padding: const EdgeInsets.fromLTRB(16.0, 48.0, 16.0, 48.0),
@@ -150,6 +150,7 @@ class PopupAlumniWidgetState extends State<PopupAlumniWidget> with RouteAware {
                   filled: true,
                   fillColor: Colors.white,
                 ),
+                menuMaxHeight: 300,
                 items: years.map((String year) {
                   return DropdownMenuItem<String>(
                     value: year,

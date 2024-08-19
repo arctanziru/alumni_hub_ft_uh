@@ -50,9 +50,9 @@ class _VacancyScreenState extends State<VacancyScreen> {
                     'Lowongan Kerja',
                     textAlign: TextAlign.left,
                     style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 24,
-                    ),
+                          fontWeight: FontWeight.bold,
+                          fontSize: 24,
+                        ),
                   ),
                 ],
               ),
@@ -97,50 +97,53 @@ class _VacancyScreenState extends State<VacancyScreen> {
                       onRefresh: () {
                         return Future.delayed(
                           Duration.zero,
-                              () {
+                          () {
                             context.read<VacancyBloc>().add(VacancyRefreshed());
                           },
                         );
                       },
                       child: state.vacancies.isEmpty
                           ? Center(
-                        child: Text(
-                          'No data found',
-                          style: Theme.of(context).textTheme.bodyLarge,
-                        ),
-                      )
-                          : ListView.builder(
-                        controller: _scrollController,
-                        itemCount: state.vacancies.length,
-                        itemBuilder: (context, index) {
-                          final vacancy = state.vacancies[index];
-                          return Column(
-                            children: [
-                              CardVacancyWidget(
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => VacancyDetailScreen(
-                                        vacancy: vacancy,
-                                      ),
-                                    ),
-                                  );
-                                },
-                                title: vacancy.judul,
-                                company: vacancy.perusahaan.namaPerusahaan,
-                                type: vacancy.role,
-                                location: vacancy.lokasi,
-                                experience: vacancy.pengalamanKerja,
-                                postedAt: vacancy.createdAt,
-                                description: vacancy.konten,
-                                companyImgUrl: '${dotenv.get('STORAGE_URL')}${vacancy.perusahaan.logo}',
+                              child: Text(
+                                'No data found',
+                                style: Theme.of(context).textTheme.bodyLarge,
                               ),
-                              const SizedBox(height: 10),
-                            ],
-                          );
-                        },
-                      ),
+                            )
+                          : ListView.builder(
+                              controller: _scrollController,
+                              itemCount: state.vacancies.length,
+                              itemBuilder: (context, index) {
+                                final vacancy = state.vacancies[index];
+                                return Column(
+                                  children: [
+                                    CardVacancyWidget(
+                                      onTap: () {
+                                        Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                VacancyDetailScreen(
+                                              vacancy: vacancy,
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                      title: vacancy.judul,
+                                      company:
+                                          vacancy.perusahaan.namaPerusahaan,
+                                      type: vacancy.role,
+                                      location: vacancy.lokasi,
+                                      experience: vacancy.pengalamanKerja,
+                                      postedAt: vacancy.createdAt,
+                                      description: vacancy.konten,
+                                      companyImgUrl:
+                                          '${dotenv.get('STORAGE_URL')}${vacancy.perusahaan.logo}',
+                                    ),
+                                    const SizedBox(height: 10),
+                                  ],
+                                );
+                              },
+                            ),
                     );
                   },
                 ),

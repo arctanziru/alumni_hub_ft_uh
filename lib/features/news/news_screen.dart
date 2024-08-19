@@ -104,8 +104,8 @@ class _NewsScreenState extends State<NewsScreen> {
                   builder: (context, state) {
                     if (state.status == NewsStatus.error) {
                       debugPrint('Error: ${state.toString()}');
-                      return Center(
-                        child: Text(state.error?.message ?? ''),
+                      return const Center(
+                        child: Text('Terjadi kesalahan saat memuat data'),
                       );
                     }
 

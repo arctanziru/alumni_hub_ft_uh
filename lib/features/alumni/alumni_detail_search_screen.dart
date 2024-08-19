@@ -86,22 +86,25 @@ class _AlumniDetailSearchScreenState extends State<AlumniDetailSearchScreen> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Expanded(
-                              child: ListView.separated(
+                              child: ListView.builder(
                                 itemCount:
                                     state.alumniGetManyResponse.data.length,
-                                separatorBuilder: (context, index) =>
-                                    const SizedBox(height: 10),
                                 itemBuilder: (context, index) {
                                   final alumni =
                                       state.alumniGetManyResponse.data[index];
-                                  return CardAlumniProfileWidget(
-                                    name: alumni.nama,
-                                    details: alumni.nim ?? '-',
-                                    onTap: () {
-                                      locator<AppNavigation>().navigateTo(
-                                          AlumniProfileDetailScreen.route,
-                                          arguments: alumni);
-                                    },
+                                  return Column(
+                                    children: [
+                                      CardAlumniProfileWidget(
+                                        name: alumni.nama,
+                                        details: alumni.nim ?? '-',
+                                        onTap: () {
+                                          locator<AppNavigation>().navigateTo(
+                                              AlumniProfileDetailScreen.route,
+                                              arguments: alumni);
+                                        },
+                                      ),
+                                      const SizedBox(height: 10),
+                                    ],
                                   );
                                 },
                               ),

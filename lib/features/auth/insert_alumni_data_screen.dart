@@ -56,6 +56,19 @@ class _InsertAlumniDataScreenState extends State<InsertAlumniDataScreen> {
       initialDate: DateTime.now(),
       firstDate: DateTime(1900),
       lastDate: DateTime.now(),
+      builder: (BuildContext context, Widget? child) {
+        return Theme(
+          data: Theme.of(context).copyWith(
+            colorScheme: const ColorScheme.light(
+              primary: Colors.red, // header background color
+              onPrimary: Colors.white, // header text color
+              onSurface: Colors.black, // body text color
+            ),
+            dialogBackgroundColor: Colors.white, // background color of the dialog
+          ),
+          child: child!,
+        );
+      },
     );
 
     if (selectedDate != null) {
@@ -298,7 +311,6 @@ class _InsertAlumniDataScreenState extends State<InsertAlumniDataScreen> {
                       controller: _angkatanController,
                       maxLength: 4,
                     ),
-                    const SizedBox(height: 12),
                     TextFieldWidget(
                       label: 'Jurusan',
                       hint: 'Masukkan jurusan',

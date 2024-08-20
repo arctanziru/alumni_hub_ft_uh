@@ -43,7 +43,21 @@ class _ClaimAlumniDataScreenState extends State<ClaimAlumniDataScreen> {
       initialDate: DateTime.now(),
       firstDate: DateTime(1900),
       lastDate: DateTime.now(),
+      builder: (BuildContext context, Widget? child) {
+        return Theme(
+          data: Theme.of(context).copyWith(
+            colorScheme: const ColorScheme.light(
+              primary: Colors.red, // header background color
+              onPrimary: Colors.white, // header text color
+              onSurface: Colors.black, // body text color
+            ),
+            dialogBackgroundColor: Colors.white, // background color of the dialog
+          ),
+          child: child!,
+        );
+      },
     );
+
 
     if (picked != null) {
       setState(() {

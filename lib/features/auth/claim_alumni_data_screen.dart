@@ -24,16 +24,22 @@ class _ClaimAlumniDataScreenState extends State<ClaimAlumniDataScreen> {
   final _namaLengkapController = TextEditingController();
   final _tanggalLahirController = TextEditingController();
   final _nimController = TextEditingController();
-  final _jurusanController = TextEditingController();
+  String? _selectedJurusan; // Ganti _jurusanController dengan String?
   bool agreeToTerms = false;
   bool _isCheckboxChecked = false;
+
+  List<String> jurusanList = [
+    'Teknik Informatika',
+    'Teknik Elektro',
+    'Teknik Sipil',
+    // Tambahkan jurusan lainnya sesuai kebutuhan
+  ];
 
   @override
   void dispose() {
     _namaLengkapController.dispose();
     _tanggalLahirController.dispose();
     _nimController.dispose();
-    _jurusanController.dispose();
     super.dispose();
   }
 
@@ -346,10 +352,51 @@ class _ClaimAlumniDataScreenState extends State<ClaimAlumniDataScreen> {
                       ),
                     ),
                     const SizedBox(height: 24),
-                    TextFieldWidget(
-                      label: 'Jurusan',
-                      hint: 'contoh: Teknik Informatika',
-                      controller: _jurusanController,
+                    SizedBox(
+                      height: 60,
+                      width: double.infinity,
+                      child: Container(
+                        decoration: BoxDecoration(
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.2),
+                              spreadRadius: 2,
+                              blurRadius: 8,
+                              offset: const Offset(0, 4),
+                            ),
+                          ],
+                          borderRadius: BorderRadius.circular(15.0),
+                          color: Colors.white,
+                        ),
+                        child: DropdownButtonFormField<String>(
+                          value: _selectedJurusan,
+                          decoration: InputDecoration(
+                            labelText: 'Jurusan',
+                            labelStyle: textTheme.bodyMedium,
+                            border: const OutlineInputBorder(
+                              borderRadius: BorderRadius.all(Radius.circular(15.0)),
+                              borderSide: BorderSide.none,
+                            ),
+                            filled: true,
+                            fillColor: Colors.white,
+                          ),
+                          menuMaxHeight: 300,
+                          items: jurusanList.map((String jurusan) {
+                            return DropdownMenuItem<String>(
+                              value: jurusan,
+                              child: Text(
+                                jurusan,
+                                style: textTheme.bodyMedium,
+                              ),
+                            );
+                          }).toList(),
+                          onChanged: (String? newValue) {
+                            setState(() {
+                              _selectedJurusan = newValue;
+                            });
+                          },
+                        ),
+                      ),
                     ),
                     const SizedBox(height: 24),
                     TextFieldWidget(
@@ -383,7 +430,7 @@ class _ClaimAlumniDataScreenState extends State<ClaimAlumniDataScreen> {
                                         name: _namaLengkapController.text,
                                         tglLahir: _tanggalLahirController.text,
                                         nim: _nimController.text,
-                                        jurusan: _jurusanController.text,
+                                        jurusan: _selectedJurusan ?? '',
                                       ),
                                     ),
                                   );

@@ -29,6 +29,7 @@ _$AlumniUpdateBodyImpl _$$AlumniUpdateBodyImplFromJson(
       angkatan: json['angkatan'] as String,
       kelamin: json['kelamin'] as String?,
       agama: json['agama'] as String?,
+      noTelp: json['no_telp'] as String?,
       golonganDarah: json['golongan_darah'] as String?,
     );
 
@@ -42,5 +43,6 @@ Map<String, dynamic> _$$AlumniUpdateBodyImplToJson(
       'angkatan': instance.angkatan,
       'kelamin': instance.kelamin,
       'agama': instance.agama,
+      'no_telp': instance.noTelp,
       'golongan_darah': instance.golonganDarah,
     };

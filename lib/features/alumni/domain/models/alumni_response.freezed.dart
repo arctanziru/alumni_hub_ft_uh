@@ -196,6 +196,8 @@ mixin _$AlumniUpdateBody {
   String get angkatan => throw _privateConstructorUsedError;
   String? get kelamin => throw _privateConstructorUsedError;
   String? get agama => throw _privateConstructorUsedError;
+  @JsonKey(name: 'no_telp')
+  String? get noTelp => throw _privateConstructorUsedError;
   @JsonKey(name: 'golongan_darah')
   String? get golonganDarah => throw _privateConstructorUsedError;
 
@@ -219,6 +221,7 @@ abstract class $AlumniUpdateBodyCopyWith<$Res> {
       String angkatan,
       String? kelamin,
       String? agama,
+      @JsonKey(name: 'no_telp') String? noTelp,
       @JsonKey(name: 'golongan_darah') String? golonganDarah});
 }
 
@@ -242,6 +245,7 @@ class _$AlumniUpdateBodyCopyWithImpl<$Res, $Val extends AlumniUpdateBody>
     Object? angkatan = null,
     Object? kelamin = freezed,
     Object? agama = freezed,
+    Object? noTelp = freezed,
     Object? golonganDarah = freezed,
   }) {
     return _then(_value.copyWith(
@@ -273,6 +277,10 @@ class _$AlumniUpdateBodyCopyWithImpl<$Res, $Val extends AlumniUpdateBody>
           ? _value.agama
           : agama // ignore: cast_nullable_to_non_nullable
               as String?,
+      noTelp: freezed == noTelp
+          ? _value.noTelp
+          : noTelp // ignore: cast_nullable_to_non_nullable
+              as String?,
       golonganDarah: freezed == golonganDarah
           ? _value.golonganDarah
           : golonganDarah // ignore: cast_nullable_to_non_nullable
@@ -297,6 +305,7 @@ abstract class _$$AlumniUpdateBodyImplCopyWith<$Res>
       String angkatan,
       String? kelamin,
       String? agama,
+      @JsonKey(name: 'no_telp') String? noTelp,
       @JsonKey(name: 'golongan_darah') String? golonganDarah});
 }
 
@@ -318,6 +327,7 @@ class __$$AlumniUpdateBodyImplCopyWithImpl<$Res>
     Object? angkatan = null,
     Object? kelamin = freezed,
     Object? agama = freezed,
+    Object? noTelp = freezed,
     Object? golonganDarah = freezed,
   }) {
     return _then(_$AlumniUpdateBodyImpl(
@@ -349,6 +359,10 @@ class __$$AlumniUpdateBodyImplCopyWithImpl<$Res>
           ? _value.agama
           : agama // ignore: cast_nullable_to_non_nullable
               as String?,
+      noTelp: freezed == noTelp
+          ? _value.noTelp
+          : noTelp // ignore: cast_nullable_to_non_nullable
+              as String?,
       golonganDarah: freezed == golonganDarah
           ? _value.golonganDarah
           : golonganDarah // ignore: cast_nullable_to_non_nullable
@@ -368,6 +382,7 @@ class _$AlumniUpdateBodyImpl implements _AlumniUpdateBody {
       required this.angkatan,
       this.kelamin,
       this.agama,
+      @JsonKey(name: 'no_telp') this.noTelp,
       @JsonKey(name: 'golongan_darah') this.golonganDarah});
 
   factory _$AlumniUpdateBodyImpl.fromJson(Map<String, dynamic> json) =>
@@ -389,12 +404,15 @@ class _$AlumniUpdateBodyImpl implements _AlumniUpdateBody {
   @override
   final String? agama;
   @override
+  @JsonKey(name: 'no_telp')
+  final String? noTelp;
+  @override
   @JsonKey(name: 'golongan_darah')
   final String? golonganDarah;
 
   @override
   String toString() {
-    return 'AlumniUpdateBody(nim: $nim, nama: $nama, tglLahir: $tglLahir, jurusan: $jurusan, angkatan: $angkatan, kelamin: $kelamin, agama: $agama, golonganDarah: $golonganDarah)';
+    return 'AlumniUpdateBody(nim: $nim, nama: $nama, tglLahir: $tglLahir, jurusan: $jurusan, angkatan: $angkatan, kelamin: $kelamin, agama: $agama, noTelp: $noTelp, golonganDarah: $golonganDarah)';
   }
 
   @override
@@ -411,6 +429,7 @@ class _$AlumniUpdateBodyImpl implements _AlumniUpdateBody {
                 other.angkatan == angkatan) &&
             (identical(other.kelamin, kelamin) || other.kelamin == kelamin) &&
             (identical(other.agama, agama) || other.agama == agama) &&
+            (identical(other.noTelp, noTelp) || other.noTelp == noTelp) &&
             (identical(other.golonganDarah, golonganDarah) ||
                 other.golonganDarah == golonganDarah));
   }
@@ -418,7 +437,7 @@ class _$AlumniUpdateBodyImpl implements _AlumniUpdateBody {
   @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, nim, nama, tglLahir, jurusan,
-      angkatan, kelamin, agama, golonganDarah);
+      angkatan, kelamin, agama, noTelp, golonganDarah);
 
   @JsonKey(ignore: true)
   @override
@@ -444,6 +463,7 @@ abstract class _AlumniUpdateBody implements AlumniUpdateBody {
           required final String angkatan,
           final String? kelamin,
           final String? agama,
+          @JsonKey(name: 'no_telp') final String? noTelp,
           @JsonKey(name: 'golongan_darah') final String? golonganDarah}) =
       _$AlumniUpdateBodyImpl;
 
@@ -465,6 +485,9 @@ abstract class _AlumniUpdateBody implements AlumniUpdateBody {
   String? get kelamin;
   @override
   String? get agama;
+  @override
+  @JsonKey(name: 'no_telp')
+  String? get noTelp;
   @override
   @JsonKey(name: 'golongan_darah')
   String? get golonganDarah;

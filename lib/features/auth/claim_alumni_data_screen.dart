@@ -137,100 +137,101 @@ class _ClaimAlumniDataScreenState extends State<ClaimAlumniDataScreen> {
       builder: (BuildContext context) {
         return StatefulBuilder(
           builder: (BuildContext context, StateSetter setState) {
-            return AlertDialog(
-              title: Text(
-                'Data Alumni Tidak Ditemukan',
-                style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                      fontWeight: FontWeight.bold,
-                    ),
+            return Theme(
+              data: Theme.of(context).copyWith(
+                dialogBackgroundColor: Colors.white, // Set the background color to solid white
               ),
-              content: Column(
-                mainAxisSize: MainAxisSize
-                    .min, // To make sure the column height adapts to content
-                children: [
-                  Row(
-                    children: [
-                      Checkbox(
-                        value: _isCheckboxChecked,
-                        onChanged: (bool? value) {
-                          setState(() {
-                            _isCheckboxChecked = value ?? false;
-                          });
-                        },
-                      ),
-                      Expanded(
-                        child: RichText(
-                          text: TextSpan(
-                            children: [
-                              TextSpan(
-                                text: 'Saya menyetujui ',
-                                style: Theme.of(context).textTheme.bodySmall,
-                              ),
-                              TextSpan(
-                                text: 'Syarat dan Ketentuan',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodySmall
-                                    ?.copyWith(
-                                      color: AppColors.primaryColor,
-                                      decoration: TextDecoration.underline,
-                                      decorationColor: Colors
-                                          .red, // Set the color of the underline
-                                      decorationThickness:
-                                          2.0, // Adjust the thickness of the underline if needed
-                                    ),
-                                recognizer: TapGestureRecognizer()
-                                  ..onTap = () {
-                                    Navigator.pushNamed(context, '/license');
-                                  },
-                              ),
-                            ],
+              child: AlertDialog(
+                title: Text(
+                  'Data Alumni Tidak Ditemukan',
+                  style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                content: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Row(
+                      children: [
+                        Checkbox(
+                          value: _isCheckboxChecked,
+                          onChanged: (bool? value) {
+                            setState(() {
+                              _isCheckboxChecked = value ?? false;
+                            });
+                          },
+                        ),
+                        Expanded(
+                          child: RichText(
+                            text: TextSpan(
+                              children: [
+                                TextSpan(
+                                  text: 'Saya menyetujui ',
+                                  style: Theme.of(context).textTheme.bodySmall,
+                                ),
+                                TextSpan(
+                                  text: 'Syarat dan Ketentuan',
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodySmall
+                                      ?.copyWith(
+                                    color: AppColors.primaryColor,
+                                    decoration: TextDecoration.underline,
+                                    decorationColor: Colors.red,
+                                    decorationThickness: 2.0,
+                                  ),
+                                  recognizer: TapGestureRecognizer()
+                                    ..onTap = () {
+                                      Navigator.pushNamed(context, '/license');
+                                    },
+                                ),
+                              ],
+                            ),
                           ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+                actions: <Widget>[
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                        child: ButtonWidget(
+                          onPressed: () {
+                            Navigator.of(context).pop(); // Close the dialog
+                          },
+                          label: 'Kembali',
+                          color: AppColors.gray3,
+                        ),
+                      ),
+                      const SizedBox(width: 8),
+                      Expanded(
+                        child: ButtonWidget(
+                          onPressed: _isCheckboxChecked
+                              ? () {
+                            Navigator.of(context).pop(); // Close the dialog
+                            Navigator.pushNamed(context, '/insert_alumni_data'); // Navigate to InsertAlumniDataScreen
+                          }
+                              : null, // Disable button when checkbox is unchecked
+                          label: 'Isi Data',
+                          color: _isCheckboxChecked
+                              ? Theme.of(context).primaryColor
+                              : Colors.grey,
                         ),
                       ),
                     ],
                   ),
                 ],
               ),
-              actions: <Widget>[
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Expanded(
-                      child: ButtonWidget(
-                        onPressed: () {
-                          Navigator.of(context).pop(); // Close the dialog
-                        },
-                        label: 'Kembali',
-                        color: AppColors.gray3,
-                      ),
-                    ),
-                    const SizedBox(width: 8),
-                    Expanded(
-                      child: ButtonWidget(
-                        onPressed: _isCheckboxChecked
-                            ? () {
-                                Navigator.of(context).pop(); // Close the dialog
-                                Navigator.pushNamed(context,
-                                    '/insert_alumni_data'); // Navigate to InsertAlumniDataScreen
-                              }
-                            : null, // Disable button when checkbox is unchecked
-                        label: 'Isi Data',
-                        color: _isCheckboxChecked
-                            ? Theme.of(context).primaryColor
-                            : Colors.grey,
-                        // Change color based on checkbox
-                      ),
-                    ),
-                  ],
-                ),
-              ],
             );
           },
         );
       },
     );
   }
+
 
   // Add list of alumni data
   List<AlumniData> alumniDataList = [

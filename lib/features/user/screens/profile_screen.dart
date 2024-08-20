@@ -122,6 +122,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                                 _golonganDarahController,
                                             jurusan: _jurusanController.text,
                                             nama: _namaLengkapController.text,
+                                            noTelp: _noTelpController.text,
                                             kelamin: selectedGender,
                                             agama: _agamaController,
                                             tglLahir:

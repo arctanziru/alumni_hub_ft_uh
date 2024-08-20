@@ -36,6 +36,25 @@ class _InsertAlumniDataScreenState extends State<InsertAlumniDataScreen> {
   String? _golonganDarahController;
   String? _agamaController;
 
+  final List<String> jurusanList = [
+    'Teknik Informatika',
+    'Teknik Elektro',
+    'Teknik Mesin',
+    'Teknik Sipil',
+    'Teknik Industri',
+    'Teknik Lingkungan',
+    'Teknik Perkapalan',
+    'Teknik Arsitektur',
+    'Teknik Geologi',
+    'Teknik Pertambangan',
+    'Teknik Metalurgi',
+    'Teknik Industri',
+    'Teknik Kelautan',
+    'Teknik Sistem Perkapalan',
+  ];
+
+
+
   @override
   void dispose() {
     _namaLengkapController.dispose();
@@ -311,11 +330,45 @@ class _InsertAlumniDataScreenState extends State<InsertAlumniDataScreen> {
                       controller: _angkatanController,
                       maxLength: 4,
                     ),
-                    TextFieldWidget(
-                      label: 'Jurusan',
-                      hint: 'Masukkan jurusan',
-                      controller: _jurusanController,
+                    // Jurusan Dropdown
+                    const Text(
+                      'Jurusan',
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
+                    const SizedBox(height: 8),
+                    DropdownButtonFormField<String>(
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        contentPadding: const EdgeInsets.symmetric(horizontal: 16),
+                        hintStyle: Theme.of(context).textTheme.bodyMedium,
+                        labelStyle: Theme.of(context).textTheme.bodyMedium,
+                      ),
+                      hint: Text(
+                        'Pilih jurusan',
+                        style: Theme.of(context).textTheme.bodyMedium,
+                      ),
+                      value: selectedJurusan,
+                      onChanged: (String? newValue) {
+                        setState(() {
+                          selectedJurusan = newValue;
+                        });
+                      },
+                      items: jurusanList.map((String value) {
+                        return DropdownMenuItem<String>(
+                          value: value,
+                          child: Text(
+                            value,
+                            style: Theme.of(context).textTheme.bodyMedium,
+                          ),
+                        );
+                      }).toList(),
+                    ),
+
                     const SizedBox(height: 12),
                     // dropdown golongan darah
                     const Text(

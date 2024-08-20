@@ -28,12 +28,23 @@ class _ClaimAlumniDataScreenState extends State<ClaimAlumniDataScreen> {
   bool agreeToTerms = false;
   bool _isCheckboxChecked = false;
 
-  List<String> jurusanList = [
+  final List<String> jurusanList = [
     'Teknik Informatika',
     'Teknik Elektro',
+    'Teknik Mesin',
     'Teknik Sipil',
-    // Tambahkan jurusan lainnya sesuai kebutuhan
+    'Teknik Industri',
+    'Teknik Lingkungan',
+    'Teknik Perkapalan',
+    'Teknik Arsitektur',
+    'Teknik Geologi',
+    'Teknik Pertambangan',
+    'Teknik Metalurgi',
+    'Teknik Industri',
+    'Teknik Kelautan',
+    'Teknik Sistem Perkapalan',
   ];
+
 
   @override
   void dispose() {
@@ -143,100 +154,101 @@ class _ClaimAlumniDataScreenState extends State<ClaimAlumniDataScreen> {
       builder: (BuildContext context) {
         return StatefulBuilder(
           builder: (BuildContext context, StateSetter setState) {
-            return AlertDialog(
-              title: Text(
-                'Data Alumni Tidak Ditemukan',
-                style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                      fontWeight: FontWeight.bold,
-                    ),
+            return Theme(
+              data: Theme.of(context).copyWith(
+                dialogBackgroundColor: Colors.white, // Set the background color to solid white
               ),
-              content: Column(
-                mainAxisSize: MainAxisSize
-                    .min, // To make sure the column height adapts to content
-                children: [
-                  Row(
-                    children: [
-                      Checkbox(
-                        value: _isCheckboxChecked,
-                        onChanged: (bool? value) {
-                          setState(() {
-                            _isCheckboxChecked = value ?? false;
-                          });
-                        },
-                      ),
-                      Expanded(
-                        child: RichText(
-                          text: TextSpan(
-                            children: [
-                              TextSpan(
-                                text: 'Saya menyetujui ',
-                                style: Theme.of(context).textTheme.bodySmall,
-                              ),
-                              TextSpan(
-                                text: 'Syarat dan Ketentuan',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .bodySmall
-                                    ?.copyWith(
-                                      color: AppColors.primaryColor,
-                                      decoration: TextDecoration.underline,
-                                      decorationColor: Colors
-                                          .red, // Set the color of the underline
-                                      decorationThickness:
-                                          2.0, // Adjust the thickness of the underline if needed
-                                    ),
-                                recognizer: TapGestureRecognizer()
-                                  ..onTap = () {
-                                    Navigator.pushNamed(context, '/license');
-                                  },
-                              ),
-                            ],
+              child: AlertDialog(
+                title: Text(
+                  'Data Alumni Tidak Ditemukan',
+                  style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                content: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Row(
+                      children: [
+                        Checkbox(
+                          value: _isCheckboxChecked,
+                          onChanged: (bool? value) {
+                            setState(() {
+                              _isCheckboxChecked = value ?? false;
+                            });
+                          },
+                        ),
+                        Expanded(
+                          child: RichText(
+                            text: TextSpan(
+                              children: [
+                                TextSpan(
+                                  text: 'Saya menyetujui ',
+                                  style: Theme.of(context).textTheme.bodySmall,
+                                ),
+                                TextSpan(
+                                  text: 'Syarat dan Ketentuan',
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodySmall
+                                      ?.copyWith(
+                                    color: AppColors.primaryColor,
+                                    decoration: TextDecoration.underline,
+                                    decorationColor: Colors.red,
+                                    decorationThickness: 2.0,
+                                  ),
+                                  recognizer: TapGestureRecognizer()
+                                    ..onTap = () {
+                                      Navigator.pushNamed(context, '/license');
+                                    },
+                                ),
+                              ],
+                            ),
                           ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+                actions: <Widget>[
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                        child: ButtonWidget(
+                          onPressed: () {
+                            Navigator.of(context).pop(); // Close the dialog
+                          },
+                          label: 'Kembali',
+                          color: AppColors.gray3,
+                        ),
+                      ),
+                      const SizedBox(width: 8),
+                      Expanded(
+                        child: ButtonWidget(
+                          onPressed: _isCheckboxChecked
+                              ? () {
+                            Navigator.of(context).pop(); // Close the dialog
+                            Navigator.pushNamed(context, '/insert_alumni_data'); // Navigate to InsertAlumniDataScreen
+                          }
+                              : null, // Disable button when checkbox is unchecked
+                          label: 'Isi Data',
+                          color: _isCheckboxChecked
+                              ? Theme.of(context).primaryColor
+                              : Colors.grey,
                         ),
                       ),
                     ],
                   ),
                 ],
               ),
-              actions: <Widget>[
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Expanded(
-                      child: ButtonWidget(
-                        onPressed: () {
-                          Navigator.of(context).pop(); // Close the dialog
-                        },
-                        label: 'Kembali',
-                        color: AppColors.gray3,
-                      ),
-                    ),
-                    const SizedBox(width: 8),
-                    Expanded(
-                      child: ButtonWidget(
-                        onPressed: _isCheckboxChecked
-                            ? () {
-                                Navigator.of(context).pop(); // Close the dialog
-                                Navigator.pushNamed(context,
-                                    '/insert_alumni_data'); // Navigate to InsertAlumniDataScreen
-                              }
-                            : null, // Disable button when checkbox is unchecked
-                        label: 'Isi Data',
-                        color: _isCheckboxChecked
-                            ? Theme.of(context).primaryColor
-                            : Colors.grey,
-                        // Change color based on checkbox
-                      ),
-                    ),
-                  ],
-                ),
-              ],
             );
           },
         );
       },
     );
   }
+
 
   // Add list of alumni data
   List<AlumniData> alumniDataList = [
@@ -350,52 +362,44 @@ class _ClaimAlumniDataScreenState extends State<ClaimAlumniDataScreen> {
                         ),
                       ),
                     ),
-                    const SizedBox(height: 24),
-                    SizedBox(
-                      height: 60,
-                      width: double.infinity,
-                      child: Container(
-                        decoration: BoxDecoration(
-                          boxShadow: [
-                            BoxShadow(
-                              color: Colors.black.withOpacity(0.2),
-                              spreadRadius: 2,
-                              blurRadius: 8,
-                              offset: const Offset(0, 4),
-                            ),
-                          ],
-                          borderRadius: BorderRadius.circular(15.0),
-                          color: Colors.white,
-                        ),
-                        child: DropdownButtonFormField<String>(
-                          value: _selectedJurusan,
-                          decoration: InputDecoration(
-                            labelText: 'Jurusan',
-                            labelStyle: textTheme.bodyMedium,
-                            border: const OutlineInputBorder(
-                              borderRadius: BorderRadius.all(Radius.circular(15.0)),
-                              borderSide: BorderSide.none,
-                            ),
-                            filled: true,
-                            fillColor: Colors.white,
-                          ),
-                          menuMaxHeight: 300,
-                          items: jurusanList.map((String jurusan) {
-                            return DropdownMenuItem<String>(
-                              value: jurusan,
-                              child: Text(
-                                jurusan,
-                                style: textTheme.bodyMedium,
-                              ),
-                            );
-                          }).toList(),
-                          onChanged: (String? newValue) {
-                            setState(() {
-                              _selectedJurusan = newValue;
-                            });
-                          },
-                        ),
+                    // Jurusan Dropdown
+                    const SizedBox(height: 12),
+                    const Text(
+                      'Jurusan',
+                      style: TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600,
                       ),
+                    ),
+                    const SizedBox(height: 8),
+                    DropdownButtonFormField<String>(
+                      decoration: InputDecoration(
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        contentPadding: const EdgeInsets.symmetric(horizontal: 16),
+                        hintStyle: Theme.of(context).textTheme.bodyMedium,
+                        labelStyle: Theme.of(context).textTheme.bodyMedium,
+                      ),
+                      hint: Text(
+                        'Pilih jurusan',
+                        style: Theme.of(context).textTheme.bodyMedium,
+                      ),
+                      value: _selectedJurusan,
+                      onChanged: (String? newValue) {
+                        setState(() {
+                          _selectedJurusan = newValue;
+                        });
+                      },
+                      items: jurusanList.map((String value) {
+                        return DropdownMenuItem<String>(
+                          value: value,
+                          child: Text(
+                            value,
+                            style: Theme.of(context).textTheme.bodyMedium,
+                          ),
+                        );
+                      }).toList(),
                     ),
                     const SizedBox(height: 24),
                     TextFieldWidget(

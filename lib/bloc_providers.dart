@@ -1,6 +1,7 @@
 import 'package:alumni_hub_ft_uh/features/claim_alumni/bloc/add/add_alumni_bloc.dart';
 import 'package:alumni_hub_ft_uh/features/claim_alumni/bloc/claim/claim_alumni_bloc.dart';
 import 'package:alumni_hub_ft_uh/features/claim_alumni/bloc/get/get_alumnis_bloc.dart';
+import 'package:alumni_hub_ft_uh/features/claim_alumni/bloc/get_jurusan/get_jurusan_bloc.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:alumni_hub_ft_uh/features/alumni/bloc/alumni_bloc.dart';
 import 'package:alumni_hub_ft_uh/features/news/bloc/news_bloc.dart';
@@ -46,5 +47,8 @@ final blocProviders = [
   ),
   BlocProvider<AlumniUpdateBloc>(
     create: (context) => locator<AlumniUpdateBloc>(),
+  ),
+  BlocProvider<GetJurusanBloc>(
+    create: (context) => locator<GetJurusanBloc>(),
   ),
 ];

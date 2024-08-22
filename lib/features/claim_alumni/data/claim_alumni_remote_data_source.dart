@@ -1,6 +1,7 @@
 import 'package:alumni_hub_ft_uh/data/api.dart';
 import 'package:alumni_hub_ft_uh/features/claim_alumni/domain/models/add_alumni_model.dart';
 import 'package:alumni_hub_ft_uh/features/claim_alumni/domain/models/claim_alumni_model.dart';
+import 'package:alumni_hub_ft_uh/features/claim_alumni/domain/models/get_all_jurusan_model.dart';
 import 'package:alumni_hub_ft_uh/features/claim_alumni/domain/models/get_alumnis_model.dart';
 import 'package:injectable/injectable.dart';
 
@@ -35,5 +36,13 @@ class ClaimAlumniRemoteDataSource {
           'id_alumni': body.idAlumni,
         });
     return ClaimAlumniResponse.fromJson(response.data);
+  }
+
+  Future<GetAllJurusanResponse> getAllJurusan() async {
+    final response = await _api.createApiCall(
+      endpoint: '/jurusan',
+      method: NetworkCallMethod.get,
+    );
+    return GetAllJurusanResponse.fromJson(response.data);
   }
 }

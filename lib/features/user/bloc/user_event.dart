@@ -23,3 +23,5 @@ class UserEventGetProfile extends UserEvent {}
 class UserEventClearUserSession extends UserEvent {}
 
 class UserEventSignInWithGoogle extends UserEvent {}
+
+class UserEventDeleteUser extends UserEvent {}

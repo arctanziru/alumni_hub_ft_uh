@@ -80,7 +80,7 @@ class _SplashScreenState extends State<SplashScreen> {
                       ),
                       const SizedBox(height: 30), // Space between logo and text
                       const Text(
-                        'IKATEKhub FTUH',
+                        'ANTEK HUB',
                         style: TextStyle(
                           fontSize: 28,
                           fontWeight: FontWeight.w800,

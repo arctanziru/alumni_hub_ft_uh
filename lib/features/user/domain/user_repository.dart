@@ -9,6 +9,7 @@ abstract class UserRepository {
   Future<bool> saveUserSession(UserSession userSession);
   UserSession? getUserSession();
   Future<bool> deleteUserSession();
+  Future<void> deleteUser();
 }
 
 @LazySingleton(as: UserRepository)
@@ -37,5 +38,10 @@ class UserRepositoryImpl implements UserRepository {
   @override
   Future<bool> deleteUserSession() {
     return userLocalDataSource.deleteUserSession();
+  }
+
+  @override
+  Future<bool> deleteUser() {
+    return userRemoteDataSource.deleteUser();
   }
 }

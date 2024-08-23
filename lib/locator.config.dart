@@ -22,6 +22,7 @@ import 'features/auth/domain/auth_repository.dart' as _i260;
 import 'features/claim_alumni/bloc/add/add_alumni_bloc.dart' as _i968;
 import 'features/claim_alumni/bloc/claim/claim_alumni_bloc.dart' as _i178;
 import 'features/claim_alumni/bloc/get/get_alumnis_bloc.dart' as _i894;
+import 'features/claim_alumni/bloc/get_jurusan/get_jurusan_bloc.dart' as _i474;
 import 'features/claim_alumni/data/claim_alumni_remote_data_source.dart'
     as _i480;
 import 'features/claim_alumni/domain/claim_alumni_repository.dart' as _i118;
@@ -63,22 +64,22 @@ Future<_i174.GetIt> $initGetIt(
   gh.lazySingleton<_i420.Api>(() => _i420.Api(gh<_i361.Dio>()));
   gh.singleton<_i225.UserLocalDataSource>(
       () => _i225.UserLocalDataSource(gh<_i460.SharedPreferences>()));
-  gh.singleton<_i480.ClaimAlumniRemoteDataSource>(
-      () => _i480.ClaimAlumniRemoteDataSource(gh<_i420.Api>()));
-  gh.singleton<_i785.VacancyRemoteDataSource>(
-      () => _i785.VacancyRemoteDataSource(gh<_i420.Api>()));
-  gh.singleton<_i516.AuthRemoteDataSource>(
-      () => _i516.AuthRemoteDataSource(gh<_i420.Api>()));
-  gh.singleton<_i444.UserRemoteDataSource>(
-      () => _i444.UserRemoteDataSource(gh<_i420.Api>()));
-  gh.singleton<_i37.SearchRemoteDataSource>(
-      () => _i37.SearchRemoteDataSource(gh<_i420.Api>()));
-  gh.singleton<_i901.NewsRemoteDataSource>(
-      () => _i901.NewsRemoteDataSource(gh<_i420.Api>()));
   gh.singleton<_i475.AlumniRemoteDataSource>(
       () => _i475.AlumniRemoteDataSource(gh<_i420.Api>()));
+  gh.singleton<_i516.AuthRemoteDataSource>(
+      () => _i516.AuthRemoteDataSource(gh<_i420.Api>()));
+  gh.singleton<_i480.ClaimAlumniRemoteDataSource>(
+      () => _i480.ClaimAlumniRemoteDataSource(gh<_i420.Api>()));
   gh.singleton<_i163.EventRemoteDataSource>(
       () => _i163.EventRemoteDataSource(gh<_i420.Api>()));
+  gh.singleton<_i901.NewsRemoteDataSource>(
+      () => _i901.NewsRemoteDataSource(gh<_i420.Api>()));
+  gh.singleton<_i37.SearchRemoteDataSource>(
+      () => _i37.SearchRemoteDataSource(gh<_i420.Api>()));
+  gh.singleton<_i444.UserRemoteDataSource>(
+      () => _i444.UserRemoteDataSource(gh<_i420.Api>()));
+  gh.singleton<_i785.VacancyRemoteDataSource>(
+      () => _i785.VacancyRemoteDataSource(gh<_i420.Api>()));
   gh.lazySingleton<_i731.VacancyRepository>(
       () => _i731.VacancyRepositoryImpl(gh<_i785.VacancyRemoteDataSource>()));
   gh.lazySingleton<_i742.EventRepository>(
@@ -99,6 +100,8 @@ Future<_i174.GetIt> $initGetIt(
       () => _i220.NewsRepositoryImpl(gh<_i901.NewsRemoteDataSource>()));
   gh.lazySingleton<_i332.AlumniRepository>(
       () => _i332.AlumniRepositoryImpl(gh<_i475.AlumniRemoteDataSource>()));
+  gh.factory<_i474.GetJurusanBloc>(
+      () => _i474.GetJurusanBloc(gh<_i480.ClaimAlumniRemoteDataSource>()));
   gh.factory<_i926.SearchBloc>(
       () => _i926.SearchBloc(gh<_i3.SearchRepository>()));
   gh.lazySingleton<_i118.ClaimAlumniRepository>(() =>

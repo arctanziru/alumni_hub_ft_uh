@@ -1,4 +1,6 @@
 import 'package:alumni_hub_ft_uh/common/utils/app_navigation.dart';
+import 'package:alumni_hub_ft_uh/common/utils/custom_dialog.dart';
+import 'package:alumni_hub_ft_uh/constants/colors.dart';
 import 'package:alumni_hub_ft_uh/features/auth/sign_in_screen.dart';
 import 'package:alumni_hub_ft_uh/features/search/search_screen.dart';
 import 'package:alumni_hub_ft_uh/features/user/bloc/user_bloc.dart';
@@ -149,13 +151,62 @@ class AppBarMenuWidget extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(
                     vertical: 16.0, horizontal: 16.0),
-                child: Center(
-                  child: ButtonWidget(
-                    onPressed: () async {
-                      context.read<UserBloc>().add(UserEventSignOut());
-                    },
-                    isLoading: state is UserStateSignOutLoading,
-                    label: 'Keluar',
+                child: Expanded(
+                  child: Column(
+                    children: [
+                      ButtonWidget(
+                        onPressed: () async {
+                          context.read<UserBloc>().add(UserEventSignOut());
+                        },
+                        isLoading: state is UserStateSignOutLoading,
+                        label: 'Keluar',
+                      ),
+                      ButtonWidget(
+                        onPressed: () {
+                          CustomDialog.showCustomDialog(
+                            context,
+                            title: 'Hapus Akun',
+                            content: Text(
+                              'Apakah Anda yakin ingin menghapus akun Anda?',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .bodyMedium
+                                  ?.copyWith(
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                            ),
+                            actions: [
+                              Expanded(
+                                child: ButtonWidget(
+                                  label: 'Batal',
+                                  color: AppColors.secondaryColor,
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                ),
+                              ),
+                              const SizedBox(width: 16),
+                              Expanded(
+                                child: ButtonWidget(
+                                  label: 'Hapus',
+                                  onPressed: () {
+                                    context
+                                        .read<UserBloc>()
+                                        .add(UserEventDeleteUser());
+                                  },
+                                  isLoading:
+                                      state is UserStateDeleteUserLoading,
+                                ),
+                              ),
+                            ],
+                          );
+                        },
+                        isLoading: state is UserStateDeleteUserLoading,
+                        label: 'Hapus Akun',
+                        color: AppColors.secondaryColor,
+                        textColor: Colors.white,
+                      ),
+                    ],
                   ),
                 ),
               ),

@@ -3,7 +3,6 @@ import 'package:alumni_hub_ft_uh/features/user/domain/models/user_get_one.dart';
 import 'package:alumni_hub_ft_uh/middleware/custom_exception.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-
 @immutable
 abstract class UserState {}
 
@@ -16,6 +15,8 @@ class UserStateSignUpLoading extends UserState {}
 class UserStateSignOutLoading extends UserState {}
 
 class UserStateGetProfileLoading extends UserState {}
+
+class UserStateDeleteUserLoading extends UserState {}
 
 class UserStateSignInWithGoogleLoading extends UserState {}
 
@@ -40,6 +41,8 @@ class UserStateSuccessSignInWithGoogle extends UserState {
   final SignInWithGoogleResponse signInWithGoogleResponse;
   UserStateSuccessSignInWithGoogle(this.signInWithGoogleResponse);
 }
+
+class UserStateSuccessDeleteUser extends UserState {}
 
 class UserStateException extends UserState {
   final CustomException exception;

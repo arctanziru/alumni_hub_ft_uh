@@ -24,4 +24,17 @@ class UserRemoteDataSource {
     }
     return UserGetOneResponse.fromJson(response.data);
   }
+
+  Future<bool> deleteUser() async {
+    final response = await _api.createApiCall(
+      endpoint: '/user/delete',
+      method: NetworkCallMethod.post,
+    );
+    if (response.statusCode == 401 || response.statusCode == 403) {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      await prefs.remove(kUserSession);
+      locator<AppNavigation>().navigateReplace('/sign_in');
+    }
+    return true;
+  }
 }

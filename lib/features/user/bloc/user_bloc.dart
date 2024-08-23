@@ -1,11 +1,13 @@
 import 'dart:convert';
 
+import 'package:alumni_hub_ft_uh/common/utils/app_navigation.dart';
 import 'package:alumni_hub_ft_uh/constants/keys.dart';
 import 'package:alumni_hub_ft_uh/features/auth/domain/auth_repository.dart';
 import 'package:alumni_hub_ft_uh/features/user/bloc/user_event.dart';
 import 'package:alumni_hub_ft_uh/features/user/bloc/user_state.dart';
 import 'package:alumni_hub_ft_uh/features/user/domain/models/user_model.dart';
 import 'package:alumni_hub_ft_uh/features/user/domain/user_repository.dart';
+import 'package:alumni_hub_ft_uh/locator.dart';
 import 'package:alumni_hub_ft_uh/middleware/custom_exception.dart';
 import 'package:bloc/bloc.dart';
 import 'package:injectable/injectable.dart';
@@ -87,13 +89,24 @@ class UserBloc extends Bloc<UserEvent, UserState> {
         emit(UserStateException(e));
       }
     });
+
+    on<UserEventDeleteUser>((event, emit) async {
+      emit(UserStateDeleteUserLoading());
+      try {
+        await _userRepository.deleteUser();
+        await signOut();
+        emit(UserStateSuccessDeleteUser());
+      } on CustomException catch (e) {
+        emit(UserStateException(e));
+      }
+    });
   }
 
   UserSession? getUserSession() => _userRepository.getUserSession();
 
   Future<void> signOut() async {
-    await _authRepository.signOut();
     await clearUserSession();
+    locator<AppNavigation>().navigateReplace('/sign_in');
   }
 
   Future<bool> clearUserSession() => _userRepository.deleteUserSession();

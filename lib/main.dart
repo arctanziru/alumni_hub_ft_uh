@@ -38,7 +38,7 @@ class _AlumniHubFtUhAppState extends State<AlumniHubFtUhApp> {
     return MultiBlocProvider(
       providers: blocProviders,
       child: MaterialApp(
-        title: 'IKATEKhub FTUH',
+        title: 'ANTEK HUB',
         debugShowCheckedModeBanner: false,
         color: AppColors.primaryColor,
         theme: appTheme,

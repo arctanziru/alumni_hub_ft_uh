@@ -31,12 +31,13 @@ class AddAlumniBody with _$AddAlumniBody {
   const factory AddAlumniBody({
     @JsonKey(name: 'nama') required String name,
     required String nim,
-    @JsonKey(name: 'tgl_lahir')required String tglLahir,
+    @JsonKey(name: 'tgl_lahir') required String tglLahir,
     @JsonKey(name: 'jurusan') required String jurusan,
     required String angkatan,
     required String kelamin,
-    required String agama,
-    @JsonKey(name: 'golongan_darah') required String golonganDarah,
+    String? agama,
+    @JsonKey(name: 'golongan_darah') String? golonganDarah,
+    @JsonKey(name: 'no_telp') String? noTelp,
   }) = _AddAlumniBody;
 
   factory AddAlumniBody.fromJson(Map<String, dynamic> json) =>

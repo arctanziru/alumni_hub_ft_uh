@@ -185,6 +185,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           readOnly: true,
                         ),
                         TextFieldProfileWidget(
+                          label: 'NIM',
+                          description: _stambukController.text,
+                          icon: Icons.credit_card,
+                          controller: _stambukController,
+                          readOnly: true,
+                        ),
+                        TextFieldProfileWidget(
                           label: 'Tanggal lahir',
                           description: _tanggalLahirController.text,
                           icon: Icons.calendar_view_day,

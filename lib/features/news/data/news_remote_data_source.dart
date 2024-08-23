@@ -31,7 +31,7 @@ class NewsRemoteDataSource {
 
   Future<NewsGetOneModelResponse> toggleLikeNews(int id) async {
     final response = await _api.createApiCall(
-      endpoint: '/berita/like/',
+      endpoint: '/berita/like',
       method: NetworkCallMethod.post,
       body: {'id_berita': id},
     );

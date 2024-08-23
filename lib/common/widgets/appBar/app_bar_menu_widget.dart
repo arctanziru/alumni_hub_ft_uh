@@ -97,17 +97,20 @@ class AppBarMenuWidget extends StatelessWidget {
                           NetworkImage(userSession?.user?.avatar ?? ''),
                     ),
                     const SizedBox(width: 16),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          userSession?.user?.alumni?.nama ?? 'Guest',
-                          style: Theme.of(context).textTheme.titleLarge,
-                        ),
-                        Text(
-                          userSession?.user?.email ?? '',
-                        ),
-                      ],
+                    Flexible(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            userSession?.user?.alumni?.nama ?? 'Guest',
+                            style: Theme.of(context).textTheme.titleLarge,
+                            softWrap: true,
+                          ),
+                          Text(
+                            userSession?.user?.email ?? '',
+                          ),
+                        ],
+                      ),
                     ),
                   ],
                 ),

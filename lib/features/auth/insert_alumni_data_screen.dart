@@ -23,7 +23,7 @@ class InsertAlumniDataScreen extends StatefulWidget {
 
 class _InsertAlumniDataScreenState extends State<InsertAlumniDataScreen> {
   String? selectedJurusan;
-  String? selectedAngkatan;
+  // String? selectedAngkatan;
   String? selectedGender;
   bool agreeToTerms = false;
 
@@ -32,7 +32,7 @@ class _InsertAlumniDataScreenState extends State<InsertAlumniDataScreen> {
   final _stambukController = TextEditingController();
   final _noTelpController = TextEditingController();
   final _angkatanController = TextEditingController();
-  final _jurusanController = TextEditingController();
+  // final _jurusanController = TextEditingController();
   // final _golonganDarahController = TextEditingController();
   // final _agamaController = TextEditingController();
   String? _golonganDarahController;
@@ -52,7 +52,7 @@ class _InsertAlumniDataScreenState extends State<InsertAlumniDataScreen> {
     _stambukController.dispose();
     _noTelpController.dispose();
     _angkatanController.dispose();
-    _jurusanController.dispose();
+    // _jurusanController.dispose();
     // _golonganDarahController.dispose();
     // _agamaController.dispose();
 
@@ -84,7 +84,7 @@ class _InsertAlumniDataScreenState extends State<InsertAlumniDataScreen> {
     if (selectedDate != null) {
       setState(() {
         _tanggalLahirController.text =
-            DateFormat('dd/MM/yyyy').format(selectedDate);
+            DateFormat('yyyy-MM-dd').format(selectedDate);
       });
     }
   }
@@ -105,10 +105,11 @@ class _InsertAlumniDataScreenState extends State<InsertAlumniDataScreen> {
                 nim: _stambukController.text,
                 kelamin: selectedGender! == 'Laki-laki' ? 'l' : 'p',
                 tglLahir: _tanggalLahirController.text,
-                jurusan: _jurusanController.text,
+                jurusan: selectedJurusan ?? '',
                 angkatan: _angkatanController.text,
-                golonganDarah: _golonganDarahController ?? '',
-                agama: _agamaController ?? '',
+                golonganDarah: _golonganDarahController,
+                agama: _agamaController,
+                noTelp: _noTelpController.text,
               ),
               token: userSession?.token,
             ),
@@ -213,7 +214,7 @@ class _InsertAlumniDataScreenState extends State<InsertAlumniDataScreen> {
                             ),
                             const SizedBox(height: 12),
                             TextFieldWidget(
-                              label: 'NIM/Stambuk (Optional)',
+                              label: 'NIM/Stambuk',
                               hint: 'Masukkan stambuk',
                               controller: _stambukController,
                             ),
@@ -561,13 +562,19 @@ class _InsertAlumniDataScreenState extends State<InsertAlumniDataScreen> {
                                 return SizedBox(
                                   width: double.infinity,
                                   child: ButtonWidget(
-                                    onPressed: _handleAddData,
-                                    label: 'Daftar',
-                                    isLoading: state is AddAlumniLoading,
-                                    color: agreeToTerms
-                                        ? Theme.of(context).primaryColor
-                                        : Colors.grey,
-                                  ),
+                                      onPressed: _handleAddData,
+                                      label: 'Daftar',
+                                      isLoading: state is AddAlumniLoading,
+                                      color: agreeToTerms
+                                          ? Theme.of(context).primaryColor
+                                          : Colors.grey,
+                                      disabled:
+                                          _namaLengkapController.text.isEmpty ||
+                                              _tanggalLahirController
+                                                  .text.isEmpty ||
+                                              _stambukController.text.isEmpty ||
+                                              selectedJurusan == null ||
+                                              _angkatanController.text.isEmpty),
                                 );
                               },
                             ),

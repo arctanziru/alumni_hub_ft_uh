@@ -154,57 +154,61 @@ class AppBarMenuWidget extends StatelessWidget {
                 child: Expanded(
                   child: Column(
                     children: [
-                      ButtonWidget(
-                        onPressed: () async {
-                          context.read<UserBloc>().add(UserEventSignOut());
-                        },
-                        isLoading: state is UserStateSignOutLoading,
-                        label: 'Keluar',
+                      Expanded(
+                        child: ButtonWidget(
+                          onPressed: () async {
+                            context.read<UserBloc>().add(UserEventSignOut());
+                          },
+                          isLoading: state is UserStateSignOutLoading,
+                          label: 'Keluar',
+                        ),
                       ),
-                      ButtonWidget(
-                        onPressed: () {
-                          CustomDialog.showCustomDialog(
-                            context,
-                            title: 'Hapus Akun',
-                            content: Text(
-                              'Apakah Anda yakin ingin menghapus akun Anda?',
-                              style: Theme.of(context)
-                                  .textTheme
-                                  .bodyMedium
-                                  ?.copyWith(
-                                    fontWeight: FontWeight.bold,
+                      Expanded(
+                        child: ButtonWidget(
+                          onPressed: () {
+                            CustomDialog.showCustomDialog(
+                              context,
+                              title: 'Hapus Akun',
+                              content: Text(
+                                'Apakah Anda yakin ingin menghapus akun Anda?',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .bodyMedium
+                                    ?.copyWith(
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                              ),
+                              actions: [
+                                Expanded(
+                                  child: ButtonWidget(
+                                    label: 'Batal',
+                                    color: AppColors.secondaryColor,
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
                                   ),
-                            ),
-                            actions: [
-                              Expanded(
-                                child: ButtonWidget(
-                                  label: 'Batal',
-                                  color: AppColors.secondaryColor,
-                                  onPressed: () {
-                                    Navigator.of(context).pop();
-                                  },
                                 ),
-                              ),
-                              const SizedBox(width: 16),
-                              Expanded(
-                                child: ButtonWidget(
-                                  label: 'Hapus',
-                                  onPressed: () {
-                                    context
-                                        .read<UserBloc>()
-                                        .add(UserEventDeleteUser());
-                                  },
-                                  isLoading:
-                                      state is UserStateDeleteUserLoading,
+                                const SizedBox(width: 16),
+                                Expanded(
+                                  child: ButtonWidget(
+                                    label: 'Hapus',
+                                    onPressed: () {
+                                      context
+                                          .read<UserBloc>()
+                                          .add(UserEventDeleteUser());
+                                    },
+                                    isLoading:
+                                        state is UserStateDeleteUserLoading,
+                                  ),
                                 ),
-                              ),
-                            ],
-                          );
-                        },
-                        isLoading: state is UserStateDeleteUserLoading,
-                        label: 'Hapus Akun',
-                        color: AppColors.secondaryColor,
-                        textColor: Colors.white,
+                              ],
+                            );
+                          },
+                          isLoading: state is UserStateDeleteUserLoading,
+                          label: 'Hapus Akun',
+                          color: AppColors.secondaryColor,
+                          textColor: Colors.white,
+                        ),
                       ),
                     ],
                   ),

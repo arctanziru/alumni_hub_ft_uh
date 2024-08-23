@@ -2,6 +2,7 @@ import 'package:alumni_hub_ft_uh/common/utils/ui_helper.dart';
 import 'package:alumni_hub_ft_uh/features/alumni/domain/models/alumni_model.dart';
 import 'package:alumni_hub_ft_uh/features/claim_alumni/bloc/get/get_alumnis_bloc.dart';
 import 'package:alumni_hub_ft_uh/features/claim_alumni/bloc/get_jurusan/get_jurusan_bloc.dart';
+import 'package:alumni_hub_ft_uh/features/claim_alumni/domain/models/get_all_jurusan_model.dart';
 import 'package:alumni_hub_ft_uh/features/claim_alumni/domain/models/get_alumnis_model.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -58,7 +59,8 @@ class _ClaimAlumniDataScreenState extends State<ClaimAlumniDataScreen> {
               onPrimary: Colors.white, // header text color
               onSurface: Colors.black, // body text color
             ),
-            dialogBackgroundColor: Colors.white, // background color of the dialog
+            dialogBackgroundColor:
+                Colors.white, // background color of the dialog
           ),
           child: child!,
         );
@@ -82,7 +84,10 @@ class _ClaimAlumniDataScreenState extends State<ClaimAlumniDataScreen> {
             children: [
               Text(
                 'Kelengkapan Data',
-                style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Colors.grey),
+                style: Theme.of(context)
+                    .textTheme
+                    .bodyMedium
+                    ?.copyWith(color: Colors.grey),
               ),
               Text(
                 'Klaim Data Alumni',
@@ -97,7 +102,10 @@ class _ClaimAlumniDataScreenState extends State<ClaimAlumniDataScreen> {
           ),
           content: Text(
             'Untuk mendapatkan akses full, isi kelengkapan data alumni.',
-            style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold),
+            style: Theme.of(context)
+                .textTheme
+                .bodyMedium
+                ?.copyWith(fontWeight: FontWeight.bold),
           ),
           actions: <Widget>[
             Row(
@@ -116,7 +124,8 @@ class _ClaimAlumniDataScreenState extends State<ClaimAlumniDataScreen> {
                 Expanded(
                   child: ButtonWidget(
                     onPressed: () {
-                      Navigator.of(context).pop(); // Close the dialog and stay on the same screen
+                      Navigator.of(context)
+                          .pop(); // Close the dialog and stay on the same screen
                     },
                     label: 'Klaim data',
                     color: AppColors.primaryColor,
@@ -138,7 +147,8 @@ class _ClaimAlumniDataScreenState extends State<ClaimAlumniDataScreen> {
           builder: (BuildContext context, StateSetter setState) {
             return Theme(
               data: Theme.of(context).copyWith(
-                dialogBackgroundColor: Colors.white, // Set the background color to solid white
+                dialogBackgroundColor:
+                    Colors.white, // Set the background color to solid white
               ),
               child: AlertDialog(
                 title: Text(
@@ -170,7 +180,10 @@ class _ClaimAlumniDataScreenState extends State<ClaimAlumniDataScreen> {
                                 ),
                                 TextSpan(
                                   text: 'Syarat dan Ketentuan',
-                                  style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                                  style: Theme.of(context)
+                                      .textTheme
+                                      .bodySmall
+                                      ?.copyWith(
                                         color: AppColors.primaryColor,
                                         decoration: TextDecoration.underline,
                                         decorationColor: Colors.red,
@@ -207,13 +220,16 @@ class _ClaimAlumniDataScreenState extends State<ClaimAlumniDataScreen> {
                         child: ButtonWidget(
                           onPressed: _isCheckboxChecked
                               ? () {
-                                  Navigator.of(context).pop(); // Close the dialog
+                                  Navigator.of(context)
+                                      .pop(); // Close the dialog
                                   Navigator.pushNamed(context,
                                       '/insert_alumni_data'); // Navigate to InsertAlumniDataScreen
                                 }
                               : null, // Disable button when checkbox is unchecked
                           label: 'Isi Data',
-                          color: _isCheckboxChecked ? Theme.of(context).primaryColor : Colors.grey,
+                          color: _isCheckboxChecked
+                              ? Theme.of(context).primaryColor
+                              : Colors.grey,
                         ),
                       ),
                     ],
@@ -278,10 +294,12 @@ class _ClaimAlumniDataScreenState extends State<ClaimAlumniDataScreen> {
               child: LayoutBuilder(builder: (context, constraints) {
                 return ConstrainedBox(
                   constraints: BoxConstraints(
-                    maxHeight: constraints.maxHeight - MediaQuery.of(context).padding.top,
+                    maxHeight: constraints.maxHeight -
+                        MediaQuery.of(context).padding.top,
                   ),
                   child: Container(
-                    margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.2),
+                    margin: EdgeInsets.only(
+                        top: MediaQuery.of(context).size.height * 0.2),
                     decoration: const BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.only(
@@ -289,10 +307,12 @@ class _ClaimAlumniDataScreenState extends State<ClaimAlumniDataScreen> {
                         topRight: Radius.circular(30),
                       ),
                     ),
-                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 16, vertical: 24),
                     height: MediaQuery.of(context).size.height * 0.8,
                     child: SingleChildScrollView(
-                      padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+                      padding: EdgeInsets.only(
+                          bottom: MediaQuery.of(context).viewInsets.bottom),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
@@ -342,9 +362,11 @@ class _ClaimAlumniDataScreenState extends State<ClaimAlumniDataScreen> {
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(12),
                               ),
-                              contentPadding: const EdgeInsets.symmetric(horizontal: 16),
+                              contentPadding:
+                                  const EdgeInsets.symmetric(horizontal: 16),
                               hintStyle: Theme.of(context).textTheme.bodyMedium,
-                              labelStyle: Theme.of(context).textTheme.bodyMedium,
+                              labelStyle:
+                                  Theme.of(context).textTheme.bodyMedium,
                             ),
                             hint: Text(
                               'Pilih jurusan',
@@ -356,11 +378,12 @@ class _ClaimAlumniDataScreenState extends State<ClaimAlumniDataScreen> {
                                 _selectedJurusan = newValue;
                               });
                             },
-                            items: jurusanState.response.data.map((String value) {
+                            items:
+                                jurusanState.response.data.map((Jurusan value) {
                               return DropdownMenuItem<String>(
-                                value: value,
+                                value: value.namaJurusan,
                                 child: Text(
-                                  value,
+                                  value.namaJurusan,
                                   style: Theme.of(context).textTheme.bodyMedium,
                                 ),
                               );
@@ -377,12 +400,14 @@ class _ClaimAlumniDataScreenState extends State<ClaimAlumniDataScreen> {
                             listener: (context, state) {
                               if (state is GetAlumnisSuccess) {
                                 if (state.getAlumnisResponse.data.isNotEmpty) {
-                                  _showPopupClaimAlumniData(state.getAlumnisResponse.data);
+                                  _showPopupClaimAlumniData(
+                                      state.getAlumnisResponse.data);
                                 } else {
                                   _showDataNotFoundPopup();
                                 }
                               } else if (state is GetAlumnisError) {
-                                showToastMessage(message: state.exception.message);
+                                showToastMessage(
+                                    message: state.exception.message);
                               }
                             },
                             builder: (context, state) {
@@ -395,7 +420,8 @@ class _ClaimAlumniDataScreenState extends State<ClaimAlumniDataScreen> {
                                           GetAlumnis(
                                             getAlumnisBody: GetAlumnisBody(
                                               name: _namaLengkapController.text,
-                                              tglLahir: _tanggalLahirController.text,
+                                              tglLahir:
+                                                  _tanggalLahirController.text,
                                               nim: _nimController.text,
                                               jurusan: _selectedJurusan ?? '',
                                             ),

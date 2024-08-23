@@ -117,17 +117,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                         .read<AlumniUpdateBloc>()
                                         .add(AlumniEventUpdate(
                                           AlumniUpdateBody(
-                                            angkatan: _angkatanController.text,
                                             golonganDarah:
                                                 _golonganDarahController,
-                                            jurusan: _jurusanController.text,
-                                            nama: _namaLengkapController.text,
                                             noTelp: _noTelpController.text,
-                                            kelamin: selectedGender,
                                             agama: _agamaController,
-                                            tglLahir:
-                                                _tanggalLahirController.text,
-                                            nim: _stambukController.text,
                                           ),
                                         ));
                                   } else {
@@ -175,40 +168,33 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           description: _namaLengkapController.text,
                           icon: Icons.person,
                           controller: _namaLengkapController,
-                          readOnly: !_isEditing || state is AlumniUpdateLoading,
+                          readOnly: true,
                         ),
                         TextFieldProfileWidget(
                           label: 'Jurusan',
                           description: _jurusanController.text,
                           icon: Icons.school,
                           controller: _jurusanController,
-                          readOnly: !_isEditing || state is AlumniUpdateLoading,
+                          readOnly: true,
                         ),
                         TextFieldProfileWidget(
                           label: 'Angkatan',
                           description: _angkatanController.text,
                           icon: Icons.calendar_today,
                           controller: _angkatanController,
-                          readOnly: !_isEditing || state is AlumniUpdateLoading,
+                          readOnly: true,
                         ),
                         TextFieldProfileWidget(
                           label: 'Tanggal lahir',
                           description: _tanggalLahirController.text,
                           icon: Icons.calendar_view_day,
                           controller: _tanggalLahirController,
-                          readOnly: !_isEditing || state is AlumniUpdateLoading,
+                          readOnly: true,
                         ),
                         Row(
                           children: [
                             Expanded(
                               child: GestureDetector(
-                                onTap: () {
-                                  if (!_isEditing ||
-                                      state is AlumniUpdateLoading) return;
-                                  setState(() {
-                                    selectedGender = 'l';
-                                  });
-                                },
                                 child: Container(
                                   decoration: BoxDecoration(
                                     color: selectedGender == 'l'
@@ -235,13 +221,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                             const SizedBox(width: 16),
                             Expanded(
                               child: GestureDetector(
-                                onTap: () {
-                                  if (!_isEditing ||
-                                      state is AlumniUpdateLoading) return;
-                                  setState(() {
-                                    selectedGender = 'p';
-                                  });
-                                },
                                 child: Container(
                                   decoration: BoxDecoration(
                                     color: selectedGender == 'p'

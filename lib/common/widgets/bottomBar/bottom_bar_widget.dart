@@ -15,6 +15,39 @@ class BottomBarWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final userSession = context.read<UserBloc>().getUserSession();
 
+    void _klaimData() {
+      CustomDialog.showCustomDialog(
+        context,
+        title: 'Klaim Data Alumni',
+        content: Text(
+          'Untuk mendapatkan akses full, isi kelengkapan data alumni',
+          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                fontWeight: FontWeight.bold,
+              ),
+        ),
+        actions: [
+          Expanded(
+            child: ButtonWidget(
+              label: 'Nanti',
+              color: AppColors.secondaryColor,
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ),
+          const SizedBox(width: 16),
+          Expanded(
+            child: ButtonWidget(
+              label: 'Klaim Data',
+              onPressed: () {
+                Navigator.of(context).pushNamed('/claim_alumni_data');
+              },
+            ),
+          ),
+        ],
+      );
+    }
+
     return Container(
       decoration: const BoxDecoration(
         color: Colors.white,
@@ -46,7 +79,12 @@ class BottomBarWidget extends StatelessWidget {
             iconAsset: 'assets/icons/donation.svg',
             label: 'Donasi',
             isSelected: currentIndex == 2,
-            onTap: () => Navigator.of(context).pushNamed('/donation'),
+            onTap: () => {
+              if (userSession?.user?.alumni != null)
+                {Navigator.of(context).pushNamed('/donation')}
+              else
+                {_klaimData()}
+            },
           ),
           BottomBarItemWidget(
             index: 3,
@@ -57,36 +95,7 @@ class BottomBarWidget extends StatelessWidget {
               if (userSession?.user?.alumni != null) {
                 Navigator.of(context).pushNamed('/vacancy');
               } else {
-                CustomDialog.showCustomDialog(
-                  context,
-                  title: 'Klaim Data Alumni',
-                  content: Text(
-                    'Untuk mendapatkan akses full, isi kelengkapan data alumni',
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          fontWeight: FontWeight.bold,
-                        ),
-                  ),
-                  actions: [
-                    Expanded(
-                      child: ButtonWidget(
-                        label: 'Nanti',
-                        color: AppColors.secondaryColor,
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                      ),
-                    ),
-                    const SizedBox(width: 16),
-                    Expanded(
-                      child: ButtonWidget(
-                        label: 'Klaim Data',
-                        onPressed: () {
-                          Navigator.of(context).pushNamed('/claim_alumni_data');
-                        },
-                      ),
-                    ),
-                  ],
-                );
+                _klaimData();
               }
             },
           ),
@@ -99,36 +108,7 @@ class BottomBarWidget extends StatelessWidget {
               if (userSession?.user?.alumni != null) {
                 Navigator.of(context).pushNamed('/alumni');
               } else {
-                CustomDialog.showCustomDialog(
-                  context,
-                  title: 'Klaim Data Alumni',
-                  content: Text(
-                    'Untuk mendapatkan akses full, isi kelengkapan data alumni',
-                    style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          fontWeight: FontWeight.bold,
-                        ),
-                  ),
-                  actions: [
-                    Expanded(
-                      child: ButtonWidget(
-                        label: 'Nanti',
-                        color: AppColors.secondaryColor,
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                      ),
-                    ),
-                    const SizedBox(width: 16),
-                    Expanded(
-                      child: ButtonWidget(
-                        label: 'Klaim Data',
-                        onPressed: () {
-                          Navigator.of(context).pushNamed('/claim_alumni_data');
-                        },
-                      ),
-                    ),
-                  ],
-                );
+                _klaimData();
               }
             },
           ),

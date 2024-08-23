@@ -3,6 +3,7 @@ import 'package:alumni_hub_ft_uh/constants/common.dart';
 import 'package:alumni_hub_ft_uh/features/claim_alumni/bloc/add/add_alumni_bloc.dart';
 import 'package:alumni_hub_ft_uh/features/claim_alumni/bloc/get_jurusan/get_jurusan_bloc.dart';
 import 'package:alumni_hub_ft_uh/features/claim_alumni/domain/models/add_alumni_model.dart';
+import 'package:alumni_hub_ft_uh/features/claim_alumni/domain/models/get_all_jurusan_model.dart';
 import 'package:alumni_hub_ft_uh/features/user/bloc/user_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:alumni_hub_ft_uh/common/widgets/button/button_widget.dart';
@@ -72,7 +73,8 @@ class _InsertAlumniDataScreenState extends State<InsertAlumniDataScreen> {
               onPrimary: Colors.white, // header text color
               onSurface: Colors.black, // body text color
             ),
-            dialogBackgroundColor: Colors.white, // background color of the dialog
+            dialogBackgroundColor:
+                Colors.white, // background color of the dialog
           ),
           child: child!,
         );
@@ -81,7 +83,8 @@ class _InsertAlumniDataScreenState extends State<InsertAlumniDataScreen> {
 
     if (selectedDate != null) {
       setState(() {
-        _tanggalLahirController.text = DateFormat('dd/MM/yyyy').format(selectedDate);
+        _tanggalLahirController.text =
+            DateFormat('dd/MM/yyyy').format(selectedDate);
       });
     }
   }
@@ -153,10 +156,12 @@ class _InsertAlumniDataScreenState extends State<InsertAlumniDataScreen> {
                 builder: (context, constraints) {
                   return ConstrainedBox(
                     constraints: BoxConstraints(
-                      maxHeight: constraints.maxHeight - MediaQuery.of(context).padding.top,
+                      maxHeight: constraints.maxHeight -
+                          MediaQuery.of(context).padding.top,
                     ),
                     child: Container(
-                      margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.2),
+                      margin: EdgeInsets.only(
+                          top: MediaQuery.of(context).size.height * 0.2),
                       decoration: const BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.only(
@@ -164,10 +169,12 @@ class _InsertAlumniDataScreenState extends State<InsertAlumniDataScreen> {
                           topRight: Radius.circular(30),
                         ),
                       ),
-                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 16, vertical: 24),
                       height: MediaQuery.of(context).size.height * 0.8,
                       child: SingleChildScrollView(
-                        padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+                        padding: EdgeInsets.only(
+                            bottom: MediaQuery.of(context).viewInsets.bottom),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
@@ -234,7 +241,8 @@ class _InsertAlumniDataScreenState extends State<InsertAlumniDataScreen> {
                                         borderRadius: BorderRadius.circular(8),
                                         border: Border.all(color: Colors.grey),
                                       ),
-                                      padding: const EdgeInsets.symmetric(vertical: 16),
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 16),
                                       child: Center(
                                         child: Text(
                                           'Laki-laki',
@@ -264,7 +272,8 @@ class _InsertAlumniDataScreenState extends State<InsertAlumniDataScreen> {
                                         borderRadius: BorderRadius.circular(8),
                                         border: Border.all(color: Colors.grey),
                                       ),
-                                      padding: const EdgeInsets.symmetric(vertical: 16),
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 16),
                                       child: Center(
                                         child: Text(
                                           'Perempuan',
@@ -295,7 +304,8 @@ class _InsertAlumniDataScreenState extends State<InsertAlumniDataScreen> {
                                   constraints: const BoxConstraints(
                                     minHeight: 60,
                                   ),
-                                  padding: const EdgeInsets.symmetric(horizontal: 12),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 12),
                                   decoration: const BoxDecoration(
                                     color: Color(0xFFD80100),
                                     borderRadius: BorderRadius.horizontal(
@@ -317,7 +327,8 @@ class _InsertAlumniDataScreenState extends State<InsertAlumniDataScreen> {
                                     height: 60,
                                     decoration: BoxDecoration(
                                       border: Border.all(color: Colors.grey),
-                                      borderRadius: const BorderRadius.horizontal(
+                                      borderRadius:
+                                          const BorderRadius.horizontal(
                                         right: Radius.circular(8),
                                       ),
                                     ),
@@ -325,10 +336,12 @@ class _InsertAlumniDataScreenState extends State<InsertAlumniDataScreen> {
                                       controller: _noTelpController,
                                       keyboardType: TextInputType.phone,
                                       decoration: InputDecoration(
-                                        contentPadding: const EdgeInsets.all(16.0),
+                                        contentPadding:
+                                            const EdgeInsets.all(16.0),
                                         hintText: 'Masukkan nomor telepon',
                                         border: InputBorder.none,
-                                        hintStyle: textTheme.bodyMedium?.copyWith(
+                                        hintStyle:
+                                            textTheme.bodyMedium?.copyWith(
                                           color: Colors.grey,
                                         ),
                                       ),
@@ -358,9 +371,12 @@ class _InsertAlumniDataScreenState extends State<InsertAlumniDataScreen> {
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(12),
                                 ),
-                                contentPadding: const EdgeInsets.symmetric(horizontal: 16),
-                                hintStyle: Theme.of(context).textTheme.bodyMedium,
-                                labelStyle: Theme.of(context).textTheme.bodyMedium,
+                                contentPadding:
+                                    const EdgeInsets.symmetric(horizontal: 16),
+                                hintStyle:
+                                    Theme.of(context).textTheme.bodyMedium,
+                                labelStyle:
+                                    Theme.of(context).textTheme.bodyMedium,
                               ),
                               hint: Text(
                                 'Pilih jurusan',
@@ -372,12 +388,14 @@ class _InsertAlumniDataScreenState extends State<InsertAlumniDataScreen> {
                                   selectedJurusan = newValue;
                                 });
                               },
-                              items: jurusanState.response.data.map((String value) {
+                              items: jurusanState.response.data
+                                  .map((Jurusan value) {
                                 return DropdownMenuItem<String>(
-                                  value: value,
+                                  value: value.namaJurusan,
                                   child: Text(
-                                    value,
-                                    style: Theme.of(context).textTheme.bodyMedium,
+                                    value.namaJurusan,
+                                    style:
+                                        Theme.of(context).textTheme.bodyMedium,
                                   ),
                                 );
                               }).toList(),
@@ -398,9 +416,12 @@ class _InsertAlumniDataScreenState extends State<InsertAlumniDataScreen> {
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(12),
                                 ),
-                                contentPadding: const EdgeInsets.symmetric(horizontal: 16),
-                                hintStyle: Theme.of(context).textTheme.bodyMedium,
-                                labelStyle: Theme.of(context).textTheme.bodyMedium,
+                                contentPadding:
+                                    const EdgeInsets.symmetric(horizontal: 16),
+                                hintStyle:
+                                    Theme.of(context).textTheme.bodyMedium,
+                                labelStyle:
+                                    Theme.of(context).textTheme.bodyMedium,
                               ),
                               hint: Text(
                                 'Pilih golongan darah',
@@ -417,7 +438,8 @@ class _InsertAlumniDataScreenState extends State<InsertAlumniDataScreen> {
                                   value: value,
                                   child: Text(
                                     value,
-                                    style: Theme.of(context).textTheme.bodyMedium,
+                                    style:
+                                        Theme.of(context).textTheme.bodyMedium,
                                   ),
                                 );
                               }).toList(),
@@ -436,7 +458,8 @@ class _InsertAlumniDataScreenState extends State<InsertAlumniDataScreen> {
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(12),
                                 ),
-                                contentPadding: const EdgeInsets.symmetric(horizontal: 16),
+                                contentPadding:
+                                    const EdgeInsets.symmetric(horizontal: 16),
                               ),
                               hint: Text(
                                 'Pilih agama',
@@ -453,7 +476,8 @@ class _InsertAlumniDataScreenState extends State<InsertAlumniDataScreen> {
                                   value: value,
                                   child: Text(
                                     value,
-                                    style: Theme.of(context).textTheme.bodyMedium,
+                                    style:
+                                        Theme.of(context).textTheme.bodyMedium,
                                   ),
                                 );
                               }).toList(),
@@ -475,7 +499,8 @@ class _InsertAlumniDataScreenState extends State<InsertAlumniDataScreen> {
                                         agreeToTerms = value ?? false;
                                       });
                                     },
-                                    materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                                    materialTapTargetSize:
+                                        MaterialTapTargetSize.shrinkWrap,
                                   ),
                                 ),
                                 Expanded(
@@ -492,12 +517,14 @@ class _InsertAlumniDataScreenState extends State<InsertAlumniDataScreen> {
                                           text: 'syarat dan ketentuan',
                                           style: textTheme.bodyMedium?.copyWith(
                                             color: Colors.red,
-                                            decoration: TextDecoration.underline,
+                                            decoration:
+                                                TextDecoration.underline,
                                             decorationColor: Colors.red,
                                           ),
                                           recognizer: TapGestureRecognizer()
                                             ..onTap = () {
-                                              Navigator.pushNamed(context, '/license');
+                                              Navigator.pushNamed(
+                                                  context, '/license');
                                             },
                                         ),
                                       ],
@@ -510,10 +537,13 @@ class _InsertAlumniDataScreenState extends State<InsertAlumniDataScreen> {
                             BlocConsumer<AddAlumniBloc, AddAlumniState>(
                               listener: (context, state) {
                                 if (state is AddAlumniSuccess) {
-                                  showToastMessage(message: 'Data alumni berhasil ditambahkan');
+                                  showToastMessage(
+                                      message:
+                                          'Data alumni berhasil ditambahkan');
                                   Navigator.pushNamed(context, '/home');
                                 } else if (state is AddAlumniError) {
-                                  showToastMessage(message: state.exception.message);
+                                  showToastMessage(
+                                      message: state.exception.message);
                                 }
                               },
                               builder: (context, state) {
@@ -523,8 +553,9 @@ class _InsertAlumniDataScreenState extends State<InsertAlumniDataScreen> {
                                     onPressed: _handleAddData,
                                     label: 'Daftar',
                                     isLoading: state is AddAlumniLoading,
-                                    color:
-                                        agreeToTerms ? Theme.of(context).primaryColor : Colors.grey,
+                                    color: agreeToTerms
+                                        ? Theme.of(context).primaryColor
+                                        : Colors.grey,
                                   ),
                                 );
                               },

@@ -18,12 +18,6 @@ class AlumniResponse with _$AlumniResponse {
 @freezed
 class AlumniUpdateBody with _$AlumniUpdateBody {
   const factory AlumniUpdateBody({
-    required String? nim,
-    required String nama,
-    @JsonKey(name: 'tgl_lahir') required String tglLahir,
-    required String jurusan,
-    required String angkatan,
-    String? kelamin,
     String? agama,
     @JsonKey(name: 'no_telp') String? noTelp,
     @JsonKey(name: 'golongan_darah') String? golonganDarah,

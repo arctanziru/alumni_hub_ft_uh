@@ -358,17 +358,18 @@ class _ClaimAlumniDataScreenState extends State<ClaimAlumniDataScreen> {
                               fontWeight: FontWeight.w600,
                             ),
                           ),
-                          const SizedBox(height: 8),
+                          const SizedBox(height: 6),
                           DropdownButtonFormField<String>(
+                            dropdownColor: Colors.white,
                             decoration: InputDecoration(
+                              filled: true,
+                              fillColor: Colors.white,
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(12),
                               ),
-                              contentPadding:
-                                  const EdgeInsets.symmetric(horizontal: 16),
+                              contentPadding: const EdgeInsets.symmetric(horizontal: 16),
                               hintStyle: Theme.of(context).textTheme.bodyMedium,
-                              labelStyle:
-                                  Theme.of(context).textTheme.bodyMedium,
+                              labelStyle: Theme.of(context).textTheme.bodyMedium,
                             ),
                             hint: Text(
                               'Pilih jurusan',
@@ -380,8 +381,7 @@ class _ClaimAlumniDataScreenState extends State<ClaimAlumniDataScreen> {
                                 _selectedJurusan = newValue;
                               });
                             },
-                            items:
-                                jurusanState.response.data.map((Jurusan value) {
+                            items: jurusanState.response.data.map((Jurusan value) {
                               return DropdownMenuItem<String>(
                                 value: value.namaJurusan,
                                 child: Text(

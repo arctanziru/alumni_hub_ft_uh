@@ -1,5 +1,5 @@
 import 'package:alumni_hub_ft_uh/constants/colors.dart';
-import 'package:carousel_slider/carousel_slider.dart';
+import 'package:carousel_slider_plus/carousel_slider_plus.dart';
 import 'package:flutter/material.dart';
 
 class HomeCarouselWidget extends StatelessWidget {
@@ -7,7 +7,7 @@ class HomeCarouselWidget extends StatelessWidget {
   final List<String> countdownTexts;
   final List<String> registrantsInfo;
 
-  const HomeCarouselWidget({
+ const HomeCarouselWidget({
     super.key,
     required this.carouselItems,
     required this.countdownTexts,

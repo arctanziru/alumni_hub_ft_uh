@@ -369,7 +369,10 @@ class _InsertAlumniDataScreenState extends State<InsertAlumniDataScreen> {
                             ),
                             const SizedBox(height: 8),
                             DropdownButtonFormField<String>(
+                              dropdownColor: Colors.white,
                               decoration: InputDecoration(
+                                filled: true,
+                                fillColor: Colors.white,
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(12),
                                 ),
@@ -414,7 +417,10 @@ class _InsertAlumniDataScreenState extends State<InsertAlumniDataScreen> {
                             ),
                             const SizedBox(height: 8),
                             DropdownButtonFormField<String>(
+                              dropdownColor: Colors.white,
                               decoration: InputDecoration(
+                                filled: true,
+                                fillColor: Colors.white,
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(12),
                                 ),
@@ -456,7 +462,10 @@ class _InsertAlumniDataScreenState extends State<InsertAlumniDataScreen> {
                             ),
                             const SizedBox(height: 8),
                             DropdownButtonFormField<String>(
+                              dropdownColor: Colors.white,
                               decoration: InputDecoration(
+                                filled: true,
+                                fillColor: Colors.white,
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(12),
                                 ),

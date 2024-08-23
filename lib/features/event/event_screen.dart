@@ -1,5 +1,7 @@
+import 'package:alumni_hub_ft_uh/common/utils/ui_helper.dart';
 import 'package:alumni_hub_ft_uh/features/event/bloc/event_bloc.dart';
 import 'package:alumni_hub_ft_uh/features/event/event_detail_screen.dart';
+import 'package:alumni_hub_ft_uh/features/user/bloc/user_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:alumni_hub_ft_uh/common/widgets/appBar/app_bar_search_widget.dart';
@@ -34,6 +36,8 @@ class _EventScreenState extends State<EventScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final userSession = context.read<UserBloc>().getUserSession();
+
     return Scaffold(
       appBar: const AppBarSearchWidget(),
       bottomNavigationBar: const BottomBarWidget(), // Adjust index if needed
@@ -117,15 +121,19 @@ class _EventScreenState extends State<EventScreen> {
                                   children: [
                                     CardEventWidget(
                                       onTap: () {
-                                        Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                            builder: (context) =>
-                                                EventDetailScreen(
-                                              eventId: event.idEvent,
+                                        if (userSession?.user?.alumni != null) {
+                                          Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  EventDetailScreen(
+                                                eventId: event.idEvent,
+                                              ),
                                             ),
-                                          ),
-                                        );
+                                          );
+                                        } else {
+                                          klaimData(context);
+                                        }
                                       },
                                       title: event.judul,
                                       location: event.lokasiEvent,

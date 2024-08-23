@@ -60,7 +60,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 builder: (context, state) {
                   debugPrint('Event state: ${state.toString()}');
 
-                  if (state.status == EventStatus.loading) {
+                  if (state.status == EventStatus.loading &&
+                      state.events.isEmpty) {
                     return SizedBox(
                       height: 200,
                       child: Skeletonizer(

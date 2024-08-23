@@ -287,7 +287,9 @@ class _ClaimAlumniDataScreenState extends State<ClaimAlumniDataScreen> {
             );
           } else if (jurusanState is GetJurusanLoading) {
             return const Center(
-              child: CircularProgressIndicator(),
+              child: CircularProgressIndicator(
+                color: Colors.white,
+              ),
             );
           } else if (jurusanState is GetJurusanSuccess) {
             return SafeArea(

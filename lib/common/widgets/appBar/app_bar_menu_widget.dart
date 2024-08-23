@@ -151,10 +151,12 @@ class AppBarMenuWidget extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.symmetric(
                     vertical: 16.0, horizontal: 16.0),
-                child: Expanded(
+                child: SizedBox(
+                  width: double.infinity,
                   child: Column(
                     children: [
-                      Expanded(
+                      SizedBox(
+                        width: double.infinity,
                         child: ButtonWidget(
                           onPressed: () async {
                             context.read<UserBloc>().add(UserEventSignOut());
@@ -163,7 +165,8 @@ class AppBarMenuWidget extends StatelessWidget {
                           label: 'Keluar',
                         ),
                       ),
-                      Expanded(
+                      SizedBox(
+                        width: double.infinity,
                         child: ButtonWidget(
                           onPressed: () {
                             CustomDialog.showCustomDialog(

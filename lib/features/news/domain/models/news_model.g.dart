@@ -9,9 +9,11 @@ part of 'news_model.dart';
 _$NewsModelImpl _$$NewsModelImplFromJson(Map<String, dynamic> json) =>
     _$NewsModelImpl(
       idBerita: (json['id_berita'] as num).toInt(),
-      idKategoriBerita: (json['id_kategori_berita'] as num).toInt(),
-      kategori:
-          NewsCategoryModel.fromJson(json['kategori'] as Map<String, dynamic>),
+      idKategoriBerita: (json['id_kategori_berita'] as num?)?.toInt(),
+      kategori: json['kategori'] == null
+          ? null
+          : NewsCategoryModel.fromJson(
+              json['kategori'] as Map<String, dynamic>),
       judul: json['judul'] as String,
       penulis: json['penulis'] as String,
       slug: json['slug'] as String,

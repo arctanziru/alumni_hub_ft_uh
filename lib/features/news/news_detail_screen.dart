@@ -43,9 +43,8 @@ class _NewsDetailScreenState extends State<NewsDetailScreen> {
             Text(
               widget.news.judul,
               style: Theme.of(context).textTheme.titleLarge,
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
               textAlign: TextAlign.center,
+              softWrap: true,
             ),
             const SizedBox(height: 6),
             Text(

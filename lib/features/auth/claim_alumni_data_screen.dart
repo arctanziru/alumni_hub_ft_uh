@@ -157,51 +157,51 @@ class _ClaimAlumniDataScreenState extends State<ClaimAlumniDataScreen> {
                         fontWeight: FontWeight.bold,
                       ),
                 ),
-                content: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Row(
-                      children: [
-                        Checkbox(
-                          value: _isCheckboxChecked,
-                          onChanged: (bool? value) {
-                            setState(() {
-                              _isCheckboxChecked = value ?? false;
-                            });
-                          },
-                        ),
-                        Expanded(
-                          child: RichText(
-                            text: TextSpan(
-                              children: [
-                                TextSpan(
-                                  text: 'Saya menyetujui ',
-                                  style: Theme.of(context).textTheme.bodySmall,
-                                ),
-                                TextSpan(
-                                  text: 'Syarat dan Ketentuan',
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .bodySmall
-                                      ?.copyWith(
-                                        color: AppColors.primaryColor,
-                                        decoration: TextDecoration.underline,
-                                        decorationColor: Colors.red,
-                                        decorationThickness: 2.0,
-                                      ),
-                                  recognizer: TapGestureRecognizer()
-                                    ..onTap = () {
-                                      Navigator.pushNamed(context, '/license');
-                                    },
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
+                // content: Column(
+                //   mainAxisSize: MainAxisSize.min,
+                //   children: [
+                //     Row(
+                //       children: [
+                //         Checkbox(
+                //           value: _isCheckboxChecked,
+                //           onChanged: (bool? value) {
+                //             setState(() {
+                //               _isCheckboxChecked = value ?? false;
+                //             });
+                //           },
+                //         ),
+                //         Expanded(
+                //           child: RichText(
+                //             text: TextSpan(
+                //               children: [
+                //                 TextSpan(
+                //                   text: 'Saya menyetujui ',
+                //                   style: Theme.of(context).textTheme.bodySmall,
+                //                 ),
+                //                 TextSpan(
+                //                   text: 'Syarat dan Ketentuan',
+                //                   style: Theme.of(context)
+                //                       .textTheme
+                //                       .bodySmall
+                //                       ?.copyWith(
+                //                         color: AppColors.primaryColor,
+                //                         decoration: TextDecoration.underline,
+                //                         decorationColor: Colors.red,
+                //                         decorationThickness: 2.0,
+                //                       ),
+                //                   recognizer: TapGestureRecognizer()
+                //                     ..onTap = () {
+                //                       Navigator.pushNamed(context, '/license');
+                //                     },
+                //                 ),
+                //               ],
+                //             ),
+                //           ),
+                //         ),
+                //       ],
+                //     ),
+                //   ],
+                // ),
                 actions: <Widget>[
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -215,23 +215,23 @@ class _ClaimAlumniDataScreenState extends State<ClaimAlumniDataScreen> {
                           color: AppColors.gray3,
                         ),
                       ),
-                      const SizedBox(width: 8),
-                      Expanded(
-                        child: ButtonWidget(
-                          onPressed: _isCheckboxChecked
-                              ? () {
-                                  Navigator.of(context)
-                                      .pop(); // Close the dialog
-                                  Navigator.pushNamed(context,
-                                      '/insert_alumni_data'); // Navigate to InsertAlumniDataScreen
-                                }
-                              : null, // Disable button when checkbox is unchecked
-                          label: 'Isi Data',
-                          color: _isCheckboxChecked
-                              ? Theme.of(context).primaryColor
-                              : Colors.grey,
-                        ),
-                      ),
+                      // const SizedBox(width: 8),
+                      // Expanded(
+                      //   child: ButtonWidget(
+                      //     onPressed: _isCheckboxChecked
+                      //         ? () {
+                      //             Navigator.of(context)
+                      //                 .pop(); // Close the dialog
+                      //             Navigator.pushNamed(context,
+                      //                 '/insert_alumni_data'); // Navigate to InsertAlumniDataScreen
+                      //           }
+                      //         : null, // Disable button when checkbox is unchecked
+                      //     label: 'Isi Data',
+                      //     color: _isCheckboxChecked
+                      //         ? Theme.of(context).primaryColor
+                      //         : Colors.grey,
+                      //   ),
+                      // ),
                     ],
                   ),
                 ],

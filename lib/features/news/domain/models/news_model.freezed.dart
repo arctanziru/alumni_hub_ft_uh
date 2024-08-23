@@ -23,8 +23,8 @@ mixin _$NewsModel {
   @JsonKey(name: 'id_berita')
   int get idBerita => throw _privateConstructorUsedError;
   @JsonKey(name: 'id_kategori_berita')
-  int get idKategoriBerita => throw _privateConstructorUsedError;
-  NewsCategoryModel get kategori => throw _privateConstructorUsedError;
+  int? get idKategoriBerita => throw _privateConstructorUsedError;
+  NewsCategoryModel? get kategori => throw _privateConstructorUsedError;
   String get judul => throw _privateConstructorUsedError;
   String get penulis => throw _privateConstructorUsedError;
   String get slug => throw _privateConstructorUsedError;
@@ -53,8 +53,8 @@ abstract class $NewsModelCopyWith<$Res> {
   @useResult
   $Res call(
       {@JsonKey(name: 'id_berita') int idBerita,
-      @JsonKey(name: 'id_kategori_berita') int idKategoriBerita,
-      NewsCategoryModel kategori,
+      @JsonKey(name: 'id_kategori_berita') int? idKategoriBerita,
+      NewsCategoryModel? kategori,
       String judul,
       String penulis,
       String slug,
@@ -66,7 +66,7 @@ abstract class $NewsModelCopyWith<$Res> {
       @JsonKey(name: 'updated_at') DateTime updatedAt,
       dynamic required});
 
-  $NewsCategoryModelCopyWith<$Res> get kategori;
+  $NewsCategoryModelCopyWith<$Res>? get kategori;
 }
 
 /// @nodoc
@@ -83,8 +83,8 @@ class _$NewsModelCopyWithImpl<$Res, $Val extends NewsModel>
   @override
   $Res call({
     Object? idBerita = null,
-    Object? idKategoriBerita = null,
-    Object? kategori = null,
+    Object? idKategoriBerita = freezed,
+    Object? kategori = freezed,
     Object? judul = null,
     Object? penulis = null,
     Object? slug = null,
@@ -101,14 +101,14 @@ class _$NewsModelCopyWithImpl<$Res, $Val extends NewsModel>
           ? _value.idBerita
           : idBerita // ignore: cast_nullable_to_non_nullable
               as int,
-      idKategoriBerita: null == idKategoriBerita
+      idKategoriBerita: freezed == idKategoriBerita
           ? _value.idKategoriBerita
           : idKategoriBerita // ignore: cast_nullable_to_non_nullable
-              as int,
-      kategori: null == kategori
+              as int?,
+      kategori: freezed == kategori
           ? _value.kategori
           : kategori // ignore: cast_nullable_to_non_nullable
-              as NewsCategoryModel,
+              as NewsCategoryModel?,
       judul: null == judul
           ? _value.judul
           : judul // ignore: cast_nullable_to_non_nullable
@@ -154,8 +154,12 @@ class _$NewsModelCopyWithImpl<$Res, $Val extends NewsModel>
 
   @override
   @pragma('vm:prefer-inline')
-  $NewsCategoryModelCopyWith<$Res> get kategori {
-    return $NewsCategoryModelCopyWith<$Res>(_value.kategori, (value) {
+  $NewsCategoryModelCopyWith<$Res>? get kategori {
+    if (_value.kategori == null) {
+      return null;
+    }
+
+    return $NewsCategoryModelCopyWith<$Res>(_value.kategori!, (value) {
       return _then(_value.copyWith(kategori: value) as $Val);
     });
   }
@@ -171,8 +175,8 @@ abstract class _$$NewsModelImplCopyWith<$Res>
   @useResult
   $Res call(
       {@JsonKey(name: 'id_berita') int idBerita,
-      @JsonKey(name: 'id_kategori_berita') int idKategoriBerita,
-      NewsCategoryModel kategori,
+      @JsonKey(name: 'id_kategori_berita') int? idKategoriBerita,
+      NewsCategoryModel? kategori,
       String judul,
       String penulis,
       String slug,
@@ -185,7 +189,7 @@ abstract class _$$NewsModelImplCopyWith<$Res>
       dynamic required});
 
   @override
-  $NewsCategoryModelCopyWith<$Res> get kategori;
+  $NewsCategoryModelCopyWith<$Res>? get kategori;
 }
 
 /// @nodoc
@@ -200,8 +204,8 @@ class __$$NewsModelImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? idBerita = null,
-    Object? idKategoriBerita = null,
-    Object? kategori = null,
+    Object? idKategoriBerita = freezed,
+    Object? kategori = freezed,
     Object? judul = null,
     Object? penulis = null,
     Object? slug = null,
@@ -218,14 +222,14 @@ class __$$NewsModelImplCopyWithImpl<$Res>
           ? _value.idBerita
           : idBerita // ignore: cast_nullable_to_non_nullable
               as int,
-      idKategoriBerita: null == idKategoriBerita
+      idKategoriBerita: freezed == idKategoriBerita
           ? _value.idKategoriBerita
           : idKategoriBerita // ignore: cast_nullable_to_non_nullable
-              as int,
-      kategori: null == kategori
+              as int?,
+      kategori: freezed == kategori
           ? _value.kategori
           : kategori // ignore: cast_nullable_to_non_nullable
-              as NewsCategoryModel,
+              as NewsCategoryModel?,
       judul: null == judul
           ? _value.judul
           : judul // ignore: cast_nullable_to_non_nullable
@@ -293,9 +297,9 @@ class _$NewsModelImpl implements _NewsModel {
   final int idBerita;
   @override
   @JsonKey(name: 'id_kategori_berita')
-  final int idKategoriBerita;
+  final int? idKategoriBerita;
   @override
-  final NewsCategoryModel kategori;
+  final NewsCategoryModel? kategori;
   @override
   final String judul;
   @override
@@ -387,8 +391,8 @@ class _$NewsModelImpl implements _NewsModel {
 abstract class _NewsModel implements NewsModel {
   const factory _NewsModel(
       {@JsonKey(name: 'id_berita') required final int idBerita,
-      @JsonKey(name: 'id_kategori_berita') required final int idKategoriBerita,
-      required final NewsCategoryModel kategori,
+      @JsonKey(name: 'id_kategori_berita') required final int? idKategoriBerita,
+      required final NewsCategoryModel? kategori,
       required final String judul,
       required final String penulis,
       required final String slug,
@@ -408,9 +412,9 @@ abstract class _NewsModel implements NewsModel {
   int get idBerita;
   @override
   @JsonKey(name: 'id_kategori_berita')
-  int get idKategoriBerita;
+  int? get idKategoriBerita;
   @override
-  NewsCategoryModel get kategori;
+  NewsCategoryModel? get kategori;
   @override
   String get judul;
   @override

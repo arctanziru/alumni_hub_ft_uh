@@ -7,8 +7,8 @@ part 'news_model.g.dart';
 class NewsModel with _$NewsModel {
   const factory NewsModel(
       {@JsonKey(name: 'id_berita') required int idBerita,
-      @JsonKey(name: 'id_kategori_berita') required int idKategoriBerita,
-      required NewsCategoryModel kategori,
+      @JsonKey(name: 'id_kategori_berita') required int? idKategoriBerita,
+      required NewsCategoryModel? kategori,
       required String judul,
       required String penulis,
       required String slug,

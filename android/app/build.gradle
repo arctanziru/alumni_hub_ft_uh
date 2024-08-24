@@ -28,7 +28,7 @@ if (flutterVersionName == null) {
 }
 
 android {
-    namespace = "com.antekhub.app"
+    namespace = "com.example.alumni_hub_ft_uh"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
 

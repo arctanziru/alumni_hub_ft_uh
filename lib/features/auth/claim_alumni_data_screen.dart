@@ -4,7 +4,6 @@ import 'package:alumni_hub_ft_uh/features/claim_alumni/bloc/get/get_alumnis_bloc
 import 'package:alumni_hub_ft_uh/features/claim_alumni/bloc/get_jurusan/get_jurusan_bloc.dart';
 import 'package:alumni_hub_ft_uh/features/claim_alumni/domain/models/get_all_jurusan_model.dart';
 import 'package:alumni_hub_ft_uh/features/claim_alumni/domain/models/get_alumnis_model.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:alumni_hub_ft_uh/constants/colors.dart';
 import 'package:alumni_hub_ft_uh/common/widgets/button/button_widget.dart';

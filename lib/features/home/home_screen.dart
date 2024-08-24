@@ -7,6 +7,7 @@ import 'package:alumni_hub_ft_uh/common/widgets/button/button_filter_widget.dart
 import 'package:alumni_hub_ft_uh/common/widgets/button/button_widget.dart';
 import 'package:alumni_hub_ft_uh/common/widgets/card/card_news_widget.dart';
 import 'package:alumni_hub_ft_uh/common/widgets/card/card_vacancy_widget.dart';
+import 'package:alumni_hub_ft_uh/features/event/bloc/event_bloc.dart';
 import 'package:alumni_hub_ft_uh/features/news/bloc/news_bloc.dart';
 import 'package:alumni_hub_ft_uh/features/news/news_detail_screen.dart';
 import 'package:alumni_hub_ft_uh/features/news/news_screen.dart';
@@ -14,7 +15,6 @@ import 'package:alumni_hub_ft_uh/features/user/bloc/user_bloc.dart';
 import 'package:alumni_hub_ft_uh/features/vacancy/bloc/vacancy_bloc.dart';
 import 'package:alumni_hub_ft_uh/features/vacancy/vacancy_detail_screen.dart';
 import 'package:alumni_hub_ft_uh/features/vacancy/vacancy_screen.dart';
-import 'package:alumni_hub_ft_uh/features/event/bloc/event_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -88,6 +88,10 @@ class _HomeScreenState extends State<HomeScreen> {
                         (index) =>
                             '${dotenv.get("STORAGE_URL")}${state.events[index].gambar}',
                       ),
+                      ids: List.generate(
+                        min(state.events.length, 3),
+                        (index) => state.events[index].idEvent,
+                      ),
                       countdownTexts: List.generate(
                         min(state.events.length, 3),
                         (index) {
@@ -99,7 +103,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             return 'Exp Event berakhir';
                           }
 
-                          return ' $dif hari lagi';
+                          return '$dif hari lagi';
                         },
                       ),
                       registrantsInfo: List.generate(

@@ -46,14 +46,14 @@ class EventRepositoryImpl implements EventRepository {
     return Mutation<EventGetOneModelResponse, int>(
       key: ['register_event'],
       queryFn: (idEvent) => _eventRemoteDataSource.toggleRegisterEvent(idEvent),
-      refetchQueries: ['event'],
+      refetchQueries: ['events'],
     );
   }
 
   @override
   Query<EventGetOneModelResponse> getEvent(int eventId) {
     return Query<EventGetOneModelResponse>(
-      key: ['event', eventId],
+      key: ['events', eventId],
       queryFn: () => _eventRemoteDataSource.getEvent(eventId),
     );
   }

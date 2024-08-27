@@ -9,6 +9,7 @@ class NewsModel with _$NewsModel {
       {@JsonKey(name: 'id_berita') required int idBerita,
       @JsonKey(name: 'id_kategori_berita') required int? idKategoriBerita,
       required NewsCategoryModel? kategori,
+      String? deskripsi,
       required String judul,
       required String penulis,
       required String slug,

@@ -25,6 +25,7 @@ mixin _$NewsModel {
   @JsonKey(name: 'id_kategori_berita')
   int? get idKategoriBerita => throw _privateConstructorUsedError;
   NewsCategoryModel? get kategori => throw _privateConstructorUsedError;
+  String? get deskripsi => throw _privateConstructorUsedError;
   String get judul => throw _privateConstructorUsedError;
   String get penulis => throw _privateConstructorUsedError;
   String get slug => throw _privateConstructorUsedError;
@@ -55,6 +56,7 @@ abstract class $NewsModelCopyWith<$Res> {
       {@JsonKey(name: 'id_berita') int idBerita,
       @JsonKey(name: 'id_kategori_berita') int? idKategoriBerita,
       NewsCategoryModel? kategori,
+      String? deskripsi,
       String judul,
       String penulis,
       String slug,
@@ -85,6 +87,7 @@ class _$NewsModelCopyWithImpl<$Res, $Val extends NewsModel>
     Object? idBerita = null,
     Object? idKategoriBerita = freezed,
     Object? kategori = freezed,
+    Object? deskripsi = freezed,
     Object? judul = null,
     Object? penulis = null,
     Object? slug = null,
@@ -109,6 +112,10 @@ class _$NewsModelCopyWithImpl<$Res, $Val extends NewsModel>
           ? _value.kategori
           : kategori // ignore: cast_nullable_to_non_nullable
               as NewsCategoryModel?,
+      deskripsi: freezed == deskripsi
+          ? _value.deskripsi
+          : deskripsi // ignore: cast_nullable_to_non_nullable
+              as String?,
       judul: null == judul
           ? _value.judul
           : judul // ignore: cast_nullable_to_non_nullable
@@ -177,6 +184,7 @@ abstract class _$$NewsModelImplCopyWith<$Res>
       {@JsonKey(name: 'id_berita') int idBerita,
       @JsonKey(name: 'id_kategori_berita') int? idKategoriBerita,
       NewsCategoryModel? kategori,
+      String? deskripsi,
       String judul,
       String penulis,
       String slug,
@@ -206,6 +214,7 @@ class __$$NewsModelImplCopyWithImpl<$Res>
     Object? idBerita = null,
     Object? idKategoriBerita = freezed,
     Object? kategori = freezed,
+    Object? deskripsi = freezed,
     Object? judul = null,
     Object? penulis = null,
     Object? slug = null,
@@ -230,6 +239,10 @@ class __$$NewsModelImplCopyWithImpl<$Res>
           ? _value.kategori
           : kategori // ignore: cast_nullable_to_non_nullable
               as NewsCategoryModel?,
+      deskripsi: freezed == deskripsi
+          ? _value.deskripsi
+          : deskripsi // ignore: cast_nullable_to_non_nullable
+              as String?,
       judul: null == judul
           ? _value.judul
           : judul // ignore: cast_nullable_to_non_nullable
@@ -278,6 +291,7 @@ class _$NewsModelImpl implements _NewsModel {
       {@JsonKey(name: 'id_berita') required this.idBerita,
       @JsonKey(name: 'id_kategori_berita') required this.idKategoriBerita,
       required this.kategori,
+      this.deskripsi,
       required this.judul,
       required this.penulis,
       required this.slug,
@@ -300,6 +314,8 @@ class _$NewsModelImpl implements _NewsModel {
   final int? idKategoriBerita;
   @override
   final NewsCategoryModel? kategori;
+  @override
+  final String? deskripsi;
   @override
   final String judul;
   @override
@@ -327,7 +343,7 @@ class _$NewsModelImpl implements _NewsModel {
 
   @override
   String toString() {
-    return 'NewsModel(idBerita: $idBerita, idKategoriBerita: $idKategoriBerita, kategori: $kategori, judul: $judul, penulis: $penulis, slug: $slug, gambar: $gambar, konten: $konten, isLiked: $isLiked, totalLike: $totalLike, createdAt: $createdAt, updatedAt: $updatedAt, required: $required)';
+    return 'NewsModel(idBerita: $idBerita, idKategoriBerita: $idKategoriBerita, kategori: $kategori, deskripsi: $deskripsi, judul: $judul, penulis: $penulis, slug: $slug, gambar: $gambar, konten: $konten, isLiked: $isLiked, totalLike: $totalLike, createdAt: $createdAt, updatedAt: $updatedAt, required: $required)';
   }
 
   @override
@@ -341,6 +357,8 @@ class _$NewsModelImpl implements _NewsModel {
                 other.idKategoriBerita == idKategoriBerita) &&
             (identical(other.kategori, kategori) ||
                 other.kategori == kategori) &&
+            (identical(other.deskripsi, deskripsi) ||
+                other.deskripsi == deskripsi) &&
             (identical(other.judul, judul) || other.judul == judul) &&
             (identical(other.penulis, penulis) || other.penulis == penulis) &&
             (identical(other.slug, slug) || other.slug == slug) &&
@@ -363,6 +381,7 @@ class _$NewsModelImpl implements _NewsModel {
       idBerita,
       idKategoriBerita,
       kategori,
+      deskripsi,
       judul,
       penulis,
       slug,
@@ -393,6 +412,7 @@ abstract class _NewsModel implements NewsModel {
       {@JsonKey(name: 'id_berita') required final int idBerita,
       @JsonKey(name: 'id_kategori_berita') required final int? idKategoriBerita,
       required final NewsCategoryModel? kategori,
+      final String? deskripsi,
       required final String judul,
       required final String penulis,
       required final String slug,
@@ -415,6 +435,8 @@ abstract class _NewsModel implements NewsModel {
   int? get idKategoriBerita;
   @override
   NewsCategoryModel? get kategori;
+  @override
+  String? get deskripsi;
   @override
   String get judul;
   @override

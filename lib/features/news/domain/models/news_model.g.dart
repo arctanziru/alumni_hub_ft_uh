@@ -14,6 +14,7 @@ _$NewsModelImpl _$$NewsModelImplFromJson(Map<String, dynamic> json) =>
           ? null
           : NewsCategoryModel.fromJson(
               json['kategori'] as Map<String, dynamic>),
+      deskripsi: json['deskripsi'] as String?,
       judul: json['judul'] as String,
       penulis: json['penulis'] as String,
       slug: json['slug'] as String,
@@ -31,6 +32,7 @@ Map<String, dynamic> _$$NewsModelImplToJson(_$NewsModelImpl instance) =>
       'id_berita': instance.idBerita,
       'id_kategori_berita': instance.idKategoriBerita,
       'kategori': instance.kategori,
+      'deskripsi': instance.deskripsi,
       'judul': instance.judul,
       'penulis': instance.penulis,
       'slug': instance.slug,

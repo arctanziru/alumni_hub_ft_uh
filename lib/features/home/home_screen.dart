@@ -230,7 +230,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                             ));
                                           },
                                           title: state.news[index].judul,
-                                          description: state.news[index].konten,
+                                          description: state
+                                                  .news[index].deskripsi ??
+                                              'Tekan untuk melihat detail berita',
                                           imageUrl:
                                               '${dotenv.env['STORAGE_URL']}${state.news[index].gambar}',
                                           likes: state.news[index].totalLike,
@@ -350,7 +352,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                               experience:
                                                   vacancy.pengalamanKerja,
                                               postedAt: vacancy.createdAt,
-                                              description: vacancy.konten,
+                                              description: vacancy.deskripsi ??
+                                                  'Tekan untuk melihat detail loker',
                                               companyImgUrl:
                                                   '${dotenv.get('STORAGE_URL')}${vacancy.perusahaan.logo}',
                                             ),

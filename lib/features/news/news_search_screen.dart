@@ -97,7 +97,7 @@ class _NewsSearchScreenState extends State<NewsSearchScreen> {
                                 imageUrl:
                                     '${dotenv.get('STORAGE_URL')}${state.news[index].gambar}',
                                 title: state.news[index].judul,
-                                description: state.news[index].konten,
+                                description: state.news[index].deskripsi ?? 'Tekan untuk melihat detail berita',
                                 likes: state.news[index].totalLike,
                                 isLiked: state.news[index].isLiked,
                                 onLikePressed: () => {

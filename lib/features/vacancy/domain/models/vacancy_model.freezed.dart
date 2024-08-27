@@ -26,6 +26,7 @@ mixin _$VacancyModel {
   @JsonKey(name: 'id_perusahaan')
   int get idPerusahaan => throw _privateConstructorUsedError;
   String get slug => throw _privateConstructorUsedError;
+  String? get deskripsi => throw _privateConstructorUsedError;
   String get konten => throw _privateConstructorUsedError;
   @JsonKey(name: 'tgl_selesai')
   String get tglSelesai => throw _privateConstructorUsedError;
@@ -56,6 +57,7 @@ abstract class $VacancyModelCopyWith<$Res> {
       String judul,
       @JsonKey(name: 'id_perusahaan') int idPerusahaan,
       String slug,
+      String? deskripsi,
       String konten,
       @JsonKey(name: 'tgl_selesai') String tglSelesai,
       String lokasi,
@@ -85,6 +87,7 @@ class _$VacancyModelCopyWithImpl<$Res, $Val extends VacancyModel>
     Object? judul = null,
     Object? idPerusahaan = null,
     Object? slug = null,
+    Object? deskripsi = freezed,
     Object? konten = null,
     Object? tglSelesai = null,
     Object? lokasi = null,
@@ -111,6 +114,10 @@ class _$VacancyModelCopyWithImpl<$Res, $Val extends VacancyModel>
           ? _value.slug
           : slug // ignore: cast_nullable_to_non_nullable
               as String,
+      deskripsi: freezed == deskripsi
+          ? _value.deskripsi
+          : deskripsi // ignore: cast_nullable_to_non_nullable
+              as String?,
       konten: null == konten
           ? _value.konten
           : konten // ignore: cast_nullable_to_non_nullable
@@ -168,6 +175,7 @@ abstract class _$$VacancyModelImplCopyWith<$Res>
       String judul,
       @JsonKey(name: 'id_perusahaan') int idPerusahaan,
       String slug,
+      String? deskripsi,
       String konten,
       @JsonKey(name: 'tgl_selesai') String tglSelesai,
       String lokasi,
@@ -196,6 +204,7 @@ class __$$VacancyModelImplCopyWithImpl<$Res>
     Object? judul = null,
     Object? idPerusahaan = null,
     Object? slug = null,
+    Object? deskripsi = freezed,
     Object? konten = null,
     Object? tglSelesai = null,
     Object? lokasi = null,
@@ -222,6 +231,10 @@ class __$$VacancyModelImplCopyWithImpl<$Res>
           ? _value.slug
           : slug // ignore: cast_nullable_to_non_nullable
               as String,
+      deskripsi: freezed == deskripsi
+          ? _value.deskripsi
+          : deskripsi // ignore: cast_nullable_to_non_nullable
+              as String?,
       konten: null == konten
           ? _value.konten
           : konten // ignore: cast_nullable_to_non_nullable
@@ -266,6 +279,7 @@ class _$VacancyModelImpl implements _VacancyModel {
       required this.judul,
       @JsonKey(name: 'id_perusahaan') required this.idPerusahaan,
       required this.slug,
+      this.deskripsi,
       required this.konten,
       @JsonKey(name: 'tgl_selesai') required this.tglSelesai,
       required this.lokasi,
@@ -289,6 +303,8 @@ class _$VacancyModelImpl implements _VacancyModel {
   @override
   final String slug;
   @override
+  final String? deskripsi;
+  @override
   final String konten;
   @override
   @JsonKey(name: 'tgl_selesai')
@@ -311,7 +327,7 @@ class _$VacancyModelImpl implements _VacancyModel {
 
   @override
   String toString() {
-    return 'VacancyModel(idLoker: $idLoker, judul: $judul, idPerusahaan: $idPerusahaan, slug: $slug, konten: $konten, tglSelesai: $tglSelesai, lokasi: $lokasi, pengalamanKerja: $pengalamanKerja, role: $role, createdAt: $createdAt, updatedAt: $updatedAt, perusahaan: $perusahaan)';
+    return 'VacancyModel(idLoker: $idLoker, judul: $judul, idPerusahaan: $idPerusahaan, slug: $slug, deskripsi: $deskripsi, konten: $konten, tglSelesai: $tglSelesai, lokasi: $lokasi, pengalamanKerja: $pengalamanKerja, role: $role, createdAt: $createdAt, updatedAt: $updatedAt, perusahaan: $perusahaan)';
   }
 
   @override
@@ -324,6 +340,8 @@ class _$VacancyModelImpl implements _VacancyModel {
             (identical(other.idPerusahaan, idPerusahaan) ||
                 other.idPerusahaan == idPerusahaan) &&
             (identical(other.slug, slug) || other.slug == slug) &&
+            (identical(other.deskripsi, deskripsi) ||
+                other.deskripsi == deskripsi) &&
             (identical(other.konten, konten) || other.konten == konten) &&
             (identical(other.tglSelesai, tglSelesai) ||
                 other.tglSelesai == tglSelesai) &&
@@ -347,6 +365,7 @@ class _$VacancyModelImpl implements _VacancyModel {
       judul,
       idPerusahaan,
       slug,
+      deskripsi,
       konten,
       tglSelesai,
       lokasi,
@@ -376,6 +395,7 @@ abstract class _VacancyModel implements VacancyModel {
       required final String judul,
       @JsonKey(name: 'id_perusahaan') required final int idPerusahaan,
       required final String slug,
+      final String? deskripsi,
       required final String konten,
       @JsonKey(name: 'tgl_selesai') required final String tglSelesai,
       required final String lokasi,
@@ -398,6 +418,8 @@ abstract class _VacancyModel implements VacancyModel {
   int get idPerusahaan;
   @override
   String get slug;
+  @override
+  String? get deskripsi;
   @override
   String get konten;
   @override

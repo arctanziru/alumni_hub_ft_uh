@@ -135,7 +135,8 @@ class _VacancyScreenState extends State<VacancyScreen> {
                                       location: vacancy.lokasi,
                                       experience: vacancy.pengalamanKerja,
                                       postedAt: vacancy.createdAt,
-                                      description: vacancy.konten,
+                                      description: vacancy.deskripsi ??
+                                          'Tekan untuk melihat detail loker',
                                       companyImgUrl:
                                           '${dotenv.get('STORAGE_URL')}${vacancy.perusahaan.logo}',
                                     ),

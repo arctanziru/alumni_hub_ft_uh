@@ -10,6 +10,7 @@ class VacancyModel with _$VacancyModel {
     required String judul,
     @JsonKey(name: 'id_perusahaan') required int idPerusahaan,
     required String slug,
+    String? deskripsi,
     required String konten,
     @JsonKey(name: 'tgl_selesai') required String tglSelesai,
     required String lokasi,

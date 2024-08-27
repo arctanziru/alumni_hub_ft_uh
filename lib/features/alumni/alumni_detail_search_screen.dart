@@ -10,17 +10,6 @@ import 'package:skeletonizer/skeletonizer.dart';
 import '../../common/widgets/appBar/app_bar_secondary_widget.dart';
 import 'alumni_profile_detail_screen.dart'; // Import your CardAlumniProfileWidget // Import the AlumniProfileDetailScreen
 
-// class AlumniDetailSearchScreen extends StatefulWidget {
-//   static const String route = '/alumniDetailSearch';
-
-//   const AlumniDetailSearchScreen({super.key});
-
-//   @override
-//   State<AlumniDetailSearchScreen> createState() =>
-//       _AlumniDetailSearchScreenState();
-// }
-// need arguments
-
 class AlumniDetailSearchScreen extends StatefulWidget {
   static const String route = '/alumniDetailSearch';
   final AlumniGetManyParams alumniGetManyParams;

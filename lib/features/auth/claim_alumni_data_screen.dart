@@ -456,28 +456,31 @@ class _ClaimAlumniDataScreenState extends State<ClaimAlumniDataScreen> {
               if (state is GetJurusanLoading || state is GetJurusanInitial || state is GetJurusanError) {
                 return const SizedBox();
               }
-              return Stack(
-                children: [
-                  Positioned(
-                    top: MediaQuery.of(context).size.height * 0.13, // Use percentage for better consistency
-                    left: 0,
-                    right: 0,
-                    child: Center(
-                      child: Container(
-                        padding: const EdgeInsets.all(5.0),
-                        decoration: const BoxDecoration(
-                          color: Colors.white,
-                          shape: BoxShape.circle,
-                        ),
-                        child: Image.asset(
-                          'assets/logos/ikatek_unhas.webp',
-                          height: 150,
-                          width: 150,
+              return SafeArea(
+                child: Stack(
+                  children: [
+                    Positioned(
+                      // Mengatur posisi top agar lebih ke bawah
+                      top: MediaQuery.of(context).size.height * 0.075, // Menggunakan 20% dari tinggi layar untuk posisi top
+                      left: 0,
+                      right: 0,
+                      child: Center(
+                        child: Container(
+                          padding: const EdgeInsets.all(5.0),
+                          decoration: const BoxDecoration(
+                            color: Colors.white,
+                            shape: BoxShape.circle,
+                          ),
+                          child: Image.asset(
+                            'assets/logos/ikatek_unhas.webp',
+                            height: 150,
+                            width: 150,
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               );
             },
           ),

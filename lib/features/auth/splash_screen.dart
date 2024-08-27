@@ -21,7 +21,7 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   final List<String> iconPaths = [
     'assets/logos/unhas.png',
-    'assets/logos/ikatek_unhas.png',
+    'assets/logos/ikatek_unhas.webp',
   ];
 
   @override
@@ -72,7 +72,7 @@ class _SplashScreenState extends State<SplashScreen> {
                           shape: BoxShape.circle,
                         ),
                         child: Image.asset(
-                          'assets/logos/ikatek_unhas.png',
+                          'assets/logos/ikatek_unhas.webp',
                           height: 200,
                           width: 200,
                         ),

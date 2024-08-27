@@ -253,7 +253,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     shape: BoxShape.circle,
                   ),
                   child: Image.asset(
-                    'assets/logos/ikatek_unhas.png',
+                    'assets/logos/ikatek_unhas.webp',
                     height: 150,
                     width: 150,
                   ),

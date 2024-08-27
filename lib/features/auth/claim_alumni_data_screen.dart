@@ -470,7 +470,7 @@ class _ClaimAlumniDataScreenState extends State<ClaimAlumniDataScreen> {
                           shape: BoxShape.circle,
                         ),
                         child: Image.asset(
-                          'assets/logos/ikatek_unhas.png',
+                          'assets/logos/ikatek_unhas.webp',
                           height: 150,
                           width: 150,
                         ),

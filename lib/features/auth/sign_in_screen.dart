@@ -269,7 +269,7 @@ class _SignInScreenState extends State<SignInScreen> {
             ),
           ),
           Positioned(
-            top: MediaQuery.of(context).size.height * 0.165,
+            top: MediaQuery.of(context).size.height * 0.15,
             left: 0,
             right: 0,
             child: Align(
@@ -282,8 +282,8 @@ class _SignInScreenState extends State<SignInScreen> {
                 ),
                 child: Image.asset(
                   'assets/logos/ikatek_unhas.webp',
-                  height: 150,
-                  width: 150,
+                  height: MediaQuery.of(context).size.width * 0.4, // Misalnya 40% dari lebar layar
+                  width: MediaQuery.of(context).size.width * 0.4,
                 ),
               ),
             ),

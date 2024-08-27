@@ -460,8 +460,8 @@ class _ClaimAlumniDataScreenState extends State<ClaimAlumniDataScreen> {
                 child: Stack(
                   children: [
                     Positioned(
-                      // Mengatur posisi top agar lebih ke bawah
-                      top: MediaQuery.of(context).size.height * 0.075, // Menggunakan 20% dari tinggi layar untuk posisi top
+                      // Menurunkan posisi dengan menggunakan persentase dari tinggi layar
+                      top: MediaQuery.of(context).size.height * 0.07,
                       left: 0,
                       right: 0,
                       child: Center(
@@ -473,8 +473,9 @@ class _ClaimAlumniDataScreenState extends State<ClaimAlumniDataScreen> {
                           ),
                           child: Image.asset(
                             'assets/logos/ikatek_unhas.webp',
-                            height: 150,
-                            width: 150,
+                            // Ukuran logo dinamis berdasarkan persentase dari lebar layar
+                            height: MediaQuery.of(context).size.width * 0.4, // Misalnya 40% dari lebar layar
+                            width: MediaQuery.of(context).size.width * 0.4,
                           ),
                         ),
                       ),

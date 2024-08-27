@@ -43,6 +43,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
       body: SafeArea(
         child: Stack(
           children: [
+        Positioned.fill(
+        child: SafeArea(
+        child:
             LayoutBuilder(
               builder: (context, constraints) {
                 return ConstrainedBox(
@@ -62,8 +65,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       ),
                     ),
                     height: MediaQuery.of(context).size.height * 0.8,
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 16, vertical: 24),
+                    padding: const EdgeInsets.only(
+                      left: 16,
+                      right: 16,
+                      top: 24,
+                      bottom: 16,
+                    ),
                     child: SingleChildScrollView(
                       padding: EdgeInsets.only(
                         bottom: MediaQuery.of(context).viewInsets.bottom,
@@ -240,8 +247,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 );
               },
             ),
+        ),
+        ),
             Positioned(
-              top: MediaQuery.of(context).size.height * 0.102,
+              top: MediaQuery.of(context).size.height * 0.075,
               left: 0,
               right: 0,
               child: Align(
@@ -254,8 +263,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   ),
                   child: Image.asset(
                     'assets/logos/ikatek_unhas.webp',
-                    height: 150,
-                    width: 150,
+                    height: MediaQuery.of(context).size.width * 0.4, // Misalnya 40% dari lebar layar
+                    width: MediaQuery.of(context).size.width * 0.4,
                   ),
                 ),
               ),

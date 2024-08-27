@@ -58,8 +58,7 @@ class _ClaimAlumniDataScreenState extends State<ClaimAlumniDataScreen> {
               onPrimary: Colors.white, // header text color
               onSurface: Colors.black, // body text color
             ),
-            dialogBackgroundColor:
-                Colors.white, // background color of the dialog
+            dialogBackgroundColor: Colors.white, // background color of the dialog
           ),
           child: child!,
         );
@@ -83,10 +82,7 @@ class _ClaimAlumniDataScreenState extends State<ClaimAlumniDataScreen> {
             children: [
               Text(
                 'Kelengkapan Data',
-                style: Theme.of(context)
-                    .textTheme
-                    .bodyMedium
-                    ?.copyWith(color: Colors.grey),
+                style: Theme.of(context).textTheme.bodyMedium?.copyWith(color: Colors.grey),
               ),
               Text(
                 'Klaim Data Alumni',
@@ -101,10 +97,7 @@ class _ClaimAlumniDataScreenState extends State<ClaimAlumniDataScreen> {
           ),
           content: Text(
             'Untuk mendapatkan akses full, isi kelengkapan data alumni.',
-            style: Theme.of(context)
-                .textTheme
-                .bodyMedium
-                ?.copyWith(fontWeight: FontWeight.bold),
+            style: Theme.of(context).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.bold),
           ),
           actions: <Widget>[
             Row(
@@ -123,8 +116,7 @@ class _ClaimAlumniDataScreenState extends State<ClaimAlumniDataScreen> {
                 Expanded(
                   child: ButtonWidget(
                     onPressed: () {
-                      Navigator.of(context)
-                          .pop(); // Close the dialog and stay on the same screen
+                      Navigator.of(context).pop(); // Close the dialog and stay on the same screen
                     },
                     label: 'Klaim data',
                     color: AppColors.primaryColor,
@@ -146,8 +138,7 @@ class _ClaimAlumniDataScreenState extends State<ClaimAlumniDataScreen> {
           builder: (BuildContext context, StateSetter setState) {
             return Theme(
               data: Theme.of(context).copyWith(
-                dialogBackgroundColor:
-                    Colors.white, // Set the background color to solid white
+                dialogBackgroundColor: Colors.white, // Set the background color to solid white
               ),
               child: AlertDialog(
                 title: Text(
@@ -259,236 +250,234 @@ class _ClaimAlumniDataScreenState extends State<ClaimAlumniDataScreen> {
     final textTheme = Theme.of(context).textTheme;
 
     return Scaffold(
-      resizeToAvoidBottomInset: true,
-      backgroundColor: Theme.of(context).primaryColor,
-      body: Stack(
-        children: [
-      BlocBuilder<GetJurusanBloc, GetJurusanState>(
-        builder: (context, jurusanState) {
-          if (jurusanState is GetJurusanError) {
-            return Center(
-              child: Column(
-                children: [
-                  Text(
-                    jurusanState.exception.message,
-                    style: textTheme.headlineMedium?.copyWith(
-                      color: Colors.white,
-                    ),
-                  ),
-                  const SizedBox(height: 16),
-                  ButtonWidget(
-                    onPressed: () {
-                      context.read<GetJurusanBloc>().add(GetAllJurusan());
-                    },
-                    label: 'Coba Lagi',
-                    color: Colors.white,
-                  ),
-                ],
-              ),
-            );
-          } else if (jurusanState is GetJurusanLoading) {
-            return const Center(
-              child: CircularProgressIndicator(
-                color: Colors.white,
-              ),
-            );
-          } else if (jurusanState is GetJurusanSuccess) {
-            return SafeArea(
-              child: LayoutBuilder(builder: (context, constraints) {
-                return ConstrainedBox(
-                  constraints: BoxConstraints(
-                    maxHeight: constraints.maxHeight -
-                        MediaQuery.of(context).padding.top,
-                  ),
-                  child: Container(
-                    margin: EdgeInsets.only(
-                        top: MediaQuery.of(context).size.height * 0.2),
-                    decoration: const BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(30),
-                        topRight: Radius.circular(30),
+        resizeToAvoidBottomInset: true,
+        backgroundColor: Theme.of(context).primaryColor,
+        body: Stack(children: [
+          BlocBuilder<GetJurusanBloc, GetJurusanState>(
+            builder: (context, jurusanState) {
+              if (jurusanState is GetJurusanError) {
+                return Center(
+                  child: Column(
+                    children: [
+                      Text(
+                        jurusanState.exception.message,
+                        style: textTheme.headlineMedium?.copyWith(
+                          color: Colors.white,
+                        ),
                       ),
-                    ),
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 16, vertical: 24),
-                    height: MediaQuery.of(context).size.height * 0.8,
-                    child: SingleChildScrollView(
-                      padding: EdgeInsets.only(
-                          bottom: MediaQuery.of(context).viewInsets.bottom,
-                      top: 48),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: <Widget>[
-                          Text(
-                            'Data Alumni',
-                            style: textTheme.headlineLarge?.copyWith(
-                              fontWeight: FontWeight.bold,
-                              letterSpacing: -0.02,
-                            ),
-                          ),
-                          Text(
-                            'Isi Data Alumni',
-                            style: textTheme.titleMedium?.copyWith(
-                              color: Colors.grey,
-                            ),
-                          ),
-                          const SizedBox(height: 24),
-                          TextFieldWidget(
-                            label: 'Nama',
-                            hint: 'Masukkan nama lengkap',
-                            controller: _namaLengkapController,
-                          ),
-                          const SizedBox(height: 24),
-                          InkWell(
-                            onTap: () => _selectDate(context),
-                            child: IgnorePointer(
-                              child: TextFieldWidget(
-                                label: 'Tanggal Lahir',
-                                hint: 'Masukkan tanggal lahir',
-                                controller: _tanggalLahirController,
-                                icon: const Icon(Icons.arrow_drop_down),
-                              ),
-                            ),
-                          ),
-                          // Jurusan Dropdown
-                          const SizedBox(height: 12),
-                          const Text(
-                            'Jurusan',
-                            style: TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                          const SizedBox(height: 6),
-                          DropdownButtonFormField<String>(
-                            dropdownColor: Colors.white,
-                            decoration: InputDecoration(
-                              filled: true,
-                              fillColor: Colors.white,
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(12),
-                              ),
-                              contentPadding: const EdgeInsets.symmetric(horizontal: 16),
-                              hintStyle: Theme.of(context).textTheme.bodyMedium,
-                              labelStyle: Theme.of(context).textTheme.bodyMedium,
-                            ),
-                            hint: Text(
-                              'Pilih jurusan',
-                              style: Theme.of(context).textTheme.bodyMedium,
-                            ),
-                            value: _selectedJurusan,
-                            onChanged: (String? newValue) {
-                              setState(() {
-                                _selectedJurusan = newValue;
-                              });
-                            },
-                            items: jurusanState.response.data.map((Jurusan value) {
-                              return DropdownMenuItem<String>(
-                                value: value.namaJurusan,
-                                child: Text(
-                                  value.namaJurusan,
-                                  style: Theme.of(context).textTheme.bodyMedium,
-                                ),
-                              );
-                            }).toList(),
-                          ),
-                          const SizedBox(height: 24),
-                          TextFieldWidget(
-                            label: 'NIM/Stambuk (Optional)',
-                            hint: 'Masukkan NIM/Stambuk',
-                            controller: _nimController,
-                          ),
-                          const SizedBox(height: 24),
-                          BlocConsumer<GetAlumnisBloc, GetAlumnisState>(
-                            listener: (context, state) {
-                              if (state is GetAlumnisSuccess) {
-                                if (state.getAlumnisResponse.data.isNotEmpty) {
-                                  _showPopupClaimAlumniData(
-                                      state.getAlumnisResponse.data);
-                                } else {
-                                  _showDataNotFoundPopup();
-                                }
-                              } else if (state is GetAlumnisError) {
-                                showToastMessage(
-                                    message: state.exception.message);
-                              }
-                            },
-                            builder: (context, state) {
-                              return SizedBox(
-                                width: double.infinity,
-                                child: ButtonWidget(
-                                  // onPressed: _showPopupClaimAlumniData,
-                                  onPressed: () {
-                                    context.read<GetAlumnisBloc>().add(
-                                          GetAlumnis(
-                                            getAlumnisBody: GetAlumnisBody(
-                                              name: _namaLengkapController.text,
-                                              tglLahir:
-                                                  _tanggalLahirController.text,
-                                              nim: _nimController.text,
-                                              jurusan: _selectedJurusan ?? '',
-                                            ),
-                                          ),
-                                        );
-                                  },
-                                  label: 'Klaim Data',
-                                  isLoading: state is GetAlumnisLoading,
-                                  color: AppColors.primaryColor,
-                                ),
-                              );
-                            },
-                          ),
-                          const SizedBox(height: 12),
-                          // SizedBox(
-                          //   width: double.infinity,
-                          //   child: ButtonWidget(
-                          //     onPressed: _showDataNotFoundPopup, // Show the data not found popup
-                          //     label: 'Data tidak ditemukan',
-                          //     color: AppColors.primaryColor,
-                          //   ),
-                          // ),
-                          // const SizedBox(height: 12),
-                          SizedBox(
-                            width: double.infinity,
-                            child: ButtonWidget(
-                              onPressed: _navigateAndShowPopup,
-                              label: 'Nanti',
-                              color: AppColors.gray3,
-                            ),
-                          ),
-                        ],
+                      const SizedBox(height: 16),
+                      ButtonWidget(
+                        onPressed: () {
+                          context.read<GetJurusanBloc>().add(GetAllJurusan());
+                        },
+                        label: 'Coba Lagi',
+                        color: Colors.white,
                       ),
-                    ),
+                    ],
                   ),
                 );
-              }),
-            );
-          }
-          return const SizedBox();
-        },
-      ),
-          Positioned(
-            top: MediaQuery.of(context).size.height * 0.165,
-            left: 0,
-            right: 0,
-              child: Align(
-                alignment: Alignment.center,
-                child: Container(
-                  padding: const EdgeInsets.all(5.0),
-                  decoration: const BoxDecoration(
+              } else if (jurusanState is GetJurusanLoading) {
+                return const Center(
+                  child: CircularProgressIndicator(
                     color: Colors.white,
-                    shape: BoxShape.circle,
                   ),
-                  child: Image.asset(
-                    'assets/logos/ikatek_unhas.png',
-                    height: 150,
-                    width: 150,
+                );
+              } else if (jurusanState is GetJurusanSuccess) {
+                return SafeArea(
+                  child: LayoutBuilder(builder: (context, constraints) {
+                    return ConstrainedBox(
+                      constraints: BoxConstraints(
+                        maxHeight: constraints.maxHeight - MediaQuery.of(context).padding.top,
+                      ),
+                      child: Container(
+                        margin: EdgeInsets.only(top: MediaQuery.of(context).size.height * 0.2),
+                        decoration: const BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(30),
+                            topRight: Radius.circular(30),
+                          ),
+                        ),
+                        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
+                        height: MediaQuery.of(context).size.height * 0.8,
+                        child: SingleChildScrollView(
+                          padding: EdgeInsets.only(
+                              bottom: MediaQuery.of(context).viewInsets.bottom, top: 48),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: <Widget>[
+                              Text(
+                                'Data Alumni',
+                                style: textTheme.headlineLarge?.copyWith(
+                                  fontWeight: FontWeight.bold,
+                                  letterSpacing: -0.02,
+                                ),
+                              ),
+                              Text(
+                                'Isi Data Alumni',
+                                style: textTheme.titleMedium?.copyWith(
+                                  color: Colors.grey,
+                                ),
+                              ),
+                              const SizedBox(height: 24),
+                              TextFieldWidget(
+                                label: 'Nama',
+                                hint: 'Masukkan nama lengkap',
+                                controller: _namaLengkapController,
+                              ),
+                              const SizedBox(height: 24),
+                              InkWell(
+                                onTap: () => _selectDate(context),
+                                child: IgnorePointer(
+                                  child: TextFieldWidget(
+                                    label: 'Tanggal Lahir',
+                                    hint: 'Masukkan tanggal lahir',
+                                    controller: _tanggalLahirController,
+                                    icon: const Icon(Icons.arrow_drop_down),
+                                  ),
+                                ),
+                              ),
+                              // Jurusan Dropdown
+                              const SizedBox(height: 12),
+                              const Text(
+                                'Jurusan',
+                                style: TextStyle(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                              const SizedBox(height: 6),
+                              DropdownButtonFormField<String>(
+                                dropdownColor: Colors.white,
+                                decoration: InputDecoration(
+                                  filled: true,
+                                  fillColor: Colors.white,
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(12),
+                                  ),
+                                  contentPadding: const EdgeInsets.symmetric(horizontal: 16),
+                                  hintStyle: Theme.of(context).textTheme.bodyMedium,
+                                  labelStyle: Theme.of(context).textTheme.bodyMedium,
+                                ),
+                                hint: Text(
+                                  'Pilih jurusan',
+                                  style: Theme.of(context).textTheme.bodyMedium,
+                                ),
+                                value: _selectedJurusan,
+                                onChanged: (String? newValue) {
+                                  setState(() {
+                                    _selectedJurusan = newValue;
+                                  });
+                                },
+                                items: jurusanState.response.data.map((Jurusan value) {
+                                  return DropdownMenuItem<String>(
+                                    value: value.namaJurusan,
+                                    child: Text(
+                                      value.namaJurusan,
+                                      style: Theme.of(context).textTheme.bodyMedium,
+                                    ),
+                                  );
+                                }).toList(),
+                              ),
+                              const SizedBox(height: 24),
+                              TextFieldWidget(
+                                label: 'NIM/Stambuk (Optional)',
+                                hint: 'Masukkan NIM/Stambuk',
+                                controller: _nimController,
+                              ),
+                              const SizedBox(height: 24),
+                              BlocConsumer<GetAlumnisBloc, GetAlumnisState>(
+                                listener: (context, state) {
+                                  if (state is GetAlumnisSuccess) {
+                                    if (state.getAlumnisResponse.data.isNotEmpty) {
+                                      _showPopupClaimAlumniData(state.getAlumnisResponse.data);
+                                    } else {
+                                      _showDataNotFoundPopup();
+                                    }
+                                  } else if (state is GetAlumnisError) {
+                                    showToastMessage(message: state.exception.message);
+                                  }
+                                },
+                                builder: (context, state) {
+                                  return SizedBox(
+                                    width: double.infinity,
+                                    child: ButtonWidget(
+                                      // onPressed: _showPopupClaimAlumniData,
+                                      onPressed: () {
+                                        context.read<GetAlumnisBloc>().add(
+                                              GetAlumnis(
+                                                getAlumnisBody: GetAlumnisBody(
+                                                  name: _namaLengkapController.text,
+                                                  tglLahir: _tanggalLahirController.text,
+                                                  nim: _nimController.text,
+                                                  jurusan: _selectedJurusan ?? '',
+                                                ),
+                                              ),
+                                            );
+                                      },
+                                      label: 'Klaim Data',
+                                      isLoading: state is GetAlumnisLoading,
+                                      color: AppColors.primaryColor,
+                                    ),
+                                  );
+                                },
+                              ),
+                              const SizedBox(height: 12),
+                              // SizedBox(
+                              //   width: double.infinity,
+                              //   child: ButtonWidget(
+                              //     onPressed: _showDataNotFoundPopup, // Show the data not found popup
+                              //     label: 'Data tidak ditemukan',
+                              //     color: AppColors.primaryColor,
+                              //   ),
+                              // ),
+                              // const SizedBox(height: 12),
+                              SizedBox(
+                                width: double.infinity,
+                                child: ButtonWidget(
+                                  onPressed: _navigateAndShowPopup,
+                                  label: 'Nanti',
+                                  color: AppColors.gray3,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    );
+                  }),
+                );
+              }
+              return const SizedBox();
+            },
+          ),
+          BlocBuilder<GetJurusanBloc, GetJurusanState>(
+            builder: (context, state) {
+              if (state is GetJurusanLoading || state is GetJurusanInitial || state is GetJurusanError) {
+                return const SizedBox();
+              }
+              return Positioned(
+                top: MediaQuery.of(context).size.height * 0.165,
+                left: 0,
+                right: 0,
+                child: Align(
+                  alignment: Alignment.center,
+                  child: Container(
+                    padding: const EdgeInsets.all(5.0),
+                    decoration: const BoxDecoration(
+                      color: Colors.white,
+                      shape: BoxShape.circle,
+                    ),
+                    child: Image.asset(
+                      'assets/logos/ikatek_unhas.png',
+                      height: 150,
+                      width: 150,
+                    ),
                   ),
                 ),
-              ),
-            ),
-    ])
-    );
+              );
+            },
+          ),
+        ]));
   }
 }

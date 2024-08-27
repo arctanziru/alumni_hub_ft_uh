@@ -7,7 +7,7 @@ class FooterWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final List<String> iconPaths = [
       'assets/logos/unhas.png',
-      'assets/logos/ikatek_unhas.png',
+      'assets/logos/ikatek_unhas.webp',
     ];
 
     return Padding(

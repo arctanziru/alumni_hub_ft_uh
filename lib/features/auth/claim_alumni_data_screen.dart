@@ -325,7 +325,7 @@ class _ClaimAlumniDataScreenState extends State<ClaimAlumniDataScreen> {
                                 hint: 'Masukkan nama lengkap',
                                 controller: _namaLengkapController,
                               ),
-                              const SizedBox(height: 24),
+                              const SizedBox(height: 12),
                               InkWell(
                                 onTap: () => _selectDate(context),
                                 child: IgnorePointer(

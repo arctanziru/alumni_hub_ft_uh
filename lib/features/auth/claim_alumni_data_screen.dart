@@ -27,7 +27,7 @@ class _ClaimAlumniDataScreenState extends State<ClaimAlumniDataScreen> {
   final _nimController = TextEditingController();
   String? _selectedJurusan; // Ganti _jurusanController dengan String?
   bool agreeToTerms = false;
-  bool _isCheckboxChecked = false;
+  // bool _isCheckboxChecked = false;
 
   @override
   void initState() {
@@ -261,7 +261,9 @@ class _ClaimAlumniDataScreenState extends State<ClaimAlumniDataScreen> {
     return Scaffold(
       resizeToAvoidBottomInset: true,
       backgroundColor: Theme.of(context).primaryColor,
-      body: BlocBuilder<GetJurusanBloc, GetJurusanState>(
+      body: Stack(
+        children: [
+      BlocBuilder<GetJurusanBloc, GetJurusanState>(
         builder: (context, jurusanState) {
           if (jurusanState is GetJurusanError) {
             return Center(
@@ -313,7 +315,8 @@ class _ClaimAlumniDataScreenState extends State<ClaimAlumniDataScreen> {
                     height: MediaQuery.of(context).size.height * 0.8,
                     child: SingleChildScrollView(
                       padding: EdgeInsets.only(
-                          bottom: MediaQuery.of(context).viewInsets.bottom),
+                          bottom: MediaQuery.of(context).viewInsets.bottom,
+                      top: 48),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
@@ -465,6 +468,27 @@ class _ClaimAlumniDataScreenState extends State<ClaimAlumniDataScreen> {
           return const SizedBox();
         },
       ),
+          Positioned(
+            top: MediaQuery.of(context).size.height * 0.165,
+            left: 0,
+            right: 0,
+              child: Align(
+                alignment: Alignment.center,
+                child: Container(
+                  padding: const EdgeInsets.all(5.0),
+                  decoration: const BoxDecoration(
+                    color: Colors.white,
+                    shape: BoxShape.circle,
+                  ),
+                  child: Image.asset(
+                    'assets/logos/ikatek_unhas.png',
+                    height: 150,
+                    width: 150,
+                  ),
+                ),
+              ),
+            ),
+    ])
     );
   }
 }

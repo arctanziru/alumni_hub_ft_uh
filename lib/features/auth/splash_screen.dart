@@ -67,15 +67,14 @@ class _SplashScreenState extends State<SplashScreen> {
                     children: <Widget>[
                       // Logo with solid red background
                       Container(
-                        padding: const EdgeInsets.all(30.0),
                         decoration: const BoxDecoration(
                           color: AppColors.primaryColor, // Solid red background
                           shape: BoxShape.circle,
                         ),
                         child: Image.asset(
                           'assets/logos/ikatek_unhas.png',
-                          height: 160,
-                          width: 160,
+                          height: 200,
+                          width: 200,
                         ),
                       ),
                       const SizedBox(height: 30), // Space between logo and text
@@ -83,7 +82,7 @@ class _SplashScreenState extends State<SplashScreen> {
                         'ANTEK HUB',
                         style: TextStyle(
                           fontSize: 28,
-                          fontWeight: FontWeight.w800,
+                          fontWeight: FontWeight.w900,
                           letterSpacing: -0.02,
                         ),
                       ),
@@ -91,7 +90,7 @@ class _SplashScreenState extends State<SplashScreen> {
                       const Text(
                         'ADAPTIVE COLLABORATIVE',
                         style: TextStyle(
-                            fontSize: 14,
+                            fontSize: 12,
                             fontWeight: FontWeight.bold,
                             color: AppColors.primaryColor),
                       ),

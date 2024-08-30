@@ -55,8 +55,6 @@ class _EventDetailScreenState extends State<EventDetailScreen> {
                   child: Text(
                     state.selectedEvent?.judul ?? '',
                     style: Theme.of(context).textTheme.titleLarge,
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
                     textAlign: TextAlign.center,
                   ),
                 ),

@@ -460,7 +460,7 @@ class _ClaimAlumniDataScreenState extends State<ClaimAlumniDataScreen> {
                 child: Stack(
                   children: [
                     Positioned(
-                      // Menurunkan posisi dengan menggunakan persentase dari tinggi layar
+                      // Adjust position based on a percentage of the screen height
                       top: MediaQuery.of(context).size.height * 0.07,
                       left: 0,
                       right: 0,
@@ -471,11 +471,23 @@ class _ClaimAlumniDataScreenState extends State<ClaimAlumniDataScreen> {
                             color: Colors.white,
                             shape: BoxShape.circle,
                           ),
-                          child: Image.asset(
-                            'assets/logos/ikatek_unhas.webp',
-                            // Ukuran logo dinamis berdasarkan persentase dari lebar layar
-                            height: MediaQuery.of(context).size.width * 0.4, // Misalnya 40% dari lebar layar
-                            width: MediaQuery.of(context).size.width * 0.4,
+                          child: LayoutBuilder(
+                            builder: (context, constraints) {
+                              // Calculate dynamic size based on screen width
+                              double logoSize = constraints.maxWidth * 0.4;
+
+                              // Set a maximum size for the logo to prevent it from being too large on tablets
+                              double maxSize = 200.0; // Set your desired maximum size here
+                              if (logoSize > maxSize) {
+                                logoSize = maxSize;
+                              }
+
+                              return Image.asset(
+                                'assets/logos/ikatek_unhas.webp',
+                                height: logoSize,
+                                width: logoSize,
+                              );
+                            },
                           ),
                         ),
                       ),
@@ -485,6 +497,7 @@ class _ClaimAlumniDataScreenState extends State<ClaimAlumniDataScreen> {
               );
             },
           ),
+
         ]
         )
     );

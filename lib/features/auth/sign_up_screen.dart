@@ -250,21 +250,34 @@ class _SignUpScreenState extends State<SignUpScreen> {
         ),
         ),
             Positioned(
-              top: MediaQuery.of(context).size.height * 0.075,
+              // Adjust position based on a percentage of the screen height
+              top: MediaQuery.of(context).size.height * 0.07,
               left: 0,
               right: 0,
-              child: Align(
-                alignment: Alignment.center,
+              child: Center(
                 child: Container(
                   padding: const EdgeInsets.all(5.0),
                   decoration: const BoxDecoration(
-                    color: Colors.white, // Solid white background
+                    color: Colors.white,
                     shape: BoxShape.circle,
                   ),
-                  child: Image.asset(
-                    'assets/logos/ikatek_unhas.webp',
-                    height: MediaQuery.of(context).size.width * 0.4, // Misalnya 40% dari lebar layar
-                    width: MediaQuery.of(context).size.width * 0.4,
+                  child: LayoutBuilder(
+                    builder: (context, constraints) {
+                      // Calculate dynamic size based on screen width
+                      double logoSize = constraints.maxWidth * 0.4;
+
+                      // Set a maximum size for the logo to prevent it from being too large on tablets
+                      double maxSize = 200.0; // Set your desired maximum size here
+                      if (logoSize > maxSize) {
+                        logoSize = maxSize;
+                      }
+
+                      return Image.asset(
+                        'assets/logos/ikatek_unhas.webp',
+                        height: logoSize,
+                        width: logoSize,
+                      );
+                    },
                   ),
                 ),
               ),

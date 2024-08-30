@@ -46,22 +46,22 @@ class DateUtil {
   static String getDaysAgo(DateTime date) {
     final days = DateTime.now().difference(date).inDays;
     if (days == 0) {
-      return 'Today';
+      return 'Hari ini';
     } else if (days == 1) {
-      return 'Yesterday';
+      return 'Kemarin';
     } else {
-      return '$days days ago';
+      return '$days hari yang lalu';
     }
   }
 
   static String getDaysLeft(DateTime date) {
     final days = date.difference(DateTime.now()).inDays;
     if (days == 0) {
-      return 'Today';
+      return 'Terakhir hari ini';
     } else if (days == 1) {
-      return 'Tomorrow';
+      return 'Terakhir Besok';
     } else {
-      return '$days days left';
+      return '$days hari lagi';
     }
   }
 }

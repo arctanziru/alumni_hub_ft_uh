@@ -138,7 +138,8 @@ class _EventScreenState extends State<EventScreen> {
                                       title: event.judul,
                                       location: event.lokasiEvent,
                                       date: event.tglEvent,
-                                      description: event.konten,
+                                      description: event.deskripsi ??
+                                          'Tekan untuk melihat detail event',
                                       imageUrl:
                                           '${dotenv.get('STORAGE_URL')}${event.gambar}',
                                       peserta: event.peserta,

@@ -129,7 +129,7 @@ class _SignInScreenState extends State<SignInScreen> {
                                       mainAxisAlignment: MainAxisAlignment.center,
                                       children: [
                                         Image.asset(
-                                          'assets/logos/google_logo.png', // Path to your Google logo asset
+                                          'assets/logos/google.jpg', // Path to your Google logo asset
                                           height: 24, // Adjust the height as needed
                                           width: 24, // Adjust the width as needed
                                         ),

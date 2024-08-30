@@ -62,6 +62,7 @@ class _VacancySearchScreenState extends State<VacancySearchScreen> {
                             location: 'Loading...',
                             experience: 'Loading...',
                             postedAt: DateTime.now(),
+                            endDate: DateTime.now(),
                             description: 'Loading...' * 10,
                             companyImgUrl: 'Loading...',
                           ),
@@ -113,6 +114,7 @@ class _VacancySearchScreenState extends State<VacancySearchScreen> {
                                 location: vacancy.lokasi,
                                 experience: vacancy.pengalamanKerja,
                                 postedAt: vacancy.createdAt,
+                                endDate: vacancy.createdAt,
                                 description: vacancy.deskripsi ??
                                     'Tekan untuk melihat detail loker',
                                 companyImgUrl:

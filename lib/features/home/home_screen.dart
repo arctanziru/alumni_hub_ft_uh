@@ -304,6 +304,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                         location: 'Loading...',
                                         experience: 'Loading...',
                                         postedAt: DateTime.now(),
+                                        endDate: DateTime.now(),
                                         description: 'Loading...' * 10,
                                         companyImgUrl: 'Loading...',
                                       ),
@@ -352,6 +353,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                               experience:
                                                   vacancy.pengalamanKerja,
                                               postedAt: vacancy.createdAt,
+                                              endDate: vacancy.tglSelesai,
                                               description: vacancy.deskripsi ??
                                                   'Tekan untuk melihat detail loker',
                                               companyImgUrl:

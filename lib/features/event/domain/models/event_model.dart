@@ -12,6 +12,7 @@ class EventModel with _$EventModel {
     required String gambar,
     required String konten,
     required String penyelenggara,
+    String? deskripsi,
     @JsonKey(name: 'tgl_event') required DateTime tglEvent,
     @JsonKey(name: 'lokasi_event') required String lokasiEvent,
     required int kuota,

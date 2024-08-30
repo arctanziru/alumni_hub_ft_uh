@@ -29,7 +29,7 @@ mixin _$VacancyModel {
   String? get deskripsi => throw _privateConstructorUsedError;
   String get konten => throw _privateConstructorUsedError;
   @JsonKey(name: 'tgl_selesai')
-  String get tglSelesai => throw _privateConstructorUsedError;
+  DateTime get tglSelesai => throw _privateConstructorUsedError;
   String get lokasi => throw _privateConstructorUsedError;
   @JsonKey(name: 'pengalaman_kerja')
   String get pengalamanKerja => throw _privateConstructorUsedError;
@@ -59,7 +59,7 @@ abstract class $VacancyModelCopyWith<$Res> {
       String slug,
       String? deskripsi,
       String konten,
-      @JsonKey(name: 'tgl_selesai') String tglSelesai,
+      @JsonKey(name: 'tgl_selesai') DateTime tglSelesai,
       String lokasi,
       @JsonKey(name: 'pengalaman_kerja') String pengalamanKerja,
       String role,
@@ -125,7 +125,7 @@ class _$VacancyModelCopyWithImpl<$Res, $Val extends VacancyModel>
       tglSelesai: null == tglSelesai
           ? _value.tglSelesai
           : tglSelesai // ignore: cast_nullable_to_non_nullable
-              as String,
+              as DateTime,
       lokasi: null == lokasi
           ? _value.lokasi
           : lokasi // ignore: cast_nullable_to_non_nullable
@@ -177,7 +177,7 @@ abstract class _$$VacancyModelImplCopyWith<$Res>
       String slug,
       String? deskripsi,
       String konten,
-      @JsonKey(name: 'tgl_selesai') String tglSelesai,
+      @JsonKey(name: 'tgl_selesai') DateTime tglSelesai,
       String lokasi,
       @JsonKey(name: 'pengalaman_kerja') String pengalamanKerja,
       String role,
@@ -242,7 +242,7 @@ class __$$VacancyModelImplCopyWithImpl<$Res>
       tglSelesai: null == tglSelesai
           ? _value.tglSelesai
           : tglSelesai // ignore: cast_nullable_to_non_nullable
-              as String,
+              as DateTime,
       lokasi: null == lokasi
           ? _value.lokasi
           : lokasi // ignore: cast_nullable_to_non_nullable
@@ -308,7 +308,7 @@ class _$VacancyModelImpl implements _VacancyModel {
   final String konten;
   @override
   @JsonKey(name: 'tgl_selesai')
-  final String tglSelesai;
+  final DateTime tglSelesai;
   @override
   final String lokasi;
   @override
@@ -397,7 +397,7 @@ abstract class _VacancyModel implements VacancyModel {
       required final String slug,
       final String? deskripsi,
       required final String konten,
-      @JsonKey(name: 'tgl_selesai') required final String tglSelesai,
+      @JsonKey(name: 'tgl_selesai') required final DateTime tglSelesai,
       required final String lokasi,
       @JsonKey(name: 'pengalaman_kerja') required final String pengalamanKerja,
       required final String role,
@@ -424,7 +424,7 @@ abstract class _VacancyModel implements VacancyModel {
   String get konten;
   @override
   @JsonKey(name: 'tgl_selesai')
-  String get tglSelesai;
+  DateTime get tglSelesai;
   @override
   String get lokasi;
   @override

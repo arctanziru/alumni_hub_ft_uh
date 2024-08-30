@@ -85,7 +85,8 @@ class _AlumniDetailSearchScreenState extends State<AlumniDetailSearchScreen> {
                                     children: [
                                       CardAlumniProfileWidget(
                                         name: alumni.nama,
-                                        details: alumni.nim ?? '-',
+                                        details:
+                                            '${alumni.jurusan} - ${alumni.angkatan}',
                                         onTap: () {
                                           locator<AppNavigation>().navigateTo(
                                               AlumniProfileDetailScreen.route,

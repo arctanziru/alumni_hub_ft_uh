@@ -9,8 +9,11 @@ class AppNavigation {
   }
 
   Future<dynamic> navigateReplace(String routeName, {dynamic arguments}) {
-    return navigatorKey.currentState!
-        .pushReplacementNamed(routeName, arguments: arguments);
+    return navigatorKey.currentState!.pushNamedAndRemoveUntil(
+      routeName,
+      (Route<dynamic> route) => false,
+      arguments: arguments,
+    );
   }
 
   void goBack() {

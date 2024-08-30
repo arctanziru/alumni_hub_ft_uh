@@ -1,3 +1,4 @@
+import 'package:alumni_hub_ft_uh/common/utils/date_util.dart';
 import 'package:alumni_hub_ft_uh/constants/colors.dart';
 import 'package:flutter/material.dart';
 
@@ -8,6 +9,7 @@ class CardVacancyWidget extends StatelessWidget {
   final String location;
   final String experience;
   final DateTime postedAt;
+  final DateTime endDate;
   final String description;
   final String companyImgUrl;
   final VoidCallback onTap;
@@ -20,6 +22,7 @@ class CardVacancyWidget extends StatelessWidget {
     required this.location,
     required this.experience,
     required this.postedAt,
+    required this.endDate,
     required this.description,
     required this.companyImgUrl,
     required this.onTap,
@@ -27,8 +30,6 @@ class CardVacancyWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final daysLeft = DateTime.now().difference(postedAt).inDays;
-
     return InkWell(
       onTap: onTap,
       child: Container(
@@ -117,14 +118,13 @@ class CardVacancyWidget extends StatelessWidget {
                 ),
                 _buildInfoRow(
                   icon: Icons.access_time,
-                  text: experience,
+                  text: '$experience tahun',
                   context: context,
                 ),
                 _buildInfoRow(
-                  icon: Icons.calendar_today,
-                  text: '$daysLeft days',
-                  context: context,
-                ),
+                    context: context,
+                    icon: Icons.calendar_today,
+                    text: DateUtil.getDaysLeft(endDate)),
               ],
             ),
             const SizedBox(height: 16),

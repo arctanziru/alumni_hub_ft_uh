@@ -12,7 +12,7 @@ class VacancyModel with _$VacancyModel {
     required String slug,
     String? deskripsi,
     required String konten,
-    @JsonKey(name: 'tgl_selesai') required String tglSelesai,
+    @JsonKey(name: 'tgl_selesai') required DateTime tglSelesai,
     required String lokasi,
     @JsonKey(name: 'pengalaman_kerja') required String pengalamanKerja,
     required String role,

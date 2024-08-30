@@ -87,11 +87,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         CircleAvatar(
-                          radius: 60,
-                          backgroundImage: NetworkImage(
-                            user?.avatar ?? '',
-                          ),
-                        ),
+                            radius: 60,
+                            backgroundImage: user?.avatar != null
+                                ? NetworkImage(
+                                    user?.avatar ?? '',
+                                  )
+                                : Image.asset('assets/logos/ikatek_unhas.webp')
+                                    .image),
                         const SizedBox(width: 12),
                         Expanded(
                           child: Column(

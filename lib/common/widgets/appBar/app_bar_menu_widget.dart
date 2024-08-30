@@ -92,10 +92,11 @@ class AppBarMenuWidget extends StatelessWidget {
                 child: Row(
                   children: [
                     CircleAvatar(
-                      radius: 40,
-                      backgroundImage:
-                          NetworkImage(userSession?.user?.avatar ?? ''),
-                    ),
+                        radius: 40,
+                        backgroundImage: userSession?.user?.avatar != null
+                            ? NetworkImage(userSession?.user?.avatar ?? '')
+                            : Image.asset('assets/logos/ikatek_unhas.webp')
+                                .image),
                     const SizedBox(width: 16),
                     Flexible(
                       child: Column(

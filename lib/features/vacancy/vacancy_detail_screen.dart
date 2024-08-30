@@ -4,6 +4,7 @@ import 'package:alumni_hub_ft_uh/common/widgets/bottomBar/bottom_bar_widget.dart
 import 'package:alumni_hub_ft_uh/constants/colors.dart';
 import 'package:alumni_hub_ft_uh/features/vacancy/domain/models/vacancy_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
 
 class VacancyDetailScreen extends StatefulWidget {
   final VacancyModel vacancy;
@@ -41,24 +42,22 @@ class _VacancyDetailScreenState extends State<VacancyDetailScreen> {
             Text(
               widget.vacancy.judul,
               style: Theme.of(context).textTheme.titleLarge,
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 6),
             Text(
               widget.vacancy.perusahaan.namaPerusahaan,
               style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                color: const Color(0xFF606060),
-              ),
+                    color: const Color(0xFF606060),
+                  ),
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 6),
             Text(
               DateUtil.getFormattedDate((widget.vacancy.createdAt)),
               style: Theme.of(context).textTheme.bodyLarge?.copyWith(
-                color: const Color(0xFF606060),
-              ),
+                    color: const Color(0xFF606060),
+                  ),
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 6),
@@ -81,12 +80,12 @@ class _VacancyDetailScreenState extends State<VacancyDetailScreen> {
                   _buildInfoChip(
                     context: context,
                     icon: Icons.access_time,
-                    text: widget.vacancy.pengalamanKerja,
+                    text: '${widget.vacancy.pengalamanKerja} tahun',
                   ),
                   _buildInfoChip(
                       context: context,
                       icon: Icons.calendar_today,
-                      text: DateUtil.getDaysAgo((widget.vacancy.updatedAt))),
+                      text: DateUtil.getDaysLeft((widget.vacancy.tglSelesai)))
                 ],
               ),
             ),
@@ -97,25 +96,23 @@ class _VacancyDetailScreenState extends State<VacancyDetailScreen> {
                   borderRadius: BorderRadius.all(Radius.circular(12)),
                 ),
                 padding:
-                const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const SizedBox(height: 24),
                     const SizedBox(height: 16),
                     Text(
                       'Role :',
-                      style: Theme.of(context).textTheme.titleLarge,
+                      style: Theme.of(context).textTheme.titleMedium,
                     ),
-                    const SizedBox(height: 8),
                     Text(
                       widget.vacancy.role,
                       style: Theme.of(context).textTheme.bodyMedium,
                     ),
                     const SizedBox(height: 16),
-                    Text(
+                    HtmlWidget(
                       widget.vacancy.konten,
-                      style: Theme.of(context).textTheme.bodyMedium,
+                      textStyle: Theme.of(context).textTheme.bodyMedium,
                     ),
                   ],
                 )),

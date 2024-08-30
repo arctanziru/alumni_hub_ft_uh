@@ -64,9 +64,11 @@ class AppBarWidget extends StatelessWidget implements PreferredSizeWidget {
         ),
         IconButton(
           icon: CircleAvatar(
-            backgroundImage: NetworkImage(
-              userSession?.user?.avatar ?? '',
-            ),
+            backgroundImage: userSession?.user?.avatar != null
+                ? NetworkImage(
+                    userSession?.user?.avatar ?? '',
+                  )
+                : Image.asset('assets/logos/ikatek_unhas.webp').image,
           ),
           onPressed: () {
             if (userSession?.user?.alumni != null) {

@@ -27,6 +27,7 @@ mixin _$EventModel {
   String get gambar => throw _privateConstructorUsedError;
   String get konten => throw _privateConstructorUsedError;
   String get penyelenggara => throw _privateConstructorUsedError;
+  String? get deskripsi => throw _privateConstructorUsedError;
   @JsonKey(name: 'tgl_event')
   DateTime get tglEvent => throw _privateConstructorUsedError;
   @JsonKey(name: 'lokasi_event')
@@ -59,6 +60,7 @@ abstract class $EventModelCopyWith<$Res> {
       String gambar,
       String konten,
       String penyelenggara,
+      String? deskripsi,
       @JsonKey(name: 'tgl_event') DateTime tglEvent,
       @JsonKey(name: 'lokasi_event') String lokasiEvent,
       int kuota,
@@ -87,6 +89,7 @@ class _$EventModelCopyWithImpl<$Res, $Val extends EventModel>
     Object? gambar = null,
     Object? konten = null,
     Object? penyelenggara = null,
+    Object? deskripsi = freezed,
     Object? tglEvent = null,
     Object? lokasiEvent = null,
     Object? kuota = null,
@@ -120,6 +123,10 @@ class _$EventModelCopyWithImpl<$Res, $Val extends EventModel>
           ? _value.penyelenggara
           : penyelenggara // ignore: cast_nullable_to_non_nullable
               as String,
+      deskripsi: freezed == deskripsi
+          ? _value.deskripsi
+          : deskripsi // ignore: cast_nullable_to_non_nullable
+              as String?,
       tglEvent: null == tglEvent
           ? _value.tglEvent
           : tglEvent // ignore: cast_nullable_to_non_nullable
@@ -167,6 +174,7 @@ abstract class _$$EventModelImplCopyWith<$Res>
       String gambar,
       String konten,
       String penyelenggara,
+      String? deskripsi,
       @JsonKey(name: 'tgl_event') DateTime tglEvent,
       @JsonKey(name: 'lokasi_event') String lokasiEvent,
       int kuota,
@@ -193,6 +201,7 @@ class __$$EventModelImplCopyWithImpl<$Res>
     Object? gambar = null,
     Object? konten = null,
     Object? penyelenggara = null,
+    Object? deskripsi = freezed,
     Object? tglEvent = null,
     Object? lokasiEvent = null,
     Object? kuota = null,
@@ -226,6 +235,10 @@ class __$$EventModelImplCopyWithImpl<$Res>
           ? _value.penyelenggara
           : penyelenggara // ignore: cast_nullable_to_non_nullable
               as String,
+      deskripsi: freezed == deskripsi
+          ? _value.deskripsi
+          : deskripsi // ignore: cast_nullable_to_non_nullable
+              as String?,
       tglEvent: null == tglEvent
           ? _value.tglEvent
           : tglEvent // ignore: cast_nullable_to_non_nullable
@@ -268,6 +281,7 @@ class _$EventModelImpl implements _EventModel {
       required this.gambar,
       required this.konten,
       required this.penyelenggara,
+      this.deskripsi,
       @JsonKey(name: 'tgl_event') required this.tglEvent,
       @JsonKey(name: 'lokasi_event') required this.lokasiEvent,
       required this.kuota,
@@ -293,6 +307,8 @@ class _$EventModelImpl implements _EventModel {
   @override
   final String penyelenggara;
   @override
+  final String? deskripsi;
+  @override
   @JsonKey(name: 'tgl_event')
   final DateTime tglEvent;
   @override
@@ -314,7 +330,7 @@ class _$EventModelImpl implements _EventModel {
 
   @override
   String toString() {
-    return 'EventModel(idEvent: $idEvent, judul: $judul, slug: $slug, gambar: $gambar, konten: $konten, penyelenggara: $penyelenggara, tglEvent: $tglEvent, lokasiEvent: $lokasiEvent, kuota: $kuota, peserta: $peserta, isRegistered: $isRegistered, createdAt: $createdAt, updatedAt: $updatedAt)';
+    return 'EventModel(idEvent: $idEvent, judul: $judul, slug: $slug, gambar: $gambar, konten: $konten, penyelenggara: $penyelenggara, deskripsi: $deskripsi, tglEvent: $tglEvent, lokasiEvent: $lokasiEvent, kuota: $kuota, peserta: $peserta, isRegistered: $isRegistered, createdAt: $createdAt, updatedAt: $updatedAt)';
   }
 
   @override
@@ -329,6 +345,8 @@ class _$EventModelImpl implements _EventModel {
             (identical(other.konten, konten) || other.konten == konten) &&
             (identical(other.penyelenggara, penyelenggara) ||
                 other.penyelenggara == penyelenggara) &&
+            (identical(other.deskripsi, deskripsi) ||
+                other.deskripsi == deskripsi) &&
             (identical(other.tglEvent, tglEvent) ||
                 other.tglEvent == tglEvent) &&
             (identical(other.lokasiEvent, lokasiEvent) ||
@@ -353,6 +371,7 @@ class _$EventModelImpl implements _EventModel {
       gambar,
       konten,
       penyelenggara,
+      deskripsi,
       tglEvent,
       lokasiEvent,
       kuota,
@@ -383,6 +402,7 @@ abstract class _EventModel implements EventModel {
           required final String gambar,
           required final String konten,
           required final String penyelenggara,
+          final String? deskripsi,
           @JsonKey(name: 'tgl_event') required final DateTime tglEvent,
           @JsonKey(name: 'lokasi_event') required final String lokasiEvent,
           required final int kuota,
@@ -408,6 +428,8 @@ abstract class _EventModel implements EventModel {
   String get konten;
   @override
   String get penyelenggara;
+  @override
+  String? get deskripsi;
   @override
   @JsonKey(name: 'tgl_event')
   DateTime get tglEvent;

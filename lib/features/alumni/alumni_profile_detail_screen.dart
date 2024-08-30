@@ -2,7 +2,7 @@ import 'package:alumni_hub_ft_uh/features/alumni/domain/models/alumni_model.dart
 import 'package:flutter/material.dart';
 import 'package:alumni_hub_ft_uh/common/widgets/textField/text_field_profile_widget.dart';
 import 'package:alumni_hub_ft_uh/common/widgets/appBar/app_bar_secondary_widget.dart';
-import 'package:qr_flutter/qr_flutter.dart';
+// import 'package:qr_flutter/qr_flutter.dart';
 
 class AlumniProfileDetailScreen extends StatelessWidget {
   static const String route = '/alumniProfileDetail';
@@ -45,10 +45,11 @@ class AlumniProfileDetailScreen extends StatelessWidget {
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      const CircleAvatar(
-                        radius: 40, // Reduced size for avatar
-                        backgroundImage: NetworkImage(''),
-                      ),
+                      CircleAvatar(
+                          radius: 40,
+                          backgroundImage:
+                              Image.asset('assets/logos/ikatek_unhas.webp')
+                                  .image),
                       const SizedBox(width: 12),
                       Expanded(
                         child: Column(
@@ -60,7 +61,7 @@ class AlumniProfileDetailScreen extends StatelessWidget {
                                   textTheme.labelLarge!.copyWith(fontSize: 25),
                             ),
                             Text(
-                              alumni.nim ?? '-',
+                              alumni.noAnggota ?? '-',
                               style: textTheme.bodyMedium,
                             ),
                           ],
@@ -69,23 +70,23 @@ class AlumniProfileDetailScreen extends StatelessWidget {
                     ],
                   ),
                 ),
-                Container(
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
-                  child: Center(
-                    child: QrImageView(
-                      data: alumni.noAnggota ?? alumni.nama,
-                      version: QrVersions.auto,
-                      size: 320,
-                      gapless: false,
-                      embeddedImage:
-                          const AssetImage('assets/logos/ikatek_unhas.png'),
-                      embeddedImageStyle: const QrEmbeddedImageStyle(
-                        size: Size(80, 80),
-                      ),
-                    ),
-                  ),
-                ),
+                // Container(
+                //   padding:
+                //       const EdgeInsets.symmetric(vertical: 20, horizontal: 20),
+                //   child: Center(
+                //     child: QrImageView(
+                //       data: alumni.noAnggota ?? alumni.nama,
+                //       version: QrVersions.auto,
+                //       size: 320,
+                //       gapless: false,
+                //       embeddedImage:
+                //           const AssetImage('assets/logos/ikatek_unhas.png'),
+                //       embeddedImageStyle: const QrEmbeddedImageStyle(
+                //         size: Size(80, 80),
+                //       ),
+                //     ),
+                //   ),
+                // ),
                 Container(
                   decoration: BoxDecoration(
                     color: Colors.white,

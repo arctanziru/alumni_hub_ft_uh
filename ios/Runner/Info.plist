@@ -31,10 +31,14 @@
         <string>Editor</string>
         <key>CFBundleURLSchemes</key>
         <array>
-          <string>com.googleusercontent.apps.1052063810674-64basqksoamo1jrlfsdjjggg95ugn98a</string>
+          <string>com.googleusercontent.apps.693464014284-u8fdkq9rbnga08s5uejs7hmijiab2vk9</string>
         </array>
       </dict>
     </array>
+    <key>REVERSED_CLIENT_ID</key>
+    <string>com.googleusercontent.apps.693464014284-u8fdkq9rbnga08s5uejs7hmijiab2vk9</string>
+    <key>GIDClientID</key>
+    <string>693464014284-u8fdkq9rbnga08s5uejs7hmijiab2vk9.apps.googleusercontent.com</string>
     <key>LSRequiresIPhoneOS</key>
     <true/>
     <key>NSPhotoLibraryAddUsageDescription</key>

@@ -126,13 +126,13 @@ class AlumniProfileDetailScreen extends StatelessWidget {
                         controller: batchController,
                         readOnly: true,
                       ),
-                      TextFieldProfileWidget(
-                        label: 'Tanggal lahir',
-                        description: alumni.tglLahir,
-                        icon: Icons.calendar_view_day,
-                        controller: birthDateController,
-                        readOnly: true,
-                      ),
+                      // TextFieldProfileWidget(
+                      //   label: 'Tanggal lahir',
+                      //   description: alumni.tglLahir,
+                      //   icon: Icons.calendar_view_day,
+                      //   controller: birthDateController,
+                      //   readOnly: true,
+                      // ),
                       TextFieldProfileWidget(
                         label: 'Agama',
                         description: alumni.agama ?? '-',

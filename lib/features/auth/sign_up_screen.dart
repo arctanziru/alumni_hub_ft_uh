@@ -5,9 +5,11 @@ import 'package:alumni_hub_ft_uh/features/auth/domain/auth_model.dart';
 import 'package:alumni_hub_ft_uh/features/user/bloc/user_event.dart';
 import 'package:alumni_hub_ft_uh/features/user/bloc/user_state.dart';
 import 'package:alumni_hub_ft_uh/locator.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:alumni_hub_ft_uh/features/user/bloc/user_bloc.dart'; // Import UserBloc
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../common/widgets/button/button_widget.dart';
 import '../../common/widgets/textField/text_field_widget.dart';
 
@@ -195,6 +197,44 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                   !_isPasswordObscured2;
                                 });
                               },
+                            ),
+                          ),
+                          const SizedBox(height: 16),
+                          Center(
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                RichText(
+                                  textAlign: TextAlign.center,
+                                  text: TextSpan(
+                                    text: 'Dengan membuat akun, Anda menyetujui ',
+                                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                                      color: Colors.black,
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(height: 0.1),
+                                RichText(
+                                  textAlign: TextAlign.center,
+                                  text: TextSpan(
+                                    text: 'syarat dan ketentuan',
+                                    style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                                      color: Colors.red,
+                                      decoration: TextDecoration.underline,
+                                      decorationColor: Colors.red,
+                                    ),
+                                    recognizer: TapGestureRecognizer()
+                                      ..onTap = () async {
+                                        final url = Uri.parse('https://antekhub.com/privacy-policy/id/');
+                                        if (await canLaunchUrl(url)) {
+                                          await launchUrl(url);
+                                        } else {
+                                          ('Could not launch $url');
+                                        }
+                                      },
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                           const SizedBox(height: 24),

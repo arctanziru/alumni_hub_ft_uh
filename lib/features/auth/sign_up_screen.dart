@@ -217,7 +217,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 RichText(
                                   textAlign: TextAlign.center,
                                   text: TextSpan(
-                                    text: 'syarat dan ketentuan',
+                                    text: 'kebijakan privasi',
                                     style: Theme.of(context).textTheme.bodySmall?.copyWith(
                                       color: Colors.red,
                                       decoration: TextDecoration.underline,
@@ -225,11 +225,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                     ),
                                     recognizer: TapGestureRecognizer()
                                       ..onTap = () async {
-                                        final url = Uri.parse('https://antekhub.com/privacy-policy/id/');
-                                        if (await canLaunchUrl(url)) {
-                                          await launchUrl(url);
-                                        } else {
-                                          ('Could not launch $url');
+                                        const url = 'https://antekhub.com/privacy-policy/id/';
+                                        try {
+                                          await launchUrl(Uri.parse(url));
+                                        } catch (e) {
+                                          ('Could not launch $url: $e');
                                         }
                                       },
                                   ),

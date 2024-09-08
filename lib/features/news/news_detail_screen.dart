@@ -1,11 +1,12 @@
 import 'package:alumni_hub_ft_uh/common/utils/date_util.dart';
-import 'package:alumni_hub_ft_uh/common/widgets/appBar/app_bar_search_widget.dart';
 import 'package:alumni_hub_ft_uh/common/widgets/bottomBar/bottom_bar_widget.dart';
 import 'package:alumni_hub_ft_uh/constants/colors.dart';
 import 'package:alumni_hub_ft_uh/features/news/domain/models/news_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_widget_from_html/flutter_widget_from_html.dart';
+
+import '../../common/widgets/appBar/app_bar_widget.dart';
 
 class NewsDetailScreen extends StatefulWidget {
   final NewsModel news;
@@ -23,7 +24,7 @@ class _NewsDetailScreenState extends State<NewsDetailScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const AppBarSearchWidget(),
+      appBar: const AppBarWidget(),
       bottomNavigationBar: const BottomBarWidget(),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),

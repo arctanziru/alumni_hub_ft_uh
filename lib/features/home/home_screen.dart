@@ -92,6 +92,10 @@ class _HomeScreenState extends State<HomeScreen> with RouteAware {
                     );
                   }
 
+                  if (upcomingEvents.isEmpty) {
+                    return const SizedBox();
+                  }
+
                   return Padding(
                     padding: const EdgeInsets.only(bottom: 8.0),
                     child: HomeCarouselWidget(

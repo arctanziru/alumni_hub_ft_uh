@@ -99,20 +99,21 @@ class _EventDetailScreenState extends State<EventDetailScreen> {
                       children: [
                         const SizedBox(height: 24),
                         Skeletonizer(
-                            enabled: state.selectedEventStatus ==
-                                    EventStatus.loading &&
-                                state.selectedEvent == null,
+                          enabled: state.selectedEventStatus == EventStatus.loading &&
+                              state.selectedEvent == null,
+                          child: Center(
                             child: Image.network(
                               '${dotenv.env['STORAGE_URL']}${state.selectedEvent?.gambar ?? ''}',
-                              errorBuilder: (context, error, stackTrace) =>
-                                  Container(
+                              errorBuilder: (context, error, stackTrace) => Container(
                                 height: 200,
                                 color: Colors.grey[200],
                                 child: const Center(
-                                    child: Icon(Icons.error,
-                                        size: 40, color: Colors.grey)),
+                                  child: Icon(Icons.error, size: 40, color: Colors.grey),
+                                ),
                               ),
-                            )),
+                            ),
+                          ),
+                        ),
                         const SizedBox(height: 16),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.end,

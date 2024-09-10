@@ -75,14 +75,16 @@ class _NewsDetailScreenState extends State<NewsDetailScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const SizedBox(height: 24),
-                    Image.network(
-                      '${dotenv.env['STORAGE_URL']}${widget.news.gambar}',
-                      errorBuilder: (context, error, stackTrace) => Container(
-                        height: 200,
-                        color: Colors.grey[200],
-                        child: const Center(
-                            child: Icon(Icons.error,
-                                size: 40, color: Colors.grey)),
+                    Center(
+                      child: Image.network(
+                        '${dotenv.env['STORAGE_URL']}${widget.news.gambar}',
+                        errorBuilder: (context, error, stackTrace) => Container(
+                          height: 200,
+                          color: Colors.grey[200],
+                          child: const Center(
+                            child: Icon(Icons.error, size: 40, color: Colors.grey),
+                          ),
+                        ),
                       ),
                     ),
                     const SizedBox(height: 16),

@@ -7,6 +7,7 @@ import 'package:alumni_hub_ft_uh/common/widgets/button/button_filter_widget.dart
 import 'package:alumni_hub_ft_uh/common/widgets/button/button_widget.dart';
 import 'package:alumni_hub_ft_uh/common/widgets/card/card_news_widget.dart';
 import 'package:alumni_hub_ft_uh/common/widgets/card/card_vacancy_widget.dart';
+import 'package:alumni_hub_ft_uh/common/widgets/carousel/carousel_widget.dart';
 import 'package:alumni_hub_ft_uh/features/event/bloc/event_bloc.dart';
 import 'package:alumni_hub_ft_uh/features/news/bloc/news_bloc.dart';
 import 'package:alumni_hub_ft_uh/features/news/news_detail_screen.dart';
@@ -20,8 +21,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
-import '../../common/widgets/carousel/carousel_widget.dart';
-
 class HomeScreen extends StatefulWidget {
   static const String route = '/home';
 
@@ -31,7 +30,7 @@ class HomeScreen extends StatefulWidget {
   State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
+class _HomeScreenState extends State<HomeScreen> with RouteAware {
   final Debouncer _debouncer =
       Debouncer(delay: const Duration(milliseconds: 500));
 
@@ -39,9 +38,16 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
     context.read<NewsBloc>().add(NewsRefreshed(isClear: true));
-    context.read<NewsBloc>().add(NewsCategoryFetched());
-    context.read<VacancyBloc>().add(VacancyFetched());
-    context.read<EventBloc>().add(EventFetched());
+    context.read<VacancyBloc>().add(VacancyRefreshed(isClear: true));
+    context.read<EventBloc>().add(EventRefreshed(isClear: true));
+  }
+
+  @override
+  void didPopNext() {
+    super.didPopNext();
+    context.read<NewsBloc>().add(NewsRefreshed(isClear: true));
+    context.read<VacancyBloc>().add(VacancyRefreshed(isClear: true));
+    context.read<EventBloc>().add(EventRefreshed(isClear: true));
   }
 
   @override
@@ -60,8 +66,14 @@ class _HomeScreenState extends State<HomeScreen> {
                 builder: (context, state) {
                   debugPrint('Event state: ${state.toString()}');
 
+                  final upcomingEvents = state.events.where((event) {
+                    final diff =
+                        event.tglEvent.difference(DateTime.now()).inDays;
+                    return diff >= 0;
+                  }).toList();
+
                   if (state.status == EventStatus.loading &&
-                      state.events.isEmpty) {
+                      upcomingEvents.isEmpty) {
                     return SizedBox(
                       height: 200,
                       child: Skeletonizer(
@@ -84,32 +96,37 @@ class _HomeScreenState extends State<HomeScreen> {
                     padding: const EdgeInsets.only(bottom: 8.0),
                     child: HomeCarouselWidget(
                       carouselItems: List.generate(
-                        min(state.events.length, 3),
+                        min(upcomingEvents.length, 3),
                         (index) =>
-                            '${dotenv.get("STORAGE_URL")}${state.events[index].gambar}',
+                            '${dotenv.get("STORAGE_URL")}${upcomingEvents[index].gambar}',
                       ),
                       ids: List.generate(
-                        min(state.events.length, 3),
-                        (index) => state.events[index].idEvent,
+                        min(upcomingEvents.length, 3),
+                        (index) => upcomingEvents[index].idEvent,
                       ),
                       countdownTexts: List.generate(
-                        min(state.events.length, 3),
+                        min(upcomingEvents.length, 3),
                         (index) {
-                          final dif = state.events[index].tglEvent
+                          final dif = upcomingEvents[index]
+                              .tglEvent
                               .difference(DateTime.now())
                               .inDays;
 
                           if (dif < 0) {
-                            return 'Exp Event berakhir';
+                            return '  Event berakhir';
+                          }
+
+                          if (dif == 0) {
+                            return '  Hari ini';
                           }
 
                           return '$dif hari lagi';
                         },
                       ),
                       registrantsInfo: List.generate(
-                        min(state.events.length, 3),
+                        min(upcomingEvents.length, 3),
                         (index) =>
-                            '${state.events[index].peserta}/${state.events[index].kuota} pendaftar',
+                            '${upcomingEvents[index].peserta}/${upcomingEvents[index].kuota} pendaftar',
                       ),
                     ),
                   );

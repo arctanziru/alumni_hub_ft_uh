@@ -38,16 +38,22 @@ class _HomeScreenState extends State<HomeScreen> with RouteAware {
   void initState() {
     super.initState();
     context.read<NewsBloc>().add(NewsRefreshed(isClear: true));
+    context.read<NewsBloc>().add(NewsFetched());
     context.read<VacancyBloc>().add(VacancyRefreshed(isClear: true));
+    context.read<VacancyBloc>().add(VacancyFetched());
     context.read<EventBloc>().add(EventRefreshed(isClear: true));
+    context.read<EventBloc>().add(EventFetched());
   }
 
   @override
   void didPopNext() {
     super.didPopNext();
     context.read<NewsBloc>().add(NewsRefreshed(isClear: true));
+    context.read<NewsBloc>().add(NewsFetched());
     context.read<VacancyBloc>().add(VacancyRefreshed(isClear: true));
+    context.read<VacancyBloc>().add(VacancyFetched());
     context.read<EventBloc>().add(EventRefreshed(isClear: true));
+    context.read<EventBloc>().add(EventFetched());
   }
 
   @override

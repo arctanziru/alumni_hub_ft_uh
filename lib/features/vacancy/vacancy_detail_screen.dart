@@ -61,61 +61,69 @@ class _VacancyDetailScreenState extends State<VacancyDetailScreen> {
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 6),
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 4),
-              decoration: const BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.all(Radius.circular(6)),
-              ),
-              child: Wrap(
-                alignment: WrapAlignment.center,
-                spacing: 14,
-                runSpacing: 8,
-                children: [
-                  _buildInfoChip(
-                    context: context,
-                    icon: Icons.location_on,
-                    text: widget.vacancy.lokasi,
-                  ),
-                  _buildInfoChip(
-                    context: context,
-                    icon: Icons.access_time,
-                    text: '${widget.vacancy.pengalamanKerja} tahun',
-                  ),
-                  _buildInfoChip(
+            Center(
+              child: Container(
+                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 4),
+                decoration: const BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.all(Radius.circular(6)),
+                ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min, // Row takes minimal width
+                  mainAxisAlignment: MainAxisAlignment.center, // Center the content inside the Row
+                  children: [
+                    _buildInfoChip(
+                      context: context,
+                      icon: Icons.location_on,
+                      text: widget.vacancy.lokasi,
+                    ),
+                    const SizedBox(width: 14), // Adds spacing between chips
+                    _buildInfoChip(
+                      context: context,
+                      icon: Icons.access_time,
+                      text: '${widget.vacancy.pengalamanKerja} tahun',
+                    ),
+                    const SizedBox(width: 14), // Adds spacing between chips
+                    _buildInfoChip(
                       context: context,
                       icon: Icons.calendar_today,
-                      text: DateUtil.getDaysLeft((widget.vacancy.tglSelesai)))
-                ],
+                      text: DateUtil.getDaysLeft((widget.vacancy.tglSelesai)),
+                    ),
+                  ],
+                ),
               ),
             ),
             const SizedBox(height: 24),
             Container(
-                decoration: const BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.all(Radius.circular(12)),
-                ),
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const SizedBox(height: 16),
-                    Text(
-                      'Role :',
-                      style: Theme.of(context).textTheme.titleMedium,
-                    ),
-                    Text(
-                      widget.vacancy.role,
-                      style: Theme.of(context).textTheme.bodyMedium,
-                    ),
-                    const SizedBox(height: 16),
-                    HtmlWidget(
+              decoration: const BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.all(Radius.circular(12)),
+              ),
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SizedBox(height: 16),
+                  Text(
+                    'Role :',
+                    style: Theme.of(context).textTheme.titleMedium,
+                  ),
+                  Text(
+                    widget.vacancy.role,
+                    style: Theme.of(context).textTheme.bodyMedium,
+                  ),
+                  const SizedBox(height: 16),
+                  // Wrap HtmlWidget in a Container to control width
+                  SizedBox(
+                    width: double.infinity, // Ensure it uses full width
+                    child: HtmlWidget(
                       widget.vacancy.konten,
                       textStyle: Theme.of(context).textTheme.bodyMedium,
                     ),
-                  ],
-                )),
+                  ),
+                ],
+              ),
+            )
           ],
         ),
       ),

@@ -29,7 +29,8 @@ if (flutterVersionName == null) {
 
 android {
     namespace = "com.example.alumni_hub_ft_uh"
-    compileSdk = flutter.compileSdkVersion
+    // compileSdk = flutter.compileSdkVersion
+    compileSdk = 34
     ndkVersion = flutter.ndkVersion
 
     compileOptions {
@@ -37,20 +38,26 @@ android {
         targetCompatibility = JavaVersion.VERSION_1_8
     }
 
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+
     defaultConfig {
-        applicationId = "com.antekhub.app"
-        minSdk = flutter.minSdkVersion
-        targetSdk = flutter.targetSdkVersion
+        applicationId = "com.ikatekhub.app"
+        // minSdk = flutter.minSdkVersion
+        minSdk = 24
+        // targetSdk = flutter.targetSdkVersion
+        targetSdk = 34
         versionCode = flutterVersionCode.toInteger()
         versionName = flutterVersionName
     }
 
     signingConfigs {
         release {
-            keyAlias 'ikatek-hub-release-key'
-            keyPassword 'ikatekhub'
+            keyAlias 'upload'
+            keyPassword '@antek98@'
             storeFile file('../ikatek-hub-release-key.jks')
-            storePassword 'ikatekhub'
+            storePassword '@antek98@'
         }
     }
 

@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:alumni_hub_ft_uh/common/utils/ui_helper.dart';
 import 'package:alumni_hub_ft_uh/common/widgets/bottomBar/bottom_bar_widget.dart';
 import 'package:alumni_hub_ft_uh/common/widgets/button/button_widget.dart';
-import 'package:document_file_save_plus/document_file_save_plus.dart';
+// Removed: import 'package:document_file_save_plus/document_file_save_plus.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -104,31 +104,30 @@ class _DonationScreenState extends State<DonationScreen> {
 
   Future<void> _downloadPdf() async {
     try {
-      // Get the directory to save the file (Downloads directory)
-      late Directory filePath;
-
+      // Determine file path based on platform.
+      String filePath;
       if (Platform.isAndroid) {
-        filePath = Directory('/storage/emulated/0/Download/brosur-dana-abadi.pdf');
+        filePath = '/storage/emulated/0/Download/brosur-dana-abadi.pdf';
       } else {
         final directory = await getApplicationDocumentsDirectory();
-        filePath = Directory('${directory.path}/brosur-dana-abadi.pdf');
+        filePath = '${directory.path}/brosur-dana-abadi.pdf';
       }
+      final file = File(filePath);
 
-      // Check if the file already exists
-      if (await filePath.exists()) {
+      // If the file already exists, open it.
+      if (await file.exists()) {
         showToastMessage(message: 'File sudah ada, membuka file...');
-        OpenFilex.open(filePath.path);
+        OpenFilex.open(filePath);
       } else {
-        // Load the PDF file from assets
+        // Load the PDF file from assets.
         final ByteData byteData = await rootBundle.load('assets/files/brosur-dana-abadi.pdf');
         final Uint8List pdfBytes = byteData.buffer.asUint8List();
 
-        // Save the file to the Downloads directory
-        await DocumentFileSavePlus().saveFile(pdfBytes, "brosur-dana-abadi.pdf", "application/pdf");
+        // Save the file by writing the bytes directly.
+        await file.writeAsBytes(pdfBytes, flush: true);
 
         showToastMessage(message: 'PDF telah diunduh di folder Download');
-
-        OpenFilex.open(filePath.path);
+        OpenFilex.open(filePath);
       }
     } catch (e) {
       showToastMessage(message: 'Gagal mengunduh PDF');
@@ -138,11 +137,9 @@ class _DonationScreenState extends State<DonationScreen> {
   Future<void> _downloadQRCode() async {
     try {
       final ByteData byteData = await rootBundle.load('assets/images/qris.png');
-
       final Uint8List imageBytes = byteData.buffer.asUint8List();
 
       await ImageGallerySaver.saveImage(imageBytes);
-
       showToastMessage(
         message: 'QR Code berhasil diunduh',
       );
@@ -194,11 +191,12 @@ class _DonationScreenState extends State<DonationScreen> {
                       Text('TID', style: Theme.of(context).textTheme.bodyMedium),
                       const SizedBox(height: 11),
                       Expanded(
-                          child: Image.asset(
-                        'assets/images/qris.png',
-                        width: 320,
-                        alignment: Alignment.center,
-                      )),
+                        child: Image.asset(
+                          'assets/images/qris.png',
+                          width: 320,
+                          alignment: Alignment.center,
+                        ),
+                      ),
                       const SizedBox(height: 20),
                       Text(
                         'SATU QRIS UNTUK SEMUA',
@@ -252,8 +250,8 @@ class _DonationScreenState extends State<DonationScreen> {
                             text: 'baca ketentuan donasi',
                             style: Theme.of(context).textTheme.bodySmall?.copyWith(
                                   color: Colors.red,
-                                  decoration: TextDecoration.underline, // Add underline
-                                  decorationColor: Colors.red, // Set underline color
+                                  decoration: TextDecoration.underline,
+                                  decorationColor: Colors.red,
                                 ),
                             recognizer: TapGestureRecognizer()..onTap = _onReadTermsClicked,
                           ),
